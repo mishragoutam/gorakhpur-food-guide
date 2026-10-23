@@ -1,0 +1,103 @@
+import type { Restaurant } from '@/types/restaurant';
+
+/**
+ * ⚠️  DEMO DATA — every restaurant, rating and review count in this file is
+ * FICTIONAL and exists only to preview the design and exercise the filters.
+ * Names, ratings and prices do not describe real businesses. Each record is
+ * flagged `isDemo: true` and the UI labels it as such.
+ *
+ * Replace this file with API data (see services/restaurantService.ts) once the
+ * backend and PostgreSQL database are ready.
+ */
+export const demoRestaurants: readonly Restaurant[] = [
+  {
+    id: 'demo-kesar-darbar-kitchen',
+    name: 'Kesar Darbar Kitchen',
+    area: 'Golghar',
+    city: 'Gorakhpur',
+    description: 'Sample listing: slow-cooked curries, tandoor breads and Mughlai classics.',
+    categories: ['north-indian'],
+    cuisines: ['North Indian', 'Mughlai'],
+    popularDishes: ['Dal Makhani', 'Paneer Lababdar', 'Butter Naan'],
+    costForTwo: 900,
+    averageRating: 4.6,
+    reviewCount: 214,
+    imageUrl: null,
+    isDemo: true,
+  },
+  {
+    id: 'demo-lotus-wok-house',
+    name: 'Lotus Wok House',
+    area: 'Civil Lines',
+    city: 'Gorakhpur',
+    description: 'Sample listing: wok-tossed noodles, Manchurian and steamed momos.',
+    categories: ['chinese'],
+    cuisines: ['Chinese', 'Indo-Chinese'],
+    popularDishes: ['Hakka Noodles', 'Veg Manchurian', 'Steamed Momos'],
+    costForTwo: 600,
+    averageRating: 4.3,
+    reviewCount: 168,
+    imageUrl: null,
+    isDemo: true,
+  },
+  {
+    id: 'demo-stack-and-sizzle-eatery',
+    name: 'Stack & Sizzle Eatery',
+    area: 'Medical College Road',
+    city: 'Gorakhpur',
+    description: 'Sample listing: loaded burgers, wood-fired style pizzas and peri-peri fries.',
+    categories: ['fast-food'],
+    cuisines: ['Fast Food', 'Pizza'],
+    popularDishes: ['Crispy Veg Burger', 'Peri Peri Fries', 'Farmhouse Pizza'],
+    costForTwo: 450,
+    averageRating: 3.9,
+    reviewCount: 92,
+    imageUrl: null,
+    isDemo: true,
+  },
+  {
+    id: 'demo-chai-and-chapters-cafe',
+    name: 'Chai & Chapters Café',
+    area: 'Betiahata',
+    city: 'Gorakhpur',
+    description: 'Sample listing: a relaxed reading corner with coffee, chai and fresh bakes.',
+    categories: ['cafe'],
+    cuisines: ['Cafe', 'Bakery'],
+    popularDishes: ['Cold Coffee', 'Masala Chai', 'Chocolate Brownie'],
+    costForTwo: 550,
+    averageRating: 4.5,
+    reviewCount: 131,
+    imageUrl: null,
+    isDemo: true,
+  },
+  {
+    id: 'demo-rasraj-sweets-and-snacks',
+    name: 'Rasraj Sweets & Snacks',
+    area: 'Asuran Chowk',
+    city: 'Gorakhpur',
+    description: 'Sample listing: festive mithai, fresh namkeen and hot samosas.',
+    categories: ['sweets', 'street-food'],
+    cuisines: ['Mithai', 'Namkeen'],
+    popularDishes: ['Kaju Katli', 'Rasmalai', 'Samosa'],
+    costForTwo: 250,
+    averageRating: 4.2,
+    reviewCount: 305,
+    imageUrl: null,
+    isDemo: true,
+  },
+  {
+    id: 'demo-chaat-chowk-corner',
+    name: 'Chaat Chowk Corner',
+    area: 'Taramandal',
+    city: 'Gorakhpur',
+    description: 'Sample listing: tangy chaat, crisp golgappe and street-style momos.',
+    categories: ['street-food'],
+    cuisines: ['Street Food', 'Chaat'],
+    popularDishes: ['Aloo Tikki Chaat', 'Golgappe', 'Fried Momos'],
+    costForTwo: 200,
+    averageRating: 4.4,
+    reviewCount: 187,
+    imageUrl: null,
+    isDemo: true,
+  },
+];

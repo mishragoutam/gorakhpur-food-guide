@@ -1,0 +1,134 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens
+ * Warm cream surfaces, espresso-brown text and a saffron-orange accent.
+ * Contrast notes (WCAG AA, measured): white on accent-600 is 4.8:1, ink-500 on
+ * cream-100 is 5.3:1, accent-700 on cream-100 is 6.0:1, ink-900 on accent-500
+ * is 5.1:1. accent-600 text on cream-100 is only 4.4:1, so small orange text
+ * on cream uses accent-700; accent-600 is for buttons, icons and large text.
+ */
+@theme {
+  --font-display: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Instrument Sans Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --color-cream-50: #fffbf2;
+  --color-cream-100: #fbf3e3;
+  --color-cream-200: #f5e9d0;
+  --color-cream-300: #ebdcbf;
+  --color-cream-400: #d9c6a2;
+  --color-cream-500: #c2ab83;
+  --color-cream-600: #a78e64;
+  --color-cream-700: #88704d;
+  --color-cream-800: #6c583d;
+  --color-cream-900: #4f3f2d;
+
+  --color-ink-50: #fbf9f6;
+  --color-ink-100: #f5f0ea;
+  --color-ink-200: #e6dcce;
+  --color-ink-300: #d1c0ad;
+  --color-ink-400: #9e8d7d;
+  --color-ink-500: #6f6354;
+  --color-ink-600: #5e5144;
+  --color-ink-700: #4c3f34;
+  --color-ink-800: #3d2f24;
+  --color-ink-900: #2b2018;
+  --color-ink-950: #1a120c;
+
+  --color-accent-50: #fff3e6;
+  --color-accent-100: #fde3c8;
+  --color-accent-200: #fbc994;
+  --color-accent-300: #fca758;
+  --color-accent-400: #ff8a3d;
+  --color-accent-500: #f0680f;
+  --color-accent-600: #c8470d;
+  --color-accent-700: #a33a0a;
+  --color-accent-800: #822f08;
+  --color-accent-900: #6b2808;
+
+  /* Forest greens for RateIt brand buttons, badges, and owner portal */
+  --color-forest-50: #f0f7f4;
+  --color-forest-100: #dceee6;
+  --color-forest-200: #bcdecf;
+  --color-forest-300: #92c7b1;
+  --color-forest-400: #62a98f;
+  --color-forest-500: #3f8e74;
+  --color-forest-600: #2f7d5f;
+  --color-forest-700: #26634d;
+  --color-forest-800: #21503f;
+  --color-forest-900: #1c4235;
+  --color-forest-950: #0f271f;
+
+  /* Star ratings: deep amber keeps 3:1+ against white, and stays distinct from the orange accent. */
+  --color-star: #cf7a00;
+
+  /* Soft backdrops for the illustrated restaurant images. */
+  --color-tint-leaf-100: #e6efd6;
+  --color-tint-leaf-200: #cfe1b4;
+  --color-tint-sun-100: #fdefc0;
+  --color-tint-sun-200: #f9dc8a;
+  --color-tint-sand-100: #f3e4cc;
+  --color-tint-sand-200: #e4c9a2;
+  --color-tint-rose-100: #fbe3dc;
+  --color-tint-rose-200: #f6c8bb;
+  --color-tint-mint-100: #d9eee4;
+  --color-tint-mint-200: #b7dccb;
+
+  --shadow-card: 0 1px 2px rgb(88 52 18 / 0.06), 0 10px 24px -12px rgb(88 52 18 / 0.18);
+  --shadow-card-hover: 0 2px 4px rgb(88 52 18 / 0.08), 0 18px 36px -14px rgb(88 52 18 / 0.3);
+  --shadow-search: 0 2px 4px rgb(88 52 18 / 0.06), 0 22px 44px -18px rgb(88 52 18 / 0.35);
+}
+
+@layer base {
+  html {
+    /* Keeps anchored sections clear of the sticky header. */
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-cream-100);
+    color: var(--color-ink-900);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  /* Tailwind v4 resets buttons to the default cursor; restore the pointer. */
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent-700);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-accent-200);
+    color: var(--color-ink-900);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

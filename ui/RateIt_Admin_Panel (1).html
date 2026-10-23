@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RateIt Admin Panel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#16302A;--muted:#5E7A70;--bg:#F2F7F4;--card:#fff;--line:#DCE9E2;--g:#2F7D5F;--gd:#1F6249;--gl:#E3F2EA;--bad:#D63F5C;--side:250px;
+--fd:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;--fb:'DM Sans','Segoe UI',system-ui,sans-serif;--sh:0 1px 8px rgba(31,98,73,.07)}
+*{box-sizing:border-box;margin:0}
+[hidden]{display:none!important}
+body{font-family:var(--fb);background:var(--bg);color:var(--ink);line-height:1.5}
+h1,h2,h3{font-family:var(--fd);letter-spacing:-.02em;line-height:1.15}
+h2{font-size:1.5rem}h3{font-size:1.05rem}
+button{font-family:inherit}
+:focus-visible{outline:3px solid #8FCDB0;outline-offset:2px;border-radius:8px}
+.muted{color:var(--muted)}.tiny{font-size:.82rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:12px;padding:10px 18px;font:700 .92rem var(--fb);cursor:pointer;transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn.primary{background:var(--g);color:#fff;box-shadow:0 6px 16px rgba(47,125,95,.25)}
+.btn.primary:hover{background:var(--gd)}
+.btn.ghost{background:#fff;color:var(--gd);border:1.5px solid var(--line)}
+.btn.ghost:hover{border-color:var(--g)}
+.btn.danger{background:#fff;color:var(--bad);border:1.5px solid #F4C9D2}
+.btn.sm{padding:6px 12px;font-size:.82rem;border-radius:10px}
+.btn.block{width:100%}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--sh)}
+.pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:.76rem;font-weight:700;white-space:nowrap}
+.pill.ok{background:#E3F6EE;color:#0F7A55}.pill.warn{background:#FFF1D6;color:#9A5B00}
+.pill.bad{background:#FDE5EA;color:#B3294A}.pill.mute{background:var(--gl);color:var(--gd)}
+.field{display:grid;gap:6px;margin-bottom:14px}
+.field label{font-weight:700;font-size:.85rem}
+input,select{font:500 .95rem var(--fb);color:var(--ink)}
+.field input,.tools input,.tools select{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:10px 14px;background:#fff;outline:0}
+.field input:focus,.tools input:focus,.tools select:focus{border-color:var(--g);box-shadow:0 0 0 4px var(--gl)}
+.err{color:var(--bad);font-size:.82rem;min-height:1.1em}
+/* login */
+.login{min-height:100vh;display:grid;place-items:center;padding:20px}
+.login .card{width:min(420px,100%);padding:30px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand .lg{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,var(--g),#6DBB97);display:grid;place-items:center;font-size:1.2rem}
+.brand small{display:block;color:var(--muted);font-size:.78rem}
+/* layout */
+.sidebar{position:fixed;inset:0 auto 0 0;width:var(--side);background:#fff;border-right:1px solid var(--line);padding:20px 14px;display:flex;flex-direction:column;gap:18px;z-index:60;transition:transform .25s}
+.nav{display:grid;gap:3px}
+.nav button{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;font:500 .94rem var(--fb);color:var(--muted);background:none;border:0;cursor:pointer;text-align:left;width:100%}
+.nav button:hover{background:var(--bg);color:var(--ink)}
+.nav button.active{background:var(--gl);color:var(--gd);font-weight:700}
+.nav .ic{width:22px;text-align:center}
+.main{margin-left:var(--side);min-height:100vh}
+.topbar{position:sticky;top:0;z-index:40;background:rgba(242,247,244,.92);backdrop-filter:blur(10px);display:flex;align-items:center;gap:14px;padding:14px 28px;border-bottom:1px solid var(--line)}
+.topbar h1{font-size:1.35rem;flex:1}
+.burger{display:none;background:#fff;border:1px solid var(--line);border-radius:10px;width:40px;height:40px;font-size:1.2rem;cursor:pointer}
+.chip-u{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px 14px 4px 4px;font-size:.88rem;font-weight:700}
+.av{width:32px;height:32px;border-radius:50%;background:var(--g);color:#fff;display:grid;place-items:center;font-weight:800}
+.content{padding:26px 28px 60px;display:grid;gap:22px;max-width:1240px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.kpi{padding:18px;display:grid;gap:4px}
+.kpi small{color:var(--muted);font-weight:700}
+.kpi strong{font:800 2rem var(--fd)}
+.pad{padding:20px}
+.grid2{display:grid;grid-template-columns:1.4fr 1fr;gap:20px}
+.tools{display:flex;gap:10px;flex-wrap:wrap}
+.tools input{max-width:300px}.tools select{width:auto}
+.tw{overflow-x:auto}
+.tbl{width:100%;border-collapse:collapse;font-size:.9rem;min-width:640px}
+.tbl th{text-align:left;color:var(--muted);font-weight:700;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl tr:last-child td{border-bottom:0}
+.acts{display:flex;gap:6px;flex-wrap:wrap}
+.stars{color:#F5B301;letter-spacing:2px}
+.feed{list-style:none;padding:0;display:grid;gap:0}
+.feed li{padding:11px 0;border-bottom:1px solid var(--line);display:flex;gap:10px;justify-content:space-between;font-size:.9rem}
+.feed li:last-child{border:0}
+.bars{display:grid;gap:10px;margin-top:12px}
+.bar{display:grid;grid-template-columns:90px 1fr 36px;gap:10px;align-items:center;font-size:.9rem}
+.bar i{height:9px;border-radius:9px;background:var(--line);overflow:hidden;display:block}
+.bar u{display:block;height:100%;background:#4FA27F}
+.empty{text-align:center;padding:30px;color:var(--muted)}
+.toasts{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:200;display:grid;gap:10px;width:min(420px,92vw)}
+.toast{background:var(--ink);color:#fff;border-radius:14px;padding:13px 18px;font-size:.92rem;box-shadow:0 12px 30px rgba(22,48,42,.35)}
+.overlay{position:fixed;inset:0;background:rgba(22,48,42,.45);display:grid;place-items:center;padding:16px;z-index:100}
+.modal{background:#fff;border-radius:22px;width:min(460px,100%);padding:26px}
+.modal .acts{margin-top:16px}
+@media(max-width:900px){.sidebar{transform:translateX(-100%)}.sidebar.open{transform:none}.main{margin-left:0}.burger{display:block}.kpis{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}.content,.topbar{padding-left:16px;padding-right:16px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="login" id="login">
+ <div class="card">
+  <div class="brand"><div class="lg">🛡</div><div><strong>RateIt</strong><small>Admin Panel · Web only</small></div></div>
+  <h2 style="margin:20px 0 4px">Admin login</h2>
+  <p class="muted tiny" style="margin-bottom:16px">Demo: use any email and password. The 2FA code is optional.</p>
+  <div class="field"><label for="em">Admin email</label><input id="em" type="email" value="admin@rateit.com"></div>
+  <div class="field"><label for="pw">Password</label><input id="pw" type="password" value="admin123"></div>
+  <div class="field"><label for="otp">2FA code (optional)</label><input id="otp" inputmode="numeric" maxlength="6" placeholder="6-digit code"></div>
+  <div class="err" id="lerr"></div>
+  <button class="btn primary block" data-a="login">Log in</button>
+ </div>
+</div>
+
+<div id="app" hidden>
+ <aside class="sidebar" id="sb" aria-label="Main navigation">
+  <div class="brand"><div class="lg">🛡</div><div><strong>RateIt</strong><small>Admin Panel</small></div></div>
+  <nav class="nav" id="nav"></nav>
+  <button class="btn ghost sm" style="margin-top:auto" data-a="logout">Log out</button>
+ </aside>
+ <div class="main">
+  <header class="topbar">
+   <button class="burger" data-a="burger" aria-label="Open menu">☰</button>
+   <h1 id="title">Dashboard</h1>
+   <span class="pill mute">Sample data</span>
+   <div class="chip-u"><span class="av">A</span>Admin</div>
+  </header>
+  <main class="content" id="content"></main>
+ </div>
+</div>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<div class="overlay" id="ov" hidden><div class="modal" role="dialog" aria-modal="true" id="mb"></div></div>
+
+<script>
+const $=s=>document.querySelector(s);
+const users=[['Aarav Mehta','aarav@mail.com',14],['Meera Joshi','meera@mail.com',9],['Kabir Singh','kabir@mail.com',22],['Sana Khan','sana@mail.com',6],['Rohan Verma','rohan@mail.com',31],['Riya Gupta','riya@mail.com',3]].map((u,i)=>({id:i,n:u[0],e:u[1],rv:u[2],ban:i==4}));
+const shops=[['Brew & Books Cafe','Cafe','Neha Kapoor',4.2,142],['Moti Chaat Bhandar','Street food','Raju Prasad',4.6,310],['Crumb Bakery','Bakery','Anita Das',4.4,188],['Sharma Chai Corner','Street food','Mohan Sharma',3.1,57],['Quick Bites Express','Street food','Unknown',1.8,12]].map((s,i)=>({id:i,n:s[0],c:s[1],o:s[2],r:s[3],cnt:s[4],st:i==4?'Flagged':'Active'}));
+const revs=[['Kabir','Brew & Books Cafe',2,'Waited 25 minutes for a sandwich.'],['Rohan','Quick Bites Express',1,'Scam place, total waste. Owner is a **** and should be banned.'],['Meera','Moti Chaat Bhandar',5,'Best tikki in town.'],['Unknown123','Crumb Bakery',5,'Visit my page for free coupons www.spam-link.biz'],['Sana','Sharma Chai Corner',3,'Chai is fine, seating is limited.']].map((r,i)=>({id:i,u:r[0],s:r[1],st:r[2],t:r[3],fl:i==1||i==3}));
+let log=[['Admin logged in','just now']];
+const S={page:'dash',q:'',f:'All'};
+const pages=[['dash','📊','Dashboard'],['users','👥','Users'],['shops','🏪','Shops'],['revs','💬','Reviews'],['audit','📋','Audit log']];
+const stars=n=>'<span class="stars" aria-label="'+n+' stars">'+'★'.repeat(n)+'☆'.repeat(5-n)+'</span>';
+const T=()=>new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+function toast(m){const t=document.createElement('div');t.className='toast';t.textContent=m;$('#toasts').append(t);setTimeout(()=>t.remove(),2400)}
+function act(m){log.unshift([m,T()]);toast(m)}
+function ask(msg,fn,label){$('#mb').innerHTML='<h3>Please confirm</h3><p class="muted" style="margin-top:8px">'+msg+'</p><div class="acts"><button class="btn danger" data-a="yes">'+label+'</button><button class="btn ghost" data-a="no">Cancel</button></div>';$('#ov').hidden=false;ask.fn=fn;$('#mb button').focus()}
+function kpis(){const a=[['Total users',1198+users.length],['Total shops',81+shops.length],['Total reviews',(9390+revs.length).toLocaleString()],['Flagged items',revs.filter(r=>r.fl).length+shops.filter(s=>s.st=='Flagged').length]];
+ return '<div class="kpis">'+a.map(k=>'<div class="card kpi"><small>'+k[0]+'</small><strong>'+k[1]+'</strong></div>').join('')+'</div>'}
+function feed(n){return '<ul class="feed">'+log.slice(0,n).map(l=>'<li><span>'+l[0]+'</span><span class="muted tiny">'+l[1]+'</span></li>').join('')+'</ul>'}
+function view(){
+ const p=S.page;let h='';
+ if(p=='dash'){const d=[['5 stars',48],['4 stars',27],['3 stars',13],['2 stars',7],['1 star',5]];
+  h=kpis()+'<div class="grid2"><div class="card pad"><h3>Recent activity</h3>'+feed(6)+'</div><div class="card pad"><h3>Rating split, all shops</h3><div class="bars">'+d.map(x=>'<div class="bar"><span>'+x[0]+'</span><i><u style="width:'+x[1]*2+'%"></u></i><b>'+x[1]+'%</b></div>').join('')+'</div></div></div>'}
+ if(p=='users'){const l=users.filter(u=>(u.n+u.e).toLowerCase().includes(S.q.toLowerCase()));
+  h='<div class="tools"><input id="q" placeholder="Search by name or email" value="'+S.q+'" aria-label="Search users"></div><div class="card tw"><table class="tbl"><tr><th>Name</th><th>Email</th><th>Reviews</th><th>Status</th><th>Actions</th></tr>'+l.map(u=>'<tr><td><b>'+u.n+'</b></td><td>'+u.e+'</td><td>'+u.rv+'</td><td><span class="pill '+(u.ban?'bad':'ok')+'">'+(u.ban?'Banned':'Active')+'</span></td><td><div class="acts"><button class="btn ghost sm" data-a="uview" data-v="'+u.id+'">View profile</button><button class="btn '+(u.ban?'primary':'danger')+' sm" data-a="uban" data-v="'+u.id+'">'+(u.ban?'Unban':'Ban')+'</button></div></td></tr>').join('')+'</table>'+(l.length?'':'<div class="empty">No users match your search.</div>')+'</div>'}
+ if(p=='shops')h='<div class="card tw"><table class="tbl"><tr><th>Shop</th><th>Owner</th><th>Rating</th><th>Reviews</th><th>Status</th><th>Actions</th></tr>'+shops.map(s=>'<tr><td><b>'+s.n+'</b><div class="muted tiny">'+s.c+'</div></td><td>'+s.o+'</td><td>'+s.r.toFixed(1)+' ★</td><td>'+s.cnt+'</td><td><span class="pill '+(s.st=='Active'?'ok':s.st=='Suspended'?'warn':'bad')+'">'+s.st+'</span></td><td><div class="acts"><button class="btn ghost sm" data-a="ssus" data-v="'+s.id+'">'+(s.st=='Suspended'?'Restore':'Suspend')+'</button><button class="btn ghost sm" data-a="sfake" data-v="'+s.id+'">Flag as fake</button><button class="btn danger sm" data-a="srem" data-v="'+s.id+'">Remove</button></div></td></tr>').join('')+'</table></div>';
+ if(p=='revs'){const shn=['All',...new Set(revs.map(r=>r.s))];const l=revs.filter(r=>S.f=='All'||r.s==S.f);
+  h='<div class="tools"><select id="f" aria-label="Filter by shop">'+shn.map(s=>'<option'+(S.f==s?' selected':'')+'>'+s+'</option>').join('')+'</select></div><div class="card tw"><table class="tbl"><tr><th>Reviewer</th><th>Shop</th><th>Rating</th><th>Review</th><th>Actions</th></tr>'+l.map(r=>'<tr><td><b>'+r.u+'</b></td><td>'+r.s+'</td><td>'+stars(r.st)+'</td><td>'+r.t+(r.fl?' <span class="pill bad">Flagged</span>':'')+'</td><td><div class="acts"><button class="btn ghost sm" data-a="rflag" data-v="'+r.id+'">'+(r.fl?'Unflag':'Flag abusive')+'</button><button class="btn danger sm" data-a="rdel" data-v="'+r.id+'">Delete</button></div></td></tr>').join('')+'</table>'+(l.length?'':'<div class="empty">No reviews for this shop.</div>')+'</div>'}
+ if(p=='audit')h='<div class="card pad"><h3>Audit log</h3><p class="muted tiny">Every admin action is recorded here.</p>'+feed(50)+'</div>';
+ $('#title').textContent=pages.find(x=>x[0]==p)[2];$('#content').innerHTML=h;
+ $('#nav').innerHTML=pages.map(x=>'<button data-a="pg" data-v="'+x[0]+'" class="'+(p==x[0]?'active':'')+'"><span class="ic">'+x[1]+'</span>'+x[2]+'</button>').join('')}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,v=+b.dataset.v;
+ if(a=='login'){if(!$('#em').value.trim()||!$('#pw').value){$('#lerr').textContent='Enter your email and password.';return}$('#login').hidden=true;$('#app').hidden=false;S.page='dash';view();return}
+ if(a=='logout'){$('#app').hidden=true;$('#login').hidden=false;return}
+ if(a=='burger'){$('#sb').classList.toggle('open');return}
+ if(a=='pg'){S.page=b.dataset.v;$('#sb').classList.remove('open')}
+ else if(a=='uban'){const u=users[v];u.ban=!u.ban;act((u.ban?'Banned user ':'Unbanned user ')+u.n)}
+ else if(a=='uview'){const u=users[v];$('#mb').innerHTML='<h3>'+u.n+'</h3><p class="muted">'+u.e+'</p><p style="margin-top:10px">'+u.rv+' reviews written · Status: '+(u.ban?'Banned':'Active')+'</p><div class="acts"><button class="btn ghost" data-a="no">Close</button></div>';$('#ov').hidden=false;return}
+ else if(a=='ssus'){const s=shops[v];s.st=s.st=='Suspended'?'Active':'Suspended';act(s.st+': '+s.n)}
+ else if(a=='sfake'){shops[v].st='Flagged';act('Flagged as fake or spam: '+shops[v].n)}
+ else if(a=='srem'){ask('Remove “'+shops[v].n+'” from RateIt? This is recorded in the audit log.',()=>{act('Removed shop '+shops[v].n);shops.splice(v,1);shops.forEach((s,i)=>s.id=i);view()},'Remove shop');return}
+ else if(a=='rflag'){const r=revs[v];r.fl=!r.fl;act((r.fl?'Flagged':'Unflagged')+' review by '+r.u)}
+ else if(a=='rdel'){ask('Delete this review by '+revs[v].u+'?',()=>{act('Deleted review by '+revs[v].u);revs.splice(v,1);revs.forEach((r,i)=>r.id=i);view()},'Delete review');return}
+ else if(a=='yes'){$('#ov').hidden=true;ask.fn();return}
+ else if(a=='no'){$('#ov').hidden=true;return}
+ view()});
+document.addEventListener('input',e=>{if(e.target.id=='q'){S.q=e.target.value;view();const q=$('#q');q.focus();q.setSelectionRange(99,99)}});
+document.addEventListener('change',e=>{if(e.target.id=='f'){S.f=e.target.value;view()}});
+document.addEventListener('keydown',e=>{if(e.key=='Escape')$('#ov').hidden=true});
+</script>
+</body>
+</html>

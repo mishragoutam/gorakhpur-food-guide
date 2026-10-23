@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RateIt Restaurant Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<!-- QR generation library (needs internet). If it fails to load, a labelled placeholder is shown instead. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+/* =========================================================
+   1. DESIGN TOKENS
+   ========================================================= */
+:root{
+  --ink:#16302A; --muted:#5E7A70; --bg:#F2F7F4; --card:#FFFFFF; --line:#DCE9E2;
+  --violet:#2F7D5F; --violet-d:#1F6249; --violet-l:#E3F2EA;
+  --star:#F5B301; --good:#18946A; --bad:#D63F5C; --warn:#C77A0A;
+  --shadow:0 12px 30px rgba(31,98,73,.10); --shadow-s:0 1px 8px rgba(31,98,73,.07);
+  --f-display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --f-body:'DM Sans','Segoe UI',system-ui,sans-serif;
+  --side:262px;
+}
+
+/* =========================================================
+   2. BASE
+   ========================================================= */
+*{box-sizing:border-box;margin:0}
+[hidden]{display:none!important}
+body{font-family:var(--f-body);background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--f-display);letter-spacing:-.02em;line-height:1.15}
+h2{font-size:1.5rem} h3{font-size:1.05rem}
+p{max-width:70ch}
+a{color:inherit}
+img{max-width:100%;display:block}
+.muted{color:var(--muted)} .tiny{font-size:.82rem}
+:focus-visible{outline:3px solid #8FCDB0;outline-offset:2px;border-radius:8px}
+button{font-family:inherit}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:12px;padding:10px 18px;font:700 .92rem var(--f-body);cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .15s,background .15s,border-color .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn.primary{background:var(--violet);color:#fff;box-shadow:0 6px 16px rgba(47,125,95,.25)}
+.btn.primary:hover{background:var(--violet-d)}
+.btn.ghost{background:#fff;color:var(--violet-d);border:1.5px solid var(--line)}
+.btn.ghost:hover{border-color:var(--violet)}
+.btn.danger{background:#fff;color:var(--bad);border:1.5px solid #F4C9D2}
+.btn.sm{padding:6px 12px;font-size:.82rem;border-radius:10px}
+.btn.block{width:100%}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow-s)}
+.pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:.76rem;font-weight:700;white-space:nowrap}
+.pill.ok{background:#E3F6EE;color:#0F7A55}.pill.warn{background:#FFF1D6;color:#9A5B00}
+.pill.bad{background:#FDE5EA;color:#B3294A}.pill.mute{background:var(--violet-l);color:var(--violet-d)}
+.pill.sample{background:#FFF8E6;color:#7A5300;border:1px solid #F3DFA8}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:5px 13px;font:500 .84rem var(--f-body);color:var(--ink)}
+button.chip,label.chip{cursor:pointer;transition:all .15s}
+button.chip:hover,label.chip:hover{border-color:var(--violet)}
+.chip.on{background:var(--violet);border-color:var(--violet);color:#fff}
+.chip.sm{padding:2px 10px;font-size:.76rem;background:var(--violet-l);border-color:transparent;color:var(--violet-d)}
+.chip.sm.neg{background:#FDEBEF;color:var(--bad)}
+.stars{display:inline-block;letter-spacing:2px;line-height:1;background:linear-gradient(90deg,var(--star) var(--p,0%),#D3E5DB var(--p,0%));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sr{position:absolute;opacity:0;pointer-events:none}
+
+/* Forms */
+.field{display:grid;gap:6px;margin-bottom:14px}
+.field>label,.lbl{font-weight:700;font-size:.85rem}
+input,select,textarea{font:500 .95rem var(--f-body);color:var(--ink)}
+.field input:not([type=checkbox]):not([type=radio]):not([type=file]),.field select,.field textarea,.toolbar input,.toolbar select{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:10px 14px;background:#fff;outline:0}
+.field input:focus,.field select:focus,.field textarea:focus,.toolbar input:focus,.toolbar select:focus{border-color:var(--violet);box-shadow:0 0 0 4px var(--violet-l)}
+.field input:disabled,.field select:disabled,.field textarea:disabled{background:#F7FBF9;color:#3E5A50}
+.err{color:var(--bad);font-size:.82rem;min-height:1.1em}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
+.form-grid .full{grid-column:1/-1}
+fieldset{border:0;padding:0;min-width:0}
+.hint{font-size:.8rem;color:var(--muted)}
+.switch{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}
+.switch:last-child{border-bottom:0}
+.switch input{appearance:none;width:44px;height:26px;background:#CFE2D8;border-radius:99px;position:relative;cursor:pointer;transition:background .2s;flex:none}
+.switch input::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.switch input:checked{background:var(--violet)}
+.switch input:checked::after{transform:translateX(18px)}
+.uploader{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.thumb{width:84px;height:84px;border-radius:16px;object-fit:cover;border:1px solid var(--line);background:var(--violet-l);display:grid;place-items:center;font-size:2rem;overflow:hidden}
+.thumb.wide{width:160px;height:84px}
+.thumb img{width:100%;height:100%;object-fit:cover}
+
+/* =========================================================
+   3. LOGIN SCREEN
+   ========================================================= */
+.login{min-height:100vh;display:grid;grid-template-columns:1.05fr 1fr}
+.login-brand{background:linear-gradient(150deg,#174A38,#2F7D5F 60%,#5FB08E);color:#fff;padding:56px;display:grid;align-content:space-between;gap:32px}
+.login-brand h1{font-size:clamp(2rem,4vw,3rem);font-weight:800;max-width:14ch}
+.login-brand p{color:#D2EBDD;font-size:1.05rem;margin-top:14px}
+.login-list{list-style:none;padding:0;display:grid;gap:12px}
+.login-list li{display:flex;gap:12px;align-items:center;background:rgba(255,255,255,.12);padding:12px 16px;border-radius:14px}
+.login-form-wrap{display:grid;place-items:center;padding:32px;background:#fff}
+.login-box{width:min(400px,100%);display:grid;gap:14px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand strong{font:800 1.25rem var(--f-display);letter-spacing:-.02em;display:block;line-height:1.1}
+.brand small{color:var(--muted);font-size:.78rem}
+.demo-box{border:1.5px dashed #B5D9C4;background:var(--violet-l);border-radius:16px;padding:14px;display:grid;gap:8px}
+.divider{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:.85rem}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
+.linkbtn{background:none;border:0;color:var(--violet-d);font-weight:700;cursor:pointer;padding:0;text-decoration:underline;font-size:.88rem}
+
+/* =========================================================
+   4. APP SHELL: fixed sidebar + top bar
+   ========================================================= */
+.sidebar{position:fixed;inset:0 auto 0 0;width:var(--side);background:#fff;border-right:1px solid var(--line);padding:20px 14px;display:flex;flex-direction:column;gap:18px;z-index:60;overflow-y:auto;transition:transform .25s}
+.owner-card{display:flex;align-items:center;gap:10px;background:var(--bg);padding:10px;border-radius:14px}
+.owner-card strong{display:block;font-size:.92rem;line-height:1.2}
+.logo-img{width:42px;height:42px;border-radius:12px;object-fit:cover;flex:none}
+.ph-logo{background:linear-gradient(135deg,var(--violet),#6DBB97);display:grid;place-items:center;font-size:1.3rem}
+.logo-img.lg{width:84px;height:84px;border-radius:22px;border:4px solid #fff;box-shadow:var(--shadow);font-size:2.4rem;background-color:#fff}
+.nav{display:grid;gap:3px}
+.nav a,.nav button{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;text-decoration:none;font:500 .94rem var(--f-body);color:var(--muted);background:none;border:0;cursor:pointer;text-align:left;width:100%}
+.nav a:hover,.nav button:hover{background:var(--bg);color:var(--ink)}
+.nav a.active{background:var(--violet-l);color:var(--violet-d);font-weight:700}
+.nav .ic{width:22px;text-align:center}
+.nav .sep{height:1px;background:var(--line);margin:8px 4px}
+.main{margin-left:var(--side);min-height:100vh}
+.topbar{position:sticky;top:0;z-index:40;background:rgba(242,247,244,.92);backdrop-filter:blur(10px);display:flex;align-items:center;gap:14px;padding:14px 28px;border-bottom:1px solid var(--line)}
+.topbar h1{font-size:1.35rem;flex:1}
+.burger{display:none;background:#fff;border:1px solid var(--line);border-radius:10px;width:40px;height:40px;font-size:1.2rem;cursor:pointer}
+.user-chip{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px 14px 4px 4px;font-size:.88rem;font-weight:700}
+.avatar{width:32px;height:32px;border-radius:50%;background:var(--violet);color:#fff;display:grid;place-items:center;font-weight:800}
+.content{padding:26px 28px 60px;display:grid;gap:22px;max-width:1240px}
+.scrim{position:fixed;inset:0;background:rgba(22,48,42,.45);z-index:55}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.sec-head p{color:var(--muted);margin-top:4px}
+.banner{background:#FFF8E6;border:1px solid #F3DFA8;color:#7A5300;border-radius:14px;padding:10px 16px;font-size:.88rem}
+
+/* =========================================================
+   5. DASHBOARD WIDGETS
+   ========================================================= */
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.kpi{padding:18px;display:grid;gap:4px}
+.kpi small{color:var(--muted);font-weight:700}
+.kpi strong{font:800 2rem var(--f-display);letter-spacing:-.02em}
+.panel{padding:22px;display:grid;gap:14px;align-content:start}
+.panel>h3{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.profile-hero{overflow:hidden}
+.hero-body{display:flex;gap:18px;align-items:center;padding:24px;flex-wrap:wrap}
+.hero-body .grow{flex:1;min-width:220px}
+.bar-row{display:grid;grid-template-columns:52px 1fr 34px;gap:10px;align-items:center;font-size:.85rem;margin:6px 0;background:none;border:0;width:100%;text-align:left;cursor:default;padding:0;color:inherit}
+button.bar-row{cursor:pointer;border-radius:8px}
+button.bar-row:hover{background:var(--violet-l)}
+.track{height:10px;background:var(--violet-l);border-radius:99px;overflow:hidden;display:block}
+.track i{display:block;height:100%;background:var(--violet);border-radius:99px;transition:width .6s}
+.track.good i{background:var(--good)} .track.bad i{background:var(--bad)}
+.chart svg{width:100%;height:auto;display:block}
+.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.quick button{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;display:grid;gap:6px;text-align:left;cursor:pointer;transition:all .15s;box-shadow:var(--shadow-s)}
+.quick button:hover{border-color:var(--violet);transform:translateY(-2px);box-shadow:var(--shadow)}
+.quick .qi{font-size:1.5rem}
+.rev{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.rev:last-child{border-bottom:0}
+.rev-av{flex:none;width:38px;height:38px;border-radius:50%;background:var(--violet-l);color:var(--violet-d);display:grid;place-items:center;font-weight:800}
+.rev-main{display:grid;gap:6px;flex:1;min-width:0}
+.rev-top{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.tabs{display:inline-flex;gap:4px;background:#fff;padding:4px;border-radius:12px;border:1px solid var(--line);flex-wrap:wrap}
+.tabs button{border:0;background:none;padding:8px 16px;border-radius:9px;font:700 .88rem var(--f-body);color:var(--muted);cursor:pointer}
+.tabs button.on{background:var(--violet);color:#fff}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.toolbar input{flex:1;min-width:200px}.toolbar select{width:auto;min-width:150px}
+.empty{padding:48px 20px;text-align:center;display:grid;gap:10px;justify-items:center;color:var(--muted)}
+.empty .em{font-size:2.6rem}
+
+/* Menu */
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.dish{overflow:hidden;display:flex;flex-direction:column}
+.dish.off{opacity:.72}
+.dish-img{position:relative;height:140px;background:linear-gradient(135deg,var(--c1),var(--c2));background-size:cover;background-position:center;display:grid;place-items:center;overflow:hidden}
+.dish-img::before{content:"";position:absolute;width:130px;height:130px;border-radius:50%;background:rgba(255,255,255,.15);top:-40px;right:-30px}
+.dish-emoji{position:relative;font-size:3.2rem;filter:drop-shadow(0 6px 10px rgba(0,0,0,.25))}
+.dish-badges{position:absolute;left:10px;top:10px;display:flex;gap:6px}
+.dish-body{padding:14px 16px 16px;display:grid;gap:8px;flex:1;align-content:start}
+.dish-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.price{font:800 1.1rem var(--f-display);color:var(--violet-d);white-space:nowrap}
+.diet{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:700}
+.diet i{width:14px;height:14px;border:2px solid;display:inline-grid;place-items:center;border-radius:3px}
+.diet i::after{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.diet.veg{color:#0F7A55}.diet.nonveg{color:#B3294A}
+.dish-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
+
+/* QR page */
+.qr-layout{display:grid;grid-template-columns:420px 1fr;gap:22px;align-items:start}
+.qr-card{padding:28px;display:grid;gap:14px;justify-items:center;text-align:center}
+.qr-card .qr-head{display:flex;align-items:center;gap:12px}
+#qrMount{padding:14px;background:#fff;border:2px solid var(--ink);border-radius:18px;display:grid;place-items:center;min-width:248px;min-height:248px}
+#qrMount img{display:block}
+.qr-ph{width:220px;height:220px;display:grid;place-items:center;text-align:center;font-size:.85rem;color:var(--muted);border:2px dashed var(--line);border-radius:12px;padding:16px}
+.url{background:var(--bg);padding:6px 12px;border-radius:10px;font-size:.82rem;color:var(--violet-d);overflow-wrap:anywhere}
+.howto{list-style:none;padding:0;display:grid;gap:12px;counter-reset:h}
+.howto li{display:flex;gap:12px}
+.howto li::before{counter-increment:h;content:counter(h);flex:none;width:28px;height:28px;border-radius:50%;background:var(--violet-l);color:var(--violet-d);display:grid;place-items:center;font-weight:800;font-size:.85rem}
+
+/* Insights, AI, competitors */
+.donut{--a:41%;width:150px;height:150px;border-radius:50%;background:conic-gradient(var(--violet) var(--a),#D5E6DC 0);display:grid;place-items:center;flex:none}
+.donut span{width:96px;height:96px;border-radius:50%;background:#fff;display:grid;place-items:center;font:800 1.2rem var(--f-display)}
+.wk{display:flex;align-items:flex-end;gap:10px;height:150px}
+.wk div{flex:1;display:grid;gap:4px;justify-items:center;align-content:end;height:100%;font-size:.75rem;color:var(--muted)}
+.wk i{display:block;width:100%;background:var(--violet);border-radius:8px 8px 0 0;min-height:4px}
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.topic{background:var(--bg);border-radius:14px;padding:12px;display:grid;gap:6px;font-size:.9rem}
+.sugg{list-style:none;padding:0;display:grid;gap:10px}
+.sugg li{display:flex;gap:12px;padding:12px 14px;border-radius:14px;background:var(--bg);font-size:.92rem}
+.tbl-wrap{overflow-x:auto}
+.tbl{width:100%;border-collapse:collapse;font-size:.9rem;min-width:640px}
+.tbl th{text-align:left;color:var(--muted);font-weight:700;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl td{padding:12px;border-bottom:1px solid var(--line)}
+.tbl tr.you td{background:var(--violet-l)}
+.tbl tr:last-child td{border-bottom:0}
+.rank{width:30px;height:30px;border-radius:50%;background:var(--bg);display:grid;place-items:center;font-weight:800}
+.tbl tr.you .rank{background:var(--violet);color:#fff}
+textarea.big{min-height:110px;resize:vertical}
+
+/* =========================================================
+   6. MODAL AND TOASTS
+   ========================================================= */
+.overlay{position:fixed;inset:0;z-index:100;background:rgba(22,48,42,.55);backdrop-filter:blur(4px);display:grid;place-items:center;padding:20px;overflow-y:auto}
+.modal{position:relative;background:#fff;border-radius:22px;width:min(600px,100%);max-height:92vh;overflow-y:auto;box-shadow:0 30px 80px rgba(22,48,42,.4);animation:pop .25s cubic-bezier(.2,1.2,.4,1);outline:0}
+@keyframes pop{from{transform:scale(.94);opacity:0}to{transform:scale(1);opacity:1}}
+.modal-x{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;border:0;background:var(--bg);font-size:1.3rem;cursor:pointer}
+.pad{padding:28px}
+.modal-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.toasts{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:200;display:grid;gap:10px;width:min(440px,92vw)}
+.toast{display:flex;gap:12px;align-items:center;background:var(--ink);color:#fff;border-radius:14px;padding:13px 18px;box-shadow:0 12px 30px rgba(22,48,42,.35);animation:pop .25s both;font-size:.92rem}
+.toast i{font-style:normal;flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:.8rem;font-weight:800;background:var(--good)}
+.toast.error i{background:var(--bad)}.toast.warn i{background:var(--warn)}.toast.info i{background:var(--violet)}
+
+/* =========================================================
+   7. RESPONSIVE
+   ========================================================= */
+@media (max-width:1100px){.kpis{grid-template-columns:repeat(2,1fr)}.grid3{grid-template-columns:1fr 1fr}.qr-layout{grid-template-columns:1fr}}
+@media (max-width:900px){
+  .login{grid-template-columns:1fr}.login-brand{padding:32px 24px}
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:none;box-shadow:var(--shadow)}
+  .main{margin-left:0}
+  .burger{display:block}
+  .topbar{padding:12px 16px}.content{padding:20px 16px 60px}
+  .grid2,.quick{grid-template-columns:1fr}
+  .user-chip span.nm{display:none}
+}
+@media (max-width:600px){.kpis,.grid3,.form-grid{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.pad{padding:22px 18px}}
+
+/* Printing the QR card only */
+@media print{
+  body.print-qr *{visibility:hidden}
+  body.print-qr #printCard,body.print-qr #printCard *{visibility:visible}
+  body.print-qr #printCard{position:absolute;left:50%;top:24px;transform:translateX(-50%);box-shadow:none;border:2px solid #000;width:420px}
+  body.print-qr .toasts{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="logo" viewBox="0 0 32 32"><rect width="32" height="32" rx="10" fill="#2F7D5F"/><path d="M16 6.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L16 21.3l-5.9 3.2 1.2-6.5-4.8-4.6 6.6-.9z" fill="#fff"/></symbol>
+</svg>
+
+<!-- =========================== LOGIN =========================== -->
+<div class="login" id="loginScreen" hidden>
+  <section class="login-brand">
+    <div class="brand" style="color:#fff"><svg width="40" height="40" aria-hidden="true"><use href="#logo"/></svg><div><strong>RateIt</strong><small style="color:#C3E3D2">Restaurant Dashboard</small></div></div>
+    <div>
+      <h1>Know what your guests really think.</h1>
+      <p>Manage your restaurant details, menu and QR code, and learn from customer feedback in one place.</p>
+    </div>
+    <ul class="login-list">
+      <li>🍽️ Edit your menu and prices anytime</li>
+      <li>🔳 Print a QR code for tables and the billing counter</li>
+      <li>💬 Read reviews and see simple improvement ideas</li>
+    </ul>
+  </section>
+  <section class="login-form-wrap">
+    <div class="login-box">
+      <div><h2>Welcome back</h2><p class="muted">Log in to manage your restaurant on RateIt.</p></div>
+      <form id="loginForm" novalidate>
+        <div class="field"><label for="l-email">Email</label><input id="l-email" name="email" type="email" autocomplete="email" placeholder="owner@yourrestaurant.com"><p class="err" data-err="email"></p></div>
+        <div class="field"><label for="l-pw">Password</label><input id="l-pw" name="pw" type="password" autocomplete="current-password" placeholder="At least 6 characters"><p class="err" data-err="pw"></p></div>
+        <button class="btn primary block" type="submit">Login</button>
+      </form>
+      <div style="text-align:center"><button class="linkbtn" data-action="forgot">Forgot password?</button></div>
+      <div class="divider">or</div>
+      <div class="demo-box">
+        <span class="pill sample" style="width:fit-content">Demo login</span>
+        <p class="tiny muted">Skip the form and open the sample dashboard for “Spice Garden Cafe”.</p>
+        <button class="btn ghost block" data-action="demoLogin">Use demo login</button>
+      </div>
+      <p class="tiny muted">Quick access mode: any valid email with a 6+ character password opens the dashboard.</p>
+    </div>
+  </section>
+</div>
+
+<!-- =========================== APP =========================== -->
+<div id="app" hidden>
+  <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+    <div class="brand"><svg width="36" height="36" aria-hidden="true"><use href="#logo"/></svg><div><strong>RateIt</strong><small>Restaurant Dashboard</small></div></div>
+    <div class="owner-card" id="ownerCard"></div>
+    <nav class="nav" id="nav"></nav>
+  </aside>
+  <div class="scrim" id="scrim" data-action="closeSidebar" hidden></div>
+  <div class="main">
+    <header class="topbar">
+      <button class="burger" data-action="toggleSidebar" aria-label="Open menu" aria-controls="sidebar">☰</button>
+      <h1 id="pageTitle">Overview</h1>
+      <span class="pill sample">Sample data</span>
+      <div class="user-chip"><span class="avatar" id="userAv">O</span><span class="nm" id="userNm">Owner</span></div>
+    </header>
+    <main class="content" id="content"></main>
+  </div>
+</div>
+
+<div class="overlay" id="modal" hidden>
+  <div class="modal" id="modalBox" role="dialog" aria-modal="true" aria-label="Dialog" tabindex="-1">
+    <button class="modal-x" data-action="closeModal" aria-label="Close dialog">×</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<script>
+/* =========================================================
+   RateIt Restaurant Dashboard
+   Sections: 1 Sample data  2 State  3 Helpers  4 Modal/Toast
+             5 Login/Router  6 Overview  7 Profile  8 Menu
+             9 QR  10 Reviews  11 Insights  12 AI  13 Competitors
+             14 Settings  15 Events  16 Start-up
+   ========================================================= */
+
+/* ---------- 1. SAMPLE DATA ---------- */
+const ROUTES = [
+  {id:'overview',   title:'Overview',                 ic:'📊'},
+  {id:'profile',    title:'Restaurant Profile',       ic:'🏪'},
+  {id:'menu',       title:'Menu Management',          ic:'🍽️'},
+  {id:'qr',         title:'QR Code',                  ic:'🔳'},
+  {id:'reviews',    title:'Customer Reviews',         ic:'💬'},
+  {id:'insights',   title:'Customer Insights',        ic:'📈'},
+  {id:'ai',         title:'AI Improvement Suggestions', ic:'💡'},
+  {id:'competitors',title:'Competitor Ranking',       ic:'🏆'},
+  {id:'settings',   title:'Settings',                 ic:'⚙️'}
+];
+const MENU_CATS = ['Starters','Main Course','Breads','Desserts','Beverages'];
+const CAT_STYLE = {'Starters':['#2F7D5F','#A9DCC0','🥟'],'Main Course':['#256B51','#5FB08E','🍛'],'Breads':['#3C9A76','#B8E2CB','🫓'],'Desserts':['#2B8A68','#BFE5CF','🍮'],'Beverages':['#1F5C45','#7FB8A0','🥤']};
+const CUISINES = ['North Indian','South Indian','Multi-cuisine','Chinese','Continental','Street Food','Biryani Specialist','Café & Snacks'];
+const FACILITIES = ['Air Conditioned','Free Wi-Fi','Parking','Family Friendly','Outdoor Seating','Live Music','Takeaway','Home Delivery','Card Payments','Wheelchair Accessible','Kids Friendly','Pet Friendly'];
+const DAYS = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+const POS_TAGS = ['Great Taste','Food Quality','Clean & Hygienic','Friendly Service','Good Ambience','Value for Money'];
+const NEG_TAGS = ['Slow Service','Cold Food','Noisy','Pricey','Hygiene Concern','Small Portions'];
+
+const DEFAULT_PROFILE = {
+  name:'Spice Garden Cafe', logo:'', cover:'',
+  desc:'A family-friendly North Indian restaurant serving tandoor starters, slow-cooked curries and fresh breads in a calm garden-style dining room.',
+  cuisine:'North Indian', diet:'both',
+  address:'Shop 12, Garden Plaza, MG Road (sample address)', city:'Pune', locality:'MG Road',
+  open:'11:00', close:'23:00', days:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+  phone:'9876543210', priceMin:300, priceMax:600,
+  tags:['Air Conditioned','Family Friendly','Free Wi-Fi','Parking','Takeaway','Card Payments']
+};
+const DEFAULT_MENU = [
+  ['Paneer Tikka','Cottage cheese cubes marinated in yogurt and spices, grilled in the tandoor.',249,'Starters','veg',true,true],
+  ['Chicken Seekh Kebab','Minced chicken with herbs, skewered and grilled until juicy.',299,'Starters','nonveg',true,false],
+  ['Crispy Corn','Golden fried corn tossed with pepper and chaat masala.',179,'Starters','veg',true,false],
+  ['Butter Chicken','Tandoori chicken in a rich tomato and butter gravy.',349,'Main Course','nonveg',true,true],
+  ['Dal Makhani','Black lentils simmered overnight with cream and butter.',259,'Main Course','veg',true,true],
+  ['Paneer Butter Masala','Soft paneer in a smooth, mildly sweet tomato gravy.',289,'Main Course','veg',true,false],
+  ['Veg Biryani','Fragrant basmati rice layered with vegetables and whole spices.',239,'Main Course','veg',true,false],
+  ['Chicken Dum Biryani','Slow-cooked basmati rice and marinated chicken, sealed and steamed.',329,'Main Course','nonveg',true,true],
+  ['Veg Thali','Dal, two sabzis, rice, roti, salad and a sweet. A full lunch plate.',229,'Main Course','veg',true,false],
+  ['Butter Naan','Soft leavened bread brushed with butter.',59,'Breads','veg',true,false],
+  ['Garlic Naan','Naan topped with roasted garlic and coriander.',79,'Breads','veg',true,false],
+  ['Gulab Jamun','Warm milk dumplings in cardamom sugar syrup.',99,'Desserts','veg',false,false],
+  ['Masala Chai','Strong tea simmered with ginger, cardamom and milk.',49,'Beverages','veg',true,false],
+  ['Sweet Lassi','Thick chilled yogurt drink, lightly sweetened.',89,'Beverages','veg',true,false]
+];
+/* [first name, rating, text, tags, days ago] - all invented sample reviews, first names only */
+const SEED_REVIEWS = [
+  ['Aarav',5,"Butter Chicken was rich and creamy, easily the best I've had nearby. Naan came hot.",['Great Taste','Food Quality'],1],
+  ['Meera',4,'Paneer Tikka was smoky and soft. The place was clean and the staff were friendly.',['Food Quality','Clean & Hygienic','Friendly Service'],2],
+  ['Rohan',2,'Tasty food but the service was slow. We waited 35 minutes for the main course.',['Slow Service'],3],
+  ['Sana',5,'Lovely ambience with soft music, perfect for a family dinner. Dal Makhani was excellent.',['Good Ambience','Great Taste'],5],
+  ['Karan',3,'Biryani was good but the portions felt small for the price.',['Small Portions','Pricey'],6],
+  ['Nisha',5,'Great value thali lunch. Fresh, hot and filling.',['Value for Money','Food Quality'],8],
+  ['Vikram',1,'Food arrived cold and nobody apologised. Very disappointed.',['Cold Food','Slow Service'],9],
+  ['Pooja',4,'Masala Chai and Gulab Jamun were perfect. Clean tables and quick billing.',['Great Taste','Clean & Hygienic'],10],
+  ['Imran',5,'Chicken Seekh Kebab was juicy and well spiced. The staff recommended it and were right.',['Great Taste','Friendly Service'],12],
+  ['Divya',4,'Cosy seating and good music, though it gets a bit noisy at peak hours.',['Good Ambience','Noisy'],13],
+  ['Arjun',2,'The washroom was not clean and a table next to us was left messy for a long time.',['Hygiene Concern'],14],
+  ['Lena',5,'Garlic Naan with Paneer Butter Masala is a must. Fair prices and generous portions.',['Value for Money','Great Taste'],16],
+  ['Tarun',3,'Food quality is good but service speed is inconsistent. We waited long on Saturday.',['Slow Service','Food Quality'],18],
+  ['Neha',5,'Sweet Lassi was thick and fresh. The staff were polite and attentive.',['Friendly Service','Food Quality'],20],
+  ['Sameer',4,'Good taste and a fair price. Parking is a bit tight but the restaurant is great.',['Great Taste','Value for Money'],22],
+  ['Ritu',2,'Paneer Butter Masala was too oily and lukewarm. The staff fixed the bill quickly though.',['Cold Food'],24],
+  ['Dev',5,'Amazing Veg Biryani, aromatic and perfectly spiced. Will visit again.',['Great Taste','Food Quality'],26],
+  ['Isha',4,'Celebrated a birthday here. The staff were helpful and the decor was lovely.',['Friendly Service','Good Ambience'],28],
+  ['Zoya',3,'Tasty but a little pricey for dessert. Gulab Jamun was good, portion small.',['Pricey','Small Portions'],31],
+  ['Yash',5,'Quick service on a weekday lunch and the Dal Makhani was perfect.',['Friendly Service','Great Taste'],34],
+  ['Mohit',4,'Clean restaurant, polite staff and tasty starters.',['Clean & Hygienic','Friendly Service'],38],
+  ['Rina',2,'Very noisy and crowded, we could barely hear each other. Food was average.',['Noisy'],41],
+  ['Sahil',5,'Best Butter Naan in the area, soft and fresh. Great value.',['Food Quality','Value for Money'],46],
+  ['Kavya',4,'Lovely atmosphere and a delicious Chicken Dum Biryani.',['Good Ambience','Great Taste'],52],
+  ['Alisha',3,'Good food, but they were out of Gulab Jamun and service was slow.',['Slow Service'],57],
+  ['Nikhil',5,'Excellent food and warm service every time I visit.',['Food Quality','Friendly Service'],59]
+];
+/* Illustrative competitors in the same cuisine. Not real or live data. */
+const COMPETITORS = [
+  {name:'Masala Mile',rating:4.5,reviews:212,food:4.6,service:4.5,value:4.3,dist:'0.8 km'},
+  {name:'The Curry Leaf',rating:4.2,reviews:164,food:4.3,service:4.0,value:4.1,dist:'1.2 km'},
+  {name:'Tandoor Tales',rating:3.7,reviews:131,food:3.9,service:3.5,value:3.8,dist:'1.9 km'},
+  {name:'Chai & Chutney Café',rating:3.6,reviews:88,food:3.7,service:3.4,value:3.8,dist:'2.4 km'}
+];
+const YOU_SUB = {food:4.4, service:3.8, value:4.1};   /* sample sub-ratings for the owner's restaurant */
+const NEW_VS_RETURNING = {newPct:41};                  /* sample statistic */
+
+/* Fixes shown next to complaint tags */
+const FIX_BY_TAG = {
+  'Slow Service':'Review order preparation and service speed. Set a prep-time target per dish and add staff on busy evenings.',
+  'Cold Food':'Serve hot dishes straight from the pass. Use a plating checklist and keep a warmer at the pass.',
+  'Noisy':'Lower music at peak hours and add soft furnishings or panels to absorb noise.',
+  'Pricey':'Add a lunch combo or value thali so guests can see a clear deal.',
+  'Hygiene Concern':'Add a two-hourly cleaning checklist for washrooms and a quick table-reset routine.',
+  'Small Portions':'Check portion sizes against price, or offer a large size for popular dishes.'
+};
+const FIX_BY_TOPIC = {
+  Food:'Check ingredient freshness and taste consistency with the kitchen team.',
+  Service:'Review order preparation and service speed. Consider extra staff at peak hours.',
+  Hygiene:'Run a daily cleanliness checklist for tables, washrooms and the kitchen.',
+  Ambience:'Check noise level, seating comfort and lighting during peak hours.',
+  Value:'Review portion sizes against price, or add combo offers.'
+};
+
+/* ---------- 2. STATE (saved in localStorage) ---------- */
+const KEY = 'rateit_owner_v1';
+let state, REVIEWS = [];
+let current = 'overview', editing = false, draft = {}, lastFocus = null, confirmCb = null;
+const MENUF = {q:'', cat:'All'};
+const REVF = {tab:'all', q:'', sort:'newest', star:'all'};
+
+function seedState(){
+  return {session:null, profile:JSON.parse(JSON.stringify(DEFAULT_PROFILE)), nextItem:DEFAULT_MENU.length+1,
+    menu:DEFAULT_MENU.map((m,i) => ({id:i+1,name:m[0],desc:m[1],price:m[2],cat:m[3],diet:m[4],avail:m[5],featured:m[6],emoji:'',img:''})),
+    settings:{email:'owner@spicegarden.example', visibility:'public', notif:{newReview:true,lowRating:true,weekly:true,tips:false}}};
+}
+function loadState(){
+  try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.profile && s.menu && s.settings) return s; } catch(e){}
+  return seedState();
+}
+function save(){
+  try { localStorage.setItem(KEY, JSON.stringify(state)); }
+  catch(e){ if (!save.warned){ save.warned = true; toast('Browser storage is full or blocked. Changes last until you refresh.','warn'); } }
+}
+function buildReviews(){
+  const now = Date.now();
+  REVIEWS = SEED_REVIEWS.map((r,i) => ({id:i+1, name:r[0], rating:r[1], text:r[2], tags:r[3], date:now - r[4]*864e5}));
+}
+
+/* ---------- 3. HELPERS ---------- */
+const $  = (s,r=document) => r.querySelector(s);
+const $$ = (s,r=document) => [...r.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmtDate = ts => new Date(ts).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
+const inr = n => '₹' + Number(n).toLocaleString('en-IN');
+const starsHTML = v => `<span class="stars" style="--p:${(v/5*100).toFixed(0)}%" role="img" aria-label="${v.toFixed(1)} out of 5 stars">★★★★★</span>`;
+const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+const reviewUrl = () => 'https://rateit.example/r/' + slug(state.profile.name);
+const to12h = t => { const [h,m] = t.split(':').map(Number); return `${((h+11)%12)+1}:${String(m).padStart(2,'0')} ${h<12?'AM':'PM'}`; };
+function setErr(scope, name, msg){ const el = $(`[data-err="${name}"]`, scope); if (el) el.textContent = msg; }
+function stats(){
+  const n = REVIEWS.length, dist = [0,0,0,0,0]; REVIEWS.forEach(r => dist[r.rating-1]++);
+  return {n, dist, avg:REVIEWS.reduce((a,r)=>a+r.rating,0)/n, pos:REVIEWS.filter(r=>r.rating>=4).length, neg:REVIEWS.filter(r=>r.rating<=2).length, mixed:REVIEWS.filter(r=>r.rating===3).length};
+}
+function tagCounts(list){
+  const m = {}; list.forEach(r => r.tags.forEach(t => m[t] = (m[t]||0)+1));
+  return Object.entries(m).sort((a,b) => b[1]-a[1]);
+}
+function shrinkImage(file, maxW, cb){
+  const fr = new FileReader();
+  fr.onload = () => { const img = new Image(); img.onload = () => {
+    const s = Math.min(1, maxW/img.width), c = document.createElement('canvas');
+    c.width = Math.round(img.width*s); c.height = Math.round(img.height*s);
+    c.getContext('2d').drawImage(img,0,0,c.width,c.height); cb(c.toDataURL('image/jpeg',.75));
+  }; img.onerror = () => toast('That file could not be read as an image.','error'); img.src = fr.result; };
+  fr.readAsDataURL(file);
+}
+function logoHTML(cls=''){ const p = state.profile;
+  return p.logo ? `<img class="logo-img ${cls}" src="${p.logo}" alt="${esc(p.name)} logo">` : `<div class="logo-img ph-logo ${cls}" aria-hidden="true">🌿</div>`; }
+function dishArt(m){
+  const st = CAT_STYLE[m.cat] || CAT_STYLE['Main Course'];
+  const bg = m.img ? `background-image:url('${m.img}')` : '';
+  return `style="--c1:${st[0]};--c2:${st[1]};${bg}"`;
+}
+const dishEmoji = m => m.img ? '' : `<span class="dish-emoji" aria-hidden="true">${(CAT_STYLE[m.cat]||CAT_STYLE['Main Course'])[2]}</span>`;
+const dietHTML = d => `<span class="diet ${d}"><i></i>${d==='veg'?'Veg':'Non-veg'}</span>`;
+function reviewItem(r){
+  return `<div class="rev"><div class="rev-av" aria-hidden="true">${esc(r.name[0])}</div><div class="rev-main">
+    <div class="rev-top"><strong>${esc(r.name)}</strong>${starsHTML(r.rating)}<span class="muted tiny">${fmtDate(r.date)}</span></div>
+    <p>${esc(r.text)}</p>
+    ${r.tags.length ? `<div class="chips">${r.tags.map(t => `<span class="chip sm ${NEG_TAGS.includes(t)?'neg':''}">${esc(t)}</span>`).join('')}</div>` : ''}</div></div>`;
+}
+const sampleBanner = txt => `<p class="banner"><strong>Sample data.</strong> ${txt}</p>`;
+
+/* ---------- 4. MODAL AND TOASTS ---------- */
+function openModal(html){
+  lastFocus = document.activeElement; $('#modalBody').innerHTML = html;
+  $('#modal').hidden = false; document.body.style.overflow = 'hidden'; $('#modalBox').scrollTop = 0; $('#modalBox').focus();
+}
+function closeModal(){
+  if ($('#modal').hidden) return;
+  $('#modal').hidden = true; document.body.style.overflow = '';
+  if (lastFocus && lastFocus.focus) lastFocus.focus();
+}
+function toast(msg, type='ok'){
+  const t = document.createElement('div'); t.className = 'toast ' + type;
+  t.innerHTML = `<i>${type==='error'||type==='warn'?'!':type==='info'?'i':'✓'}</i><span>${esc(msg)}</span>`;
+  $('#toasts').appendChild(t);
+  setTimeout(() => { t.style.transition = 'opacity .3s'; t.style.opacity = 0; setTimeout(() => t.remove(), 300); }, 3200);
+}
+function confirmBox(title, text, okLabel, cb){
+  confirmCb = cb;
+  openModal(`<div class="pad"><h3>${esc(title)}</h3><p class="muted" style="margin:10px 0 18px">${esc(text)}</p>
+    <div class="modal-actions"><button class="btn danger" data-action="confirmOk">${esc(okLabel)}</button><button class="btn ghost" data-action="closeModal">Cancel</button></div></div>`);
+}
+
+/* ---------- 5. LOGIN AND ROUTER ---------- */
+function handleLogin(form){
+  const email = form.email.value.trim(), pw = form.pw.value; let ok = true;
+  const badE = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); setErr(form,'email', badE ? 'Enter a valid email address.' : ''); if (badE) ok = false;
+  const badP = pw.length < 6; setErr(form,'pw', badP ? 'Use at least 6 characters.' : ''); if (badP) ok = false;
+  if (!ok) return toast('Please fix the highlighted fields.','error');
+  startSession(email);
+}
+function startSession(email){
+  state.session = {email}; save(); toast('Logged in (demo). Welcome back!');
+  if (location.hash === '#/overview') route(); else location.hash = '#/overview';
+}
+function logout(){ state.session = null; save(); editing = false; closeModal(); route(); toast('Logged out','info'); }
+function buildNav(){
+  $('#nav').innerHTML = ROUTES.map(r => `<a href="#/${r.id}" data-route="${r.id}"><span class="ic" aria-hidden="true">${r.ic}</span>${r.title}</a>`).join('') +
+    `<div class="sep"></div><button data-action="logout"><span class="ic" aria-hidden="true">🚪</span>Logout</button>`;
+}
+function updateShell(){
+  const p = state.profile, em = state.session ? state.session.email : '';
+  $('#ownerCard').innerHTML = `${logoHTML()}<div><strong>${esc(p.name)}</strong><span class="muted tiny">${esc(p.locality)}, ${esc(p.city)}</span></div>`;
+  $('#userNm').textContent = em; $('#userAv').textContent = (em[0] || 'O').toUpperCase();
+}
+const VIEW = {};
+function route(){
+  const logged = !!state.session;
+  $('#loginScreen').hidden = logged; $('#app').hidden = !logged;
+  if (!logged){ document.title = 'Login | RateIt Restaurant Dashboard'; return; }
+  const id = (location.hash || '#/overview').slice(2), r = ROUTES.find(x => x.id === id) || ROUTES[0];
+  if (current !== r.id) editing = false;
+  current = r.id; document.title = r.title + ' | RateIt Restaurant Dashboard';
+  $('#pageTitle').textContent = r.title;
+  $$('#nav a').forEach(a => { const on = a.dataset.route === r.id; a.classList.toggle('active', on); on ? a.setAttribute('aria-current','page') : a.removeAttribute('aria-current'); });
+  closeSidebar(); updateShell(); VIEW[r.id](); window.scrollTo(0,0);
+}
+function go(id){ if (location.hash === '#/' + id) route(); else location.hash = '#/' + id; }
+function closeSidebar(){ $('#sidebar').classList.remove('open'); $('#scrim').hidden = true; }
+
+/* ---------- 6. OVERVIEW ---------- */
+function trend30(){
+  const day = 864e5, now = Date.now(), s = stats(), pts = [], labels = []; let prev = s.avg;
+  for (let d = 30; d >= 0; d -= 3){
+    const win = REVIEWS.filter(r => { const age = (now - r.date)/day; return age >= d && age < d + 7; });
+    if (win.length) prev = win.reduce((a,r)=>a+r.rating,0)/win.length;
+    pts.push(prev); labels.push(new Date(now - d*day).toLocaleDateString('en-IN',{day:'numeric',month:'short'}));
+  }
+  return {pts, labels};
+}
+function lineChart(tr){
+  const W = 640, H = 240, L = 38, R = 16, T = 16, B = 32, pts = tr.pts;
+  let lo = Math.max(1, Math.floor(Math.min(...pts)*2)/2 - .5), hi = Math.min(5, Math.ceil(Math.max(...pts)*2)/2 + .5);
+  if (hi - lo < 1) lo = Math.max(1, hi - 1);
+  const x = i => L + i*(W-L-R)/(pts.length-1), y = v => T + (hi-v)/(hi-lo)*(H-T-B);
+  const line = pts.map((v,i) => `${i?'L':'M'}${x(i).toFixed(1)} ${y(v).toFixed(1)}`).join(' ');
+  const area = `${line} L${x(pts.length-1)} ${H-B} L${x(0)} ${H-B} Z`;
+  let grid = ''; for (let k=0;k<=4;k++){ const v = lo + (hi-lo)*k/4; grid += `<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="#DCE9E2"/><text x="${L-8}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="#5E7A70">${v.toFixed(1)}</text>`; }
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Line chart of the average rating over the last 30 days"><defs><linearGradient id="ga" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#2F7D5F" stop-opacity=".25"/><stop offset="1" stop-color="#2F7D5F" stop-opacity="0"/></linearGradient></defs>
+    ${grid}<path d="${area}" fill="url(#ga)"/><path d="${line}" fill="none" stroke="#2F7D5F" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+    ${pts.map((v,i) => `<circle cx="${x(i)}" cy="${y(v)}" r="4.5" fill="#fff" stroke="#2F7D5F" stroke-width="3"><title>${tr.labels[i]}: ${v.toFixed(2)}</title></circle>${i%2===0 ? `<text x="${x(i)}" y="${H-10}" text-anchor="middle" font-size="11" fill="#5E7A70">${tr.labels[i]}</text>` : ''}`).join('')}</svg>`;
+}
+VIEW.overview = () => {
+  const p = state.profile, s = stats(), recent = REVIEWS.slice().sort((a,b) => b.date-a.date).slice(0,5);
+  $('#content').innerHTML = `
+    ${sampleBanner('Ratings and reviews on this dashboard are invented for the demo. Menu and profile edits are real changes saved in this browser.')}
+    <section class="card profile-hero">
+      <div class="hero-body">${logoHTML('lg')}
+        <div class="grow"><h2>${esc(p.name)}</h2><p class="muted">${esc(p.cuisine)} in ${esc(p.locality)}, ${esc(p.city)}</p></div>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">${starsHTML(s.avg)}<strong>${s.avg.toFixed(1)}</strong><span class="pill ${state.settings.visibility==='public'?'ok':'warn'}">${state.settings.visibility==='public'?'Visible to customers':'Hidden from customers'}</span></div>
+      </div>
+    </section>
+    <div class="kpis">
+      <div class="card kpi"><small>Average rating</small><strong>${s.avg.toFixed(1)}</strong>${starsHTML(s.avg)}</div>
+      <div class="card kpi"><small>Total reviews</small><strong>${s.n}</strong><span class="muted tiny">Sample reviews</span></div>
+      <div class="card kpi"><small>Positive (4–5 stars)</small><strong style="color:var(--good)">${s.pos}</strong><span class="muted tiny">${Math.round(s.pos/s.n*100)}% of reviews</span></div>
+      <div class="card kpi"><small>Negative (1–2 stars)</small><strong style="color:var(--bad)">${s.neg}</strong><span class="muted tiny">${s.mixed} mixed (3 stars)</span></div>
+    </div>
+    <div class="quick">
+      <button data-action="goto" data-to="profile"><span class="qi">🏪</span><strong>Edit restaurant details</strong><span class="muted tiny">Update photos, hours and facilities</span></button>
+      <button data-action="goto" data-to="menu"><span class="qi">🍽️</span><strong>Manage the menu</strong><span class="muted tiny">${state.menu.length} items, ${state.menu.filter(m=>m.avail).length} available</span></button>
+      <button data-action="goto" data-to="qr"><span class="qi">🔳</span><strong>View QR code</strong><span class="muted tiny">Download or print for your tables</span></button>
+    </div>
+    <div class="grid2">
+      <div class="card panel"><h3>Rating trend, last 30 days <span class="pill sample">Sample</span></h3><div class="chart">${lineChart(trend30())}</div><p class="muted tiny">Rolling 7-day average rating, shown every 3 days.</p></div>
+      <div class="card panel"><h3>Rating distribution</h3><div>${[5,4,3,2,1].map(i => `<div class="bar-row"><span>${i} stars</span><span class="track ${i>=4?'good':i<=2?'bad':''}"><i style="width:${s.dist[i-1]/s.n*100}%"></i></span><span>${s.dist[i-1]}</span></div>`).join('')}</div></div>
+    </div>
+    <div class="card panel"><h3>Recent customer reviews <button class="btn ghost sm" data-action="goto" data-to="reviews">See all reviews</button></h3>${recent.map(reviewItem).join('')}</div>`;
+};
+
+/* ---------- 7. RESTAURANT PROFILE ---------- */
+VIEW.profile = () => {
+  const p = state.profile; draft = {};
+  $('#content').innerHTML = `
+    <div class="sec-head"><div><h2>Restaurant profile</h2><p>This is what customers see on the RateIt website.</p></div>
+      <div class="modal-actions" style="margin:0"><button class="btn primary" data-action="editProfile" id="pfEdit">Edit Profile</button>
+        <button class="btn primary" type="submit" form="profileForm" id="pfSave" hidden>Save Changes</button>
+        <button class="btn ghost" data-action="cancelProfile" id="pfCancel" hidden>Cancel</button></div></div>
+    <form id="profileForm" class="card panel" novalidate><fieldset id="pfSet" disabled>
+      <div class="form-grid">
+        <div class="field"><label>Restaurant logo</label><div class="uploader"><div class="thumb" id="pfLogoPrev">${p.logo ? `<img src="${p.logo}" alt="Logo preview">` : '🌿'}</div><div><input type="file" id="pf-logo" accept="image/*" hidden><button type="button" class="btn ghost sm" data-action="pickFile" data-for="pf-logo">Choose logo</button><p class="hint">Square image works best</p></div></div></div>
+        <div class="field"><label>Cover image</label><div class="uploader"><div class="thumb wide" id="pfCoverPrev">${p.cover ? `<img src="${p.cover}" alt="Cover preview">` : '🍛'}</div><div><input type="file" id="pf-cover" accept="image/*" hidden><button type="button" class="btn ghost sm" data-action="pickFile" data-for="pf-cover">Choose cover</button><p class="hint">Wide image, shown on your page</p></div></div></div>
+        <div class="field"><label for="pf-name">Restaurant name</label><input id="pf-name" name="name" value="${esc(p.name)}" maxlength="60"><p class="err" data-err="name"></p></div>
+        <div class="field"><label for="pf-cuisine">Cuisine type</label><select id="pf-cuisine" name="cuisine">${CUISINES.map(c => `<option ${c===p.cuisine?'selected':''}>${c}</option>`).join('')}</select></div>
+        <div class="field full"><label for="pf-desc">Description</label><textarea id="pf-desc" name="desc" rows="3" maxlength="300">${esc(p.desc)}</textarea><p class="err" data-err="desc"></p></div>
+        <div class="field full"><label class="lbl">Food type</label><div class="chips">${[['veg','Vegetarian'],['nonveg','Non-vegetarian'],['both','Both']].map(([v,l]) => `<label class="chip ${p.diet===v?'on':''}"><input class="sr" type="radio" name="diet" value="${v}" ${p.diet===v?'checked':''}>${l}</label>`).join('')}</div></div>
+        <div class="field full"><label for="pf-addr">Full address</label><input id="pf-addr" name="address" value="${esc(p.address)}"><p class="err" data-err="address"></p></div>
+        <div class="field"><label for="pf-city">City</label><input id="pf-city" name="city" value="${esc(p.city)}"><p class="err" data-err="city"></p></div>
+        <div class="field"><label for="pf-loc">Locality</label><input id="pf-loc" name="locality" value="${esc(p.locality)}"><p class="err" data-err="locality"></p></div>
+        <div class="field"><label for="pf-open">Opening time</label><input id="pf-open" name="open" type="time" value="${p.open}"></div>
+        <div class="field"><label for="pf-close">Closing time</label><input id="pf-close" name="close" type="time" value="${p.close}"><p class="err" data-err="hours"></p></div>
+        <div class="field full"><label class="lbl">Open on</label><div class="chips">${DAYS.map(d => `<label class="chip ${p.days.includes(d)?'on':''}"><input class="sr" type="checkbox" name="days" value="${d}" ${p.days.includes(d)?'checked':''}>${d}</label>`).join('')}</div><p class="err" data-err="days"></p></div>
+        <div class="field"><label for="pf-phone">Contact number</label><input id="pf-phone" name="phone" inputmode="tel" value="${esc(p.phone)}" placeholder="10-digit mobile number"><p class="err" data-err="phone"></p></div>
+        <div class="field"><label>Price range per person (₹)</label><div style="display:flex;gap:10px;align-items:center"><input name="priceMin" type="number" min="0" value="${p.priceMin}" aria-label="Minimum price per person" style="width:100%;border:1.5px solid var(--line);border-radius:12px;padding:10px 14px"><span>to</span><input name="priceMax" type="number" min="0" value="${p.priceMax}" aria-label="Maximum price per person" style="width:100%;border:1.5px solid var(--line);border-radius:12px;padding:10px 14px"></div><p class="err" data-err="price"></p></div>
+        <div class="field full"><label class="lbl">Facilities and ambience</label><div class="chips">${FACILITIES.map(f => `<label class="chip ${p.tags.includes(f)?'on':''}"><input class="sr" type="checkbox" name="tags" value="${f}" ${p.tags.includes(f)?'checked':''}>${f}</label>`).join('')}</div></div>
+      </div></fieldset></form>`;
+};
+function handleProfileSave(form){
+  const v = n => form[n].value.trim(), days = $$('input[name=days]:checked', form).map(i => i.value);
+  const phone = v('phone').replace(/[\s-]/g,''), pMin = +form.priceMin.value, pMax = +form.priceMax.value;
+  const errs = {
+    name: v('name').length < 2 ? 'Enter your restaurant name.' : '',
+    desc: v('desc').length < 20 ? 'Write at least 20 characters about your restaurant.' : '',
+    address: v('address').length < 8 ? 'Enter the full address.' : '',
+    city: !v('city') ? 'Enter the city.' : '', locality: !v('locality') ? 'Enter the locality.' : '',
+    hours: !form.open.value || !form.close.value ? 'Set opening and closing times.' : form.open.value === form.close.value ? 'Opening and closing time cannot be the same.' : '',
+    days: days.length ? '' : 'Select at least one opening day.',
+    phone: /^[6-9]\d{9}$/.test(phone) ? '' : 'Enter a valid 10-digit Indian mobile number.',
+    price: !(pMin >= 0 && pMax > 0) ? 'Enter valid prices.' : pMin >= pMax ? 'Minimum must be lower than maximum.' : ''
+  };
+  Object.keys(errs).forEach(k => setErr(form, k, errs[k]));
+  if (Object.values(errs).some(Boolean)) return toast('Please fix the highlighted fields.','error');
+  const p = state.profile;
+  Object.assign(p, {name:v('name'), cuisine:form.cuisine.value, desc:v('desc'), diet:form.diet.value, address:v('address'), city:v('city'), locality:v('locality'),
+    open:form.open.value, close:form.close.value, days:DAYS.filter(d => days.includes(d)), phone, priceMin:pMin, priceMax:pMax,
+    tags:$$('input[name=tags]:checked', form).map(i => i.value)});
+  if (draft.logo !== undefined) p.logo = draft.logo;
+  if (draft.cover !== undefined) p.cover = draft.cover;
+  save(); editing = false; updateShell(); VIEW.profile(); toast('Profile saved. Your changes are stored in this browser.');
+}
+
+/* ---------- 8. MENU MANAGEMENT ---------- */
+VIEW.menu = () => {
+  const m = state.menu;
+  $('#content').innerHTML = `
+    <div class="sec-head"><div><h2>Menu management</h2><p>Add, edit and remove dishes. Changes show up right away.</p></div><button class="btn primary" data-action="addItem">+ Add Food Item</button></div>
+    <div class="kpis" style="grid-template-columns:repeat(3,1fr)">
+      <div class="card kpi"><small>Total items</small><strong id="mTotal">${m.length}</strong></div>
+      <div class="card kpi"><small>Available now</small><strong id="mAvail">${m.filter(x=>x.avail).length}</strong></div>
+      <div class="card kpi"><small>Featured dishes</small><strong id="mFeat">${m.filter(x=>x.featured).length}</strong></div>
+    </div>
+    <div class="toolbar"><input data-f="menu.q" value="${esc(MENUF.q)}" placeholder="Search dishes" aria-label="Search dishes" autocomplete="off"></div>
+    <div class="chips" id="menuCats"></div>
+    <div class="menu-grid" id="menuGrid"></div>`;
+  renderMenuGrid();
+};
+function renderMenuGrid(){
+  const m = state.menu, q = MENUF.q.trim().toLowerCase();
+  $('#menuCats').innerHTML = ['All'].concat(MENU_CATS).map(c => `<button class="chip ${MENUF.cat===c?'on':''}" data-action="menuCat" data-cat="${c}">${c}${c==='All'?'':` (${m.filter(x=>x.cat===c).length})`}</button>`).join('');
+  const list = m.filter(x => (MENUF.cat === 'All' || x.cat === MENUF.cat) && (!q || (x.name+' '+x.desc).toLowerCase().includes(q)));
+  $('#mTotal').textContent = m.length; $('#mAvail').textContent = m.filter(x=>x.avail).length; $('#mFeat').textContent = m.filter(x=>x.featured).length;
+  $('#menuGrid').innerHTML = list.length ? list.map(x => `<article class="card dish ${x.avail?'':'off'}">
+    <div class="dish-img" ${dishArt(x)}>${dishEmoji(x)}<div class="dish-badges">${x.featured?'<span class="pill warn">★ Signature</span>':''}${x.avail?'':'<span class="pill bad">Unavailable</span>'}</div></div>
+    <div class="dish-body"><div class="dish-top"><h3>${esc(x.name)}</h3><span class="price">${inr(x.price)}</span></div>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">${dietHTML(x.diet)}<span class="muted tiny">${esc(x.cat)}</span></div>
+      <p class="muted tiny">${esc(x.desc || 'No description yet.')}</p>
+      <div class="dish-actions"><button class="btn ghost sm" data-action="editItem" data-id="${x.id}">Edit</button>
+        <button class="btn ghost sm" data-action="toggleAvail" data-id="${x.id}">${x.avail?'Mark unavailable':'Mark available'}</button>
+        <button class="btn ghost sm" data-action="toggleFeat" data-id="${x.id}" aria-pressed="${x.featured}">${x.featured?'Unfeature':'Feature'}</button>
+        <button class="btn danger sm" data-action="deleteItem" data-id="${x.id}">Delete</button></div></div></article>`).join('')
+    : `<div class="card empty" style="grid-column:1/-1"><div class="em">🍽️</div><h3>${m.length ? 'No dishes match your search' : 'Your menu is empty'}</h3><p>${m.length ? 'Try another category or clear the search.' : 'Add your first dish to get started.'}</p><button class="btn primary" data-action="${m.length?'clearMenuFilters':'addItem'}">${m.length?'Clear filters':'+ Add Food Item'}</button></div>`;
+}
+function menuFormHTML(it){
+  const e = it || {name:'',desc:'',price:'',cat:'',diet:'veg',avail:true,featured:false,img:'',emoji:''};
+  return `<div class="pad"><h3 style="margin-bottom:16px">${it ? 'Edit food item' : 'Add food item'}</h3>
+    <form id="menuForm" ${it?`data-edit="${it.id}"`:''} novalidate>
+      <div class="field"><label>Item image <span class="muted">(optional)</span></label><div class="uploader"><div class="thumb" id="mfPrev">${e.img ? `<img src="${e.img}" alt="Item image preview">` : '🍽️'}</div>
+        <div><input type="file" id="mf-file" accept="image/*" hidden><button type="button" class="btn ghost sm" data-action="pickFile" data-for="mf-file">Upload image</button> <button type="button" class="btn ghost sm" data-action="clearItemImg">Remove</button></div></div></div>
+      <div class="field"><label for="mf-name">Food item name</label><input id="mf-name" name="name" value="${esc(e.name)}" maxlength="60" placeholder="e.g. Paneer Tikka"><p class="err" data-err="name"></p></div>
+      <div class="field"><label for="mf-desc">Description</label><textarea id="mf-desc" name="desc" rows="2" maxlength="160" placeholder="Short and appetising">${esc(e.desc)}</textarea></div>
+      <div class="form-grid">
+        <div class="field"><label for="mf-price">Price (₹)</label><input id="mf-price" name="price" type="number" min="1" step="1" inputmode="numeric" value="${e.price}" placeholder="e.g. 249"><p class="err" data-err="price"></p></div>
+        <div class="field"><label for="mf-cat">Category</label><select id="mf-cat" name="cat"><option value="">Select a category</option>${MENU_CATS.map(c => `<option ${c===e.cat?'selected':''}>${c}</option>`).join('')}</select><p class="err" data-err="cat"></p></div>
+      </div>
+      <div class="field"><label class="lbl">Dietary type</label><div class="chips">${[['veg','Vegetarian'],['nonveg','Non-vegetarian']].map(([v,l]) => `<label class="chip ${e.diet===v?'on':''}"><input class="sr" type="radio" name="diet" value="${v}" ${e.diet===v?'checked':''}>${l}</label>`).join('')}</div></div>
+      <div class="switch"><label for="mf-avail">Available to order</label><input id="mf-avail" name="avail" type="checkbox" ${e.avail?'checked':''}></div>
+      <div class="switch"><label for="mf-feat">Feature as a popular or signature dish</label><input id="mf-feat" name="featured" type="checkbox" ${e.featured?'checked':''}></div>
+      <div class="modal-actions" style="margin-top:18px"><button class="btn primary" type="submit">${it ? 'Save changes' : 'Add item'}</button><button type="button" class="btn ghost" data-action="closeModal">Cancel</button></div>
+    </form></div>`;
+}
+function handleMenuSave(form){
+  const name = form.name.value.trim(), priceRaw = form.price.value.trim(), price = Number(priceRaw), cat = form.cat.value;
+  const eN = name.length < 2 ? 'Enter the food item name (2+ characters).' : '';
+  const eP = !priceRaw ? 'Enter a price in rupees.' : (!isFinite(price) || price <= 0) ? 'Price must be greater than ₹0.' : price > 10000 ? 'Price looks too high. Use 10,000 or less.' : !Number.isInteger(price) ? 'Use whole rupees, for example 249.' : '';
+  const eC = cat ? '' : 'Select a category.';
+  setErr(form,'name',eN); setErr(form,'price',eP); setErr(form,'cat',eC);
+  if (eN || eP || eC) return toast('Please fix the highlighted fields.','error');
+  const dup = state.menu.some(x => x.name.toLowerCase() === name.toLowerCase() && String(x.id) !== form.dataset.edit);
+  if (dup) return setErr(form,'name','A dish with this name already exists.');
+  const data = {name, desc:form.desc.value.trim(), price, cat, diet:form.diet.value, avail:form.avail.checked, featured:form.featured.checked};
+  if (form.dataset.edit){
+    const it = state.menu.find(x => x.id === +form.dataset.edit); Object.assign(it, data);
+    if (form._img !== undefined) it.img = form._img;
+    toast(`“${name}” updated`);
+  } else { state.menu.push(Object.assign({id:state.nextItem++, emoji:'', img:form._img || ''}, data)); toast(`“${name}” added to the menu`); }
+  save(); closeModal(); if (current === 'menu') renderMenuGrid(); else VIEW[current]();
+}
+
+/* ---------- 9. QR CODE ---------- */
+function drawQR(){
+  const mount = $('#qrMount'); if (!mount) return;
+  mount.innerHTML = '';
+  if (typeof QRCode === 'undefined'){
+    mount.innerHTML = '<div class="qr-ph">QR placeholder<br>The QR library could not load. Connect to the internet and refresh to generate a real code.</div>'; return;
+  }
+  new QRCode(mount, {text:reviewUrl(), width:220, height:220, colorDark:'#16302A', colorLight:'#ffffff', correctLevel:QRCode.CorrectLevel.H});
+}
+function qrSource(){ const m = $('#qrMount'); return m ? (m.querySelector('canvas') || m.querySelector('img')) : null; }
+function downloadQR(){
+  const src = qrSource(); if (!src) return toast('QR code is not available. Check your internet connection and refresh.','error');
+  const p = state.profile, c = document.createElement('canvas'), W = 640, H = 840; c.width = W; c.height = H;
+  const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0,0,W,H);
+  x.fillStyle = '#2F7D5F'; x.fillRect(0,0,W,170);
+  x.fillStyle = '#fff'; x.textAlign = 'center'; x.font = '700 40px "DM Sans", Arial, sans-serif'; x.fillText(p.name.length > 24 ? p.name.slice(0,24)+'…' : p.name, W/2, 85);
+  x.font = '500 24px "DM Sans", Arial, sans-serif'; x.fillText('Loved your meal? Tell us on RateIt', W/2, 128);
+  x.imageSmoothingEnabled = false; x.drawImage(src, 100, 220, 440, 440);
+  x.fillStyle = '#16302A'; x.font = '700 30px "DM Sans", Arial, sans-serif'; x.fillText('Scan to review us', W/2, 725);
+  x.fillStyle = '#5E7A70'; x.font = '500 18px "DM Sans", Arial, sans-serif'; x.fillText(reviewUrl(), W/2, 765); x.fillText('Scan with smartphone camera to review', W/2, 800);
+  const a = document.createElement('a'); a.href = c.toDataURL('image/png'); a.download = `rateit-qr-${slug(p.name)}.png`; a.click();
+  toast('QR code downloaded as a PNG');
+}
+function printQR(){
+  if (!qrSource()) return toast('QR code is not available. Check your internet connection and refresh.','error');
+  document.body.classList.add('print-qr');
+  const done = () => { document.body.classList.remove('print-qr'); window.removeEventListener('afterprint', done); };
+  window.addEventListener('afterprint', done); window.print(); setTimeout(done, 1500);
+}
+VIEW.qr = () => {
+  const p = state.profile;
+  $('#content').innerHTML = `
+    <div class="sec-head"><div><h2>QR code</h2><p>Let guests open your review page by scanning a code.</p></div></div>
+    <p class="banner"><strong>Table QR Code.</strong> This QR code links directly to your restaurant review page for diners to share ratings and reviews.</p>
+    <div class="qr-layout">
+      <div class="card qr-card" id="printCard">
+        <div class="qr-head">${logoHTML()}<div style="text-align:left"><h3>${esc(p.name)}</h3><span class="muted tiny">Scan to review us on RateIt</span></div></div>
+        <div id="qrMount" aria-label="QR code for ${esc(p.name)}"></div>
+        <span class="url">${esc(reviewUrl())}</span>
+        <span class="pill sample">Sample URL</span>
+      </div>
+      <div style="display:grid;gap:20px">
+        <div class="card panel"><h3>Download or print</h3>
+          <p class="muted">Download a ready-to-print PNG with your restaurant name, or print the card directly from this page.</p>
+          <div class="modal-actions" style="margin:0"><button class="btn primary" data-action="qrDownload">Download QR Code</button><button class="btn ghost" data-action="qrPrint">Print QR Code</button><button class="btn ghost" data-action="copyUrl">Copy review link</button></div></div>
+        <div class="card panel"><h3>How customers use it</h3>
+          <p class="muted">Guests scan the code with their phone camera. It opens ${esc(p.name)}’s review page, where they can rate their meal and write feedback.</p></div>
+        <div class="card panel"><h3>Where to place your printed QR code</h3>
+          <ol class="howto">
+            <li><span><strong>On every table.</strong> Use a table tent or a small stand so guests see it while they eat.</span></li>
+            <li><span><strong>At the billing counter.</strong> Place it near the payment machine and mention it when handing over the bill.</span></li>
+            <li><span><strong>On the bill folder or takeaway bags.</strong> Guests who order takeaway can review from home.</span></li>
+            <li><span><strong>Keep it flat, bright and at least 4 cm wide.</strong> Test it with a phone before printing many copies.</span></li>
+          </ol></div>
+      </div>
+    </div>`;
+  drawQR();
+};
+
+/* ---------- 10. CUSTOMER REVIEWS ---------- */
+function filteredReviews(){
+  const q = REVF.q.trim().toLowerCase();
+  return REVIEWS.filter(r => (REVF.tab === 'all' || (REVF.tab === 'pos' ? r.rating >= 4 : r.rating <= 2)) &&
+    (REVF.star === 'all' || r.rating === +REVF.star) && (!q || (r.text + ' ' + r.name + ' ' + r.tags.join(' ')).toLowerCase().includes(q)))
+    .sort((a,b) => REVF.sort === 'newest' ? b.date - a.date : a.date - b.date);
+}
+VIEW.reviews = () => {
+  const s = stats();
+  $('#content').innerHTML = `
+    <div class="sec-head"><div><h2>Customer reviews</h2><p>Only first names are shown. No phone numbers or emails are ever displayed.</p></div><span class="pill sample">Sample data</span></div>
+    <div class="grid2">
+      <div class="card panel"><h3>Average rating</h3><div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><strong style="font:800 3rem var(--f-display)">${s.avg.toFixed(1)}</strong><div>${starsHTML(s.avg)}<p class="muted tiny">${s.n} sample reviews</p></div></div></div>
+      <div class="card panel"><h3>Rating distribution <span class="muted tiny" style="font-weight:400">Click a row to filter</span></h3><div id="distRows"></div></div>
+    </div>
+    <div class="tabs" role="tablist" id="revTabs"></div>
+    <div class="toolbar"><input data-f="rev.q" value="${esc(REVF.q)}" placeholder="Search reviews, names or tags" aria-label="Search reviews" autocomplete="off">
+      <select data-f="rev.sort" aria-label="Sort reviews"><option value="newest" ${REVF.sort==='newest'?'selected':''}>Newest first</option><option value="oldest" ${REVF.sort==='oldest'?'selected':''}>Oldest first</option></select>
+      <select data-f="rev.star" aria-label="Filter by stars"><option value="all">All stars</option>${[5,4,3,2,1].map(i => `<option value="${i}" ${String(REVF.star)===String(i)?'selected':''}>${i} star${i>1?'s':''}</option>`).join('')}</select></div>
+    <div class="card panel" id="revList"></div>`;
+  renderReviewList();
+};
+function renderReviewList(){
+  const s = stats(), list = filteredReviews();
+  $('#distRows').innerHTML = [5,4,3,2,1].map(i => `<button class="bar-row" data-action="revStar" data-star="${i}" aria-label="Show ${i}-star reviews"><span>${i} stars</span><span class="track ${i>=4?'good':i<=2?'bad':''}"><i style="width:${s.dist[i-1]/s.n*100}%"></i></span><span>${s.dist[i-1]}</span></button>`).join('');
+  $('#revTabs').innerHTML = [['all',`All (${s.n})`],['pos',`Positive (${s.pos})`],['neg',`Negative (${s.neg})`]].map(([k,l]) => `<button role="tab" aria-selected="${REVF.tab===k}" class="${REVF.tab===k?'on':''}" data-action="revTab" data-tab="${k}">${l}</button>`).join('');
+  $('#revList').innerHTML = list.length ? `<p class="muted tiny">${list.length} review${list.length===1?'':'s'} shown. Positive is 4–5 stars, negative is 1–2 stars, and 3-star reviews appear under All.</p>` + list.map(reviewItem).join('')
+    : `<div class="empty"><div class="em">💬</div><h3>No reviews match</h3><p>${REVIEWS.length ? 'Try a different tab, star rating or search.' : 'Reviews will appear here once customers start scanning your QR code.'}</p><button class="btn primary sm" data-action="clearReviewFilters">Clear filters</button></div>`;
+}
+
+/* ---------- 11. CUSTOMER INSIGHTS ---------- */
+VIEW.insights = () => {
+  const now = Date.now(), wk = 7*864e5, weeks = [];
+  for (let w = 7; w >= 0; w--){
+    const inW = REVIEWS.filter(r => { const a = now - r.date; return a >= w*wk && a < (w+1)*wk; });
+    weeks.push({n:inW.length, label: w === 0 ? 'This wk' : w + 'w ago'});
+  }
+  const maxN = Math.max(...weeks.map(w => w.n), 1);
+  const posT = tagCounts(REVIEWS.filter(r => r.rating >= 3)).filter(([t]) => POS_TAGS.includes(t));
+  const negT = tagCounts(REVIEWS).filter(([t]) => NEG_TAGS.includes(t));
+  const dishes = state.menu.map(m => [m.name, REVIEWS.filter(r => r.text.toLowerCase().includes(m.name.toLowerCase())).length]).filter(d => d[1]).sort((a,b) => b[1]-a[1]).slice(0,5);
+  const nv = NEW_VS_RETURNING.newPct, bars = (arr, cls, max) => arr.map(([t,c]) => `<div class="bar-row" style="grid-template-columns:130px 1fr 28px"><span>${esc(t)}</span><span class="track ${cls}"><i style="width:${c/max*100}%"></i></span><span>${c}</span></div>`).join('');
+  $('#content').innerHTML = `
+    <div class="sec-head"><div><h2>Customer insights</h2><p>Aggregate patterns across all feedback.</p></div></div>
+    ${sampleBanner('These statistics are illustrative sample data, not live customer analytics. Feedback shows first names only.')}
+    <div class="grid2">
+      <div class="card panel"><h3>New vs returning customers <span class="pill sample">Sample</span></h3>
+        <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap"><div class="donut" style="--a:${nv}%" role="img" aria-label="${nv}% new customers and ${100-nv}% returning"><span>${100-nv}%</span></div>
+          <div style="display:grid;gap:10px"><span><span class="pill mute">New</span> ${nv}% of guests</span><span><span class="pill" style="background:#D5E6DC;color:var(--ink)">Returning</span> ${100-nv}% of guests</span><p class="muted tiny">The centre shows the returning share.</p></div></div></div>
+      <div class="card panel"><h3>Review trend, last 8 weeks</h3><div class="wk" role="img" aria-label="Bar chart of reviews per week">${weeks.map(w => `<div><span>${w.n}</span><i style="height:${w.n/maxN*100}px"></i><span>${w.label}</span></div>`).join('')}</div><p class="muted tiny">Number of sample reviews received each week.</p></div>
+      <div class="card panel"><h3>Frequently mentioned positives</h3>${bars(posT,'good',posT[0][1])}</div>
+      <div class="card panel"><h3>Frequently mentioned complaints</h3>${bars(negT,'bad',negT[0][1])}<p class="muted tiny">Counted from the tags guests chose.</p></div>
+    </div>
+    <div class="card panel"><h3>Most mentioned dishes</h3><div class="chips">${dishes.map(([n,c]) => `<span class="chip">${esc(n)} <strong style="margin-left:6px">${c}</strong></span>`).join('')}</div><p class="muted tiny">Dish names found in review text.</p></div>`;
+};
+
+/* ---------- 12. AI IMPROVEMENT SUGGESTIONS (demo keyword rules) ---------- */
+const POSW = 'tasty delicious great amazing friendly clean fresh love loved excellent fast cozy cosy best good awesome polite worth outstanding generous lovely perfect hygienic tidy warm attentive helpful quick juicy soft'.split(' ');
+const NEGW = 'slow rude dirty cold expensive overpriced bad worst noisy stale late crowded poor waited disappointing bland pricey messy smelly small oily lukewarm average unclean'.split(' ');
+const TOPIC_W = {
+  Food:'food taste tasty delicious flavour flavor spicy bland cold stale fresh dish biryani chicken paneer naan dessert oily lukewarm kebab tikka'.split(' '),
+  Service:'service staff waiter rude friendly slow fast polite waited wait waiting order late helpful quick attentive'.split(' '),
+  Hygiene:'clean dirty hygiene hygienic washroom tidy messy smelly unclean tables table'.split(' '),
+  Ambience:'ambience atmosphere music noisy cozy cosy seating decor crowded lighting loud'.split(' '),
+  Value:'price prices pricey expensive value cheap worth portion portions cost overpriced small'.split(' ')
+};
+function analyze(text){
+  const t = {}; Object.keys(TOPIC_W).forEach(k => t[k] = {p:0,n:0,m:0});
+  text.toLowerCase().split(/[.!?;\n,]+|\bbut\b|\bhowever\b|\bthough\b/).forEach(part => {
+    const w = part.match(/[a-z']+/g) || [], p = w.filter(x => POSW.includes(x)).length, n = w.filter(x => NEGW.includes(x)).length;
+    Object.keys(TOPIC_W).forEach(k => { if (w.some(x => TOPIC_W[k].includes(x))){ t[k].m++; t[k].p += p; t[k].n += n; } });
+  });
+  return t;
+}
+const topicLabel = v => !v.m ? ['Not mentioned','mute'] : v.p > v.n ? ['Positive','ok'] : v.n > v.p ? ['Negative','bad'] : ['Neutral','mute'];
+function analysisHTML(text){
+  const a = analyze(text), neg = Object.keys(a).filter(k => a[k].n > a[k].p);
+  return `<div class="topic-grid">${Object.entries(a).map(([k,v]) => { const l = topicLabel(v); return `<div class="topic"><strong>${k}</strong><span class="pill ${l[1]}" style="width:fit-content">${l[0]}</span></div>`; }).join('')}</div>
+    <div><strong>Suggested action</strong><ul class="sugg" style="margin-top:8px">${neg.length ? neg.map(k => `<li><span>🔧</span><span><strong>${k}:</strong> ${FIX_BY_TOPIC[k]}</span></li>`).join('') : '<li><span>👍</span><span>No clear problem found. Keep doing what this guest liked.</span></li>'}</ul></div>`;
+}
+VIEW.ai = () => {
+  const low = REVIEWS.filter(r => r.rating <= 3).sort((a,b) => b.date-a.date).slice(0,5);
+  const words = {}; REVIEWS.filter(r => r.rating <= 3).forEach(r => (r.text.toLowerCase().match(/[a-z']+/g)||[]).forEach(w => { if (NEGW.includes(w) || ['wait','waited','long'].includes(w)) words[w] = (words[w]||0)+1; }));
+  const kw = Object.entries(words).sort((a,b) => b[1]-a[1]).slice(0,10), negT = tagCounts(REVIEWS).filter(([t]) => NEG_TAGS.includes(t));
+  const ex = 'The food was tasty, but the service was slow.';
+  $('#content').innerHTML = `
+    <div class="sec-head"><div><h2>AI improvement suggestions</h2><p>Turn feedback into a short to-do list.</p></div><span class="pill sample">Demo-generated</span></div>
+    ${sampleBanner('Results below are demo-generated with simple keyword rules in your browser. No AI model is connected, and the rules ignore sarcasm and negation.')}
+    <div class="card panel"><h3>Try the analysis</h3>
+      <div class="field" style="margin:0"><label for="aiText">Paste a customer review</label><textarea class="big" id="aiText" style="width:100%;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px">${ex}</textarea></div>
+      <div class="modal-actions" style="margin:0"><button class="btn primary" data-action="analyze">Analyse review</button><button class="btn ghost" data-action="aiExample">Use example</button></div>
+      <div id="aiOut" aria-live="polite">${analysisHTML(ex)}</div></div>
+    <div class="grid2">
+      <div class="card panel"><h3>Common complaint keywords</h3><div class="chips">${kw.map(([w,c]) => `<span class="chip">${esc(w)} <strong style="margin-left:6px">${c}</strong></span>`).join('')}</div><p class="muted tiny">Counted in reviews rated 3 stars or lower.</p></div>
+      <div class="card panel"><h3>Suggested improvements</h3><ul class="sugg">${negT.map(([t,c]) => `<li><span>🔧</span><span><strong>${esc(t)}</strong> <span class="pill ${c>=3?'bad':'warn'}">${c>=3?'High priority':'Medium priority'}</span><br>${FIX_BY_TAG[t]}</span></li>`).join('')}</ul></div>
+    </div>
+    <div class="card panel"><h3>Analysis of recent critical reviews</h3>${low.map(r => `<div class="rev" style="display:grid;gap:10px"><div class="rev-top"><strong>${esc(r.name)}</strong>${starsHTML(r.rating)}<span class="muted tiny">${fmtDate(r.date)}</span></div><p>“${esc(r.text)}”</p>${analysisHTML(r.text)}</div>`).join('')}</div>`;
+};
+
+/* ---------- 13. COMPETITOR RANKING ---------- */
+VIEW.competitors = () => {
+  const s = stats(), p = state.profile;
+  const you = {name:p.name, rating:+s.avg.toFixed(1), reviews:s.n, food:YOU_SUB.food, service:YOU_SUB.service, value:YOU_SUB.value, dist:'You', you:true};
+  const all = COMPETITORS.concat(you).sort((a,b) => b.rating - a.rating), rank = all.findIndex(x => x.you) + 1;
+  const best = k => COMPETITORS.reduce((m,c) => c[k] > m[k] ? c : m, COMPETITORS[0]);
+  const metrics = [['food','Food quality'],['service','Service'],['value','Value for money']];
+  const tips = metrics.map(([k,l]) => ({k,l,gap:best(k)[k]-you[k],top:best(k)})).filter(t => t.gap > 0.05).sort((a,b) => b.gap-a.gap)
+    .map(t => `<li><span>📌</span><span><strong>${t.l}:</strong> you score ${you[t.k].toFixed(1)} versus ${t.top[t.k].toFixed(1)} at ${esc(t.top.name)}. ${t.k==='service'?'Focus on order preparation time and table attention at peak hours.':t.k==='food'?'Check consistency of taste and serving temperature on popular dishes.':'Consider a lunch combo or clearer portion sizes.'}</span></li>`);
+  $('#content').innerHTML = `
+    <div class="sec-head"><div><h2>Competitor ranking</h2><p>How you compare with nearby ${esc(p.cuisine.toLowerCase())} restaurants.</p></div><span class="pill sample">Illustrative</span></div>
+    ${sampleBanner('Competitors and rankings are invented for the demo. They are not live data or real-time rankings of actual restaurants.')}
+    <div class="kpis" style="grid-template-columns:repeat(3,1fr)">
+      <div class="card kpi"><small>Your sample local rank</small><strong>#${rank} <span class="muted" style="font-size:1rem">of ${all.length}</span></strong></div>
+      <div class="card kpi"><small>Your average rating</small><strong>${you.rating.toFixed(1)}</strong>${starsHTML(you.rating)}</div>
+      <div class="card kpi"><small>Top sample rating nearby</small><strong>${all[0].rating.toFixed(1)}</strong><span class="muted tiny">${esc(all[0].name)}</span></div>
+    </div>
+    <div class="card panel"><h3>Ranking by average rating</h3><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Rank</th><th>Restaurant</th><th>Rating</th><th>Reviews</th><th>Food</th><th>Service</th><th>Value</th><th>Distance</th></tr></thead><tbody>
+      ${all.map((r,i) => `<tr class="${r.you?'you':''}"><td><span class="rank">${i+1}</span></td><td><strong>${esc(r.name)}</strong>${r.you?' <span class="pill mute">You</span>':''}</td><td>${starsHTML(r.rating)} ${r.rating.toFixed(1)}</td><td>${r.reviews}</td><td>${r.food.toFixed(1)}</td><td>${r.service.toFixed(1)}</td><td>${r.value.toFixed(1)}</td><td>${r.dist}</td></tr>`).join('')}</tbody></table></div></div>
+    <div class="grid2">
+      <div class="card panel"><h3>Score comparison</h3>${metrics.map(([k,l]) => `<div><strong class="tiny">${l}</strong>${all.map(r => `<div class="bar-row" style="grid-template-columns:130px 1fr 30px;margin:4px 0"><span class="${r.you?'':'muted'}" style="${r.you?'font-weight:700':''}">${esc(r.name.length>16?r.name.slice(0,15)+'…':r.name)}</span><span class="track ${r.you?'':'bad'}" style="${r.you?'':'--x:0'}"><i style="width:${r[k]/5*100}%;${r.you?'':'background:#BDD6C9'}"></i></span><span>${r[k].toFixed(1)}</span></div>`).join('')}</div>`).join('')}</div>
+      <div class="card panel"><h3>Suggestions for improvement</h3><ul class="sugg">${tips.length ? tips.join('') : '<li><span>🎉</span><span>You match or lead the sample competitors on every score.</span></li>'}</ul><p class="muted tiny">Suggestions compare your sample scores with the best sample competitor on each measure.</p></div>
+    </div>`;
+};
+
+/* ---------- 14. SETTINGS ---------- */
+VIEW.settings = () => {
+  const st = state.settings, p = state.profile, n = st.notif;
+  const sw = (id,label,desc,on) => `<div class="switch"><label for="${id}"><strong>${label}</strong><br><span class="muted tiny">${desc}</span></label><input id="${id}" name="${id}" type="checkbox" ${on?'checked':''}></div>`;
+  $('#content').innerHTML = `
+    <div class="sec-head"><div><h2>Settings</h2><p>Demo settings saved in this browser. No emails or notifications are actually sent.</p></div></div>
+    <form id="settingsForm" novalidate style="display:grid;gap:20px">
+      <div class="grid2">
+        <div class="card panel"><h3>Contact details</h3>
+          <div class="field"><label for="s-email">Contact email</label><input id="s-email" name="email" type="email" value="${esc(st.email)}"><p class="err" data-err="email"></p></div>
+          <div class="field" style="margin:0"><label for="s-phone">Contact number</label><input id="s-phone" name="phone" inputmode="tel" value="${esc(p.phone)}"><p class="err" data-err="phone"></p></div></div>
+        <div class="card panel"><h3>Business hours</h3>
+          <div class="form-grid"><div class="field"><label for="s-open">Opens</label><input id="s-open" name="open" type="time" value="${p.open}"></div><div class="field"><label for="s-close">Closes</label><input id="s-close" name="close" type="time" value="${p.close}"></div></div>
+          <p class="err" data-err="hours"></p><p class="muted tiny">Currently ${to12h(p.open)} to ${to12h(p.close)}. These are the same hours as on your Restaurant Profile.</p></div>
+      </div>
+      <div class="grid2">
+        <div class="card panel"><h3>Profile visibility</h3>
+          <div class="field" style="margin:0"><label for="s-vis">Who can see your restaurant page</label><select id="s-vis" name="visibility"><option value="public" ${st.visibility==='public'?'selected':''}>Public: visible to all customers</option><option value="hidden" ${st.visibility==='hidden'?'selected':''}>Hidden: not shown in search</option></select></div></div>
+        <div class="card panel"><h3>Notification preferences</h3>
+          ${sw('newReview','New review alerts','Tell me when a customer posts a review',n.newReview)}${sw('lowRating','Low rating alerts','Highlight reviews of 1–2 stars',n.lowRating)}${sw('weekly','Weekly summary','A weekly recap of ratings and feedback',n.weekly)}${sw('tips','Product tips','Occasional tips for using RateIt',n.tips)}</div>
+      </div>
+      <div><button class="btn primary" type="submit">Save Settings</button></div>
+    </form>`;
+};
+function handleSettingsSave(form){
+  const email = form.email.value.trim(), phone = form.phone.value.replace(/[\s-]/g,'');
+  const eE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? '' : 'Enter a valid email address.';
+  const eP = /^[6-9]\d{9}$/.test(phone) ? '' : 'Enter a valid 10-digit Indian mobile number.';
+  const eH = !form.open.value || !form.close.value ? 'Set both times.' : form.open.value === form.close.value ? 'Opening and closing time cannot be the same.' : '';
+  setErr(form,'email',eE); setErr(form,'phone',eP); setErr(form,'hours',eH);
+  if (eE || eP || eH) return toast('Please fix the highlighted fields.','error');
+  Object.assign(state.settings, {email, visibility:form.visibility.value, notif:{newReview:form.newReview.checked, lowRating:form.lowRating.checked, weekly:form.weekly.checked, tips:form.tips.checked}});
+  Object.assign(state.profile, {phone, open:form.open.value, close:form.close.value});
+  save(); VIEW.settings(); toast('Settings saved');
+}
+
+/* ---------- 15. EVENTS ---------- */
+const actions = {
+  toggleSidebar: () => { const o = $('#sidebar').classList.toggle('open'); $('#scrim').hidden = !o; },
+  closeSidebar,
+  closeModal,
+  logout: () => confirmBox('Log out?', 'You will return to the login screen. Your demo changes stay saved in this browser.', 'Log out', logout),
+  demoLogin: () => startSession('owner@spicegarden.example'),
+  forgot: () => openModal(`<div class="pad"><h3>Reset your password</h3><p class="muted" style="margin:8px 0 16px">Enter your email and we will pretend to send a reset link. This is a demo, so no email is sent.</p>
+    <form id="forgotForm" novalidate><div class="field"><label for="fp-email">Email</label><input id="fp-email" name="email" type="email" placeholder="owner@yourrestaurant.com"><p class="err" data-err="email"></p></div>
+    <div class="modal-actions"><button class="btn primary" type="submit">Send reset link</button><button type="button" class="btn ghost" data-action="closeModal">Cancel</button></div></form></div>`),
+  confirmOk: () => { const cb = confirmCb; confirmCb = null; closeModal(); if (cb) cb(); },
+  goto: d => go(d.to),
+  pickFile: d => $('#' + d.for).click(),
+  editProfile: () => { editing = true; $('#pfSet').disabled = false; $('#pfEdit').hidden = true; $('#pfSave').hidden = false; $('#pfCancel').hidden = false; $('#pf-name').focus(); },
+  cancelProfile: () => { editing = false; VIEW.profile(); toast('Changes discarded','info'); },
+  addItem: () => openModal(menuFormHTML(null)),
+  editItem: d => openModal(menuFormHTML(state.menu.find(x => x.id === +d.id))),
+  clearItemImg: () => { const f = $('#menuForm'); f._img = ''; $('#mfPrev').innerHTML = '🍽️'; $('#mf-file').value = ''; },
+  deleteItem: d => { const it = state.menu.find(x => x.id === +d.id);
+    confirmBox(`Delete “${it.name}”?`, 'This removes the dish from your menu. You can add it again later.', 'Delete item', () => {
+      state.menu = state.menu.filter(x => x.id !== it.id); save(); renderMenuGrid(); toast(`“${it.name}” deleted`,'info'); }); },
+  toggleAvail: d => { const it = state.menu.find(x => x.id === +d.id); it.avail = !it.avail; save(); renderMenuGrid(); toast(`${it.name} is now ${it.avail?'available':'unavailable'}`,'info'); },
+  toggleFeat: d => { const it = state.menu.find(x => x.id === +d.id); it.featured = !it.featured; save(); renderMenuGrid(); toast(it.featured ? `${it.name} marked as a signature dish` : `${it.name} unfeatured`,'info'); },
+  menuCat: d => { MENUF.cat = d.cat; renderMenuGrid(); },
+  clearMenuFilters: () => { MENUF.q = ''; MENUF.cat = 'All'; VIEW.menu(); },
+  qrDownload: downloadQR, qrPrint: printQR,
+  copyUrl: () => (navigator.clipboard ? navigator.clipboard.writeText(reviewUrl()) : Promise.reject()).then(() => toast('Sample review link copied'), () => toast('Copy failed. Link: ' + reviewUrl(),'warn')),
+  revTab: d => { REVF.tab = d.tab; renderReviewList(); },
+  revStar: d => { REVF.star = REVF.star === d.star ? 'all' : d.star; $('[data-f="rev.star"]').value = REVF.star; renderReviewList(); },
+  clearReviewFilters: () => { Object.assign(REVF, {tab:'all',q:'',sort:'newest',star:'all'}); VIEW.reviews(); },
+  analyze: () => { const t = $('#aiText').value.trim(); $('#aiOut').innerHTML = t.length < 10 ? '<p class="muted">Type at least one sentence to analyse.</p>' : analysisHTML(t); if (t.length < 10) toast('Please enter a longer review.','error'); },
+  aiExample: () => { $('#aiText').value = 'The food was tasty, but the service was slow.'; actions.analyze(); }
+};
+document.addEventListener('click', e => {
+  if (e.target.id === 'modal') return closeModal();
+  const el = e.target.closest('[data-action]'); if (!el) return;
+  const fn = actions[el.dataset.action]; if (fn) fn(el.dataset, el, e);
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape'){ closeModal(); closeSidebar(); } });
+document.addEventListener('submit', e => {
+  e.preventDefault(); const f = e.target;
+  if (f.id === 'loginForm') handleLogin(f);
+  else if (f.id === 'profileForm') handleProfileSave(f);
+  else if (f.id === 'menuForm') handleMenuSave(f);
+  else if (f.id === 'settingsForm') handleSettingsSave(f);
+  else if (f.id === 'forgotForm'){
+    const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.value.trim()); setErr(f,'email', ok ? '' : 'Enter a valid email address.');
+    if (ok){ closeModal(); toast('Demo only: no email was sent.','info'); }
+  }
+});
+document.addEventListener('input', e => {
+  const t = e.target;
+  if (t.dataset && t.dataset.f){
+    const [scope,key] = t.dataset.f.split('.');
+    if (scope === 'menu'){ MENUF[key] = t.value; renderMenuGrid(); } else { REVF[key] = t.value; renderReviewList(); }
+  }
+});
+document.addEventListener('change', e => {
+  const t = e.target;
+  if (t.type === 'radio' && t.closest('.chip')) $$(`input[name="${t.name}"]`, t.form).forEach(r => r.closest('.chip').classList.toggle('on', r.checked));
+  if (t.type === 'checkbox' && t.closest('.chip')) t.closest('.chip').classList.toggle('on', t.checked);
+  if (t.dataset && t.dataset.f){ const [scope,key] = t.dataset.f.split('.'); if (scope === 'rev'){ REVF[key] = t.value; renderReviewList(); } }
+  if (t.type === 'file' && t.files[0]){
+    const file = t.files[0]; if (file.size > 8*1024*1024) return toast('Please choose an image under 8 MB.','error');
+    if (t.id === 'pf-logo') shrinkImage(file, 320, d => { draft.logo = d; $('#pfLogoPrev').innerHTML = `<img src="${d}" alt="Logo preview">`; });
+    if (t.id === 'pf-cover') shrinkImage(file, 1000, d => { draft.cover = d; $('#pfCoverPrev').innerHTML = `<img src="${d}" alt="Cover preview">`; });
+    if (t.id === 'mf-file') shrinkImage(file, 520, d => { $('#menuForm')._img = d; $('#mfPrev').innerHTML = `<img src="${d}" alt="Item image preview">`; });
+  }
+});
+
+/* ---------- 16. START-UP ---------- */
+function init(){
+  state = loadState(); buildReviews(); buildNav();
+  window.addEventListener('hashchange', route);
+  route();
+}
+init();
+</script>
+</body>
+</html>
