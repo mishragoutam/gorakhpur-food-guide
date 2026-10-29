@@ -1,67 +1,90 @@
 # Gorakhpur Food Guide
 
-A restaurant discovery and review platform for Gorakhpur, Uttar Pradesh. Customers browse local restaurants and (later) read customer-submitted reviews; restaurant owners register and manage their restaurants.
+A restaurant discovery, table QR review, and collaborative dining platform for Gorakhpur, Uttar Pradesh. Customers browse local restaurants, discover signature food trails, scan table QR codes, and decide group meals together; restaurant owners manage profiles, menus, and table standees.
 
-**Status: Page 1 (Home page) only, running on demo data.** The six restaurants, their ratings and review counts are fictional samples. They are flagged `isDemo: true`, labelled "Sample listing" on every card, and explained by a notice above the list. Nothing on the page is a live review or a real business.
+**Stack:** React 19 · Vite · TypeScript · Tailwind CSS v4 · Lucide icons · React Router v7 · Firebase Firestore (dual-persistence with offline localStorage fallback). Mobile-first, responsive, and PWA-friendly.
 
-**Stack:** React 19 · Vite · TypeScript · Tailwind CSS v4 · Lucide icons · React Router. Mobile-first and PWA-friendly (web manifest, icons, offline app-shell service worker).
+---
 
-## Run it locally
+## Key Features
 
-Requires Node.js 22.13 or newer and npm. (The dev server and build run on Node 20.19+, but the test tooling needs 22.13+.)
+### 1. Restaurant Discovery & Local Food Trails
+- **Dynamic Search & Filtering:** Filter by cuisine, budget band, minimum diner rating, and area. Removable filter chips with instant clear.
+- **Local Food Trails:** Curated culinary trails across Gorakhpur:
+  - *Taramandal Lake Sunset Chaat & Street Trail*
+  - *Golghar Heritage North Indian & Mughlai*
+  - *Asuran Chowk Samosa & Desi Ghee Mithai*
+  - *Betiahata Reading Lounges & Artisanal Cafes*
+- **Restaurant Details:** High-resolution menus with dish pricing and veg/non-veg tags, sub-rating breakdowns (food, taste, hygiene, service, ambience), customer reviews with owner management responses, verified location, operating hours, phone dialer action, and Google Maps directions.
+
+### 2. Individual Restaurant QR Code & Standee System
+- **Unique Deterministic Payloads:** Every restaurant generates a distinct canonical public URL encoded into high-contrast QR Code Model 2.
+- **Centralized Public URL Engine (`src/lib/restaurantUrl.ts`):** Canonical routing `/restaurants/:id`, environment variable domain configuration (`VITE_PUBLIC_SITE_URL`), production localhost guard, and clean slug formatting.
+- **Standards-Compliant QR Generation (`src/lib/qrCode.ts`):** Standard quiet zones, error correction level M, and crisp vector rendering.
+- **Comprehensive Export & Sharing UI (`RestaurantQrModal.tsx` / `QrCodeView.tsx`):**
+  - **PNG Download:** High-resolution (1000x1000px) raster image with safe sanitized filenames: `gorakhpur-food-guide-[slug]-qr.png`.
+  - **SVG Download:** Scalable vector format.
+  - **Printable Table Standee Card:** Print-isolated layout with table numbers for dining tables and billing counters.
+  - **Web Share API:** 1-click native sharing on smartphones with clipboard fallback.
+- **Admin QR Management:** Moderation panel tab for previewing and bulk exporting QR codes for all restaurants.
+
+### 3. "Decide Together" — Group Dining Decision & Voting
+- **Session Management (`/decide-together`):** Create outings, define budgets and target areas, and invite friends via shareable link or room code. Real-time synchronization powered by Google Cloud Firestore with offline local storage fallback.
+- **Preference Collection:** Captures dietary requirements (Strict Pure Veg, Non-Veg OK, Vegan, Flexible), per-person budget in INR, cuisine cravings, spice tolerance, preferred Gorakhpur localities, and voluntary allergen notes (with prominent legal disclaimer).
+- **Deterministic Recommendation Engine (`src/lib/groupRecommendation.ts`):**
+  - *Hard constraints:* Pure veg requirement eliminates venues without vegetarian food; strictly caps out-of-budget venues.
+  - *Balanced fairness:* Weighted scoring ($0.6 \times \text{mean} + 0.4 \times \min$) prevents majority tyranny and protects minority diets.
+  - *Transparent explanations:* Lists exact matched preferences and compromises for every recommendation.
+- **Democratic Consensus Voting:** 1 active vote per participant, vote changes allowed before closing, live percentage bars, tie-breaking by compatibility score, and winner celebration card with directions and QR standee trigger.
+
+---
+
+## Run It Locally
+
+Requires Node.js 22.13+ (or Node 20.19+) and npm.
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open the URL Vite prints (usually http://localhost:5173).
+Open http://localhost:5173 in your browser.
 
 | Command | What it does |
 | --- | --- |
-| `npm run dev` | Dev server with hot reload |
-| `npm run build` | Type-check, then production build into `dist/` |
-| `npm run preview` | Serve the production build (use this to try the PWA / service worker) |
-| `npm run typecheck` | TypeScript only |
-| `npm run lint` | Oxlint |
-| `npm test` | Unit and component tests (Vitest + Testing Library) |
+| `npm run dev` | Start development server with hot module reload |
+| `npm run build` | Full TypeScript typecheck and production build into `dist/` |
+| `npm run preview` | Serve production build locally |
+| `npm run typecheck` | Run TypeScript compiler checks (`tsc -b`) |
+| `npm run lint` | Oxlint fast linter |
+| `npm test` | Run all unit, component, and QR scanner round-trip tests (Vitest) |
 
-## What's on the page
+---
 
-Header (brand, Home / Explore Restaurants / About, owner login, Register Your Restaurant) → hero with search → category cards → filterable restaurant list → owner call-to-action → footer.
+## Environment Variables
 
-- **Search** matches restaurant name, cuisine, popular dishes and area. Results update as you type.
-- **Categories** and the **cuisine / budget / rating** filters combine with each other and with search. Active filters show as removable chips; "Clear all filters" resets them.
-- **Empty state** appears when nothing matches.
-- **Placeholder routes:** `/restaurants/:id`, `/owner/login`, `/owner/register`, `/about`, `/contact`, `/privacy`, `/terms`, plus a 404 page.
+Copy `.env.example` to `.env`:
 
-## Project structure
+```env
+# Public domain for production QR payloads (optional in dev, defaults to current origin or canonical production domain)
+VITE_PUBLIC_SITE_URL="https://gorakhpurfoodguide.in"
 
-```
-src/
-  components/
-    art/       Local SVG illustrations used instead of photos (no image hosting needed)
-    home/      Hero, SearchBar, CategorySection, FilterBar, RestaurantListing, RestaurantCard, OwnerCta
-    layout/    Header, Footer, Logo, Layout, ScrollManager
-    ui/        Button, Badge, StarRating, SelectField, StatePanel, ...
-  data/        categories.ts, demoRestaurants.ts   (demo data lives here and only here)
-  hooks/       useRestaurants, useRestaurantFilters, useAsyncData, usePageTitle
-  lib/         Pure helpers: filtering, budget bands, formatting, routes
-  pages/       One file per route
-  services/    restaurantService.ts   (the data-access boundary)
-  types/       restaurant.ts          (domain types)
-public/        manifest, icons, sw.js
+# Firebase Cloud Firestore Configuration
+VITE_FIREBASE_API_KEY="..."
+VITE_FIREBASE_AUTH_DOMAIN="..."
+VITE_FIREBASE_PROJECT_ID="..."
+VITE_FIREBASE_STORAGE_BUCKET="..."
+VITE_FIREBASE_MESSAGING_SENDER_ID="..."
+VITE_FIREBASE_APP_ID="..."
 ```
 
-## Getting ready for the backend
+---
 
-- Components never import demo data. They call hooks, which call `services/restaurantService.ts`. To go live, replace the two functions in that file with `fetch` calls to the API; the UI does not need to change. Loading and error states are already handled.
-- `types/restaurant.ts` is shaped like the tables expected in PostgreSQL (restaurants, categories, cuisines, restaurant-to-category links). `imageUrl: null` falls back to a local illustration until real photos exist.
-- Filtering currently runs in the browser (`lib/restaurantFilters.ts`). With a real database, move it to the query and keep the same `RestaurantFilters` shape as the request parameters.
-- Once ratings come from real reviews, the "Sample listing" badge and demo notice disappear on their own, because they are driven by each record's `isDemo` flag.
+## Verification & Automated Tests
 
-## Notes
-
-- The service worker is registered in production builds only, so `npm run dev` never serves stale files. Bump `CACHE_VERSION` in `public/sw.js` whenever its caching strategy changes.
-- The deployment host must serve `index.html` for unknown paths (SPA fallback), so deep links such as `/about` work on refresh. `vite dev` and `vite preview` already do this.
-- Out of scope for this page by design: AI features, payments, maps, and any external API.
+All tests run via `npm test` and include:
+1. `src/lib/restaurantUrl.test.ts`: Unique restaurant payload generation, canonical route resolution, sanitized slugs, production localhost protection, and standard filename generation.
+2. `src/lib/qrCode.test.ts`: SVG string generation, high-res PNG dataURL generation, and **in-memory scanner round-trip verification using `jsQR`**.
+3. `src/lib/groupRecommendation.test.ts`: Hard dietary constraints enforcement, budget ceiling checks, multi-member balanced scoring, and match/compromise explanations.
+4. `src/services/groupDiningService.test.ts`: Session lifecycle, preference saving, voting with duplicate vote prevention, and tie-breaker decision consensus.
+5. `src/App.test.tsx` & `src/pages/HomePage.test.tsx`: App routing, header/footer navigation, search, filters, and restaurant details.

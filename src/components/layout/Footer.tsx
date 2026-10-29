@@ -8,6 +8,7 @@ const FOOTER_LINKS = [
   { label: 'Contact', to: ROUTES.contact },
   { label: 'Privacy Policy', to: ROUTES.privacy },
   { label: 'Terms', to: ROUTES.terms },
+  { label: 'Decide Together', to: ROUTES.groupDining },
   { label: 'My Reviews', to: ROUTES.myReviews },
   { label: 'Owner Dashboard', to: ROUTES.ownerDashboard },
   { label: 'Admin Panel', to: ROUTES.admin },

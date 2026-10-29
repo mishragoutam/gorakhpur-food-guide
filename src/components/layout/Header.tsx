@@ -22,6 +22,7 @@ const onResults = (location: Location) => onHome(location) && location.hash === 
 const NAV_ITEMS: readonly NavItem[] = [
   { label: 'Home', to: ROUTES.home, isActive: (location) => onHome(location) && !onResults(location) },
   { label: 'Explore Restaurants', to: ROUTES.explore, isActive: onResults },
+  { label: 'Decide Together', to: ROUTES.groupDining, isActive: (location) => location.pathname.startsWith('/decide-together') },
   { label: 'My Reviews', to: ROUTES.myReviews, isActive: (location) => location.pathname === ROUTES.myReviews },
   { label: 'About', to: ROUTES.about, isActive: (location) => location.pathname === ROUTES.about },
   { label: 'Contact', to: ROUTES.contact, isActive: (location) => location.pathname === ROUTES.contact },

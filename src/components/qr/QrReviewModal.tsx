@@ -1,5 +1,6 @@
 import { QrCode, X, Sparkles, Utensils } from 'lucide-react';
 import { QrCodeView } from '@/components/ui/QrCodeView';
+import { getRestaurantPublicUrl, getRestaurantQrFilename } from '@/lib/restaurantUrl';
 import type { Restaurant } from '@/types/restaurant';
 
 interface QrReviewModalProps {
@@ -17,9 +18,8 @@ export function QrReviewModal({
 }: QrReviewModalProps) {
   if (!isOpen) return null;
 
-  const reviewUrl = typeof window !== 'undefined'
-    ? `${window.location.origin}/restaurants/${restaurant.id}?qr=true`
-    : `https://rateit.gorakhpur.food/restaurants/${restaurant.id}`;
+  const reviewUrl = getRestaurantPublicUrl(restaurant, { queryParams: { qr: 'true' } });
+  const filename = getRestaurantQrFilename(restaurant);
 
   return (
     <div
@@ -49,11 +49,17 @@ export function QrReviewModal({
           Table QR Review Experience
         </h2>
         <div className="my-2.5 rounded-xl border border-forest-200 bg-forest-50/80 p-2.5 text-xs text-forest-900">
-          📱 Table QR Code: Scan with your smartphone camera or click below to submit your verified dining review.
+          📱 Table QR Code: Scan with your smartphone camera to submit your verified dining review or save this restaurant.
         </div>
 
         <div className="my-4 flex justify-center">
-          <QrCodeView value={reviewUrl} size={180} showActions={false} />
+          <QrCodeView
+            value={reviewUrl}
+            restaurantName={restaurant.name}
+            filename={filename.replace(/\.png$/, '')}
+            size={180}
+            showActions={true}
+          />
         </div>
 
         <div className="my-3 flex items-center gap-3 rounded-2xl border border-cream-200 bg-cream-50/60 p-3 text-left">

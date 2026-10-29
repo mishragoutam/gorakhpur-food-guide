@@ -9,6 +9,7 @@ import {
   Sparkles,
   SearchX,
   MessageSquareReply,
+  Navigation,
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
@@ -20,6 +21,7 @@ import { StarRating } from '@/components/ui/StarRating';
 import { StatePanel } from '@/components/ui/StatePanel';
 import { WriteReviewModal } from '@/components/reviews/WriteReviewModal';
 import { QrReviewModal } from '@/components/qr/QrReviewModal';
+import { RestaurantQrModal } from '@/components/qr/RestaurantQrModal';
 import { usePageTitle } from '@/hooks/usePageTitle';
 import { useRestaurant } from '@/hooks/useRestaurants';
 import { getBudgetBand } from '@/lib/budget';
@@ -65,6 +67,7 @@ export default function RestaurantDetailsPage() {
   );
   const [writeModalOpen, setWriteModalOpen] = useState(false);
   const [qrModalOpen, setQrModalOpen] = useState(false);
+  const [standeeModalOpen, setStandeeModalOpen] = useState(false);
 
   useEffect(() => {
     const handleStorageChange = () => {
@@ -206,12 +209,28 @@ export default function RestaurantDetailsPage() {
               </button>
               <button
                 type="button"
-                onClick={() => setQrModalOpen(true)}
+                onClick={() => setStandeeModalOpen(true)}
                 className="inline-flex items-center gap-2 rounded-full border border-forest-600 bg-forest-50 px-5 py-3 text-sm font-bold text-forest-800 transition hover:bg-forest-100"
               >
                 <QrCode size={16} />
+                View QR Standee
+              </button>
+              <button
+                type="button"
+                onClick={() => setQrModalOpen(true)}
+                className="inline-flex items-center gap-2 rounded-full border border-cream-300 bg-white px-4 py-3 text-sm font-semibold text-ink-700 transition hover:bg-cream-100"
+              >
                 Try QR Review
               </button>
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${restaurant.name}, ${restaurant.address || restaurant.area}, Gorakhpur, Uttar Pradesh`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full border border-cream-300 bg-white px-4 py-3 text-sm font-semibold text-ink-700 transition hover:bg-cream-100"
+              >
+                <Navigation size={15} className="text-accent-700" />
+                Directions
+              </a>
             </div>
 
             <h2 className="mt-8 text-sm font-semibold tracking-wide text-ink-600 uppercase">Popular dishes</h2>
@@ -432,7 +451,7 @@ export default function RestaurantDetailsPage() {
               </p>
               <button
                 type="button"
-                onClick={() => setQrModalOpen(true)}
+                onClick={() => setStandeeModalOpen(true)}
                 className="mt-4 inline-flex w-full items-center justify-center rounded-xl bg-forest-600 py-2.5 text-xs font-bold text-white shadow-xs transition hover:bg-forest-700"
               >
                 Launch QR Standee
@@ -459,6 +478,12 @@ export default function RestaurantDetailsPage() {
         onContinueToReview={() => {
           setWriteModalOpen(true);
         }}
+      />
+
+      <RestaurantQrModal
+        isOpen={standeeModalOpen}
+        restaurant={restaurant}
+        onClose={() => setStandeeModalOpen(false)}
       />
     </section>
   );

@@ -4,6 +4,8 @@ import { OwnerCta } from '@/components/home/OwnerCta';
 import { RestaurantListing } from '@/components/home/RestaurantListing';
 import { HowItWorksSection } from '@/components/home/HowItWorksSection';
 import { AiInsightsSection } from '@/components/home/AiInsightsSection';
+import { GroupDiningBanner } from '@/components/home/GroupDiningBanner';
+import { FoodTrailsSection } from '@/components/home/FoodTrailsSection';
 import { useRestaurantFilters } from '@/hooks/useRestaurantFilters';
 import { usePageTitle } from '@/hooks/usePageTitle';
 import { RESULTS_HEADING_ID } from '@/lib/routes';
@@ -40,7 +42,9 @@ export default function HomePage() {
         onSuggestionSelect={handleSuggestion}
       />
       <CategorySection selected={filters.category} onSelect={handleCategorySelect} />
+      <GroupDiningBanner />
       <RestaurantListing filters={filters} onFilterChange={setFilter} onResetFilters={resetFilters} />
+      <FoodTrailsSection onSelectTrail={handleSuggestion} />
       <HowItWorksSection />
       <AiInsightsSection />
       <OwnerCta />

@@ -94,6 +94,20 @@ export async function saveFirestoreRestaurant(restaurant: Restaurant): Promise<v
 }
 
 /**
+ * Delete a restaurant document from Firestore.
+ */
+export async function deleteFirestoreRestaurant(id: string): Promise<void> {
+  if (!db || !id) return;
+  try {
+    const docRef = doc(db, COLLECTIONS.restaurants, id);
+    await deleteDoc(docRef);
+  } catch (err) {
+    console.error(`[Firestore] Error deleting restaurant ${id}:`, err);
+    throw err;
+  }
+}
+
+/**
  * Fetch reviews from Firestore, optionally filtered by restaurant ID.
  */
 export async function getFirestoreReviews(restaurantId?: string): Promise<Review[]> {
@@ -192,10 +206,15 @@ export async function logFirestoreAudit(entry: AuditLogEntry): Promise<void> {
   if (!db) return;
   try {
     const docRef = doc(db, COLLECTIONS.auditLogs, String(entry.id));
-    await setDoc(docRef, {
-      ...entry,
+    const payload: Record<string, unknown> = {
+      id: String(entry.id),
+      action: entry.action,
+      timestamp: entry.timestamp,
       createdAt: serverTimestamp(),
-    });
+    };
+    if (entry.target !== undefined) payload.target = entry.target;
+    if (entry.details !== undefined) payload.details = entry.details;
+    await setDoc(docRef, payload);
   } catch (err) {
     console.error('[Firestore] Error saving audit log:', err);
   }
@@ -263,6 +282,7 @@ export const firestoreService = {
   getRestaurants: getFirestoreRestaurants,
   getRestaurantById: getFirestoreRestaurantById,
   saveRestaurant: saveFirestoreRestaurant,
+  deleteRestaurant: deleteFirestoreRestaurant,
   getReviews: getFirestoreReviews,
   saveReview: saveFirestoreReview,
   updateReview: updateFirestoreReview,

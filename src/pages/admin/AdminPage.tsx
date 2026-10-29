@@ -12,6 +12,10 @@ import {
   Database,
   Cloud,
   RefreshCw,
+  QrCode,
+  Download,
+  Printer,
+  ExternalLink,
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -19,9 +23,12 @@ import { showToast } from '@/lib/toast';
 import { usePageTitle } from '@/hooks/usePageTitle';
 import { ROUTES } from '@/lib/routes';
 import { storageService } from '@/services/storageService';
+import { QrCodeView } from '@/components/ui/QrCodeView';
+import { getRestaurantPublicUrl, getRestaurantQrFilename } from '@/lib/restaurantUrl';
+import { generateQrDataUrl } from '@/lib/qrCode';
 import type { AuditLogEntry, Restaurant, Review, UserProfile } from '@/types/restaurant';
 
-type AdminTab = 'dash' | 'users' | 'shops' | 'revs' | 'audit';
+type AdminTab = 'dash' | 'users' | 'shops' | 'revs' | 'qr' | 'audit';
 
 export default function AdminPage() {
   usePageTitle('Admin Moderation Panel');
@@ -42,6 +49,8 @@ export default function AdminPage() {
   // Filtering states
   const [userQuery, setUserQuery] = useState('');
   const [shopFilter, setShopFilter] = useState('All');
+  const [selectedQrRestId, setSelectedQrRestId] = useState<string>('');
+  const [isExportingBulk, setIsExportingBulk] = useState(false);
 
   // Modals
   const [viewingUser, setViewingUser] = useState<UserProfile | null>(null);
@@ -158,6 +167,33 @@ export default function AdminPage() {
     });
   };
 
+  const handleBulkQrExport = async () => {
+    if (!restaurants.length) {
+      showToast('No restaurants available to export', 'error');
+      return;
+    }
+    setIsExportingBulk(true);
+    showToast(`Generating high-res QR codes for ${restaurants.length} restaurants…`);
+    try {
+      for (const rest of restaurants) {
+        const url = getRestaurantPublicUrl(rest, { queryParams: { qr: 'standee' } });
+        const dataUrl = await generateQrDataUrl(url, { size: 1000, margin: 4, errorCorrectionLevel: 'M' });
+        const a = document.createElement('a');
+        a.href = dataUrl;
+        a.download = getRestaurantQrFilename(rest, 'png');
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        await new Promise((resolve) => setTimeout(resolve, 200));
+      }
+      showToast(`Exported ${restaurants.length} restaurant QR codes successfully!`);
+    } catch {
+      showToast('Error during bulk QR export', 'error');
+    } finally {
+      setIsExportingBulk(false);
+    }
+  };
+
   // LOGIN SCREEN
   if (!isLoggedIn) {
     return (
@@ -269,6 +305,7 @@ export default function AdminPage() {
                 { id: 'users', label: 'Users Management', icon: Users },
                 { id: 'shops', label: 'Restaurants / Shops', icon: Store },
                 { id: 'revs', label: 'Review Moderation', icon: MessageSquare },
+                { id: 'qr', label: 'QR Standee Management', icon: QrCode },
                 { id: 'audit', label: 'Audit Log', icon: ClipboardList },
               ].map((tab) => {
                 const Icon = tab.icon;
@@ -717,6 +754,138 @@ export default function AdminPage() {
                   </tbody>
                 </table>
               </div>
+            </div>
+          ) : null}
+
+          {/* QR STANDEE MANAGEMENT TAB */}
+          {activeTab === 'qr' ? (
+            <div className="space-y-6">
+              <div className="rounded-3xl border border-cream-300 bg-white p-6 shadow-sm">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                  <div>
+                    <h3 className="text-xl font-bold text-ink-900">Restaurant QR Code Management</h3>
+                    <p className="text-xs text-ink-500">
+                      Generate, inspect, print, and export high-resolution QR standees for any registered Gorakhpur venue.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleBulkQrExport}
+                    disabled={isExportingBulk || restaurants.length === 0}
+                    className="inline-flex items-center gap-2 rounded-xl bg-forest-600 px-4 py-2.5 text-xs font-bold text-white shadow-xs hover:bg-forest-700 disabled:opacity-50"
+                  >
+                    <Download size={15} />
+                    {isExportingBulk ? 'Exporting Batch…' : `Bulk Export All (${restaurants.length})`}
+                  </button>
+                </div>
+
+                <div className="mt-6 flex flex-wrap items-center gap-3">
+                  <label htmlFor="qr-rest-select" className="text-xs font-bold text-ink-700">
+                    Select Restaurant:
+                  </label>
+                  <select
+                    id="qr-rest-select"
+                    value={selectedQrRestId || (restaurants[0]?.id ?? '')}
+                    onChange={(e) => setSelectedQrRestId(e.target.value)}
+                    className="flex-1 min-w-[240px] rounded-xl border border-cream-300 bg-cream-50 px-3 py-2 text-xs font-semibold text-ink-900 focus:outline-hidden"
+                  >
+                    {restaurants.map((rest) => (
+                      <option key={rest.id} value={rest.id}>
+                        {rest.name} ({rest.area}) — {rest.id}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              {/* Selected Restaurant Standee Preview */}
+              {(() => {
+                const targetRest =
+                  restaurants.find((r) => r.id === (selectedQrRestId || restaurants[0]?.id)) ||
+                  restaurants[0];
+                if (!targetRest) {
+                  return (
+                    <div className="rounded-3xl border border-cream-300 bg-white p-8 text-center text-xs text-ink-500">
+                      No restaurants registered yet.
+                    </div>
+                  );
+                }
+
+                const qrUrl = getRestaurantPublicUrl(targetRest, { queryParams: { qr: 'admin' } });
+                const qrFilename = getRestaurantQrFilename(targetRest);
+
+                return (
+                  <div className="grid gap-8 lg:grid-cols-2">
+                    <div className="rounded-3xl border border-cream-300 bg-white p-6 shadow-sm flex flex-col justify-between">
+                      <div>
+                        <h4 className="text-lg font-bold text-ink-900">{targetRest.name}</h4>
+                        <p className="text-xs text-ink-600">{targetRest.cuisines.join(' · ')} • {targetRest.area}</p>
+
+                        <div className="my-6 flex justify-center">
+                          <QrCodeView
+                            value={qrUrl}
+                            restaurantName={targetRest.name}
+                            filename={qrFilename.replace(/\.png$/, '')}
+                            size={220}
+                            showActions={true}
+                            showPrint={true}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="rounded-2xl border border-cream-200 bg-cream-50 p-3.5 text-xs text-ink-700">
+                        <span className="font-bold text-ink-900">Canonical QR Payload:</span>
+                        <p className="mt-1 font-mono text-[11px] text-forest-800 break-all">{qrUrl}</p>
+                      </div>
+                    </div>
+
+                    <div className="rounded-3xl border border-cream-300 bg-white p-6 shadow-sm flex flex-col justify-between">
+                      <div>
+                        <h4 className="text-lg font-bold text-ink-900">Printable Table Standee</h4>
+                        <p className="text-xs text-ink-500">Tent card preview for tables & counters.</p>
+
+                        <div className="mt-6 mx-auto max-w-xs rounded-3xl border-4 border-forest-800 bg-white p-6 text-center shadow-md">
+                          <div className="font-display font-extrabold text-forest-700 text-lg">Gorakhpur Food Guide</div>
+                          <h5 className="mt-2 text-base font-bold text-ink-900">{targetRest.name}</h5>
+                          <p className="text-[11px] text-ink-500">Scan to View Menu & Ratings</p>
+
+                          <div className="my-4 flex justify-center">
+                            <QrCodeView
+                              value={qrUrl}
+                              restaurantName={targetRest.name}
+                              filename={qrFilename.replace(/\.png$/, '')}
+                              size={150}
+                              showActions={false}
+                            />
+                          </div>
+
+                          <p className="text-[10px] font-semibold text-ink-600">
+                            ⭐ Rate dishes, view photos & share feedback
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="mt-6 flex gap-3">
+                        <button
+                          type="button"
+                          onClick={() => window.print()}
+                          className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-forest-600 py-3 text-xs font-bold text-white shadow-xs hover:bg-forest-700"
+                        >
+                          <Printer size={15} /> Print Standee Card
+                        </button>
+                        <a
+                          href={ROUTES.restaurant(targetRest.id)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 rounded-xl border border-cream-300 bg-white px-4 py-3 text-xs font-bold text-ink-800 hover:bg-cream-100"
+                        >
+                          <ExternalLink size={14} /> Open Page
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })()}
             </div>
           ) : null}
 

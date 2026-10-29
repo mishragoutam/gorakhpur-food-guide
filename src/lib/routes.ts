@@ -13,6 +13,8 @@ export const ROUTES = {
   privacy: '/privacy',
   terms: '/terms',
   myReviews: '/my-reviews',
+  groupDining: '/decide-together',
+  groupDiningSession: (sessionId: string) => `/decide-together/${encodeURIComponent(sessionId)}`,
   ownerLogin: '/owner/login',
   ownerRegister: '/owner/register',
   ownerDashboard: '/owner/dashboard',

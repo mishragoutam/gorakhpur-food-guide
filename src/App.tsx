@@ -13,6 +13,7 @@ import MyReviewsPage from '@/pages/MyReviewsPage';
 import PrivacyPage from '@/pages/PrivacyPage';
 import RestaurantDetailsPage from '@/pages/RestaurantDetailsPage';
 import TermsPage from '@/pages/TermsPage';
+import GroupDiningPage from '@/pages/GroupDiningPage';
 
 export default function App() {
   return (
@@ -21,6 +22,8 @@ export default function App() {
         <Route element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="restaurants/:restaurantId" element={<RestaurantDetailsPage />} />
+          <Route path="decide-together" element={<GroupDiningPage />} />
+          <Route path="decide-together/:sessionId" element={<GroupDiningPage />} />
           <Route path="my-reviews" element={<MyReviewsPage />} />
           <Route path="owner/login" element={<OwnerLoginPage />} />
           <Route path="owner/register" element={<OwnerRegisterPage />} />

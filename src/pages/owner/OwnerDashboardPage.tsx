@@ -26,6 +26,7 @@ import {
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { QrCodeView } from '@/components/ui/QrCodeView';
+import { getRestaurantPublicUrl, getRestaurantQrFilename } from '@/lib/restaurantUrl';
 import { StarRating } from '@/components/ui/StarRating';
 import { showToast } from '@/lib/toast';
 import { usePageTitle } from '@/hooks/usePageTitle';
@@ -305,9 +306,8 @@ export default function OwnerDashboardPage() {
     );
   }
 
-  const qrUrl = typeof window !== 'undefined'
-    ? `${window.location.origin}/restaurants/${restaurant.id}?qr=table`
-    : `https://rateit.gorakhpur.food/restaurants/${restaurant.id}`;
+  const qrUrl = getRestaurantPublicUrl(restaurant, { queryParams: { qr: 'table' } });
+  const qrFilename = getRestaurantQrFilename(restaurant);
 
   const filteredDishes = (restaurant.menu || []).filter(
     (d) => selectedMenuCat === 'All' || d.category === selectedMenuCat,
@@ -790,14 +790,21 @@ export default function OwnerDashboardPage() {
                   </p>
 
                   <div className="my-6 flex justify-center">
-                    <QrCodeView value={qrUrl} size={220} showActions={true} />
+                    <QrCodeView
+                      value={qrUrl}
+                      restaurantName={restaurant.name}
+                      filename={qrFilename.replace(/\.png$/, '')}
+                      size={220}
+                      showActions={true}
+                      showPrint={true}
+                    />
                   </div>
 
                   <div className="space-y-3 rounded-2xl bg-cream-50 p-4 text-xs text-ink-700">
                     <h4 className="font-bold text-ink-900">How to use your QR code:</h4>
                     <p>1. <strong>Print Standee Tent Cards</strong>: Place one standee on each table.</p>
                     <p>2. <strong>Bill Counter Display</strong>: Place a sticker near the payment QR code.</p>
-                    <p>3. <strong>Instant Feedback</strong>: Verified diners can rate dishes before leaving.</p>
+                    <p>3. <strong>Instant Feedback</strong>: Verified diners can rate dishes and view your menu in seconds.</p>
                   </div>
                 </div>
 
@@ -808,16 +815,22 @@ export default function OwnerDashboardPage() {
                     <p className="text-xs text-ink-500">What your dining guests will see on the table.</p>
 
                     <div className="mt-6 mx-auto max-w-xs rounded-3xl border-4 border-forest-800 bg-white p-6 text-center shadow-lg">
-                      <div className="font-display font-extrabold text-forest-700 text-lg">RateIt</div>
+                      <div className="font-display font-extrabold text-forest-700 text-lg">Gorakhpur Food Guide</div>
                       <h4 className="mt-2 text-base font-bold text-ink-900">{restaurant.name}</h4>
-                      <p className="text-[11px] text-ink-500">Scan to Review & Share Feedback</p>
+                      <p className="text-[11px] text-ink-500">Scan to View Menu & Share Review</p>
 
                       <div className="my-4 flex justify-center">
-                        <QrCodeView value={qrUrl} size={150} showActions={false} />
+                        <QrCodeView
+                          value={qrUrl}
+                          restaurantName={restaurant.name}
+                          filename={qrFilename.replace(/\.png$/, '')}
+                          size={150}
+                          showActions={false}
+                        />
                       </div>
 
                       <p className="text-[10px] font-semibold text-ink-600">
-                        ⭐ Help fellow foodies & support local kitchens!
+                        ⭐ Help fellow foodies & support local Gorakhpur kitchens!
                       </p>
                     </div>
                   </div>

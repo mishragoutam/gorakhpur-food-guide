@@ -50,10 +50,14 @@ export default function OwnerRegisterPage() {
     }
 
     const restId = `rest-${Date.now()}`;
+    const cleanOwnerEmail = email.trim();
+    const cleanOwnerName = ownerName.trim();
     const newRestaurant: Restaurant = {
       id: restId,
       name: restaurantName.trim(),
       cuisines: [cuisine],
+      popularDishes: [`${cuisine} Platter`, 'Chef Special Starter'],
+      imageUrl: null,
       area: area,
       city: 'Gorakhpur',
       address: `${area}, Gorakhpur`,
@@ -67,8 +71,8 @@ export default function OwnerRegisterPage() {
       openDays: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
       diet: 'both',
       status: 'Active',
-      ownerName: ownerName.trim(),
-      ownerEmail: email.trim(),
+      ownerName: cleanOwnerName,
+      ownerEmail: cleanOwnerEmail,
       description: `Welcome to ${restaurantName.trim()} in ${area}, Gorakhpur! Serving authentic ${cuisine} dishes with fresh ingredients.`,
       facilities: ['Air Conditioned', 'Free Wi-Fi', 'Family Friendly', 'Card Payments'],
       menu: [
@@ -112,8 +116,8 @@ export default function OwnerRegisterPage() {
     storageService.setOwnerSession({
       restaurantId: newRestaurant.id,
       restaurantName: newRestaurant.name,
-      ownerEmail: newRestaurant.ownerEmail,
-      ownerName: newRestaurant.ownerName,
+      ownerEmail: cleanOwnerEmail,
+      ownerName: cleanOwnerName,
     });
 
     showToast(`Registered "${newRestaurant.name}"! Welcome to RateIt.`);
