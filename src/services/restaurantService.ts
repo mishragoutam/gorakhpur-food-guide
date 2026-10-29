@@ -19,6 +19,11 @@ export const restaurantService: RestaurantService = {
     const local = storageService.getRestaurantById(id);
     if (local) return local;
 
+    // In test environment, immediately return null to avoid network timeouts
+    if (import.meta.env.MODE === 'test') {
+      return null;
+    }
+
     // If not found locally and Firebase is configured, attempt fast cloud fetch with 1s timeout
     if (firestoreService.isConfigured()) {
       try {
