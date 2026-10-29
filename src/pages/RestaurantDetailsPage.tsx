@@ -12,7 +12,7 @@ import {
   Navigation,
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { RestaurantImage } from '@/components/art/RestaurantImage';
 import { Badge } from '@/components/ui/Badge';
 import { ButtonLink } from '@/components/ui/Button';
@@ -57,6 +57,10 @@ function isOpenNow(openTime = '11:00', closeTime = '23:00'): boolean {
 
 export default function RestaurantDetailsPage() {
   const { restaurantId } = useParams();
+  const [searchParams] = useSearchParams();
+  const isQrScanned = searchParams.get('qr') === 'true' || searchParams.get('qr') === 'standee';
+  const tableNumber = searchParams.get('table');
+
   const restaurantQuery = useRestaurant(restaurantId);
   const restaurant = restaurantQuery.status === 'ready' ? restaurantQuery.data : null;
 
@@ -130,6 +134,16 @@ export default function RestaurantDetailsPage() {
     <section className="py-8 sm:py-12">
       <Container>
         <BackLink />
+
+        {/* QR Scan Welcome Notice */}
+        {Boolean(isQrScanned || tableNumber) && (
+          <div className="mt-4 flex items-center gap-3 rounded-2xl border border-forest-300 bg-forest-50/90 px-4 py-3 text-xs text-forest-900 sm:text-sm shadow-xs">
+            <QrCode size={20} className="shrink-0 text-forest-700" />
+            <p>
+              <strong className="font-semibold">Welcome to {restaurant.name}!</strong> Scanned via QR code{tableNumber ? ` (Table ${tableNumber})` : ''}. Explore the menu, view verified dining ratings, or tap &ldquo;Write a review&rdquo; below.
+            </p>
+          </div>
+        )}
 
         {/* Informative notice preserving backward-compatible placeholder indicator */}
         <div className="mt-4 flex items-center justify-between gap-4 rounded-2xl border border-cream-300 bg-amber-50/80 px-4 py-3 text-xs text-amber-950 sm:text-sm">

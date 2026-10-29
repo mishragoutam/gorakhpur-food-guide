@@ -265,8 +265,36 @@ export const storageService = {
   },
 
   getRestaurantById(id: string): Restaurant | null {
+    if (!id || typeof id !== 'string') return null;
     const list = this.getRestaurants();
-    return list.find((r) => r.id === id) ?? null;
+    
+    // 1. Direct exact match first
+    const exact = list.find((r) => r.id === id);
+    if (exact) return exact;
+
+    const decoded = decodeURIComponent(id).trim().toLowerCase();
+    const cleanId = decoded.replace(/^demo-/, '');
+
+    // 2. Resilient fallback matching (case-insensitive, optional demo- prefix, or slugified name)
+    return (
+      list.find((r) => {
+        const restId = r.id.toLowerCase();
+        const restCleanId = restId.replace(/^demo-/, '');
+        const restSlug = r.name
+          .normalize('NFD')
+          .replace(/\p{M}/gu, '')
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-+|-+$/g, '');
+
+        return (
+          restId === decoded ||
+          restCleanId === cleanId ||
+          restSlug === cleanId ||
+          restSlug === decoded
+        );
+      }) ?? null
+    );
   },
 
   /**

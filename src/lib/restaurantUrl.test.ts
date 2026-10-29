@@ -99,4 +99,22 @@ describe('restaurantUrl utility', () => {
     expect(getRestaurantIdentifier('rest-99')).toBe('rest-99');
     expect(getRestaurantIdentifier(mockRestaurant1)).toBe('demo-kesar-darbar-kitchen');
   });
+
+  it('9. Resilient restaurant lookup matches by exact ID, stripped demo prefix, or slug', async () => {
+    const { storageService } = await import('@/services/storageService');
+    const byExact = storageService.getRestaurantById('demo-kesar-darbar-kitchen');
+    expect(byExact).not.toBeNull();
+    expect(byExact?.name).toBe('Kesar Darbar Kitchen');
+
+    const byStripped = storageService.getRestaurantById('kesar-darbar-kitchen');
+    expect(byStripped).not.toBeNull();
+    expect(byStripped?.id).toBe('demo-kesar-darbar-kitchen');
+
+    const byCaseInsensitive = storageService.getRestaurantById('DEMO-KESAR-DARBAR-KITCHEN');
+    expect(byCaseInsensitive).not.toBeNull();
+    expect(byCaseInsensitive?.id).toBe('demo-kesar-darbar-kitchen');
+
+    const notFound = storageService.getRestaurantById('completely-non-existent-xyz');
+    expect(notFound).toBeNull();
+  });
 });
