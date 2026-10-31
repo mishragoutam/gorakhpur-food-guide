@@ -145,16 +145,23 @@ export default function RestaurantDetailsPage() {
           </div>
         )}
 
-        {/* Informative notice preserving backward-compatible placeholder indicator */}
-        <div className="mt-4 flex items-center justify-between gap-4 rounded-2xl border border-cream-300 bg-amber-50/80 px-4 py-3 text-xs text-amber-950 sm:text-sm">
-          <div className="flex items-center gap-2">
-            <Sparkles size={16} className="shrink-0 text-amber-700" />
-            <p>
-              <strong className="font-semibold">Full details and reviews are coming soon</strong> — preview the interactive menu highlights, ratings breakdown, table QR code, and reviews below.
-            </p>
+        {/* Verified or preview indicator */}
+        {restaurant.isDemo ? (
+          <div className="mt-4 flex items-center justify-between gap-4 rounded-2xl border border-cream-300 bg-amber-50/80 px-4 py-3 text-xs text-amber-950 sm:text-sm">
+            <div className="flex items-center gap-2">
+              <Sparkles size={16} className="shrink-0 text-amber-700" />
+              <p>
+                <strong className="font-semibold">Full details and reviews are coming soon</strong> — preview the interactive menu highlights, ratings breakdown, table QR code, and reviews below.
+              </p>
+            </div>
+            <Badge tone="accent">Sample listing</Badge>
           </div>
-          {restaurant.isDemo ? <Badge tone="accent">Sample listing</Badge> : null}
-        </div>
+        ) : (
+          <div className="mt-4 flex items-center gap-2 rounded-2xl border border-forest-200 bg-forest-50/70 px-4 py-2.5 text-xs font-semibold text-forest-800">
+            <Sparkles size={15} className="shrink-0 text-forest-600" />
+            <span>Verified Restaurant Partner • Gorakhpur Dining Directory</span>
+          </div>
+        )}
 
         {/* Hero & Overview */}
         <div className="mt-6 grid gap-8 lg:grid-cols-2 lg:gap-12">

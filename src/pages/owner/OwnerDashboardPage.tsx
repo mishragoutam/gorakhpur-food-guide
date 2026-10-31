@@ -23,7 +23,7 @@ import {
   Cloud,
   RefreshCw,
 } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { QrCodeView } from '@/components/ui/QrCodeView';
 import { getRestaurantPublicUrl, getRestaurantQrFilename } from '@/lib/restaurantUrl';
@@ -65,14 +65,6 @@ const TABS: TabConfig[] = [
 
 const MENU_CATEGORIES = ['All', 'Starters', 'Main Course', 'Breads', 'Desserts', 'Beverages'];
 
-const COMPETITORS = [
-  { name: 'Kesar Darbar Kitchen (You)', rating: 4.6, count: 214, food: 4.6, service: 4.3, dist: '0.0 km', you: true },
-  { name: 'Awadh Royal Cuisine', rating: 4.5, count: 184, food: 4.5, service: 4.4, dist: '0.6 km', you: false },
-  { name: 'Mughal Mahal', rating: 4.3, count: 142, food: 4.3, service: 4.0, dist: '1.2 km', you: false },
-  { name: 'The Saffron Table', rating: 4.2, count: 110, food: 4.2, service: 3.9, dist: '1.8 km', you: false },
-  { name: 'Chai & Chutney House', rating: 3.9, count: 85, food: 4.0, service: 3.6, dist: '2.5 km', you: false },
-];
-
 function getInitialOwnerData() {
   const all = storageService.getRestaurants();
   const session = storageService.getOwnerSession();
@@ -91,10 +83,11 @@ export default function OwnerDashboardPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [restaurant, setRestaurant] = useState<Restaurant | null>(initialData.rest);
   const [reviews, setReviews] = useState<Review[]>(initialData.reviews);
-  const [isSyncingFirestore, setIsSyncingFirestore] = useState(false);
+  const [isSyncingDatabase, setIsSyncingDatabase] = useState(false);
 
   // Menu sub-state
   const [selectedMenuCat, setSelectedMenuCat] = useState('All');
+  const [searchDish, setSearchDish] = useState('');
   const [isDishModalOpen, setIsDishModalOpen] = useState(false);
   const [editingDish, setEditingDish] = useState<MenuItem | null>(null);
   const [dishName, setDishName] = useState('');
@@ -102,6 +95,10 @@ export default function OwnerDashboardPage() {
   const [dishCategory, setDishCategory] = useState('Main Course');
   const [dishDiet, setDishDiet] = useState<'veg' | 'nonveg'>('veg');
   const [dishDesc, setDishDesc] = useState('');
+
+  // QR sub-state
+  const [tableSelection, setTableSelection] = useState<string>('1');
+  const [isBatchPrintModalOpen, setIsBatchPrintModalOpen] = useState(false);
 
   // Profile sub-state
   const [profileName, setProfileName] = useState(initialData.rest?.name || '');
@@ -146,6 +143,23 @@ export default function OwnerDashboardPage() {
     window.addEventListener('rateit-storage-change', handleStorageChange);
     return () => window.removeEventListener('rateit-storage-change', handleStorageChange);
   }, []);
+
+  const competitorsList = useMemo(() => {
+    const all = storageService.getRestaurants();
+    const sorted = [...all].sort((a, b) => b.averageRating - a.averageRating);
+    return sorted.slice(0, 8).map((r) => {
+      const isYou = r.id === restaurant?.id;
+      return {
+        name: isYou ? `${r.name} (You)` : r.name,
+        rating: r.averageRating,
+        count: r.reviewCount,
+        food: r.ratingsBreakdown?.food ?? 4.5,
+        service: r.ratingsBreakdown?.service ?? 4.2,
+        dist: isYou ? '0.0 km' : `${r.distanceKm || 1.2} km`,
+        you: isYou,
+      };
+    });
+  }, [restaurant]);
 
   const handleLogout = () => {
     storageService.setOwnerSession(null);
@@ -306,12 +320,22 @@ export default function OwnerDashboardPage() {
     );
   }
 
-  const qrUrl = getRestaurantPublicUrl(restaurant, { queryParams: { qr: 'table' } });
+  const qrUrl = getRestaurantPublicUrl(restaurant, {
+    queryParams: {
+      qr: 'standee',
+      table: tableSelection === 'counter' ? 'Counter' : tableSelection,
+    },
+  });
   const qrFilename = getRestaurantQrFilename(restaurant);
 
-  const filteredDishes = (restaurant.menu || []).filter(
-    (d) => selectedMenuCat === 'All' || d.category === selectedMenuCat,
-  );
+  const filteredDishes = (restaurant.menu || []).filter((d) => {
+    const matchesCat = selectedMenuCat === 'All' || d.category === selectedMenuCat;
+    const matchesSearch =
+      !searchDish ||
+      d.name.toLowerCase().includes(searchDish.toLowerCase()) ||
+      d.description.toLowerCase().includes(searchDish.toLowerCase());
+    return matchesCat && matchesSearch;
+  });
 
   const filteredReviews = reviews.filter((r) => {
     const matchesStar = starFilter === 'all' || r.rating === Number(starFilter);
@@ -354,13 +378,38 @@ export default function OwnerDashboardPage() {
                 </button>
               </div>
 
-              {/* Restaurant Mini Card */}
-              <div className="my-3 rounded-2xl bg-cream-100/70 p-3">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-forest-700">
+              {/* Restaurant Mini Card & Switcher */}
+              <div className="my-3 rounded-2xl bg-cream-100/80 p-3">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-forest-700 block mb-1">
                   Managing Restaurant
                 </span>
-                <p className="truncate text-xs font-bold text-ink-900">{restaurant.name}</p>
-                <p className="text-[11px] text-ink-500">{restaurant.area}, Gorakhpur</p>
+                <select
+                  value={restaurant.id}
+                  onChange={(e) => {
+                    const chosen = storageService.getRestaurantById(e.target.value);
+                    if (chosen) {
+                      storageService.setOwnerSession({
+                        restaurantId: chosen.id,
+                        restaurantName: chosen.name,
+                        ownerEmail: chosen.ownerEmail || 'owner@gorakhpurfoodguide.in',
+                        ownerName: chosen.ownerName || 'Restaurant Owner',
+                      });
+                      loadData();
+                      showToast(`Switched view to ${chosen.name}`);
+                    }
+                  }}
+                  className="w-full rounded-xl border border-cream-300 bg-white px-2.5 py-1.5 text-xs font-bold text-ink-900 shadow-2xs outline-none focus:border-forest-600 cursor-pointer truncate"
+                >
+                  {storageService.getRestaurants().map((r) => (
+                    <option key={r.id} value={r.id}>
+                      {r.name} ({r.area})
+                    </option>
+                  ))}
+                </select>
+                <p className="mt-1.5 text-[11px] text-ink-500 flex items-center justify-between">
+                  <span>{restaurant.area}, Gorakhpur</span>
+                  <span className="font-bold text-forest-700">★ {restaurant.averageRating}</span>
+                </p>
               </div>
 
               {/* Navigation Items */}
@@ -698,22 +747,34 @@ export default function OwnerDashboardPage() {
                   </button>
                 </div>
 
-                {/* Category Pills */}
-                <div className="flex flex-wrap gap-1.5">
-                  {MENU_CATEGORIES.map((cat) => (
-                    <button
-                      key={cat}
-                      type="button"
-                      onClick={() => setSelectedMenuCat(cat)}
-                      className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition ${
-                        selectedMenuCat === cat
-                          ? 'bg-forest-600 text-white shadow-xs'
-                          : 'border border-cream-300 bg-white text-ink-700 hover:bg-cream-100'
-                      }`}
-                    >
-                      {cat}
-                    </button>
-                  ))}
+                {/* Category Pills & Search */}
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+                  <div className="flex flex-wrap gap-1.5">
+                    {MENU_CATEGORIES.map((cat) => (
+                      <button
+                        key={cat}
+                        type="button"
+                        onClick={() => setSelectedMenuCat(cat)}
+                        className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition ${
+                          selectedMenuCat === cat
+                            ? 'bg-forest-600 text-white shadow-xs'
+                            : 'border border-cream-300 bg-white text-ink-700 hover:bg-cream-100'
+                        }`}
+                      >
+                        {cat}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="relative">
+                    <input
+                      type="text"
+                      placeholder="Filter dishes..."
+                      value={searchDish}
+                      onChange={(e) => setSearchDish(e.target.value)}
+                      className="w-full sm:w-48 rounded-xl border border-cream-300 bg-white px-3 py-1.5 text-xs text-ink-900 outline-none focus:border-forest-600"
+                    />
+                  </div>
                 </div>
 
                 {/* Dishes Grid */}
@@ -786,14 +847,35 @@ export default function OwnerDashboardPage() {
                 <div className="rounded-3xl border border-cream-300 bg-white p-6 sm:p-8 shadow-sm">
                   <h3 className="text-xl font-bold text-ink-900">Live Table QR Code</h3>
                   <p className="mt-1 text-xs text-ink-500">
-                    Customers who scan this QR code are taken directly to your restaurant's review page.
+                    Customers who scan this QR code are taken directly to your restaurant's review page with zero login hurdles.
                   </p>
+
+                  {/* Table Number Selector */}
+                  <div className="mt-4 rounded-2xl bg-cream-50 p-3.5 border border-cream-200">
+                    <label className="text-xs font-bold text-ink-800 block mb-2">Select Table Location:</label>
+                    <div className="flex flex-wrap gap-1.5">
+                      {['1', '2', '3', '4', '5', 'counter', 'VIP'].map((tabVal) => (
+                        <button
+                          key={tabVal}
+                          type="button"
+                          onClick={() => setTableSelection(tabVal)}
+                          className={`rounded-xl px-3 py-1.5 text-xs font-bold transition ${
+                            tableSelection === tabVal
+                              ? 'bg-forest-600 text-white shadow-xs'
+                              : 'bg-white border border-cream-300 text-ink-800 hover:bg-cream-100'
+                          }`}
+                        >
+                          {tabVal === 'counter' ? 'Billing Counter' : tabVal === 'VIP' ? 'VIP Lounge' : `Table ${tabVal}`}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
 
                   <div className="my-6 flex justify-center">
                     <QrCodeView
                       value={qrUrl}
                       restaurantName={restaurant.name}
-                      filename={qrFilename.replace(/\.png$/, '')}
+                      filename={`${qrFilename.replace(/\.png$/, '')}-table-${tableSelection}`}
                       size={220}
                       showActions={true}
                       showPrint={true}
@@ -802,7 +884,7 @@ export default function OwnerDashboardPage() {
 
                   <div className="space-y-3 rounded-2xl bg-cream-50 p-4 text-xs text-ink-700">
                     <h4 className="font-bold text-ink-900">How to use your QR code:</h4>
-                    <p>1. <strong>Print Standee Tent Cards</strong>: Place one standee on each table.</p>
+                    <p>1. <strong>Print Standee Tent Cards</strong>: Place one standee on each table with its table number.</p>
                     <p>2. <strong>Bill Counter Display</strong>: Place a sticker near the payment QR code.</p>
                     <p>3. <strong>Instant Feedback</strong>: Verified diners can rate dishes and view your menu in seconds.</p>
                   </div>
@@ -814,16 +896,21 @@ export default function OwnerDashboardPage() {
                     <h3 className="text-xl font-bold text-ink-900">Table Standee Preview</h3>
                     <p className="text-xs text-ink-500">What your dining guests will see on the table.</p>
 
-                    <div className="mt-6 mx-auto max-w-xs rounded-3xl border-4 border-forest-800 bg-white p-6 text-center shadow-lg">
+                    <div className="standee-print-card mt-6 mx-auto max-w-xs rounded-3xl border-4 border-forest-800 bg-white p-6 text-center shadow-lg">
                       <div className="font-display font-extrabold text-forest-700 text-lg">Gorakhpur Food Guide</div>
                       <h4 className="mt-2 text-base font-bold text-ink-900">{restaurant.name}</h4>
-                      <p className="text-[11px] text-ink-500">Scan to View Menu & Share Review</p>
+                      <div className="mt-1">
+                        <span className="inline-block rounded-full bg-forest-100 px-3 py-0.5 text-xs font-bold text-forest-800">
+                          {tableSelection === 'counter' ? 'Billing Counter' : `Table ${tableSelection}`}
+                        </span>
+                      </div>
+                      <p className="mt-1 text-[11px] text-ink-500">Scan to View Menu & Share Review</p>
 
                       <div className="my-4 flex justify-center">
                         <QrCodeView
                           value={qrUrl}
                           restaurantName={restaurant.name}
-                          filename={qrFilename.replace(/\.png$/, '')}
+                          filename={`${qrFilename.replace(/\.png$/, '')}-table-${tableSelection}`}
                           size={150}
                           showActions={false}
                         />
@@ -835,14 +922,24 @@ export default function OwnerDashboardPage() {
                     </div>
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={() => window.print()}
-                    className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-forest-600 py-3 text-sm font-bold text-white shadow-md hover:bg-forest-700"
-                  >
-                    <Printer size={16} />
-                    Print Table Standee
-                  </button>
+                  <div className="mt-6 flex flex-col sm:flex-row gap-3 no-print">
+                    <button
+                      type="button"
+                      onClick={() => window.print()}
+                      className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-forest-600 py-3 text-xs font-bold text-white shadow-md hover:bg-forest-700"
+                    >
+                      <Printer size={15} />
+                      Print Selected Standee
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setIsBatchPrintModalOpen(true)}
+                      className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-forest-600 bg-forest-50 py-3 text-xs font-bold text-forest-800 shadow-sm hover:bg-forest-100"
+                    >
+                      <QrCode size={15} />
+                      Batch Print Tables 1–10
+                    </button>
+                  </div>
                 </div>
               </div>
             ) : null}
@@ -1035,10 +1132,10 @@ export default function OwnerDashboardPage() {
                   <div className="rounded-3xl border border-cream-300 bg-white p-6 shadow-xs">
                     <div className="flex items-center gap-2 text-amber-700">
                       <Clock size={18} />
-                      <h4 className="font-bold text-sm text-ink-900">Accelerate 8:00 - 10:00 PM Service Speed</h4>
+                      <h4 className="font-bold text-sm text-ink-900">Accelerate 8:00 - 10:00 PM Peak Service Speed</h4>
                     </div>
                     <p className="mt-2 text-xs text-ink-600 leading-relaxed">
-                      AI identified 12 customer mentions about wait times exceeding 25 minutes during Sunday dinners. Adding an auxiliary tandoor chef or plating helper will eliminate bottle-necks.
+                      Diner checkouts and table turnover peak between 8:00 PM and 10:00 PM. Pre-prepping signature gravies, dips, and tableware ahead of peak hours will reduce dining wait times and maintain 4.8+ ratings.
                     </p>
                     <button
                       type="button"
@@ -1052,10 +1149,12 @@ export default function OwnerDashboardPage() {
                   <div className="rounded-3xl border border-cream-300 bg-white p-6 shadow-xs">
                     <div className="flex items-center gap-2 text-emerald-700">
                       <Sparkles size={18} />
-                      <h4 className="font-bold text-sm text-ink-900">Promote Paneer Lababdar & Naan Combo</h4>
+                      <h4 className="font-bold text-sm text-ink-900">
+                        Promote {restaurant.popularDishes?.[0] || 'Chef Special'} Combo
+                      </h4>
                     </div>
                     <p className="mt-2 text-xs text-ink-600 leading-relaxed">
-                      92% of reviews mentioning Paneer Lababdar gave 5 stars. Highlighting it as a Chef’s Special combo on your table standee can boost lunch check averages by 18%.
+                      Over 90% of reviews mentioning {restaurant.popularDishes?.[0] || 'signature items'} gave top ratings. Highlighting it as a Chef’s Recommendation on your table QR standee will boost diner satisfaction and average order size.
                     </p>
                     <button
                       type="button"
@@ -1091,7 +1190,7 @@ export default function OwnerDashboardPage() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-cream-100">
-                      {COMPETITORS.map((c, i) => (
+                      {competitorsList.map((c, i) => (
                         <tr
                           key={c.name}
                           className={c.you ? 'bg-forest-50/80 font-bold text-forest-900' : 'text-ink-700'}
@@ -1134,12 +1233,12 @@ export default function OwnerDashboardPage() {
                     <input type="checkbox" defaultChecked className="size-4 accent-forest-600" />
                   </div>
 
-                  {/* Google Cloud Firestore Card */}
+                  {/* Supabase PostgreSQL Card */}
                   <div className="rounded-2xl border border-forest-200 bg-forest-50/60 p-4">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2 text-forest-800">
                         <Database size={18} />
-                        <h4 className="text-xs font-bold">Google Cloud Firestore</h4>
+                        <h4 className="text-xs font-bold">Supabase PostgreSQL</h4>
                       </div>
                       <span className="inline-flex items-center gap-1 rounded-full bg-forest-100 px-2 py-0.5 text-[10px] font-bold text-forest-800">
                         <Cloud size={10} />
@@ -1147,30 +1246,30 @@ export default function OwnerDashboardPage() {
                       </span>
                     </div>
                     <p className="mt-1.5 text-[11px] leading-relaxed text-forest-900/80">
-                      Connected to Firestore database collections for real-time reviews, menu updates, and diner feedback sync.
+                      Connected to Supabase database tables for real-time reviews, menu updates, and diner feedback sync.
                     </p>
                     <div className="mt-3 flex items-center justify-between pt-2 border-t border-forest-200/60">
                       <span className="text-[10px] font-semibold text-forest-700">
-                        Collections: restaurants, reviews, inquiries
+                        Tables: restaurants, reviews, inquiries
                       </span>
                       <button
                         type="button"
-                        disabled={isSyncingFirestore}
+                        disabled={isSyncingDatabase}
                         onClick={async () => {
-                          setIsSyncingFirestore(true);
+                          setIsSyncingDatabase(true);
                           try {
-                            const res = await storageService.syncToFirestore();
-                            showToast(`Synced ${res.restaurantsCount} restaurants and ${res.reviewsCount} reviews to Cloud Firestore!`);
+                            const res = await storageService.syncToSupabase();
+                            showToast(`Synced ${res.restaurantsCount} restaurants and ${res.reviewsCount} reviews to Supabase!`);
                           } catch {
                             showToast('Sync completed with local offline cache.');
                           } finally {
-                            setIsSyncingFirestore(false);
+                            setIsSyncingDatabase(false);
                           }
                         }}
                         className="inline-flex items-center gap-1.5 rounded-lg bg-forest-600 px-3 py-1.5 text-xs font-bold text-white shadow-2xs hover:bg-forest-700 disabled:opacity-60 transition"
                       >
-                        <RefreshCw size={12} className={isSyncingFirestore ? 'animate-spin' : ''} />
-                        {isSyncingFirestore ? 'Syncing...' : 'Sync to Firestore'}
+                        <RefreshCw size={12} className={isSyncingDatabase ? 'animate-spin' : ''} />
+                        {isSyncingDatabase ? 'Syncing...' : 'Sync to Supabase'}
                       </button>
                     </div>
                   </div>
@@ -1346,6 +1445,90 @@ export default function OwnerDashboardPage() {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      ) : null}
+
+      {/* Batch Standees Print Modal */}
+      {isBatchPrintModalOpen && restaurant ? (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-ink-900/70 p-4 backdrop-blur-xs overflow-y-auto animate-in fade-in"
+        >
+          <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl border border-cream-300 bg-white p-6 sm:p-8 shadow-2xl">
+            {/* Modal Header */}
+            <div className="no-print flex flex-wrap items-center justify-between gap-4 border-b border-cream-200 pb-4 mb-6">
+              <div>
+                <h3 className="text-xl font-bold text-ink-900">
+                  Batch Table Standees for {restaurant.name}
+                </h3>
+                <p className="text-xs text-ink-500">
+                  Ready-to-print standee tent cards for Tables 1 to 10 + Billing Counter.
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => window.print()}
+                  className="inline-flex items-center gap-1.5 rounded-full bg-forest-600 px-5 py-2 text-xs font-bold text-white shadow-sm hover:bg-forest-700 cursor-pointer"
+                >
+                  <Printer size={15} />
+                  Print All 11 Cards
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIsBatchPrintModalOpen(false)}
+                  className="rounded-full border border-cream-300 p-2 text-ink-600 hover:bg-cream-100 cursor-pointer"
+                  aria-label="Close modal"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+            </div>
+
+            {/* Batch Grid */}
+            <div className="standee-batch-grid grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Billing Counter'].map((tbl) => {
+                const bUrl = getRestaurantPublicUrl(restaurant, {
+                  queryParams: {
+                    qr: 'standee',
+                    table: tbl === 'Billing Counter' ? 'Counter' : tbl,
+                  },
+                });
+                return (
+                  <div
+                    key={tbl}
+                    className="standee-print-card rounded-3xl border-4 border-forest-800 bg-white p-5 text-center shadow-sm"
+                  >
+                    <div className="font-display font-extrabold text-forest-700 text-xs">
+                      Gorakhpur Food Guide
+                    </div>
+                    <h4 className="mt-1 text-sm font-bold text-ink-900 truncate">{restaurant.name}</h4>
+                    <div className="mt-1">
+                      <span className="inline-block rounded-full bg-forest-100 px-3 py-0.5 text-[11px] font-bold text-forest-800">
+                        {tbl === 'Billing Counter' ? 'Billing Counter' : `Table ${tbl}`}
+                      </span>
+                    </div>
+                    <p className="mt-1 text-[10px] text-ink-500">Scan to View Menu & Share Review</p>
+
+                    <div className="my-3 flex justify-center">
+                      <QrCodeView
+                        value={bUrl}
+                        restaurantName={restaurant.name}
+                        filename={`${qrFilename.replace(/\.png$/, '')}-table-${tbl}`}
+                        size={120}
+                        showActions={false}
+                      />
+                    </div>
+
+                    <p className="text-[9px] font-semibold text-ink-600">
+                      ⭐ Support local Gorakhpur kitchens!
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       ) : null}

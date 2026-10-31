@@ -1,22 +1,17 @@
-import {
-  doc,
-  getDoc,
-  setDoc,
-  onSnapshot,
-  serverTimestamp,
-} from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+import { supabase } from '@/lib/supabase';
 import { recommendGroupRestaurants } from '@/lib/groupRecommendation';
 import type {
   GroupSession,
+  GroupSessionStatus,
   GroupVote,
   ParticipantPreference,
+  ScoredRecommendation,
 } from '@/types/groupDining';
 import type { Restaurant } from '@/types/restaurant';
 
 const STORAGE_KEY_SESSIONS = 'rateit_group_sessions_v1';
 const STORAGE_KEY_CURRENT_PARTICIPANT = 'rateit_group_participant_id';
-const FIRESTORE_COLLECTION = 'group_sessions';
+const SUPABASE_TABLE = 'group_sessions';
 
 function safeGetSessions(): Record<string, GroupSession> {
   try {
@@ -40,24 +35,45 @@ function safeSaveSession(session: GroupSession): void {
   }
 }
 
-function cleanFirestoreObject(obj: Record<string, unknown>): Record<string, unknown> {
-  const result: Record<string, unknown> = {};
-  for (const [key, value] of Object.entries(obj)) {
-    if (value !== undefined) {
-      if (Array.isArray(value)) {
-        result[key] = value.map((item) =>
-          typeof item === 'object' && item !== null
-            ? cleanFirestoreObject(item as Record<string, unknown>)
-            : item,
-        );
-      } else if (typeof value === 'object' && value !== null) {
-        result[key] = cleanFirestoreObject(value as Record<string, unknown>);
-      } else {
-        result[key] = value;
-      }
-    }
-  }
-  return result;
+export function toGroupSessionRow(session: GroupSession): Record<string, unknown> {
+  return {
+    id: session.id,
+    title: session.title,
+    creator_id: session.creatorId,
+    creator_name: session.creatorName,
+    target_budget: session.targetBudget ?? null,
+    target_area: session.targetArea ?? null,
+    status: session.status,
+    participants: session.participants,
+    recommendations: session.recommendations,
+    votes: session.votes,
+    winning_restaurant_id: session.winningRestaurantId ?? null,
+    created_at: session.createdAt,
+    updated_at: session.updatedAt,
+  };
+}
+
+export function fromGroupSessionRow(row: Record<string, unknown>): GroupSession {
+  return {
+    id: String(row.id),
+    title: String(row.title || ''),
+    creatorId: String(row.creator_id ?? row.creatorId ?? ''),
+    creatorName: String(row.creator_name ?? row.creatorName ?? 'Host'),
+    targetBudget:
+      row.target_budget != null
+        ? Number(row.target_budget)
+        : row.targetBudget != null
+          ? Number(row.targetBudget)
+          : undefined,
+    targetArea: (row.target_area ?? row.targetArea ?? undefined) as string | undefined,
+    status: ((row.status as string) || 'collecting') as GroupSessionStatus,
+    participants: (Array.isArray(row.participants) ? row.participants : []) as ParticipantPreference[],
+    recommendations: (Array.isArray(row.recommendations) ? row.recommendations : []) as ScoredRecommendation[],
+    votes: (Array.isArray(row.votes) ? row.votes : []) as GroupVote[],
+    winningRestaurantId: (row.winning_restaurant_id ?? row.winningRestaurantId ?? undefined) as string | undefined,
+    createdAt: String(row.created_at ?? row.createdAt ?? new Date().toISOString()),
+    updatedAt: String(row.updated_at ?? row.updatedAt ?? new Date().toISOString()),
+  };
 }
 
 export function getCurrentParticipantId(): string {
@@ -70,6 +86,21 @@ export function getCurrentParticipantId(): string {
     return id;
   } catch {
     return `user-${Date.now()}`;
+  }
+}
+
+async function persistSessionToSupabase(session: GroupSession): Promise<void> {
+  if (!supabase) return;
+  try {
+    const row = toGroupSessionRow(session);
+    const { error } = await supabase
+      .from(SUPABASE_TABLE)
+      .upsert(row, { onConflict: 'id' });
+    if (error) {
+      console.warn('[GroupDining] Supabase save warning:', error.message);
+    }
+  } catch (err) {
+    console.warn('[GroupDining] Supabase save error:', err);
   }
 }
 
@@ -105,18 +136,8 @@ export const groupDiningService = {
     // Save locally
     safeSaveSession(session);
 
-    // Save to Firestore if connected
-    if (db) {
-      try {
-        const docRef = doc(db, FIRESTORE_COLLECTION, sessionId);
-        await setDoc(docRef, {
-          ...cleanFirestoreObject(session as unknown as Record<string, unknown>),
-          firestoreCreatedAt: serverTimestamp(),
-        });
-      } catch (err) {
-        console.warn('[GroupDining] Firestore save warning:', err);
-      }
-    }
+    // Save to Supabase if connected
+    await persistSessionToSupabase(session);
 
     return session;
   },
@@ -128,17 +149,21 @@ export const groupDiningService = {
     if (!sessionId) return null;
 
     // Check cloud first if connected
-    if (db) {
+    if (supabase) {
       try {
-        const docRef = doc(db, FIRESTORE_COLLECTION, sessionId);
-        const snap = await getDoc(docRef);
-        if (snap.exists()) {
-          const cloudSession = snap.data() as GroupSession;
+        const { data, error } = await supabase
+          .from(SUPABASE_TABLE)
+          .select('*')
+          .eq('id', sessionId)
+          .maybeSingle();
+
+        if (!error && data) {
+          const cloudSession = fromGroupSessionRow(data as Record<string, unknown>);
           safeSaveSession(cloudSession);
           return cloudSession;
         }
       } catch (err) {
-        console.warn('[GroupDining] Firestore fetch warning:', err);
+        console.warn('[GroupDining] Supabase fetch warning:', err);
       }
     }
 
@@ -171,15 +196,7 @@ export const groupDiningService = {
     };
 
     safeSaveSession(session);
-
-    if (db) {
-      try {
-        const docRef = doc(db, FIRESTORE_COLLECTION, sessionId);
-        await setDoc(docRef, cleanFirestoreObject(session as unknown as Record<string, unknown>), { merge: true });
-      } catch (err) {
-        console.warn('[GroupDining] Firestore update warning:', err);
-      }
-    }
+    await persistSessionToSupabase(session);
 
     return session;
   },
@@ -206,15 +223,7 @@ export const groupDiningService = {
     };
 
     safeSaveSession(session);
-
-    if (db) {
-      try {
-        const docRef = doc(db, FIRESTORE_COLLECTION, sessionId);
-        await setDoc(docRef, cleanFirestoreObject(session as unknown as Record<string, unknown>), { merge: true });
-      } catch (err) {
-        console.warn('[GroupDining] Firestore update warning:', err);
-      }
-    }
+    await persistSessionToSupabase(session);
 
     return session;
   },
@@ -241,15 +250,7 @@ export const groupDiningService = {
     };
 
     safeSaveSession(session);
-
-    if (db) {
-      try {
-        const docRef = doc(db, FIRESTORE_COLLECTION, sessionId);
-        await setDoc(docRef, cleanFirestoreObject(session as unknown as Record<string, unknown>), { merge: true });
-      } catch (err) {
-        console.warn('[GroupDining] Firestore vote warning:', err);
-      }
-    }
+    await persistSessionToSupabase(session);
 
     return session;
   },
@@ -301,15 +302,7 @@ export const groupDiningService = {
     };
 
     safeSaveSession(session);
-
-    if (db) {
-      try {
-        const docRef = doc(db, FIRESTORE_COLLECTION, sessionId);
-        await setDoc(docRef, cleanFirestoreObject(session as unknown as Record<string, unknown>), { merge: true });
-      } catch (err) {
-        console.warn('[GroupDining] Firestore decision warning:', err);
-      }
-    }
+    await persistSessionToSupabase(session);
 
     return session;
   },
@@ -332,37 +325,45 @@ export const groupDiningService = {
     };
 
     safeSaveSession(session);
-
-    if (db) {
-      try {
-        const docRef = doc(db, FIRESTORE_COLLECTION, sessionId);
-        await setDoc(docRef, cleanFirestoreObject(session as unknown as Record<string, unknown>), { merge: true });
-      } catch (err) {
-        console.warn('[GroupDining] Firestore reset warning:', err);
-      }
-    }
+    await persistSessionToSupabase(session);
 
     return session;
   },
 
   /**
-   * Subscribes to real-time changes on this session.
+   * Subscribes to real-time changes on this session via Supabase Realtime channel.
    */
   subscribe(sessionId: string, onUpdate: (session: GroupSession) => void): () => void {
-    let unsubFirestore: (() => void) | undefined;
+    let channel: ReturnType<NonNullable<typeof supabase>['channel']> | undefined;
 
-    if (db) {
+    if (supabase) {
       try {
-        const docRef = doc(db, FIRESTORE_COLLECTION, sessionId);
-        unsubFirestore = onSnapshot(docRef, (snap) => {
-          if (snap.exists()) {
-            const data = snap.data() as GroupSession;
-            safeSaveSession(data);
-            onUpdate(data);
-          }
-        });
+        const channelName = `group-session-${sessionId}-${Math.random().toString(36).slice(2, 7)}`;
+        channel = supabase
+          .channel(channelName)
+          .on(
+            'postgres_changes',
+            {
+              event: '*',
+              schema: 'public',
+              table: SUPABASE_TABLE,
+              filter: `id=eq.${sessionId}`,
+            },
+            (payload) => {
+              if (payload.new && (payload.new as Record<string, unknown>).id) {
+                const cloudSession = fromGroupSessionRow(payload.new as Record<string, unknown>);
+                safeSaveSession(cloudSession);
+                onUpdate(cloudSession);
+              }
+            },
+          )
+          .subscribe((status) => {
+            if (status === 'CHANNEL_ERROR') {
+              console.warn('[GroupDining] Realtime group session subscription error');
+            }
+          });
       } catch (err) {
-        console.warn('[GroupDining] Real-time subscribe warning:', err);
+        console.warn('[GroupDining] Supabase real-time subscribe warning:', err);
       }
     }
 
@@ -379,7 +380,9 @@ export const groupDiningService = {
     window.addEventListener('rateit-group-change', handleLocal);
 
     return () => {
-      if (unsubFirestore) unsubFirestore();
+      if (channel && supabase) {
+        supabase.removeChannel(channel);
+      }
       window.removeEventListener('rateit-group-change', handleLocal);
     };
   },

@@ -36,7 +36,7 @@ export default function AdminPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(() => storageService.isAdminLoggedIn());
   const [adminEmail, setAdminEmail] = useState('admin@rateit.com');
   const [adminPw, setAdminPw] = useState('admin123');
-  const [isSyncingFirestore, setIsSyncingFirestore] = useState(false);
+  const [isSyncingDatabase, setIsSyncingDatabase] = useState(false);
   const [activeTab, setActiveTab] = useState<AdminTab>('dash');
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -117,7 +117,7 @@ export default function AdminPage() {
   const removeShop = (rest: Restaurant) => {
     setConfirmDialog({
       title: 'Delete Restaurant Permanently?',
-      message: `Are you sure you want to delete "${rest.name}"? This removes it from RateIt and Cloud Firestore along with all reviews.`,
+      message: `Are you sure you want to delete "${rest.name}"? This removes it from RateIt and Supabase along with all reviews.`,
       onConfirm: () => {
         storageService.deleteRestaurant(rest.id);
         showToast(`Deleted ${rest.name}`);
@@ -425,42 +425,42 @@ export default function AdminPage() {
                 </div>
               </div>
 
-              {/* Google Cloud Firestore Administration Card */}
+              {/* Supabase Database Administration Card */}
               <div className="rounded-3xl border border-forest-200 bg-gradient-to-r from-forest-50/80 via-cream-50 to-white p-6 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                 <div>
                   <div className="flex items-center gap-2">
                     <div className="flex size-8 items-center justify-center rounded-xl bg-forest-600 text-white">
                       <Database size={16} />
                     </div>
-                    <h3 className="font-bold text-ink-900 text-base">Google Cloud Firestore Database</h3>
+                    <h3 className="font-bold text-ink-900 text-base">Supabase PostgreSQL Database</h3>
                     <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 border border-emerald-200 px-2.5 py-0.5 text-[11px] font-bold text-emerald-800">
                       <Cloud size={12} />
-                      Connected (Cloud SDK)
+                      Connected (Supabase SDK)
                     </span>
                   </div>
                   <p className="mt-1 text-xs text-ink-600 max-w-xl">
-                    Collections synchronized: <strong className="text-ink-900">restaurants</strong>, <strong className="text-ink-900">reviews</strong>, <strong className="text-ink-900">inquiries</strong>, and <strong className="text-ink-900">audit_logs</strong>. Real-time updates and cloud backups are active.
+                    Tables synchronized: <strong className="text-ink-900">restaurants</strong>, <strong className="text-ink-900">reviews</strong>, <strong className="text-ink-900">inquiries</strong>, <strong className="text-ink-900">group_sessions</strong>, and <strong className="text-ink-900">audit_logs</strong>. Real-time updates and cloud backups are active.
                   </p>
                 </div>
                 <button
                   type="button"
-                  disabled={isSyncingFirestore}
+                  disabled={isSyncingDatabase}
                   onClick={async () => {
-                    setIsSyncingFirestore(true);
+                    setIsSyncingDatabase(true);
                     try {
-                      const res = await storageService.syncToFirestore();
-                      showToast(`Synced ${res.restaurantsCount} restaurants & ${res.reviewsCount} reviews to Cloud Firestore!`);
+                      const res = await storageService.syncToSupabase();
+                      showToast(`Synced ${res.restaurantsCount} restaurants & ${res.reviewsCount} reviews to Supabase!`);
                       loadAllData();
                     } catch {
                       showToast('Cloud sync complete.');
                     } finally {
-                      setIsSyncingFirestore(false);
+                      setIsSyncingDatabase(false);
                     }
                   }}
                   className="shrink-0 inline-flex items-center gap-2 rounded-xl bg-forest-600 px-4 py-2.5 text-xs font-bold text-white shadow-xs hover:bg-forest-700 disabled:opacity-60 transition"
                 >
-                  <RefreshCw size={14} className={isSyncingFirestore ? 'animate-spin' : ''} />
-                  {isSyncingFirestore ? 'Syncing...' : 'Sync Firestore Collections'}
+                  <RefreshCw size={14} className={isSyncingDatabase ? 'animate-spin' : ''} />
+                  {isSyncingDatabase ? 'Syncing...' : 'Sync Supabase Tables'}
                 </button>
               </div>
 

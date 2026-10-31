@@ -1,5 +1,5 @@
 import { storageService } from '@/services/storageService';
-import { firestoreService } from '@/services/firestoreService';
+import { supabaseService } from '@/services/supabaseService';
 import type { Restaurant } from '@/types/restaurant';
 
 export interface RestaurantService {
@@ -24,11 +24,11 @@ export const restaurantService: RestaurantService = {
       return null;
     }
 
-    // If not found locally and Firebase is configured, attempt fast cloud fetch with 1s timeout
-    if (firestoreService.isConfigured()) {
+    // If not found locally and Supabase is configured, attempt fast cloud fetch with 1s timeout
+    if (supabaseService.isConfigured()) {
       try {
         const cloudRest = await Promise.race([
-          firestoreService.getRestaurantById(id),
+          supabaseService.getRestaurantById(id),
           new Promise<null>((resolve) => setTimeout(() => resolve(null), 1000)),
         ]);
         if (cloudRest) return cloudRest;
@@ -41,13 +41,13 @@ export const restaurantService: RestaurantService = {
 
   async save(restaurant: Restaurant) {
     storageService.updateRestaurant(restaurant.id, restaurant);
-    if (firestoreService.isConfigured()) {
-      firestoreService.saveRestaurant(restaurant).catch(() => {});
+    if (supabaseService.isConfigured()) {
+      supabaseService.saveRestaurant(restaurant).catch(() => {});
     }
   },
 
   async fetchFromCloud() {
-    if (!firestoreService.isConfigured()) return [];
-    return firestoreService.getRestaurants();
+    if (!supabaseService.isConfigured()) return [];
+    return supabaseService.getRestaurants();
   },
 };

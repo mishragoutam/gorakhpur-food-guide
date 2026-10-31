@@ -7,6 +7,7 @@ export const DEFAULT_FILTERS: RestaurantFilters = {
   cuisine: null,
   budget: null,
   minRating: null,
+  area: null,
 };
 
 export const RATING_OPTIONS = [
@@ -42,6 +43,7 @@ export function filterRestaurants(
     if (filters.cuisine && !restaurant.cuisines.includes(filters.cuisine)) return false;
     if (filters.budget && getBudgetBand(restaurant.costForTwo).id !== filters.budget) return false;
     if (filters.minRating !== null && restaurant.averageRating < filters.minRating) return false;
+    if (filters.area && !restaurant.area.toLowerCase().includes(filters.area.toLowerCase())) return false;
     return true;
   });
 }
@@ -58,6 +60,7 @@ export function hasActiveFilters(filters: RestaurantFilters): boolean {
     filters.category !== null ||
     filters.cuisine !== null ||
     filters.budget !== null ||
-    filters.minRating !== null
+    filters.minRating !== null ||
+    (filters.area != null && filters.area !== '')
   );
 }

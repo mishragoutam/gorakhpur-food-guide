@@ -20,7 +20,7 @@ import { Container } from '@/components/ui/Container';
 import { usePageTitle } from '@/hooks/usePageTitle';
 import { ROUTES } from '@/lib/routes';
 import { showToast } from '@/lib/toast';
-import { firestoreService } from '@/services/firestoreService';
+import { supabaseService } from '@/services/supabaseService';
 
 interface FaqItem {
   q: string;
@@ -66,7 +66,7 @@ export default function ContactPage() {
     }
 
     setSubmitting(true);
-    firestoreService
+    supabaseService
       .saveInquiry({
         name: name.trim(),
         email: email.trim(),
@@ -75,7 +75,7 @@ export default function ContactPage() {
         message: message.trim(),
       })
       .catch((err) => {
-        console.warn('[Contact] Firestore save warning:', err);
+        console.warn('[Contact] Supabase save warning:', err);
       })
       .finally(() => {
         setSubmitting(false);

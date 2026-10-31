@@ -38,6 +38,8 @@ export default function HomePage() {
       <Hero
         query={filters.query}
         onQueryChange={(query) => setFilter('query', query)}
+        area={filters.area}
+        onAreaChange={(area) => setFilter('area', area)}
         onSearch={jumpToResults}
         onSuggestionSelect={handleSuggestion}
       />

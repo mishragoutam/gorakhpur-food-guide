@@ -106,6 +106,7 @@ export interface RestaurantFilters {
   cuisine: string | null;
   budget: BudgetBand | null;
   minRating: number | null;
+  area?: string | null;
 }
 
 export interface UserProfile {

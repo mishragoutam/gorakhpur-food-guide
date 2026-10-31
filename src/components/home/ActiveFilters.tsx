@@ -30,14 +30,20 @@ function FilterChip({ label, onRemove }: { label: string; onRemove: () => void }
 export function ActiveFilters({ filters, onFilterChange }: ActiveFiltersProps) {
   const query = filters.query.trim();
   const category = CATEGORIES.find((item) => item.id === filters.category);
+  const area = filters.area?.trim();
 
-  if (!query && !category) return null;
+  if (!query && !category && !area) return null;
 
   return (
     <ul role="list" aria-label="Active filters" className="flex flex-wrap gap-2">
       {category ? (
         <li>
           <FilterChip label={category.label} onRemove={() => onFilterChange('category', null)} />
+        </li>
+      ) : null}
+      {area ? (
+        <li>
+          <FilterChip label={`Area: ${area}`} onRemove={() => onFilterChange('area', null)} />
         </li>
       ) : null}
       {query ? (

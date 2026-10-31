@@ -9,21 +9,13 @@ export const SEARCH_PLACEHOLDER = 'Search restaurants or dishes';
 interface SearchBarProps {
   value: string;
   onChange: (value: string) => void;
+  area?: string | null;
+  onAreaChange?: (area: string | null) => void;
   /** Called on Enter or when the Search button is pressed. */
   onSubmit: () => void;
 }
 
-/**
- * Results update as you type; submitting jumps down to the listing.
- * The city is fixed for now, so the location is a label rather than a picker.
- *
- * The layout follows the bar's own width (container queries), not the viewport: the hero column is
- * narrower on a desktop than on a tablet, and the full placeholder must always stay readable.
- *   - under 28rem: location, field and full-width button stacked (phones)
- *   - 28rem to 42rem: location line on top, field and button side by side (desktop hero column)
- *   - 42rem and up: a single pill with location, field and button in one row
- */
-export function SearchBar({ value, onChange, onSubmit }: SearchBarProps) {
+export function SearchBar({ value, onChange, area, onAreaChange, onSubmit }: SearchBarProps) {
   const inputId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -44,9 +36,25 @@ export function SearchBar({ value, onChange, onSubmit }: SearchBarProps) {
         onSubmit={handleSubmit}
         className="grid grid-cols-1 gap-1 rounded-3xl bg-white p-2 shadow-search ring-1 ring-ink-900/5 @md:grid-cols-[minmax(0,1fr)_auto] @md:gap-x-2 @md:p-2.5 @2xl:grid-cols-[auto_minmax(0,1fr)_auto] @2xl:items-center @2xl:rounded-full"
       >
-        <div className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-ink-800 @md:col-span-2 @md:py-1.5 @2xl:col-span-1 @2xl:border-r @2xl:border-cream-300 @2xl:py-0 @2xl:pr-5">
+        <div className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-ink-800 @md:col-span-2 @md:py-1.5 @2xl:col-span-1 @2xl:border-r @2xl:border-cream-300 @2xl:py-0 @2xl:pr-4">
           <MapPin aria-hidden="true" size={18} className="shrink-0 text-accent-600" />
-          <span className="whitespace-nowrap">{LOCATION_LABEL}</span>
+          <select
+            aria-label="Gorakhpur locality"
+            value={area ?? ''}
+            onChange={(e) => onAreaChange?.(e.target.value || null)}
+            className="w-full bg-transparent text-xs sm:text-sm font-bold text-ink-900 focus:outline-none cursor-pointer pr-1"
+          >
+            <option value="">All Gorakhpur Areas</option>
+            <option value="Golghar">Golghar</option>
+            <option value="Civil Lines">Civil Lines</option>
+            <option value="Taramandal">Taramandal (Lakefront)</option>
+            <option value="Betiahata">Betiahata</option>
+            <option value="Medical College Road">Medical College Road</option>
+            <option value="Asuran Chowk">Asuran Chowk</option>
+            <option value="Mohaddipur">Mohaddipur</option>
+            <option value="Bank Road">Bank Road</option>
+            <option value="Shahpur">Shahpur</option>
+          </select>
         </div>
 
         <div className="flex min-w-0 items-center gap-3 rounded-2xl border-t border-cream-300 px-4 focus-within:ring-2 focus-within:ring-accent-600 @md:border @md:bg-cream-50 @2xl:rounded-full @2xl:border-0 @2xl:bg-transparent">

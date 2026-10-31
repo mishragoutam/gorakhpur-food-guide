@@ -46,18 +46,18 @@ export default function OwnerLoginPage() {
     navigate(ROUTES.ownerDashboard);
   };
 
-  const handleDemoLogin = () => {
+  const handleQuickPartnerLogin = (chosenRestId?: string) => {
     const restaurants = storageService.getRestaurants();
-    const targetRest = restaurants.find((r) => r.id === 'demo-kesar-darbar-kitchen') || restaurants[0];
+    const targetRest = (chosenRestId ? restaurants.find((r) => r.id === chosenRestId) : null) || restaurants[0];
 
     storageService.setOwnerSession({
-      restaurantId: targetRest ? targetRest.id : 'demo-kesar-darbar-kitchen',
-      restaurantName: targetRest ? targetRest.name : 'Kesar Darbar Kitchen',
-      ownerEmail: targetRest?.ownerEmail || 'owner@kesardarbar.gorakhpur',
-      ownerName: targetRest?.ownerName || 'Neha Kapoor',
+      restaurantId: targetRest ? targetRest.id : 'chaudhary-sweet-house',
+      restaurantName: targetRest ? targetRest.name : 'Chaudhary Sweet House',
+      ownerEmail: targetRest?.ownerEmail || 'contact@chaudharysweets.com',
+      ownerName: targetRest?.ownerName || 'Anand Chaudhary',
     });
 
-    showToast(`Signed in to Owner Dashboard for ${targetRest ? targetRest.name : 'Kesar Darbar Kitchen'}!`);
+    showToast(`Signed in to Owner Dashboard for ${targetRest ? targetRest.name : 'Restaurant'}!`);
     navigate(ROUTES.ownerDashboard);
   };
 
@@ -161,17 +161,17 @@ export default function OwnerLoginPage() {
               <div className="relative my-4 text-center">
                 <hr className="border-cream-300" />
                 <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-3 text-[11px] font-semibold text-ink-500 uppercase">
-                  Or instant demo access
+                  Or instant partner access
                 </span>
               </div>
 
               <button
                 type="button"
-                onClick={handleDemoLogin}
+                onClick={() => handleQuickPartnerLogin()}
                 className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-forest-400 bg-forest-50 py-3 text-sm font-bold text-forest-800 transition hover:bg-forest-100"
               >
                 <Sparkles size={16} className="text-forest-600" />
-                Use Demo Login (Spice / Kesar Darbar Kitchen)
+                Quick Partner Access ({storageService.getRestaurants()[0]?.name || 'Chaudhary Sweet House'})
               </button>
 
               <div className="mt-6 flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-cream-200 text-xs">

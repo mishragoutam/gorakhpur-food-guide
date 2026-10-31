@@ -261,6 +261,7 @@ export default function OwnerRegisterPage() {
                   <option>Taramandal</option>
                   <option>Mohaddipur</option>
                   <option>Shahpur</option>
+                  <option>Bank Road</option>
                 </select>
               </div>
             </div>

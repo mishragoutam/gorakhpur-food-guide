@@ -30,6 +30,8 @@ function ReviewModalDialog({
   const [selectedTags, setSelectedTags] = useState<string[]>(() => editReview?.tags || []);
   const [photoUrl, setPhotoUrl] = useState<string>(editReview?.photoUrl || '');
   const [error, setError] = useState('');
+  const [dinerName, setDinerName] = useState('');
+  const [dinerEmail, setDinerEmail] = useState('');
   const [showAuth, setShowAuth] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -84,10 +86,18 @@ function ReviewModalDialog({
     e.preventDefault();
     setError('');
 
-    const currentUser = storageService.getCustomerUser();
+    let currentUser = storageService.getCustomerUser();
     if (!currentUser) {
-      setShowAuth(true);
-      return;
+      if (dinerName.trim().length >= 2) {
+        currentUser = {
+          name: dinerName.trim(),
+          email: dinerEmail.trim() || undefined,
+        };
+        storageService.setCustomerUser(currentUser);
+      } else {
+        setShowAuth(true);
+        return;
+      }
     }
 
     if (rating === 0) {
@@ -310,6 +320,38 @@ function ReviewModalDialog({
                     </button>
                   )}
                 </div>
+
+                {/* Diner Information (if not already signed in) */}
+                {!storageService.getCustomerUser() && (
+                  <div className="rounded-2xl border border-cream-300 bg-cream-50/80 p-3.5 space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-ink-800">Your Details</span>
+                      <button
+                        type="button"
+                        onClick={() => setShowAuth(true)}
+                        className="text-[11px] font-bold text-accent-700 hover:underline"
+                      >
+                        Sign in with Google / Email
+                      </button>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      <input
+                        type="text"
+                        value={dinerName}
+                        onChange={(e) => setDinerName(e.target.value)}
+                        placeholder="Your Name (e.g. Rahul S.)"
+                        className="rounded-xl border border-cream-300 bg-white px-3 py-2 text-xs text-ink-900 outline-none focus:border-accent-600"
+                      />
+                      <input
+                        type="email"
+                        value={dinerEmail}
+                        onChange={(e) => setDinerEmail(e.target.value)}
+                        placeholder="Email (e.g. rahul@gmail.com)"
+                        className="rounded-xl border border-cream-300 bg-white px-3 py-2 text-xs text-ink-900 outline-none focus:border-accent-600"
+                      />
+                    </div>
+                  </div>
+                )}
 
                 {error ? <p className="text-xs font-bold text-red-600">{error}</p> : null}
 

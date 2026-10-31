@@ -132,3 +132,53 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* Standee & Table Tent Printing Styles */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 1cm;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #1a120c !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Hide app header, footer, navigation sidebars, and interactive buttons */
+  header,
+  footer,
+  aside,
+  nav,
+  .no-print,
+  button,
+  .toast-container {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  /* Standee card print layout */
+  .standee-print-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    border: 2px solid #21503f !important;
+    border-radius: 16px !important;
+    box-shadow: none !important;
+    margin-bottom: 24px;
+    padding: 20px;
+    text-align: center;
+    background: #ffffff !important;
+  }
+
+  .standee-batch-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px !important;
+  }
+}
+
