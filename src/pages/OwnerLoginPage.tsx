@@ -30,35 +30,33 @@ export default function OwnerLoginPage() {
     }
 
     const restaurants = storageService.getRestaurants();
+    const cleanEmail = email.trim().toLowerCase();
     const matched = restaurants.find(
-      (r) => r.ownerEmail?.toLowerCase() === email.trim().toLowerCase(),
+      (r) => r.ownerEmail?.toLowerCase() === cleanEmail,
     );
-    const targetRest = matched || restaurants[0];
+
+    if (!matched) {
+      setError(
+        `No restaurant account found for "${email.trim()}". Please enter your registered owner email or register your restaurant below.`,
+      );
+      return;
+    }
 
     storageService.setOwnerSession({
-      restaurantId: targetRest ? targetRest.id : 'demo-kesar-darbar-kitchen',
-      restaurantName: targetRest ? targetRest.name : email.split('@')[0] || 'Restaurant Owner',
-      ownerEmail: email.trim(),
-      ownerName: targetRest?.ownerName || email.split('@')[0] || 'Restaurant Owner',
+      restaurantId: matched.id,
+      restaurantName: matched.name,
+      ownerEmail: matched.ownerEmail || cleanEmail,
+      ownerName: matched.ownerName || cleanEmail.split('@')[0] || 'Restaurant Owner',
     });
 
-    showToast(`Logged in to Owner Dashboard${targetRest ? ` for ${targetRest.name}` : ''}!`);
+    showToast(`Logged in to Owner Dashboard for ${matched.name}!`);
     navigate(ROUTES.ownerDashboard);
   };
 
-  const handleQuickPartnerLogin = (chosenRestId?: string) => {
-    const restaurants = storageService.getRestaurants();
-    const targetRest = (chosenRestId ? restaurants.find((r) => r.id === chosenRestId) : null) || restaurants[0];
-
-    storageService.setOwnerSession({
-      restaurantId: targetRest ? targetRest.id : 'chaudhary-sweet-house',
-      restaurantName: targetRest ? targetRest.name : 'Chaudhary Sweet House',
-      ownerEmail: targetRest?.ownerEmail || 'contact@chaudharysweets.com',
-      ownerName: targetRest?.ownerName || 'Anand Chaudhary',
-    });
-
-    showToast(`Signed in to Owner Dashboard for ${targetRest ? targetRest.name : 'Restaurant'}!`);
-    navigate(ROUTES.ownerDashboard);
+  const handleSelectPartnerEmail = (partnerEmail: string) => {
+    setEmail(partnerEmail);
+    setPassword('Owner@123');
+    setError('');
   };
 
   return (
@@ -161,18 +159,33 @@ export default function OwnerLoginPage() {
               <div className="relative my-4 text-center">
                 <hr className="border-cream-300" />
                 <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-3 text-[11px] font-semibold text-ink-500 uppercase">
-                  Or instant partner access
+                  Select Registered Partner Account
                 </span>
               </div>
 
-              <button
-                type="button"
-                onClick={() => handleQuickPartnerLogin()}
-                className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-forest-400 bg-forest-50 py-3 text-sm font-bold text-forest-800 transition hover:bg-forest-100"
-              >
-                <Sparkles size={16} className="text-forest-600" />
-                Quick Partner Access ({storageService.getRestaurants()[0]?.name || 'Chaudhary Sweet House'})
-              </button>
+              <div className="rounded-2xl border border-cream-300 bg-cream-50/70 p-3">
+                <label className="text-[11px] font-bold text-ink-700 block mb-1.5" htmlFor="partner-picker">
+                  Quick-fill email for registered partner:
+                </label>
+                <select
+                  id="partner-picker"
+                  onChange={(e) => {
+                    if (e.target.value) handleSelectPartnerEmail(e.target.value);
+                  }}
+                  defaultValue=""
+                  className="w-full rounded-xl border border-cream-300 bg-white px-3 py-2 text-xs font-semibold text-ink-800 outline-none focus:border-forest-600 cursor-pointer"
+                >
+                  <option value="" disabled>-- Choose a Gorakhpur Restaurant Account --</option>
+                  {storageService.getRestaurants().map((r) => (
+                    <option key={r.id} value={r.ownerEmail || ''}>
+                      {r.name} ({r.area}) — {r.ownerEmail}
+                    </option>
+                  ))}
+                </select>
+                <p className="mt-1 text-[10px] text-ink-500">
+                  Selecting an account populates its verified owner credentials for isolated access.
+                </p>
+              </div>
 
               <div className="mt-6 flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-cream-200 text-xs">
                 <span className="text-ink-600">Don't have a restaurant account yet?</span>

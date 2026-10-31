@@ -9,18 +9,15 @@ export const DEFAULT_PRODUCTION_ORIGIN = 'https://gorakhpurfoodguide.in';
 
 /**
  * Returns the effective base URL for public links and QR code payloads.
- * Respects VITE_PUBLIC_SITE_URL and VITE_APP_URL environment variables.
- * In production or when enforceProductionDomain is true, automatically avoids localhost.
+ * Respects VITE_PUBLIC_SITE_URL and VITE_APP_URL environment variables,
+ * or dynamically resolves to window.location.origin in the browser.
  */
-export function getPublicBaseUrl(options?: { enforceProductionDomain?: boolean }): string {
-  const envUrl =
-    (typeof import.meta !== 'undefined' && import.meta.env
-      ? (import.meta.env.VITE_PUBLIC_SITE_URL as string | undefined) ||
-        (import.meta.env.VITE_APP_URL as string | undefined)
-      : undefined)?.trim();
-
-  if (envUrl) {
-    return envUrl.replace(/\/+$/, '');
+export function getPublicBaseUrl(options?: {
+  enforceProductionDomain?: boolean;
+  customBaseUrl?: string;
+}): string {
+  if (options?.customBaseUrl?.trim()) {
+    return options.customBaseUrl.trim().replace(/\/+$/, '');
   }
 
   const isBrowser = typeof window !== 'undefined' && Boolean(window.location?.origin);
@@ -31,16 +28,32 @@ export function getPublicBaseUrl(options?: { enforceProductionDomain?: boolean }
     currentOrigin.includes('127.0.0.1') ||
     currentOrigin.startsWith('http://[::1]');
 
-  const isProd =
-    typeof import.meta !== 'undefined' && import.meta.env
-      ? import.meta.env.PROD || import.meta.env.MODE === 'production'
-      : false;
+  const envUrl =
+    (typeof import.meta !== 'undefined' && import.meta.env
+      ? (import.meta.env.VITE_PUBLIC_SITE_URL as string | undefined) ||
+        (import.meta.env.VITE_APP_URL as string | undefined)
+      : undefined)?.trim();
 
-  if (options?.enforceProductionDomain || (isProd && isLocalhost)) {
+  // 1. If running in browser on a real deployment (e.g. Vercel, Netlify, or custom domain)
+  if (isBrowser && currentOrigin && !isLocalhost) {
+    if (envUrl && !envUrl.includes('gorakhpurfoodguide.in')) {
+      return envUrl.replace(/\/+$/, '');
+    }
+    return currentOrigin;
+  }
+
+  // 2. If valid production env URL is set (and not the unhosted placeholder)
+  if (envUrl && !envUrl.includes('gorakhpurfoodguide.in')) {
+    return envUrl.replace(/\/+$/, '');
+  }
+
+  // 3. If explicitly enforcing production domain (e.g. In tests or printable exports)
+  if (options?.enforceProductionDomain) {
     return DEFAULT_PRODUCTION_ORIGIN;
   }
 
-  if (currentOrigin && (!isLocalhost || !options?.enforceProductionDomain)) {
+  // 4. Default to current browser origin (even during local dev)
+  if (currentOrigin) {
     return currentOrigin;
   }
 
@@ -78,6 +91,8 @@ export function getRestaurantIdentifier(restaurant: Restaurant | string | null |
 export interface RestaurantUrlOptions {
   /** If true, returns a production-ready domain even when running on localhost */
   enforceProductionDomain?: boolean;
+  /** Custom base URL override (e.g. For testing LAN IP on mobile or setting custom domain) */
+  customBaseUrl?: string;
   /** Optional query params, e.g. { qr: 'table' } */
   queryParams?: Record<string, string | number | boolean>;
 }
@@ -95,7 +110,10 @@ export function getRestaurantPublicUrl(
     throw new Error('Cannot generate restaurant URL: invalid or missing restaurant identifier');
   }
 
-  const baseUrl = getPublicBaseUrl({ enforceProductionDomain: options?.enforceProductionDomain });
+  const baseUrl = getPublicBaseUrl({
+    enforceProductionDomain: options?.enforceProductionDomain,
+    customBaseUrl: options?.customBaseUrl,
+  });
   const path = ROUTES.restaurant(id);
 
   let url = `${baseUrl}${path}`;

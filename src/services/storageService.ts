@@ -224,6 +224,14 @@ export const storageService = {
     }
 
     if (stored !== null && Array.isArray(stored)) {
+      if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.MODE !== 'test') {
+        const hasLegacyOnly = stored.length > 0 && stored.every((r) => r.isDemo || r.id.startsWith('demo-'));
+        if (hasLegacyOnly) {
+          const fresh = getInitialRestaurants();
+          safeSet(STORAGE_KEYS.restaurants, fresh);
+          return fresh;
+        }
+      }
       return stored;
     }
 
@@ -303,6 +311,16 @@ export const storageService = {
 
     if (found) return found;
 
+    // Resilient fallback to authentic Gorakhpur dining directory
+    const gFallback = GORAKHPUR_RESTAURANTS.find(
+      (r) =>
+        r.id === id ||
+        r.id.toLowerCase() === decoded ||
+        r.id.replace(/^demo-/, '') === cleanId ||
+        r.name.toLowerCase() === decoded,
+    );
+    if (gFallback) return { ...gFallback };
+
     // Resilient fallback to test demo list if not in active list
     const fallback = demoRestaurants.find(
       (r) => r.id === id || r.id.toLowerCase() === decoded || r.id.replace(/^demo-/, '') === cleanId,
@@ -337,6 +355,13 @@ export const storageService = {
    * Updates an existing restaurant details, menu, or profile.
    */
   updateRestaurant(id: string, updates: Partial<Restaurant>): Restaurant | null {
+    const session = this.getOwnerSession();
+    // Enforce account isolation: owner session cannot modify another restaurant
+    if (session && session.restaurantId && session.restaurantId !== id) {
+      console.warn(`Unauthorized restaurant update: session ${session.restaurantId} cannot edit ${id}`);
+      return null;
+    }
+
     const list = this.getRawRestaurants();
     const idx = list.findIndex((r) => r.id === id);
     if (idx === -1) return null;

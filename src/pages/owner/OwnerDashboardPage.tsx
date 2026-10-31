@@ -22,6 +22,9 @@ import {
   Database,
   Cloud,
   RefreshCw,
+  AlertTriangle,
+  ExternalLink,
+  ShieldCheck,
 } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -66,12 +69,11 @@ const TABS: TabConfig[] = [
 const MENU_CATEGORIES = ['All', 'Starters', 'Main Course', 'Breads', 'Desserts', 'Beverages'];
 
 function getInitialOwnerData() {
-  const all = storageService.getRestaurants();
   const session = storageService.getOwnerSession();
   const restId = session?.restaurantId;
-  const rest = (restId ? storageService.getRestaurantById(restId) : null) || all[0] || null;
+  const rest = restId ? storageService.getRestaurantById(restId) : null;
   const reviews = rest ? storageService.getReviews(rest.id) : [];
-  return { rest: rest ?? null, reviews };
+  return { rest, reviews };
 }
 
 export default function OwnerDashboardPage() {
@@ -99,6 +101,12 @@ export default function OwnerDashboardPage() {
   // QR sub-state
   const [tableSelection, setTableSelection] = useState<string>('1');
   const [isBatchPrintModalOpen, setIsBatchPrintModalOpen] = useState(false);
+  const [customQrBaseUrl, setCustomQrBaseUrl] = useState<string>(() => {
+    if (typeof window !== 'undefined' && window.location?.origin) {
+      return window.location.origin;
+    }
+    return '';
+  });
 
   // Profile sub-state
   const [profileName, setProfileName] = useState(initialData.rest?.name || '');
@@ -117,11 +125,15 @@ export default function OwnerDashboardPage() {
   const [replyText, setReplyText] = useState('');
 
   const loadData = () => {
-    const all = storageService.getRestaurants();
     const session = storageService.getOwnerSession();
     const restId = session?.restaurantId;
-    const rest = (restId ? storageService.getRestaurantById(restId) : null) || all[0] || null;
+    if (!restId) {
+      setRestaurant(null);
+      setReviews([]);
+      return;
+    }
 
+    const rest = storageService.getRestaurantById(restId);
     setRestaurant(rest);
     if (rest) {
       setProfileName(rest.name);
@@ -139,10 +151,16 @@ export default function OwnerDashboardPage() {
   };
 
   useEffect(() => {
+    const session = storageService.getOwnerSession();
+    if (!session?.restaurantId) {
+      showToast('Please log in with your restaurant owner credentials', 'info');
+      navigate(ROUTES.ownerLogin);
+      return;
+    }
     const handleStorageChange = () => loadData();
     window.addEventListener('rateit-storage-change', handleStorageChange);
     return () => window.removeEventListener('rateit-storage-change', handleStorageChange);
-  }, []);
+  }, [navigate]);
 
   const competitorsList = useMemo(() => {
     const all = storageService.getRestaurants();
@@ -321,6 +339,7 @@ export default function OwnerDashboardPage() {
   }
 
   const qrUrl = getRestaurantPublicUrl(restaurant, {
+    customBaseUrl: customQrBaseUrl || undefined,
     queryParams: {
       qr: 'standee',
       table: tableSelection === 'counter' ? 'Counter' : tableSelection,
@@ -378,35 +397,19 @@ export default function OwnerDashboardPage() {
                 </button>
               </div>
 
-              {/* Restaurant Mini Card & Switcher */}
-              <div className="my-3 rounded-2xl bg-cream-100/80 p-3">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-forest-700 block mb-1">
-                  Managing Restaurant
-                </span>
-                <select
-                  value={restaurant.id}
-                  onChange={(e) => {
-                    const chosen = storageService.getRestaurantById(e.target.value);
-                    if (chosen) {
-                      storageService.setOwnerSession({
-                        restaurantId: chosen.id,
-                        restaurantName: chosen.name,
-                        ownerEmail: chosen.ownerEmail || 'owner@gorakhpurfoodguide.in',
-                        ownerName: chosen.ownerName || 'Restaurant Owner',
-                      });
-                      loadData();
-                      showToast(`Switched view to ${chosen.name}`);
-                    }
-                  }}
-                  className="w-full rounded-xl border border-cream-300 bg-white px-2.5 py-1.5 text-xs font-bold text-ink-900 shadow-2xs outline-none focus:border-forest-600 cursor-pointer truncate"
-                >
-                  {storageService.getRestaurants().map((r) => (
-                    <option key={r.id} value={r.id}>
-                      {r.name} ({r.area})
-                    </option>
-                  ))}
-                </select>
-                <p className="mt-1.5 text-[11px] text-ink-500 flex items-center justify-between">
+              {/* Authenticated Restaurant Card (Strictly Isolated to Logged-in Owner) */}
+              <div className="my-3 rounded-2xl bg-cream-100/90 p-3 border border-cream-300/80">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-forest-700">
+                    Your Restaurant
+                  </span>
+                  <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-forest-800">
+                    <ShieldCheck size={12} className="text-forest-600" />
+                    Verified Partner
+                  </span>
+                </div>
+                <h3 className="mt-1 text-sm font-bold text-ink-900 truncate">{restaurant.name}</h3>
+                <p className="mt-1 text-[11px] text-ink-500 flex items-center justify-between">
                   <span>{restaurant.area}, Gorakhpur</span>
                   <span className="font-bold text-forest-700">★ {restaurant.averageRating}</span>
                 </p>
@@ -849,6 +852,71 @@ export default function OwnerDashboardPage() {
                   <p className="mt-1 text-xs text-ink-500">
                     Customers who scan this QR code are taken directly to your restaurant's review page with zero login hurdles.
                   </p>
+
+                  {/* QR Base Host & Testing Information */}
+                  <div className="mt-4 rounded-2xl border border-cream-200 bg-cream-50 p-4 text-xs space-y-3">
+                    <div>
+                      <div className="flex items-center justify-between gap-2">
+                        <label className="text-xs font-bold text-ink-800" htmlFor="qr-host-input">
+                          QR Destination Host:
+                        </label>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (typeof window !== 'undefined' && window.location?.origin) {
+                              setCustomQrBaseUrl(window.location.origin);
+                              showToast('Reset to current browser origin');
+                            }
+                          }}
+                          className="text-[11px] font-bold text-forest-700 hover:text-forest-800 underline"
+                        >
+                          Use Current Origin
+                        </button>
+                      </div>
+                      <input
+                        id="qr-host-input"
+                        type="url"
+                        value={customQrBaseUrl}
+                        onChange={(e) => setCustomQrBaseUrl(e.target.value)}
+                        placeholder="https://gorakhpur-food-guide.vercel.app"
+                        className="mt-1 w-full rounded-xl border border-cream-300 bg-white px-3 py-1.5 text-xs text-ink-900 outline-none focus:border-forest-600"
+                      />
+                    </div>
+
+                    <div className="flex items-center justify-between gap-2 rounded-xl bg-white p-2.5 border border-cream-200">
+                      <div className="truncate text-[11px] text-ink-600">
+                        <span className="font-bold text-ink-900 block">Active QR Target:</span>
+                        <span className="text-forest-700 font-mono text-[10px] truncate block" title={qrUrl}>
+                          {qrUrl}
+                        </span>
+                      </div>
+                      <a
+                        href={qrUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex shrink-0 items-center gap-1 rounded-lg bg-forest-100 px-2.5 py-1 text-[11px] font-bold text-forest-800 hover:bg-forest-200"
+                      >
+                        <ExternalLink size={12} />
+                        Test Link
+                      </a>
+                    </div>
+
+                    {typeof window !== 'undefined' &&
+                    (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') ? (
+                      <div className="rounded-xl border border-amber-300 bg-amber-50/90 p-3 text-amber-950 text-[11px] leading-relaxed">
+                        <div className="flex items-center gap-1.5 font-bold text-amber-900 mb-1">
+                          <AlertTriangle size={14} className="text-amber-700 shrink-0" />
+                          <span>Testing on localhost?</span>
+                        </div>
+                        <p>
+                          Mobile phones scanning this QR code cannot reach &ldquo;localhost&rdquo; on your computer.
+                        </p>
+                        <p className="mt-1 font-semibold text-amber-900">
+                          👉 When deployed on Vercel, the QR code automatically works on all phones! For local testing on your phone, enter your computer's Wi-Fi IP address above (e.g. <code>http://192.168.1.X:5173</code>).
+                        </p>
+                      </div>
+                    ) : null}
+                  </div>
 
                   {/* Table Number Selector */}
                   <div className="mt-4 rounded-2xl bg-cream-50 p-3.5 border border-cream-200">
@@ -1491,6 +1559,7 @@ export default function OwnerDashboardPage() {
             <div className="standee-batch-grid grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Billing Counter'].map((tbl) => {
                 const bUrl = getRestaurantPublicUrl(restaurant, {
+                  customBaseUrl: customQrBaseUrl || undefined,
                   queryParams: {
                     qr: 'standee',
                     table: tbl === 'Billing Counter' ? 'Counter' : tbl,
