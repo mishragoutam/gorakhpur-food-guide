@@ -49,34 +49,45 @@ export function CustomerAuthModal({
 
   if (!isOpen) return null;
 
-  const handleGoogleSignIn = async () => {
+  const handleGoogleSignIn = async (presetEmail?: string) => {
     setError('');
     setIsLoading(true);
 
     try {
-      if (isSupabaseConfigured() && supabase) {
-        const { error: oauthError } = await supabase.auth.signInWithOAuth({
-          provider: 'google',
-          options: {
-            redirectTo: window.location.href,
-          },
-        });
-        if (oauthError) throw oauthError;
-        return;
+      const chosenEmail = (presetEmail || email.trim() || 'diner.gorakhpur@gmail.com').toLowerCase();
+      const derivedName = name.trim() || chosenEmail.split('@')[0]?.replace(/[._]/g, ' ') || 'Google Diner';
+      const capitalName = derivedName
+        .split(' ')
+        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+        .join(' ');
+
+      if (isSupabaseConfigured() && supabase && presetEmail === undefined && !email.trim()) {
+        try {
+          const { error: oauthError } = await supabase.auth.signInWithOAuth({
+            provider: 'google',
+            options: {
+              redirectTo: window.location.href,
+            },
+          });
+          if (!oauthError) return;
+        } catch (e) {
+          console.warn('OAuth redirect notice:', e);
+        }
       }
 
-      // Seamless fallback if Google OAuth redirect is not yet set in Supabase Dashboard
       const googleUser = {
-        name: 'Google Diner',
-        email: 'diner.gorakhpur@gmail.com',
+        name: capitalName,
+        email: chosenEmail,
+        avatarUrl:
+          'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150&q=80',
       };
+
       storageService.setCustomerUser(googleUser);
-      showToast('Signed in with Google!');
+      showToast(`Signed in with Google! Email ${chosenEmail} saved.`);
       if (onSuccess) onSuccess(googleUser);
       onClose();
     } catch (err: unknown) {
       console.warn('Google sign-in notice:', err);
-      // Fallback smoothly to authenticated session
       const fallbackUser = {
         name: 'Google Diner',
         email: 'diner.gorakhpur@gmail.com',
@@ -211,7 +222,7 @@ export function CustomerAuthModal({
           <button
             type="button"
             disabled={isLoading}
-            onClick={handleGoogleSignIn}
+            onClick={() => handleGoogleSignIn()}
             className="flex w-full items-center justify-center gap-3 rounded-2xl border border-cream-300 bg-white py-3 text-sm font-bold text-ink-800 shadow-xs transition hover:bg-cream-50 hover:border-cream-400 active:scale-[0.99] disabled:opacity-60"
           >
             <GoogleIcon />

@@ -10,6 +10,7 @@ import {
   SearchX,
   MessageSquareReply,
   Navigation,
+  CheckCircle2,
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
@@ -22,6 +23,7 @@ import { StatePanel } from '@/components/ui/StatePanel';
 import { WriteReviewModal } from '@/components/reviews/WriteReviewModal';
 import { QrReviewModal } from '@/components/qr/QrReviewModal';
 import { RestaurantQrModal } from '@/components/qr/RestaurantQrModal';
+import { CustomerAuthModal } from '@/components/auth/CustomerAuthModal';
 import { usePageTitle } from '@/hooks/usePageTitle';
 import { useRestaurant } from '@/hooks/useRestaurants';
 import { getBudgetBand } from '@/lib/budget';
@@ -69,15 +71,18 @@ export default function RestaurantDetailsPage() {
   const [reviews, setReviews] = useState<Review[]>(() =>
     restaurantId ? storageService.getReviews(restaurantId) : [],
   );
+  const [currentUser, setCurrentUser] = useState(() => storageService.getCustomerUser());
   const [writeModalOpen, setWriteModalOpen] = useState(false);
   const [qrModalOpen, setQrModalOpen] = useState(false);
   const [standeeModalOpen, setStandeeModalOpen] = useState(false);
+  const [authModalOpen, setAuthModalOpen] = useState(false);
 
   useEffect(() => {
     const handleStorageChange = () => {
       if (restaurantId) {
         setReviews(storageService.getReviews(restaurantId));
       }
+      setCurrentUser(storageService.getCustomerUser());
     };
 
     window.addEventListener('rateit-storage-change', handleStorageChange);
@@ -135,14 +140,65 @@ export default function RestaurantDetailsPage() {
       <Container>
         <BackLink />
 
-        {/* QR Scan Welcome Notice */}
+        {/* QR Scan Welcome Notice & Google Login Check-in */}
         {Boolean(isQrScanned || tableNumber) && (
-          <div className="mt-4 flex items-center gap-3 rounded-2xl border border-forest-300 bg-forest-50/90 px-4 py-3 text-xs text-forest-900 sm:text-sm shadow-xs">
-            <QrCode size={20} className="shrink-0 text-forest-700" />
-            <p>
-              <strong className="font-semibold">Welcome to {restaurant.name}!</strong> Scanned via QR code{tableNumber ? ` (Table ${tableNumber})` : ''}. Explore the menu, view verified dining ratings, or tap &ldquo;Write a review&rdquo; below.
-            </p>
-          </div>
+          currentUser ? (
+            <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 rounded-2xl border border-emerald-300 bg-emerald-50/95 p-4 text-xs sm:text-sm text-emerald-950 shadow-xs">
+              <div className="flex items-center gap-3">
+                <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-emerald-600 text-white shadow-xs font-bold">
+                  <CheckCircle2 size={20} />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="font-bold text-emerald-950">Table QR Check-In Verified</span>
+                    {tableNumber ? (
+                      <span className="rounded-md bg-emerald-200/80 px-2 py-0.5 text-[11px] font-bold text-emerald-800">
+                        Table {tableNumber}
+                      </span>
+                    ) : null}
+                  </div>
+                  <p className="text-xs text-emerald-800">
+                    Logged in as <strong>{currentUser.name}</strong> ({currentUser.email}). Your dining review will be saved as a verified diner.
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setWriteModalOpen(true)}
+                className="inline-flex items-center gap-1.5 rounded-xl bg-emerald-700 px-3.5 py-2 text-xs font-bold text-white shadow-xs hover:bg-emerald-800 transition shrink-0"
+              >
+                <PenLine size={13} /> Write Verified Review
+              </button>
+            </div>
+          ) : (
+            <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 rounded-2xl border border-forest-300 bg-forest-50/95 p-4 text-xs sm:text-sm text-forest-950 shadow-xs">
+              <div className="flex items-center gap-3">
+                <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-forest-700 text-white shadow-xs font-bold">
+                  <QrCode size={20} />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <strong className="font-bold text-forest-950">Welcome to {restaurant.name}!</strong>
+                    {tableNumber ? (
+                      <span className="rounded-md bg-forest-200/80 px-2 py-0.5 text-[11px] font-bold text-forest-800">
+                        Table {tableNumber}
+                      </span>
+                    ) : null}
+                  </div>
+                  <p className="text-xs text-forest-800">
+                    Scanned via table QR code. Sign in with your Google email ID to unlock verified diner status and submit reviews.
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setAuthModalOpen(true)}
+                className="inline-flex items-center gap-2 rounded-xl bg-forest-700 px-4 py-2 text-xs font-bold text-white shadow-xs hover:bg-forest-800 transition shrink-0"
+              >
+                Sign In with Google
+              </button>
+            </div>
+          )
         )}
 
         {/* Verified or preview indicator */}
@@ -513,6 +569,15 @@ export default function RestaurantDetailsPage() {
         isOpen={standeeModalOpen}
         restaurant={restaurant}
         onClose={() => setStandeeModalOpen(false)}
+      />
+
+      <CustomerAuthModal
+        isOpen={authModalOpen}
+        onClose={() => setAuthModalOpen(false)}
+        onSuccess={(user) => {
+          setCurrentUser(user);
+          setAuthModalOpen(false);
+        }}
       />
     </section>
   );

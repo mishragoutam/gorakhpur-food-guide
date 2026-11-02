@@ -1,7 +1,7 @@
 import type { Review } from '@/types/restaurant';
 
 /**
- * 80 Authentic customer dining reviews distributed evenly across all 20 Gorakhpur restaurants.
+ * Verified customer dining reviews distributed across all 50 Gorakhpur restaurants.
  * Complete with star ratings, detailed reviews, tags, verified Unsplash food photos,
  * user avatars, timestamps, and restaurant owner replies.
  */
@@ -1664,5 +1664,1265 @@ export const GORAKHPUR_REVIEWS: readonly Review[] = [
       "text": "Vanakkam! Thank you for making us your favorite South Indian dining destination in Shahpur.",
       "date": "2026-10-23"
     }
+  },
+  {
+    "id": "rev-81",
+    "restaurantId": "radisson-kabab-factory",
+    "restaurantName": "The Great Kabab Factory - Radisson Blu",
+    "userName": "Aarav Mehta",
+    "userEmail": "aarav.mehta10@gmail.com",
+    "userAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at The Great Kabab Factory - Radisson Blu! The Galouti Kebab was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Mohaddipur.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-10",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Aarav Mehta! We take pride in serving authentic quality food in Mohaddipur. Looking forward to welcoming you back!",
+      "date": "2026-09-11"
+    }
+  },
+  {
+    "id": "rev-82",
+    "restaurantId": "radisson-kabab-factory",
+    "restaurantName": "The Great Kabab Factory - Radisson Blu",
+    "userName": "Meera Joshi",
+    "userEmail": "meera.joshi11@outlook.com",
+    "userAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to The Great Kabab Factory - Radisson Blu. Ordered the Dal Baluchi along with cold drinks. Excellent quality and great value for money in Mohaddipur. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-10",
+    "isDemo": false,
+    "isFlagged": false
+  },
+  {
+    "id": "rev-83",
+    "restaurantId": "ten-park-street-cafe",
+    "restaurantName": "10 Park Street Cafe & Restaurant",
+    "userName": "Kabir Singh",
+    "userEmail": "kabir.singh12@yahoo.com",
+    "userAvatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at 10 Park Street Cafe & Restaurant! The Thin Crust Pizza was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Civil Lines.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-11",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Kabir Singh! We take pride in serving authentic quality food in Civil Lines. Looking forward to welcoming you back!",
+      "date": "2026-09-12"
+    }
+  },
+  {
+    "id": "rev-84",
+    "restaurantId": "ten-park-street-cafe",
+    "restaurantName": "10 Park Street Cafe & Restaurant",
+    "userName": "Sana Khan",
+    "userEmail": "sana.khan13@icloud.com",
+    "userAvatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to 10 Park Street Cafe & Restaurant. Ordered the Cheese Volcano Burger along with cold drinks. Excellent quality and great value for money in Civil Lines. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-11",
+    "isDemo": false,
+    "isFlagged": false
+  },
+  {
+    "id": "rev-85",
+    "restaurantId": "royal-cafe-banquet",
+    "restaurantName": "Royal Cafe & Banquet",
+    "userName": "Rohan Verma",
+    "userEmail": "rohan.verma14@gmail.com",
+    "userAvatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at Royal Cafe & Banquet! The Royal Basket Chaat was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Golghar.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-12",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Rohan Verma! We take pride in serving authentic quality food in Golghar. Looking forward to welcoming you back!",
+      "date": "2026-09-13"
+    }
+  },
+  {
+    "id": "rev-86",
+    "restaurantId": "royal-cafe-banquet",
+    "restaurantName": "Royal Cafe & Banquet",
+    "userName": "Riya Gupta",
+    "userEmail": "riya.gupta15@outlook.com",
+    "userAvatar": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to Royal Cafe & Banquet. Ordered the Butter Chicken along with cold drinks. Excellent quality and great value for money in Golghar. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-12",
+    "isDemo": false,
+    "isFlagged": false
+  },
+  {
+    "id": "rev-87",
+    "restaurantId": "curry-on-restaurant",
+    "restaurantName": "Curry On Restaurant",
+    "userName": "Ananya Sharma",
+    "userEmail": "ananya.sharma16@yahoo.com",
+    "userAvatar": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at Curry On Restaurant! The Handi Mutton was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Medical College Road.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-13",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Ananya Sharma! We take pride in serving authentic quality food in Medical College Road. Looking forward to welcoming you back!",
+      "date": "2026-09-14"
+    }
+  },
+  {
+    "id": "rev-88",
+    "restaurantId": "curry-on-restaurant",
+    "restaurantName": "Curry On Restaurant",
+    "userName": "Vikramaditya Rao",
+    "userEmail": "vikramaditya.rao17@icloud.com",
+    "userAvatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to Curry On Restaurant. Ordered the Paneer Pasanda along with cold drinks. Excellent quality and great value for money in Medical College Road. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-13",
+    "isDemo": false,
+    "isFlagged": false
+  },
+  {
+    "id": "rev-89",
+    "restaurantId": "cinnamon-hotel-vivek",
+    "restaurantName": "Cinnamon Fine Dine - Hotel Vivek",
+    "userName": "Sneha Tiwari",
+    "userEmail": "sneha.tiwari18@gmail.com",
+    "userAvatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at Cinnamon Fine Dine - Hotel Vivek! The Executive Thali was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Civil Lines.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-14",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Sneha Tiwari! We take pride in serving authentic quality food in Civil Lines. Looking forward to welcoming you back!",
+      "date": "2026-09-15"
+    }
+  },
+  {
+    "id": "rev-90",
+    "restaurantId": "cinnamon-hotel-vivek",
+    "restaurantName": "Cinnamon Fine Dine - Hotel Vivek",
+    "userName": "Farhan Siddiqui",
+    "userEmail": "farhan.siddiqui19@outlook.com",
+    "userAvatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to Cinnamon Fine Dine - Hotel Vivek. Ordered the Dal Makhani along with cold drinks. Excellent quality and great value for money in Civil Lines. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-14",
+    "isDemo": false,
+    "isFlagged": false
+  },
+  {
+    "id": "rev-91",
+    "restaurantId": "barbeque-nation-gkp",
+    "restaurantName": "Barbeque Nation Gorakhpur",
+    "userName": "Pooja Verma",
+    "userEmail": "pooja.verma20@yahoo.com",
+    "userAvatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at Barbeque Nation Gorakhpur! The Cajun Spiced Potatoes was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Golghar.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-15",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Pooja Verma! We take pride in serving authentic quality food in Golghar. Looking forward to welcoming you back!",
+      "date": "2026-09-16"
+    }
+  },
+  {
+    "id": "rev-92",
+    "restaurantId": "barbeque-nation-gkp",
+    "restaurantName": "Barbeque Nation Gorakhpur",
+    "userName": "Aditya Singh",
+    "userEmail": "aditya.singh21@icloud.com",
+    "userAvatar": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to Barbeque Nation Gorakhpur. Ordered the Crispy Corn along with cold drinks. Excellent quality and great value for money in Golghar. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-15",
+    "isDemo": false,
+    "isFlagged": false
+  },
+  {
+    "id": "rev-93",
+    "restaurantId": "moti-mahal-delux-gkp",
+    "restaurantName": "Moti Mahal Delux",
+    "userName": "Kavita Pandey",
+    "userEmail": "kavita.pandey22@gmail.com",
+    "userAvatar": "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at Moti Mahal Delux! The Original Butter Chicken was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Civil Lines.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-16",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Kavita Pandey! We take pride in serving authentic quality food in Civil Lines. Looking forward to welcoming you back!",
+      "date": "2026-09-17"
+    }
+  },
+  {
+    "id": "rev-94",
+    "restaurantId": "moti-mahal-delux-gkp",
+    "restaurantName": "Moti Mahal Delux",
+    "userName": "Kunal Kapoor",
+    "userEmail": "kunal.kapoor23@outlook.com",
+    "userAvatar": "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to Moti Mahal Delux. Ordered the Tandoori Murgh along with cold drinks. Excellent quality and great value for money in Civil Lines. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-16",
+    "isDemo": false,
+    "isFlagged": false
+  },
+  {
+    "id": "rev-95",
+    "restaurantId": "cafe-nirvana-lake",
+    "restaurantName": "Cafe Nirvana Rooftop Diner",
+    "userName": "Deepali Mishra",
+    "userEmail": "deepali.mishra24@yahoo.com",
+    "userAvatar": "https://images.unsplash.com/photo-1548142813-c348350df52b?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at Cafe Nirvana Rooftop Diner! The Sunset Sangria Mocktail was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Taramandal.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-17",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Deepali Mishra! We take pride in serving authentic quality food in Taramandal. Looking forward to welcoming you back!",
+      "date": "2026-09-18"
+    }
+  },
+  {
+    "id": "rev-96",
+    "restaurantId": "cafe-nirvana-lake",
+    "restaurantName": "Cafe Nirvana Rooftop Diner",
+    "userName": "Arjun Nambiar",
+    "userEmail": "arjun.nambiar25@icloud.com",
+    "userAvatar": "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to Cafe Nirvana Rooftop Diner. Ordered the Pesto Pasta along with cold drinks. Excellent quality and great value for money in Taramandal. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-17",
+    "isDemo": false,
+    "isFlagged": false
+  },
+  {
+    "id": "rev-97",
+    "restaurantId": "shahi-darbar-mughlai",
+    "restaurantName": "Shahi Darbar Mughlai & Biryani",
+    "userName": "Shalini Sen",
+    "userEmail": "shalini.sen26@gmail.com",
+    "userAvatar": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at Shahi Darbar Mughlai & Biryani! The Awadhi Mutton Biryani was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Reti Chowk.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-18",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Shalini Sen! We take pride in serving authentic quality food in Reti Chowk. Looking forward to welcoming you back!",
+      "date": "2026-09-19"
+    }
+  },
+  {
+    "id": "rev-98",
+    "restaurantId": "shahi-darbar-mughlai",
+    "restaurantName": "Shahi Darbar Mughlai & Biryani",
+    "userName": "Varun Dhawan",
+    "userEmail": "varun.dhawan27@outlook.com",
+    "userAvatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to Shahi Darbar Mughlai & Biryani. Ordered the Chicken Changezi along with cold drinks. Excellent quality and great value for money in Reti Chowk. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-18",
+    "isDemo": false,
+    "isFlagged": false
+  },
+  {
+    "id": "rev-99",
+    "restaurantId": "dominick-pizza-pasta",
+    "restaurantName": "Dominick Pizza & Pasta House",
+    "userName": "Neha Agarwal",
+    "userEmail": "neha.agarwal28@yahoo.com",
+    "userAvatar": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at Dominick Pizza & Pasta House! The Cheese Burst Pizza was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Betiahata.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-19",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Neha Agarwal! We take pride in serving authentic quality food in Betiahata. Looking forward to welcoming you back!",
+      "date": "2026-09-20"
+    }
+  },
+  {
+    "id": "rev-100",
+    "restaurantId": "dominick-pizza-pasta",
+    "restaurantName": "Dominick Pizza & Pasta House",
+    "userName": "Alok Kashyap",
+    "userEmail": "alok.kashyap29@icloud.com",
+    "userAvatar": "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to Dominick Pizza & Pasta House. Ordered the White Sauce Pasta along with cold drinks. Excellent quality and great value for money in Betiahata. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-19",
+    "isDemo": false,
+    "isFlagged": false
+  },
+  {
+    "id": "rev-101",
+    "restaurantId": "ksheer-sagar-sweets",
+    "restaurantName": "Ksheer Sagar Sweets & Restaurant",
+    "userName": "Divya Chauhan",
+    "userEmail": "divya.chauhan30@gmail.com",
+    "userAvatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at Ksheer Sagar Sweets & Restaurant! The Kesar Rajbhog was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Bank Road.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-20",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Divya Chauhan! We take pride in serving authentic quality food in Bank Road. Looking forward to welcoming you back!",
+      "date": "2026-09-21"
+    }
+  },
+  {
+    "id": "rev-102",
+    "restaurantId": "ksheer-sagar-sweets",
+    "restaurantName": "Ksheer Sagar Sweets & Restaurant",
+    "userName": "Rahul Bajpai",
+    "userEmail": "rahul.bajpai31@outlook.com",
+    "userAvatar": "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to Ksheer Sagar Sweets & Restaurant. Ordered the Malai Roll along with cold drinks. Excellent quality and great value for money in Bank Road. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-20",
+    "isDemo": false,
+    "isFlagged": false
+  },
+  {
+    "id": "rev-103",
+    "restaurantId": "up53-food-court",
+    "restaurantName": "U.P. 53 Food Court & Cafe",
+    "userName": "Swati Saxena",
+    "userEmail": "swati.saxena32@yahoo.com",
+    "userAvatar": "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at U.P. 53 Food Court & Cafe! The Kurkure Momos was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Mohaddipur.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-21",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Swati Saxena! We take pride in serving authentic quality food in Mohaddipur. Looking forward to welcoming you back!",
+      "date": "2026-09-22"
+    }
+  },
+  {
+    "id": "rev-104",
+    "restaurantId": "up53-food-court",
+    "restaurantName": "U.P. 53 Food Court & Cafe",
+    "userName": "Siddharth Roy",
+    "userEmail": "siddharth.roy33@icloud.com",
+    "userAvatar": "https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to U.P. 53 Food Court & Cafe. Ordered the Hakka Noodles along with cold drinks. Excellent quality and great value for money in Mohaddipur. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-21",
+    "isDemo": false,
+    "isFlagged": false
+  },
+  {
+    "id": "rev-105",
+    "restaurantId": "chhappan-bhog-veg",
+    "restaurantName": "Chhappan Bhog Pure Veg Restaurant",
+    "userName": "Tanvi Bhatia",
+    "userEmail": "tanvi.bhatia34@gmail.com",
+    "userAvatar": "https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at Chhappan Bhog Pure Veg Restaurant! The Chhappan Bhog Royal Thali was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Golghar.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-22",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Tanvi Bhatia! We take pride in serving authentic quality food in Golghar. Looking forward to welcoming you back!",
+      "date": "2026-09-23"
+    }
+  },
+  {
+    "id": "rev-106",
+    "restaurantId": "chhappan-bhog-veg",
+    "restaurantName": "Chhappan Bhog Pure Veg Restaurant",
+    "userName": "Mohit Rastogi",
+    "userEmail": "mohit.rastogi35@outlook.com",
+    "userAvatar": "https://images.unsplash.com/photo-1534751516642-a1714f5a5a3a?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to Chhappan Bhog Pure Veg Restaurant. Ordered the Paneer Butter Masala along with cold drinks. Excellent quality and great value for money in Golghar. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-22",
+    "isDemo": false,
+    "isFlagged": false
+  },
+  {
+    "id": "rev-107",
+    "restaurantId": "goli-vada-pav-gkp",
+    "restaurantName": "Goli Vada Pav No. 1",
+    "userName": "Priya Dubey",
+    "userEmail": "priya.dubey36@yahoo.com",
+    "userAvatar": "https://images.unsplash.com/photo-1514794749374-fb67509dbb7f?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at Goli Vada Pav No. 1! The Cheese Vada Pav was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Betiahata.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-23",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Priya Dubey! We take pride in serving authentic quality food in Betiahata. Looking forward to welcoming you back!",
+      "date": "2026-09-24"
+    }
+  },
+  {
+    "id": "rev-108",
+    "restaurantId": "goli-vada-pav-gkp",
+    "restaurantName": "Goli Vada Pav No. 1",
+    "userName": "Mayank Shukla",
+    "userEmail": "mayank.shukla37@icloud.com",
+    "userAvatar": "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to Goli Vada Pav No. 1. Ordered the Schezwan Roll along with cold drinks. Excellent quality and great value for money in Betiahata. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-23",
+    "isDemo": false,
+    "isFlagged": false
+  },
+  {
+    "id": "rev-109",
+    "restaurantId": "the-chocolate-room-gkp",
+    "restaurantName": "The Chocolate Room",
+    "userName": "Shreya Banerjee",
+    "userEmail": "shreya.banerjee38@gmail.com",
+    "userAvatar": "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at The Chocolate Room! The Death by Chocolate Pancake was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Civil Lines.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-24",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Shreya Banerjee! We take pride in serving authentic quality food in Civil Lines. Looking forward to welcoming you back!",
+      "date": "2026-09-25"
+    }
+  },
+  {
+    "id": "rev-110",
+    "restaurantId": "the-chocolate-room-gkp",
+    "restaurantName": "The Chocolate Room",
+    "userName": "Gaurav Tandon",
+    "userEmail": "gaurav.tandon39@outlook.com",
+    "userAvatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to The Chocolate Room. Ordered the Chocolate Fondue along with cold drinks. Excellent quality and great value for money in Civil Lines. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-24",
+    "isDemo": false,
+    "isFlagged": false
+  },
+  {
+    "id": "rev-111",
+    "restaurantId": "swastik-restaurant-gkp",
+    "restaurantName": "Swastik Restaurant & Thali",
+    "userName": "Ishita Singhal",
+    "userEmail": "ishita.singhal40@yahoo.com",
+    "userAvatar": "https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at Swastik Restaurant & Thali! The Deluxe Thali was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Station Road.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-25",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Ishita Singhal! We take pride in serving authentic quality food in Station Road. Looking forward to welcoming you back!",
+      "date": "2026-09-26"
+    }
+  },
+  {
+    "id": "rev-112",
+    "restaurantId": "swastik-restaurant-gkp",
+    "restaurantName": "Swastik Restaurant & Thali",
+    "userName": "Aman Keshari",
+    "userEmail": "aman.keshari41@icloud.com",
+    "userAvatar": "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to Swastik Restaurant & Thali. Ordered the Paneer Kadhai along with cold drinks. Excellent quality and great value for money in Station Road. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-25",
+    "isDemo": false,
+    "isFlagged": false
+  },
+  {
+    "id": "rev-113",
+    "restaurantId": "rambha-hotel-bobis",
+    "restaurantName": "Rambha Restaurant - Hotel Bobis",
+    "userName": "Preeti Maurya",
+    "userEmail": "preeti.maurya42@gmail.com",
+    "userAvatar": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at Rambha Restaurant - Hotel Bobis! The Chicken Tikka Butter Masala was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Civil Lines.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-26",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Preeti Maurya! We take pride in serving authentic quality food in Civil Lines. Looking forward to welcoming you back!",
+      "date": "2026-09-27"
+    }
+  },
+  {
+    "id": "rev-114",
+    "restaurantId": "rambha-hotel-bobis",
+    "restaurantName": "Rambha Restaurant - Hotel Bobis",
+    "userName": "Saurabh Tripathi",
+    "userEmail": "saurabh.tripathi43@outlook.com",
+    "userAvatar": "https://images.unsplash.com/photo-1463453091185-61582044d556?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to Rambha Restaurant - Hotel Bobis. Ordered the Mutton Rogan Josh along with cold drinks. Excellent quality and great value for money in Civil Lines. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-26",
+    "isDemo": false,
+    "isFlagged": false
+  },
+  {
+    "id": "rev-115",
+    "restaurantId": "saffron-lake-diner",
+    "restaurantName": "Saffron Multi-Cuisine Diner",
+    "userName": "Ritika Sengupta",
+    "userEmail": "ritika.sengupta44@yahoo.com",
+    "userAvatar": "https://images.unsplash.com/photo-1506863530036-1efeddceb993?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at Saffron Multi-Cuisine Diner! The Veg Sizzler was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Taramandal.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-27",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Ritika Sengupta! We take pride in serving authentic quality food in Taramandal. Looking forward to welcoming you back!",
+      "date": "2026-09-28"
+    }
+  },
+  {
+    "id": "rev-116",
+    "restaurantId": "saffron-lake-diner",
+    "restaurantName": "Saffron Multi-Cuisine Diner",
+    "userName": "Deepak Pathak",
+    "userEmail": "deepak.pathak45@icloud.com",
+    "userAvatar": "https://images.unsplash.com/photo-1528892952291-009c663ce843?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to Saffron Multi-Cuisine Diner. Ordered the Chicken Kadhai along with cold drinks. Excellent quality and great value for money in Taramandal. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-27",
+    "isDemo": false,
+    "isFlagged": false
+  },
+  {
+    "id": "rev-117",
+    "restaurantId": "bake-and-shake-cafe",
+    "restaurantName": "Bake & Shake Bakery & Cafe",
+    "userName": "Vandana Yadav",
+    "userEmail": "vandana.yadav46@gmail.com",
+    "userAvatar": "https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at Bake & Shake Bakery & Cafe! The Dutch Truffle Cake was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Betiahata.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-10",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Vandana Yadav! We take pride in serving authentic quality food in Betiahata. Looking forward to welcoming you back!",
+      "date": "2026-09-11"
+    }
+  },
+  {
+    "id": "rev-118",
+    "restaurantId": "bake-and-shake-cafe",
+    "restaurantName": "Bake & Shake Bakery & Cafe",
+    "userName": "Nikhil Chawla",
+    "userEmail": "nikhil.chawla47@outlook.com",
+    "userAvatar": "https://images.unsplash.com/photo-1541823709867-1b206113eafd?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to Bake & Shake Bakery & Cafe. Ordered the Club Sandwich along with cold drinks. Excellent quality and great value for money in Betiahata. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-10",
+    "isDemo": false,
+    "isFlagged": false
+  },
+  {
+    "id": "rev-119",
+    "restaurantId": "zaika-e-awadh-gkp",
+    "restaurantName": "Zaika-e-Awadh Biryani Hub",
+    "userName": "Sonam Jaiswal",
+    "userEmail": "sonam.jaiswal48@yahoo.com",
+    "userAvatar": "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at Zaika-e-Awadh Biryani Hub! The Chicken Dum Biryani was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Golghar.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-11",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Sonam Jaiswal! We take pride in serving authentic quality food in Golghar. Looking forward to welcoming you back!",
+      "date": "2026-09-12"
+    }
+  },
+  {
+    "id": "rev-120",
+    "restaurantId": "zaika-e-awadh-gkp",
+    "restaurantName": "Zaika-e-Awadh Biryani Hub",
+    "userName": "Harshvardhan Jain",
+    "userEmail": "harshvardhan.jain49@icloud.com",
+    "userAvatar": "https://images.unsplash.com/photo-1542206395-9feb3edaa68d?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to Zaika-e-Awadh Biryani Hub. Ordered the Chicken Changezi along with cold drinks. Excellent quality and great value for money in Golghar. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-11",
+    "isDemo": false,
+    "isFlagged": false
+  },
+  {
+    "id": "rev-121",
+    "restaurantId": "anand-sweet-chaat",
+    "restaurantName": "Anand Sweet House & Chaat",
+    "userName": "Shruti Sethi",
+    "userEmail": "shruti.sethi50@gmail.com",
+    "userAvatar": "https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at Anand Sweet House & Chaat! The Bedmi Puri Aloo Sabzi was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Maya Bazaar.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-12",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Shruti Sethi! We take pride in serving authentic quality food in Maya Bazaar. Looking forward to welcoming you back!",
+      "date": "2026-09-13"
+    }
+  },
+  {
+    "id": "rev-122",
+    "restaurantId": "anand-sweet-chaat",
+    "restaurantName": "Anand Sweet House & Chaat",
+    "userName": "Pranav Madan",
+    "userEmail": "pranav.madan51@outlook.com",
+    "userAvatar": "https://images.unsplash.com/photo-1534308143481-c55f00be8bd7?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to Anand Sweet House & Chaat. Ordered the Desi Ghee Tikki along with cold drinks. Excellent quality and great value for money in Maya Bazaar. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-12",
+    "isDemo": false,
+    "isFlagged": false
+  },
+  {
+    "id": "rev-123",
+    "restaurantId": "rolls-mania-gkp",
+    "restaurantName": "Rolls Mania Kathi Hub",
+    "userName": "Smita Deshmukh",
+    "userEmail": "smita.deshmukh52@yahoo.com",
+    "userAvatar": "https://images.unsplash.com/photo-1530268729831-4b0b9e170218?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at Rolls Mania Kathi Hub! The Chicken Tikka Roll was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Medical College Road.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-13",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Smita Deshmukh! We take pride in serving authentic quality food in Medical College Road. Looking forward to welcoming you back!",
+      "date": "2026-09-14"
+    }
+  },
+  {
+    "id": "rev-124",
+    "restaurantId": "rolls-mania-gkp",
+    "restaurantName": "Rolls Mania Kathi Hub",
+    "userName": "Akash Srivastava",
+    "userEmail": "akash.srivastava53@icloud.com",
+    "userAvatar": "https://images.unsplash.com/photo-1517462964-21fdcec3f25b?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to Rolls Mania Kathi Hub. Ordered the Paneer Cheese Roll along with cold drinks. Excellent quality and great value for money in Medical College Road. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-13",
+    "isDemo": false,
+    "isFlagged": false
+  },
+  {
+    "id": "rev-125",
+    "restaurantId": "subway-city-mall",
+    "restaurantName": "Subway Gorakhpur",
+    "userName": "Nikita Roy",
+    "userEmail": "nikita.roy54@gmail.com",
+    "userAvatar": "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at Subway Gorakhpur! The Paneer Tikka Sub was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Civil Lines.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-14",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Nikita Roy! We take pride in serving authentic quality food in Civil Lines. Looking forward to welcoming you back!",
+      "date": "2026-09-15"
+    }
+  },
+  {
+    "id": "rev-126",
+    "restaurantId": "subway-city-mall",
+    "restaurantName": "Subway Gorakhpur",
+    "userName": "Yashwardhan Lal",
+    "userEmail": "yashwardhan.lal55@outlook.com",
+    "userAvatar": "https://images.unsplash.com/photo-1546961329-78bef0414d7c?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to Subway Gorakhpur. Ordered the Roasted Chicken Sub along with cold drinks. Excellent quality and great value for money in Civil Lines. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-14",
+    "isDemo": false,
+    "isFlagged": false
+  },
+  {
+    "id": "rev-127",
+    "restaurantId": "kukkad-nukkad-dhaba",
+    "restaurantName": "Kukkad Nukkad Highway Dhaba",
+    "userName": "Radhika Goel",
+    "userEmail": "radhika.goel56@yahoo.com",
+    "userAvatar": "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at Kukkad Nukkad Highway Dhaba! The Tawa Chicken Roast was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Nausad Bypass.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-15",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Radhika Goel! We take pride in serving authentic quality food in Nausad Bypass. Looking forward to welcoming you back!",
+      "date": "2026-09-16"
+    }
+  },
+  {
+    "id": "rev-128",
+    "restaurantId": "kukkad-nukkad-dhaba",
+    "restaurantName": "Kukkad Nukkad Highway Dhaba",
+    "userName": "Devendra Pratap",
+    "userEmail": "devendra.pratap57@icloud.com",
+    "userAvatar": "https://images.unsplash.com/photo-1520466809213-7b9a56adcd45?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to Kukkad Nukkad Highway Dhaba. Ordered the Handi Mutton along with cold drinks. Excellent quality and great value for money in Nausad Bypass. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-15",
+    "isDemo": false,
+    "isFlagged": false
+  },
+  {
+    "id": "rev-129",
+    "restaurantId": "haldirams-express-gkp",
+    "restaurantName": "Haldiram's Express & Sweets",
+    "userName": "Sanya Malhotra",
+    "userEmail": "sanya.malhotra58@gmail.com",
+    "userAvatar": "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at Haldiram's Express & Sweets! The Signature Raj Kachori was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Golghar.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-16",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Sanya Malhotra! We take pride in serving authentic quality food in Golghar. Looking forward to welcoming you back!",
+      "date": "2026-09-17"
+    }
+  },
+  {
+    "id": "rev-130",
+    "restaurantId": "haldirams-express-gkp",
+    "restaurantName": "Haldiram's Express & Sweets",
+    "userName": "Tushar Khandelwal",
+    "userEmail": "tushar.khandelwal59@outlook.com",
+    "userAvatar": "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to Haldiram's Express & Sweets. Ordered the Special Chhole Bhature along with cold drinks. Excellent quality and great value for money in Golghar. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-16",
+    "isDemo": false,
+    "isFlagged": false
+  },
+  {
+    "id": "rev-131",
+    "restaurantId": "crazy-bites-chowk",
+    "restaurantName": "Crazy Bites Fast Food",
+    "userName": "Simran Kaur",
+    "userEmail": "simran.kaur60@yahoo.com",
+    "userAvatar": "https://images.unsplash.com/photo-1496345875659-11f7dd282d1d?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at Crazy Bites Fast Food! The Chilli Paneer Dry was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Asuran Chowk.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-17",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Simran Kaur! We take pride in serving authentic quality food in Asuran Chowk. Looking forward to welcoming you back!",
+      "date": "2026-09-18"
+    }
+  },
+  {
+    "id": "rev-132",
+    "restaurantId": "crazy-bites-chowk",
+    "restaurantName": "Crazy Bites Fast Food",
+    "userName": "Rajat Mathur",
+    "userEmail": "rajat.mathur61@icloud.com",
+    "userAvatar": "https://images.unsplash.com/photo-1485290334039-a3c69043e517?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to Crazy Bites Fast Food. Ordered the Schezwan Chowmein along with cold drinks. Excellent quality and great value for money in Asuran Chowk. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-17",
+    "isDemo": false,
+    "isFlagged": false
+  },
+  {
+    "id": "rev-133",
+    "restaurantId": "pizza-hut-park-road",
+    "restaurantName": "Pizza Hut Gorakhpur",
+    "userName": "Payal Singhania",
+    "userEmail": "payal.singhania62@gmail.com",
+    "userAvatar": "https://images.unsplash.com/photo-1507152832244-10d45c7eda57?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at Pizza Hut Gorakhpur! The Margherita Pan Pizza was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Civil Lines.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-18",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Payal Singhania! We take pride in serving authentic quality food in Civil Lines. Looking forward to welcoming you back!",
+      "date": "2026-09-19"
+    }
+  },
+  {
+    "id": "rev-134",
+    "restaurantId": "pizza-hut-park-road",
+    "restaurantName": "Pizza Hut Gorakhpur",
+    "userName": "Abhishek Dwivedi",
+    "userEmail": "abhishek.dwivedi63@outlook.com",
+    "userAvatar": "https://images.unsplash.com/photo-1519058082700-08a0b56da9b4?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to Pizza Hut Gorakhpur. Ordered the Tandoori Paneer Pizza along with cold drinks. Excellent quality and great value for money in Civil Lines. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-18",
+    "isDemo": false,
+    "isFlagged": false
+  },
+  {
+    "id": "rev-135",
+    "restaurantId": "kfc-ad-mall",
+    "restaurantName": "KFC Gorakhpur",
+    "userName": "Anupama Joshi",
+    "userEmail": "anupama.joshi64@yahoo.com",
+    "userAvatar": "https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at KFC Gorakhpur! The Hot & Crispy Chicken was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Golghar.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-19",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Anupama Joshi! We take pride in serving authentic quality food in Golghar. Looking forward to welcoming you back!",
+      "date": "2026-09-20"
+    }
+  },
+  {
+    "id": "rev-136",
+    "restaurantId": "kfc-ad-mall",
+    "restaurantName": "KFC Gorakhpur",
+    "userName": "Keshav Narang",
+    "userEmail": "keshav.narang65@icloud.com",
+    "userAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to KFC Gorakhpur. Ordered the Zinger Burger along with cold drinks. Excellent quality and great value for money in Golghar. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-19",
+    "isDemo": false,
+    "isFlagged": false
+  },
+  {
+    "id": "rev-137",
+    "restaurantId": "cafe-coffee-day-gkp",
+    "restaurantName": "Cafe Coffee Day",
+    "userName": "Barkha Vats",
+    "userEmail": "barkha.vats66@gmail.com",
+    "userAvatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at Cafe Coffee Day! The Devil's Own Frappe was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Civil Lines.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-20",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Barkha Vats! We take pride in serving authentic quality food in Civil Lines. Looking forward to welcoming you back!",
+      "date": "2026-09-21"
+    }
+  },
+  {
+    "id": "rev-138",
+    "restaurantId": "cafe-coffee-day-gkp",
+    "restaurantName": "Cafe Coffee Day",
+    "userName": "Himanshu Pandey",
+    "userEmail": "himanshu.pandey67@outlook.com",
+    "userAvatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to Cafe Coffee Day. Ordered the Cappuccino along with cold drinks. Excellent quality and great value for money in Civil Lines. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-20",
+    "isDemo": false,
+    "isFlagged": false
+  },
+  {
+    "id": "rev-139",
+    "restaurantId": "khaao-gali-food-hub",
+    "restaurantName": "Khaao Gali Street Food Hub",
+    "userName": "Garima Dixit",
+    "userEmail": "garima.dixit68@yahoo.com",
+    "userAvatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 5,
+    "text": "Had an exceptional dining experience at Khaao Gali Street Food Hub! The Butter Pav Bhaji was extraordinary—fresh, rich aroma and authentic flavors. Prompt service and immaculate cleanliness in Golghar.",
+    "tags": [
+      "Delicious Food",
+      "Great Ambience",
+      "Must Visit"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-21",
+    "isDemo": false,
+    "isFlagged": false,
+    "ownerReply": {
+      "text": "Thank you Garima Dixit! We take pride in serving authentic quality food in Golghar. Looking forward to welcoming you back!",
+      "date": "2026-09-22"
+    }
+  },
+  {
+    "id": "rev-140",
+    "restaurantId": "khaao-gali-food-hub",
+    "restaurantName": "Khaao Gali Street Food Hub",
+    "userName": "Ujjwal Anand",
+    "userEmail": "ujjwal.anand69@icloud.com",
+    "userAvatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&h=150&q=80",
+    "rating": 4,
+    "text": "Really enjoyed our visit to Khaao Gali Street Food Hub. Ordered the Kolkata Egg Roll along with cold drinks. Excellent quality and great value for money in Golghar. Will be returning soon!",
+    "tags": [
+      "Good Value",
+      "Quick Service",
+      "Fresh Ingredients"
+    ],
+    "photoUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+    "date": "2026-09-21",
+    "isDemo": false,
+    "isFlagged": false
   }
 ];

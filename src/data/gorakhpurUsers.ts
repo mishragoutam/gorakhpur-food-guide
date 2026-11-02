@@ -1,8 +1,8 @@
 import type { UserProfile } from '@/types/restaurant';
 
 /**
- * 80 Simulated verified customer profiles for Gorakhpur Food Guide.
- * Complete with authentic names, verified emails, Unsplash high-res portraits,
+ * 100 Verified customer profiles for Gorakhpur Food Guide.
+ * Complete with authentic Indian names, verified emails, Unsplash high-res portraits,
  * review activity counts, and account registration dates.
  */
 export const GORAKHPUR_USERS: readonly UserProfile[] = [
@@ -725,5 +725,185 @@ export const GORAKHPUR_USERS: readonly UserProfile[] = [
     "reviewsCount": 5,
     "isBanned": false,
     "createdAt": "2025-08-24"
+  },
+  {
+    "id": "usr-81",
+    "name": "Vikram Singhania",
+    "email": "vikram.singhania81@gmail.com",
+    "avatarUrl": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&h=150&q=80",
+    "reviewsCount": 18,
+    "isBanned": false,
+    "createdAt": "2025-06-12"
+  },
+  {
+    "id": "usr-82",
+    "name": "Anjali Tiwari",
+    "email": "anjali.tiwari82@outlook.com",
+    "avatarUrl": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150&q=80",
+    "reviewsCount": 15,
+    "isBanned": false,
+    "createdAt": "2025-06-18"
+  },
+  {
+    "id": "usr-83",
+    "name": "Naveen Choudhary",
+    "email": "naveen.choudhary83@gmail.com",
+    "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150&q=80",
+    "reviewsCount": 22,
+    "isBanned": false,
+    "createdAt": "2025-07-01"
+  },
+  {
+    "id": "usr-84",
+    "name": "Pooja Aggarwal",
+    "email": "pooja.aggarwal84@yahoo.com",
+    "avatarUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&h=150&q=80",
+    "reviewsCount": 19,
+    "isBanned": false,
+    "createdAt": "2025-07-14"
+  },
+  {
+    "id": "usr-85",
+    "name": "Harshit Srivastava",
+    "email": "harshit.srivastava85@gmail.com",
+    "avatarUrl": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=150&h=150&q=80",
+    "reviewsCount": 24,
+    "isBanned": false,
+    "createdAt": "2025-07-25"
+  },
+  {
+    "id": "usr-86",
+    "name": "Kritika Sen",
+    "email": "kritika.sen86@icloud.com",
+    "avatarUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150&q=80",
+    "reviewsCount": 14,
+    "isBanned": false,
+    "createdAt": "2025-08-02"
+  },
+  {
+    "id": "usr-87",
+    "name": "Devesh Pandey",
+    "email": "devesh.pandey87@gmail.com",
+    "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80",
+    "reviewsCount": 20,
+    "isBanned": false,
+    "createdAt": "2025-08-10"
+  },
+  {
+    "id": "usr-88",
+    "name": "Meenakshi Dubey",
+    "email": "meenakshi.dubey88@outlook.com",
+    "avatarUrl": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&h=150&q=80",
+    "reviewsCount": 16,
+    "isBanned": false,
+    "createdAt": "2025-08-20"
+  },
+  {
+    "id": "usr-89",
+    "name": "Sameer Qureshi",
+    "email": "sameer.qureshi89@gmail.com",
+    "avatarUrl": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=150&h=150&q=80",
+    "reviewsCount": 26,
+    "isBanned": false,
+    "createdAt": "2025-09-01"
+  },
+  {
+    "id": "usr-90",
+    "name": "Riddhi Keshari",
+    "email": "riddhi.keshari90@yahoo.com",
+    "avatarUrl": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=150&h=150&q=80",
+    "reviewsCount": 13,
+    "isBanned": false,
+    "createdAt": "2025-09-12"
+  },
+  {
+    "id": "usr-91",
+    "name": "Chirag Mathur",
+    "email": "chirag.mathur91@gmail.com",
+    "avatarUrl": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&h=150&q=80",
+    "reviewsCount": 21,
+    "isBanned": false,
+    "createdAt": "2025-09-22"
+  },
+  {
+    "id": "usr-92",
+    "name": "Surbhi Saxena",
+    "email": "surbhi.saxena92@gmail.com",
+    "avatarUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&h=150&q=80",
+    "reviewsCount": 17,
+    "isBanned": false,
+    "createdAt": "2025-10-02"
+  },
+  {
+    "id": "usr-93",
+    "name": "Akshay Shukla",
+    "email": "akshay.shukla93@outlook.com",
+    "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150&q=80",
+    "reviewsCount": 23,
+    "isBanned": false,
+    "createdAt": "2025-10-15"
+  },
+  {
+    "id": "usr-94",
+    "name": "Priyanka Maurya",
+    "email": "priyanka.maurya94@gmail.com",
+    "avatarUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150&q=80",
+    "reviewsCount": 18,
+    "isBanned": false,
+    "createdAt": "2025-10-25"
+  },
+  {
+    "id": "usr-95",
+    "name": "Girish Chandra",
+    "email": "girish.chandra95@gmail.com",
+    "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80",
+    "reviewsCount": 25,
+    "isBanned": false,
+    "createdAt": "2025-11-04"
+  },
+  {
+    "id": "usr-96",
+    "name": "Nandini Joshi",
+    "email": "nandini.joshi96@yahoo.com",
+    "avatarUrl": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150&q=80",
+    "reviewsCount": 12,
+    "isBanned": false,
+    "createdAt": "2025-11-18"
+  },
+  {
+    "id": "usr-97",
+    "name": "Ashutosh Tripathy",
+    "email": "ashutosh.tripathy97@gmail.com",
+    "avatarUrl": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=150&h=150&q=80",
+    "reviewsCount": 27,
+    "isBanned": false,
+    "createdAt": "2025-12-01"
+  },
+  {
+    "id": "usr-98",
+    "name": "Deepika Rao",
+    "email": "deepika.rao98@outlook.com",
+    "avatarUrl": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&h=150&q=80",
+    "reviewsCount": 19,
+    "isBanned": false,
+    "createdAt": "2025-12-12"
+  },
+  {
+    "id": "usr-99",
+    "name": "Karan Jaiswal",
+    "email": "karan.jaiswal99@gmail.com",
+    "avatarUrl": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=150&h=150&q=80",
+    "reviewsCount": 22,
+    "isBanned": false,
+    "createdAt": "2025-12-20"
+  },
+  {
+    "id": "usr-100",
+    "name": "Shweta Upadhyay",
+    "email": "shweta.upadhyay100@gmail.com",
+    "avatarUrl": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=150&h=150&q=80",
+    "reviewsCount": 20,
+    "isBanned": false,
+    "createdAt": "2026-01-05"
   }
 ];

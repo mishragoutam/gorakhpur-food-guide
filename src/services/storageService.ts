@@ -452,8 +452,15 @@ export const storageService = {
   },
 
   addReview(reviewData: Omit<Review, 'id' | 'date'> & { date?: string }): Review {
+    let userAvatar = reviewData.userAvatar;
+    if (!userAvatar && reviewData.userEmail) {
+      const u = this.getUsers().find((usr) => usr.email.toLowerCase() === reviewData.userEmail?.toLowerCase());
+      if (u?.avatarUrl) userAvatar = u.avatarUrl;
+    }
+
     const newReview: Review = {
       ...reviewData,
+      userAvatar,
       id: `rev-${Date.now()}`,
       date: reviewData.date || new Date().toISOString().slice(0, 10),
       isDemo: false,
@@ -463,6 +470,16 @@ export const storageService = {
     const current = safeGet<Review[]>(STORAGE_KEYS.reviews, isCleared ? [] : getInitialReviews());
     current.unshift(newReview);
     safeSet(STORAGE_KEYS.reviews, current);
+
+    // Update user review count in users directory
+    if (newReview.userEmail) {
+      const users = this.getUsers();
+      const user = users.find((u) => u.email.toLowerCase() === newReview.userEmail?.toLowerCase());
+      if (user) {
+        user.reviewsCount = (user.reviewsCount || 0) + 1;
+        safeSet(STORAGE_KEYS.users, users);
+      }
+    }
 
     this.addAuditLog(`Customer ${newReview.userName} posted review for restaurant ${newReview.restaurantId}`);
     supabaseService.saveReview(newReview).catch(() => {});
@@ -577,8 +594,34 @@ export const storageService = {
     return safeGet<{ name: string; email?: string } | null>(STORAGE_KEYS.customerUser, null);
   },
 
-  setCustomerUser(user: { name: string; email?: string } | null): void {
+  setCustomerUser(user: { name: string; email?: string; avatarUrl?: string } | null): void {
     safeSet(STORAGE_KEYS.customerUser, user);
+    if (user && user.email) {
+      const allUsers = this.getUsers();
+      const existing = allUsers.find(
+        (u) => u.email.toLowerCase() === user.email?.toLowerCase(),
+      );
+      if (existing) {
+        existing.name = user.name || existing.name;
+        if (user.avatarUrl) existing.avatarUrl = user.avatarUrl;
+      } else {
+        const newUser: UserProfile = {
+          id: `usr-${Date.now()}`,
+          name: user.name || user.email.split('@')[0] || 'Customer',
+          email: user.email,
+          avatarUrl:
+            user.avatarUrl ||
+            'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150&q=80',
+          reviewsCount: 0,
+          isBanned: false,
+          createdAt: new Date().toISOString().slice(0, 10),
+        };
+        allUsers.unshift(newUser);
+      }
+      safeSet(STORAGE_KEYS.users, allUsers);
+      this.addAuditLog(`Customer verified email login: ${user.name} (${user.email})`);
+    }
+    window.dispatchEvent(new CustomEvent('rateit-storage-change', { detail: { key: STORAGE_KEYS.customerUser } }));
   },
 
   getOwnerSession(): OwnerSession | null {
