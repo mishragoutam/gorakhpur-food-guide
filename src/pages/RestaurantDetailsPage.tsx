@@ -11,8 +11,9 @@ import {
   MessageSquareReply,
   Navigation,
   CheckCircle2,
+  Search,
 } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { RestaurantImage } from '@/components/art/RestaurantImage';
 import { Badge } from '@/components/ui/Badge';
@@ -76,6 +77,60 @@ export default function RestaurantDetailsPage() {
   const [qrModalOpen, setQrModalOpen] = useState(false);
   const [standeeModalOpen, setStandeeModalOpen] = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authGoogleMode, setAuthGoogleMode] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [dietFilter, setDietFilter] = useState<'all' | 'veg' | 'nonveg'>('all');
+  const [menuSearch, setMenuSearch] = useState<string>('');
+
+  const menuCategories = useMemo(() => {
+    if (!restaurant?.menu) return [];
+    const set = new Set<string>();
+    restaurant.menu.forEach((m) => {
+      if (m.category) set.add(m.category);
+    });
+    return Array.from(set);
+  }, [restaurant]);
+
+  const hasNonVeg = useMemo(() => {
+    return Boolean(restaurant?.menu?.some((m) => m.diet === 'nonveg'));
+  }, [restaurant]);
+
+  const filteredMenu = useMemo(() => {
+    if (!restaurant?.menu) return [];
+    return restaurant.menu.filter((item) => {
+      // Category filter
+      if (selectedCategory === 'Bestsellers') {
+        const isBestseller =
+          item.isFeatured ||
+          restaurant.popularDishes.some(
+            (p) =>
+              p.toLowerCase() === item.name.toLowerCase() ||
+              item.name.toLowerCase().includes(p.toLowerCase()) ||
+              p.toLowerCase().includes(item.name.toLowerCase()),
+          );
+        if (!isBestseller) return false;
+      } else if (selectedCategory !== 'All' && item.category !== selectedCategory) {
+        return false;
+      }
+
+      // Diet filter
+      if (dietFilter !== 'all') {
+        if (dietFilter === 'veg' && item.diet !== 'veg') return false;
+        if (dietFilter === 'nonveg' && item.diet !== 'nonveg') return false;
+      }
+
+      // Search query
+      if (menuSearch.trim()) {
+        const q = menuSearch.toLowerCase().trim();
+        const matchName = item.name.toLowerCase().includes(q);
+        const matchDesc = item.description?.toLowerCase().includes(q);
+        const matchCat = item.category?.toLowerCase().includes(q);
+        if (!matchName && !matchDesc && !matchCat) return false;
+      }
+
+      return true;
+    });
+  }, [restaurant, selectedCategory, dietFilter, menuSearch]);
 
   useEffect(() => {
     const handleStorageChange = () => {
@@ -192,7 +247,10 @@ export default function RestaurantDetailsPage() {
               </div>
               <button
                 type="button"
-                onClick={() => setAuthModalOpen(true)}
+                onClick={() => {
+                  setAuthGoogleMode(true);
+                  setAuthModalOpen(true);
+                }}
                 className="inline-flex items-center gap-2 rounded-xl bg-forest-700 px-4 py-2 text-xs font-bold text-white shadow-xs hover:bg-forest-800 transition shrink-0"
               >
                 Sign In with Google
@@ -343,57 +401,217 @@ export default function RestaurantDetailsPage() {
         <div className="mt-14 grid gap-10 lg:grid-cols-3">
           {/* Main 2 Cols: Menu Highlights + Reviews */}
           <div className="space-y-10 lg:col-span-2">
-            {/* Menu Highlights */}
+            {/* Menu Highlights (Zomato & Swiggy Style) */}
             <div className="rounded-3xl border border-cream-300 bg-white p-6 sm:p-8 shadow-sm">
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
-                  <h3 className="text-xl font-bold text-ink-900">Menu Highlights & Rates</h3>
-                  <p className="text-xs text-ink-500">Authentic dishes and live prices from {restaurant.name}</p>
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-xl font-bold text-ink-900">Restaurant Menu</h3>
+                    <span className="rounded-md bg-accent-100 px-2 py-0.5 text-[11px] font-extrabold text-accent-800 tracking-wide uppercase">
+                      Zomato & Swiggy Curated
+                    </span>
+                  </div>
+                  <p className="text-xs text-ink-500">Live dish rates, dietary tags and high-res photos from {restaurant.name}</p>
                 </div>
-                <span className="rounded-full bg-cream-100 px-3 py-1 text-xs font-semibold text-ink-700">
-                  {restaurant.menu?.length || 0} items
+                <span className="self-start sm:self-auto rounded-full bg-cream-100 px-3 py-1 text-xs font-semibold text-ink-700">
+                  {restaurant.menu?.length || 0} dishes available
                 </span>
               </div>
 
-              <div className="mt-6 grid gap-3.5 sm:grid-cols-2">
-                {restaurant.menu && restaurant.menu.length > 0 ? (
-                  restaurant.menu.map((item: MenuItem) => (
-                    <div
-                      key={item.id}
-                      className="flex flex-col justify-between rounded-2xl border border-cream-200 bg-white p-4 shadow-2xs transition hover:border-cream-300 hover:shadow-xs"
+              {/* Menu Filter Controls */}
+              <div className="mt-5 space-y-3 border-t border-cream-200/80 pt-4">
+                {/* Search Bar + Veg/NonVeg Toggle */}
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                  <div className="relative flex-1">
+                    <Search size={15} className="absolute left-3.5 top-3 text-ink-400" />
+                    <input
+                      type="text"
+                      value={menuSearch}
+                      onChange={(e) => setMenuSearch(e.target.value)}
+                      placeholder="Search menu (e.g. paneer, biryani, roll, shake)..."
+                      className="w-full rounded-xl border border-cream-200 bg-cream-50/50 pl-10 pr-4 py-2 text-xs text-ink-900 outline-none focus:border-accent-600 focus:bg-white focus:ring-2 focus:ring-accent-100 transition"
+                    />
+                    {menuSearch ? (
+                      <button
+                        type="button"
+                        onClick={() => setMenuSearch('')}
+                        className="absolute right-3 top-2.5 text-xs text-ink-400 hover:text-ink-700"
+                      >
+                        ✕
+                      </button>
+                    ) : null}
+                  </div>
+
+                  {/* Veg / Non-Veg Quick Selector */}
+                  <div className="flex items-center rounded-xl bg-cream-100 p-1 shrink-0 text-xs font-bold">
+                    <button
+                      type="button"
+                      onClick={() => setDietFilter('all')}
+                      className={`rounded-lg px-3 py-1.5 transition ${
+                        dietFilter === 'all' ? 'bg-white text-ink-900 shadow-2xs' : 'text-ink-600 hover:text-ink-900'
+                      }`}
                     >
-                      <div className="flex gap-3">
-                        {item.imageUrl ? (
-                          <img
-                            src={item.imageUrl}
-                            alt={item.name}
-                            className="size-16 shrink-0 rounded-xl object-cover ring-1 ring-ink-900/5 shadow-2xs"
-                          />
-                        ) : null}
-                        <div className="min-w-0 flex-1">
-                          <div className="flex items-start justify-between gap-2">
-                            <h4 className="text-sm font-bold text-ink-900 truncate">{item.name}</h4>
-                            <span className="shrink-0 rounded-full bg-accent-50 px-2.5 py-0.5 text-xs font-extrabold text-accent-800 ring-1 ring-accent-200">
-                              ₹{item.price}
-                            </span>
+                      All
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setDietFilter('veg')}
+                      className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 transition ${
+                        dietFilter === 'veg' ? 'bg-white text-emerald-800 shadow-2xs font-extrabold' : 'text-emerald-700 hover:text-emerald-900'
+                      }`}
+                    >
+                      <span className="size-2 rounded-full bg-emerald-600 inline-block" />
+                      Veg
+                    </button>
+                    {hasNonVeg ? (
+                      <button
+                        type="button"
+                        onClick={() => setDietFilter('nonveg')}
+                        className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 transition ${
+                          dietFilter === 'nonveg' ? 'bg-white text-rose-800 shadow-2xs font-extrabold' : 'text-rose-700 hover:text-rose-900'
+                        }`}
+                      >
+                        <span className="size-2 rotate-45 bg-rose-600 inline-block" />
+                        Non-Veg
+                      </button>
+                    ) : null}
+                  </div>
+                </div>
+
+                {/* Horizontal Category Navigation Tabs */}
+                <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar text-xs">
+                  <button
+                    type="button"
+                    onClick={() => setSelectedCategory('All')}
+                    className={`shrink-0 rounded-full px-3.5 py-1.5 font-bold transition ${
+                      selectedCategory === 'All'
+                        ? 'bg-ink-900 text-white shadow-xs'
+                        : 'bg-cream-100 text-ink-700 hover:bg-cream-200'
+                    }`}
+                  >
+                    All ({restaurant.menu?.length || 0})
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setSelectedCategory('Bestsellers')}
+                    className={`shrink-0 flex items-center gap-1 rounded-full px-3.5 py-1.5 font-bold transition ${
+                      selectedCategory === 'Bestsellers'
+                        ? 'bg-amber-600 text-white shadow-xs'
+                        : 'bg-amber-50 text-amber-800 border border-amber-200/80 hover:bg-amber-100'
+                    }`}
+                  >
+                    <span>★ Bestsellers</span>
+                  </button>
+
+                  {menuCategories.map((cat) => (
+                    <button
+                      key={cat}
+                      type="button"
+                      onClick={() => setSelectedCategory(cat)}
+                      className={`shrink-0 rounded-full px-3.5 py-1.5 font-bold transition ${
+                        selectedCategory === cat
+                          ? 'bg-ink-900 text-white shadow-xs'
+                          : 'bg-cream-100 text-ink-700 hover:bg-cream-200'
+                      }`}
+                    >
+                      {cat}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Menu Grid */}
+              <div className="mt-6 grid gap-3.5 sm:grid-cols-2">
+                {filteredMenu.length > 0 ? (
+                  filteredMenu.map((item: MenuItem) => {
+                    const isBestseller =
+                      item.isFeatured ||
+                      restaurant.popularDishes.some(
+                        (p) =>
+                          p.toLowerCase() === item.name.toLowerCase() ||
+                          item.name.toLowerCase().includes(p.toLowerCase()) ||
+                          p.toLowerCase().includes(item.name.toLowerCase()),
+                      );
+
+                    return (
+                      <div
+                        key={item.id}
+                        className="group flex flex-col justify-between rounded-2xl border border-cream-200 bg-white p-4 shadow-2xs transition hover:border-cream-300 hover:shadow-xs"
+                      >
+                        <div>
+                          {/* Bestseller Badge */}
+                          {isBestseller ? (
+                            <div className="mb-2 flex items-center gap-1">
+                              <span className="rounded-md bg-amber-100 px-2 py-0.5 text-[10px] font-extrabold text-amber-800 uppercase tracking-wide">
+                                ★ Bestseller
+                              </span>
+                            </div>
+                          ) : null}
+
+                          <div className="flex gap-3">
+                            {item.imageUrl ? (
+                              <img
+                                src={item.imageUrl}
+                                alt={item.name}
+                                className="size-20 shrink-0 rounded-2xl object-cover ring-1 ring-ink-900/5 shadow-2xs group-hover:scale-[1.02] transition-transform duration-200"
+                                loading="lazy"
+                              />
+                            ) : null}
+                            <div className="min-w-0 flex-1">
+                              <div className="flex items-start justify-between gap-2">
+                                <h4 className="text-sm font-bold text-ink-900 leading-snug line-clamp-2">
+                                  {item.name}
+                                </h4>
+                                <span className="shrink-0 rounded-full bg-accent-50 px-2.5 py-0.5 text-xs font-extrabold text-accent-800 ring-1 ring-accent-200">
+                                  ₹{item.price}
+                                </span>
+                              </div>
+                              <p className="mt-1.5 text-xs text-ink-600 line-clamp-2 leading-relaxed">
+                                {item.description}
+                              </p>
+                            </div>
                           </div>
-                          <p className="mt-1 text-xs text-ink-600 line-clamp-2">{item.description}</p>
+                        </div>
+
+                        <div className="mt-3 flex items-center justify-between border-t border-cream-100 pt-2 text-[11px] font-semibold">
+                          <span
+                            className={
+                              item.diet === 'veg'
+                                ? 'flex items-center gap-1 text-emerald-700 font-bold'
+                                : 'flex items-center gap-1 text-rose-700 font-bold'
+                            }
+                          >
+                            <span
+                              className={`size-2 inline-block ${
+                                item.diet === 'veg' ? 'rounded-full bg-emerald-600' : 'rotate-45 bg-rose-600'
+                              }`}
+                            />
+                            {item.diet === 'veg' ? 'Pure Veg' : 'Non-Veg'}
+                          </span>
+                          <span className="rounded-md bg-cream-100 px-2 py-0.5 text-ink-600">{item.category}</span>
                         </div>
                       </div>
-                      <div className="mt-3 flex items-center justify-between border-t border-cream-100 pt-2 text-[11px] font-semibold">
-                        <span
-                          className={
-                            item.diet === 'veg' ? 'text-emerald-700' : 'text-rose-700'
-                          }
-                        >
-                          {item.diet === 'veg' ? '● Pure Veg' : '▲ Non-Veg'}
-                        </span>
-                        <span className="rounded-md bg-cream-100 px-2 py-0.5 text-ink-600">{item.category}</span>
-                      </div>
-                    </div>
-                  ))
+                    );
+                  })
                 ) : (
-                  <p className="text-sm text-ink-500">Menu items being updated by owner.</p>
+                  <div className="col-span-2 py-10 text-center">
+                    <p className="text-sm font-bold text-ink-800">No dishes match your filter</p>
+                    <p className="mt-1 text-xs text-ink-500">
+                      Try searching another keyword or clear the category and diet filters.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSelectedCategory('All');
+                        setDietFilter('all');
+                        setMenuSearch('');
+                      }}
+                      className="mt-3 rounded-full bg-cream-200 px-4 py-1.5 text-xs font-bold text-ink-800 hover:bg-cream-300"
+                    >
+                      Reset Menu Filters
+                    </button>
+                  </div>
                 )}
               </div>
             </div>
@@ -602,10 +820,15 @@ export default function RestaurantDetailsPage() {
 
       <CustomerAuthModal
         isOpen={authModalOpen}
-        onClose={() => setAuthModalOpen(false)}
+        initialGoogleMode={authGoogleMode}
+        onClose={() => {
+          setAuthModalOpen(false);
+          setAuthGoogleMode(false);
+        }}
         onSuccess={(user) => {
           setCurrentUser(user);
           setAuthModalOpen(false);
+          setAuthGoogleMode(false);
         }}
       />
     </section>
