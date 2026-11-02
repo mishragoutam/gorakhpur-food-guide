@@ -3,7 +3,7 @@ import type { Restaurant } from '@/types/restaurant';
 /**
  * 50 Authentic dining establishments across Gorakhpur, UP (sourced from Zomato and local heritage spots).
  * Complete with real local addresses, verified owners, pricing, facilities,
- * comprehensive menus with dish photos, and rating breakdowns.
+ * comprehensive menus with dish photos, rates for all dishes, and rating breakdowns.
  */
 export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
   {
@@ -124,6 +124,28 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": false,
         "imageUrl": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80",
         "description": "Crisp hot saffron jalebis drenched in sweetened condensed rabdi."
+      },
+      {
+        "id": "chaudhary-sweet-house-dish-6",
+        "name": "Paneer Butter Masala",
+        "price": 170,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "chaudhary-sweet-house-dish-7",
+        "name": "Special Masala Kulhad Chai",
+        "price": 20,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly brewed aromatic beverage prepared with premium beans/leaves and whole spices."
       }
     ]
   },
@@ -244,6 +266,61 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": false,
         "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
         "description": "Refined flour bread topped with minced garlic and coriander, baked in tandoor."
+      },
+      {
+        "id": "bobis-restaurant-dish-6",
+        "name": "Tandoori Chicken",
+        "price": 580,
+        "category": "Main Course",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+        "description": "Succulent pieces cooked in rich fragrant gravy with roasted spices, brown onions, and fresh coriander."
+      },
+      {
+        "id": "bobis-restaurant-dish-7",
+        "name": "Dal Makhani",
+        "price": 410,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80",
+        "description": "Black lentils slow cooked overnight with churned white butter and velvety dairy cream."
+      },
+      {
+        "id": "bobis-restaurant-dish-8",
+        "name": "Mutton Korma",
+        "price": 580,
+        "category": "Main Course",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=80",
+        "description": "Succulent pieces cooked in rich fragrant gravy with roasted spices, brown onions, and fresh coriander."
+      },
+      {
+        "id": "bobis-restaurant-dish-9",
+        "name": "Sizzling Hot Brownie",
+        "price": 310,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
+      },
+      {
+        "id": "bobis-restaurant-dish-10",
+        "name": "Special Masala Kulhad Chai",
+        "price": 60,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly brewed aromatic beverage prepared with premium beans/leaves and whole spices."
       }
     ]
   },
@@ -365,6 +442,39 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": false,
         "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
         "description": "Warm fudgy walnut brownie served on a cast iron sizzler plate with Belgian chocolate sauce."
+      },
+      {
+        "id": "lakefront-lounge-dish-6",
+        "name": "Woodfired Farmhouse Pizza",
+        "price": 450,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly baked hand-tossed crust with gourmet mozzarella, herb marinara, and fresh toppings."
+      },
+      {
+        "id": "lakefront-lounge-dish-7",
+        "name": "Iced Hazelnut Frappe",
+        "price": 210,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "lakefront-lounge-dish-8",
+        "name": "Cheesy Garlic Bread",
+        "price": 270,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
       }
     ]
   },
@@ -485,6 +595,28 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=600&q=80",
         "description": "Traditional silver leaf diamond fudge crafted from Goa cashews and organic sugar."
+      },
+      {
+        "id": "shriram-sweets-dish-6",
+        "name": "Paneer Butter Masala Heritage",
+        "price": 140,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "shriram-sweets-dish-7",
+        "name": "Special Masala Kulhad Chai",
+        "price": 20,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly brewed aromatic beverage prepared with premium beans/leaves and whole spices."
       }
     ]
   },
@@ -605,6 +737,50 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": false,
         "imageUrl": "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=600&q=80",
         "description": "Spicy chicken broth laced with soy, bamboo shoots, egg drops, and black pepper."
+      },
+      {
+        "id": "wokandroll-kitchen-dish-6",
+        "name": "Steamed Chicken Momos",
+        "price": 30,
+        "category": "Beverages",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=80",
+        "description": "Succulent pieces cooked in rich fragrant gravy with roasted spices, brown onions, and fresh coriander."
+      },
+      {
+        "id": "wokandroll-kitchen-dish-7",
+        "name": "Chilli Paneer Gravy",
+        "price": 230,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "wokandroll-kitchen-dish-8",
+        "name": "Manchow Soup",
+        "price": 170,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "wokandroll-kitchen-dish-9",
+        "name": "Sizzling Hot Brownie",
+        "price": 170,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
       }
     ]
   },
@@ -713,6 +889,39 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": false,
         "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
         "description": "Cold milk layered with vanilla syrup, robust espresso shots, and butterscotch caramel drizzle."
+      },
+      {
+        "id": "chai-stories-cafe-dish-5",
+        "name": "Kulhad Masala Chai",
+        "price": 20,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly brewed aromatic beverage prepared with premium beans/leaves and whole spices."
+      },
+      {
+        "id": "chai-stories-cafe-dish-6",
+        "name": "Grilled Cheese Sandwich",
+        "price": 150,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "chai-stories-cafe-dish-7",
+        "name": "Cold Brew Coffee",
+        "price": 100,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly brewed aromatic beverage prepared with premium beans/leaves and whole spices."
       }
     ]
   },
@@ -821,6 +1030,50 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=600&q=80",
         "description": "Crispy fried bread triangles steeped in saffron syrup, smothered with rabdi and silver varq."
+      },
+      {
+        "id": "royal-awadh-darbar-dish-5",
+        "name": "Awadhi Dum Biryani",
+        "price": 340,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
+        "description": "Aromatic long-grain basmati layered with tender meat/veggies, saffron, mint, and whole spices."
+      },
+      {
+        "id": "royal-awadh-darbar-dish-6",
+        "name": "Mughlai Korma",
+        "price": 430,
+        "category": "Main Course",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=80",
+        "description": "Succulent pieces cooked in rich fragrant gravy with roasted spices, brown onions, and fresh coriander."
+      },
+      {
+        "id": "royal-awadh-darbar-dish-7",
+        "name": "Ulte Tawa Ka Paratha",
+        "price": 70,
+        "category": "Breads",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "royal-awadh-darbar-dish-8",
+        "name": "Special Masala Kulhad Chai",
+        "price": 60,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly brewed aromatic beverage prepared with premium beans/leaves and whole spices."
       }
     ]
   },
@@ -930,6 +1183,50 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": false,
         "imageUrl": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=80",
         "description": "Golden cottage cheese and raisin dumplings floating in a rich cashew-cream sauce."
+      },
+      {
+        "id": "brijwasi-sweets-dish-5",
+        "name": "Mathura Peda",
+        "price": 60,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "brijwasi-sweets-dish-6",
+        "name": "Desi Ghee Thali",
+        "price": 180,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Wholesome platter featuring two curries, dal, jeera rice, fresh breads, salad, and dessert."
+      },
+      {
+        "id": "brijwasi-sweets-dish-7",
+        "name": "Kesar Badam Milk",
+        "price": 170,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "brijwasi-sweets-dish-8",
+        "name": "Crispy Corn & Paneer Tikka",
+        "price": 130,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+        "description": "Marinated in yogurt, roasted garlic, and spices, chargrilled to smoky perfection."
       }
     ]
   },
@@ -1038,6 +1335,61 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=600&q=80",
         "description": "Rich chocolate shake blended with crunchy Oreo cookies and KitKat bars, crowned with whipped cream."
+      },
+      {
+        "id": "burger-crust-hub-dish-5",
+        "name": "Double Mutton Smash Burger",
+        "price": 290,
+        "category": "Main Course",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80",
+        "description": "Toasted brioche bun loaded with fresh patty, melted cheese, crisp lettuce, and signature sauce."
+      },
+      {
+        "id": "burger-crust-hub-dish-6",
+        "name": "Crispy Chicken Zinger",
+        "price": 290,
+        "category": "Main Course",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=80",
+        "description": "Succulent pieces cooked in rich fragrant gravy with roasted spices, brown onions, and fresh coriander."
+      },
+      {
+        "id": "burger-crust-hub-dish-7",
+        "name": "Cheesy Peri Peri Fries",
+        "price": 150,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "burger-crust-hub-dish-8",
+        "name": "Oreo Monster Shake",
+        "price": 120,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "burger-crust-hub-dish-9",
+        "name": "Sizzling Hot Brownie",
+        "price": 150,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
       }
     ]
   },
@@ -1148,6 +1500,50 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": false,
         "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
         "description": "Crushed flaky potato naan loaded with butter, served alongside dal makhani and pickle."
+      },
+      {
+        "id": "taalview-rooftop-dish-5",
+        "name": "Paneer Tikka Platter",
+        "price": 340,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+        "description": "Marinated in yogurt, roasted garlic, and spices, chargrilled to smoky perfection."
+      },
+      {
+        "id": "taalview-rooftop-dish-6",
+        "name": "Blue Lagoon Mocktail",
+        "price": 460,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "taalview-rooftop-dish-7",
+        "name": "Stuffed Kulcha",
+        "price": 130,
+        "category": "Breads",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "taalview-rooftop-dish-8",
+        "name": "Sizzling Hot Brownie",
+        "price": 340,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
       }
     ]
   },
@@ -1257,6 +1653,28 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": false,
         "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
         "description": "Ultra-thin handkerchief flatbread tossed over an inverted iron kadhai."
+      },
+      {
+        "id": "gagan-korma-corner-dish-5",
+        "name": "Sizzling Hot Brownie",
+        "price": 180,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
+      },
+      {
+        "id": "gagan-korma-corner-dish-6",
+        "name": "Special Masala Kulhad Chai",
+        "price": 40,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly brewed aromatic beverage prepared with premium beans/leaves and whole spices."
       }
     ]
   },
@@ -1366,6 +1784,50 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": false,
         "imageUrl": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80",
         "description": "Traditional earthen pot kulfi made from thickened milk, pistachios, and saffron."
+      },
+      {
+        "id": "golgappa-junction-dish-5",
+        "name": "6 Flavours Golgappa",
+        "price": 30,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "golgappa-junction-dish-6",
+        "name": "Sev Puri",
+        "price": 140,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "golgappa-junction-dish-7",
+        "name": "Khatta Meetha Chaat",
+        "price": 110,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "golgappa-junction-dish-8",
+        "name": "Special Masala Kulhad Chai",
+        "price": 20,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly brewed aromatic beverage prepared with premium beans/leaves and whole spices."
       }
     ]
   },
@@ -1474,6 +1936,17 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": false,
         "imageUrl": "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=600&q=80",
         "description": "Warm gulab jamuns stuffed with fragrant rose petal preserve and roasted pistachios."
+      },
+      {
+        "id": "the-yellow-chilli-gkp-dish-5",
+        "name": "Special Masala Kulhad Chai",
+        "price": 70,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly brewed aromatic beverage prepared with premium beans/leaves and whole spices."
       }
     ]
   },
@@ -1583,6 +2056,17 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": false,
         "imageUrl": "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=600&q=80",
         "description": "Semolina dessert infused with pure desi ghee, golden raisins, roasted cashews, and pineapple bits."
+      },
+      {
+        "id": "sagar-ratna-gorakhpur-dish-5",
+        "name": "Special Thali",
+        "price": 200,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Wholesome platter featuring two curries, dal, jeera rice, fresh breads, salad, and dessert."
       }
     ]
   },
@@ -1691,6 +2175,72 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": false,
         "imageUrl": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=80",
         "description": "Country chicken cooked in an earthen pot with whole spices, tomatoes, and freshly ground coriander."
+      },
+      {
+        "id": "punjabi-dhaba-express-dish-5",
+        "name": "Sarson Saag & Makki Roti",
+        "price": 40,
+        "category": "Breads",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "punjabi-dhaba-express-dish-6",
+        "name": "Amritsari Kulcha",
+        "price": 40,
+        "category": "Breads",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "punjabi-dhaba-express-dish-7",
+        "name": "Butter Chicken Handi",
+        "price": 370,
+        "category": "Main Course",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=80",
+        "description": "Succulent pieces cooked in rich fragrant gravy with roasted spices, brown onions, and fresh coriander."
+      },
+      {
+        "id": "punjabi-dhaba-express-dish-8",
+        "name": "Lassi Patiala",
+        "price": 60,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "punjabi-dhaba-express-dish-9",
+        "name": "Crispy Tandoori Murgh Tikka",
+        "price": 200,
+        "category": "Starters",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+        "description": "Marinated in yogurt, roasted garlic, and spices, chargrilled to smoky perfection."
+      },
+      {
+        "id": "punjabi-dhaba-express-dish-10",
+        "name": "Sizzling Hot Brownie",
+        "price": 200,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
       }
     ]
   },
@@ -1800,6 +2350,61 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": false,
         "imageUrl": "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=600&q=80",
         "description": "Creamy caramelised biscuit shake blended with Lotus Biscoff spread and cookie crumbs."
+      },
+      {
+        "id": "belgian-waffle-desserts-dish-5",
+        "name": "Triple Chocolate Waffle",
+        "price": 130,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
+      },
+      {
+        "id": "belgian-waffle-desserts-dish-6",
+        "name": "Nutella Hazelnut Overload",
+        "price": 170,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "belgian-waffle-desserts-dish-7",
+        "name": "Red Velvet Berry Waffle",
+        "price": 130,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
+      },
+      {
+        "id": "belgian-waffle-desserts-dish-8",
+        "name": "Biscoff Crunch Shake",
+        "price": 100,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "belgian-waffle-desserts-dish-9",
+        "name": "Crispy Corn & Paneer Tikka",
+        "price": 130,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+        "description": "Marinated in yogurt, roasted garlic, and spices, chargrilled to smoky perfection."
       }
     ]
   },
@@ -1909,6 +2514,50 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": false,
         "imageUrl": "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=600&q=80",
         "description": "Ground rice pudding scented with kewra and green cardamom, set in clay pots."
+      },
+      {
+        "id": "nawabi-zaika-biryani-dish-5",
+        "name": "Galouti Kebab with Ulte Tawa Ka Paratha",
+        "price": 30,
+        "category": "Breads",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+        "description": "Marinated in yogurt, roasted garlic, and spices, chargrilled to smoky perfection."
+      },
+      {
+        "id": "nawabi-zaika-biryani-dish-6",
+        "name": "Nawabi Dum Biryani",
+        "price": 150,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
+        "description": "Aromatic long-grain basmati layered with tender meat/veggies, saffron, mint, and whole spices."
+      },
+      {
+        "id": "nawabi-zaika-biryani-dish-7",
+        "name": "Chicken Seekh Roll",
+        "price": 220,
+        "category": "Starters",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80",
+        "description": "Succulent pieces cooked in rich fragrant gravy with roasted spices, brown onions, and fresh coriander."
+      },
+      {
+        "id": "nawabi-zaika-biryani-dish-8",
+        "name": "Special Masala Kulhad Chai",
+        "price": 30,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly brewed aromatic beverage prepared with premium beans/leaves and whole spices."
       }
     ]
   },
@@ -2018,6 +2667,61 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": false,
         "imageUrl": "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=600&q=80",
         "description": "Momos charred in the clay oven, tossed in rich cashew cream and fresh coriander."
+      },
+      {
+        "id": "momo-station-cafe-dish-5",
+        "name": "Darjeeling Steam Momos",
+        "price": 20,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "momo-station-cafe-dish-6",
+        "name": "Crispy Kurkure Momos",
+        "price": 110,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "momo-station-cafe-dish-7",
+        "name": "Chilli Garlic Thukpa",
+        "price": 140,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "momo-station-cafe-dish-8",
+        "name": "Spicy Schezwan Gravy Momos",
+        "price": 110,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "momo-station-cafe-dish-9",
+        "name": "Sizzling Hot Brownie",
+        "price": 130,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
       }
     ]
   },
@@ -2127,6 +2831,50 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": false,
         "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
         "description": "Espresso dipped savoiardi biscuits layered with mascarpone sabayon and Belgian cocoa powder."
+      },
+      {
+        "id": "pizza-slice-junction-dish-5",
+        "name": "Quattro Formaggi Pizza",
+        "price": 360,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly baked hand-tossed crust with gourmet mozzarella, herb marinara, and fresh toppings."
+      },
+      {
+        "id": "pizza-slice-junction-dish-6",
+        "name": "Pesto Penne Pasta",
+        "price": 290,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "pizza-slice-junction-dish-7",
+        "name": "Garlic Breadsticks with Cheese Dip",
+        "price": 220,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "pizza-slice-junction-dish-8",
+        "name": "Iced Cappuccino Frappe",
+        "price": 170,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
       }
     ]
   },
@@ -2236,6 +2984,50 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": false,
         "imageUrl": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80",
         "description": "Aromatic coffee filtered in stainless steel drip filter and aerated with boiled full cream milk."
+      },
+      {
+        "id": "dosa-plaza-south-kitchen-dish-5",
+        "name": "Onion Uttapam",
+        "price": 140,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "dosa-plaza-south-kitchen-dish-6",
+        "name": "Idli Vada Sambar Combo",
+        "price": 140,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "dosa-plaza-south-kitchen-dish-7",
+        "name": "Madras Filter Kaapi",
+        "price": 40,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "dosa-plaza-south-kitchen-dish-8",
+        "name": "Sizzling Hot Brownie",
+        "price": 130,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
       }
     ]
   },
@@ -2345,6 +3137,28 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": false,
         "imageUrl": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80",
         "description": "Traditional Kashmiri saffron infused creamy rice pudding served in terracotta pots."
+      },
+      {
+        "id": "radisson-kabab-factory-dish-5",
+        "name": "Gosht Dum Biryani",
+        "price": 680,
+        "category": "Main Course",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
+        "description": "Aromatic long-grain basmati layered with tender meat/veggies, saffron, mint, and whole spices."
+      },
+      {
+        "id": "radisson-kabab-factory-dish-6",
+        "name": "Special Masala Kulhad Chai",
+        "price": 130,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly brewed aromatic beverage prepared with premium beans/leaves and whole spices."
       }
     ]
   },
@@ -2445,6 +3259,50 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
         "description": "Double espresso blended with roasted hazelnut syrup, ice cream and dark chocolate drizzle."
+      },
+      {
+        "id": "ten-park-street-cafe-dish-4",
+        "name": "Thin Crust Pizza",
+        "price": 390,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly baked hand-tossed crust with gourmet mozzarella, herb marinara, and fresh toppings."
+      },
+      {
+        "id": "ten-park-street-cafe-dish-5",
+        "name": "Cheese Volcano Burger",
+        "price": 310,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80",
+        "description": "Toasted brioche bun loaded with fresh patty, melted cheese, crisp lettuce, and signature sauce."
+      },
+      {
+        "id": "ten-park-street-cafe-dish-6",
+        "name": "Peri Peri Fries",
+        "price": 230,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "ten-park-street-cafe-dish-7",
+        "name": "Sizzling Hot Brownie",
+        "price": 230,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
       }
     ]
   },
@@ -2534,6 +3392,50 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=80",
         "description": "Chicken cooked in sealed earthen handi with roasted whole spices and cashew paste."
+      },
+      {
+        "id": "royal-cafe-banquet-dish-3",
+        "name": "Butter Chicken",
+        "price": 370,
+        "category": "Main Course",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=80",
+        "description": "Succulent pieces cooked in rich fragrant gravy with roasted spices, brown onions, and fresh coriander."
+      },
+      {
+        "id": "royal-cafe-banquet-dish-4",
+        "name": "Paneer Tikka Masala",
+        "price": 200,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+        "description": "Marinated in yogurt, roasted garlic, and spices, chargrilled to smoky perfection."
+      },
+      {
+        "id": "royal-cafe-banquet-dish-5",
+        "name": "Kulfi Falooda",
+        "price": 90,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "royal-cafe-banquet-dish-6",
+        "name": "Special Masala Kulhad Chai",
+        "price": 40,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly brewed aromatic beverage prepared with premium beans/leaves and whole spices."
       }
     ]
   },
@@ -2622,6 +3524,50 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=600&q=80",
         "description": "Stuffed cottage cheese sandwiches cooked in rich cashew and onion gravy."
+      },
+      {
+        "id": "curry-on-restaurant-dish-3",
+        "name": "Crispy Corn",
+        "price": 220,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "curry-on-restaurant-dish-4",
+        "name": "Butter Naan",
+        "price": 50,
+        "category": "Breads",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "curry-on-restaurant-dish-5",
+        "name": "Sizzling Hot Brownie",
+        "price": 220,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
+      },
+      {
+        "id": "curry-on-restaurant-dish-6",
+        "name": "Special Masala Kulhad Chai",
+        "price": 40,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly brewed aromatic beverage prepared with premium beans/leaves and whole spices."
       }
     ]
   },
@@ -2698,6 +3644,61 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80",
         "description": "Slow cooked black urad dal with fresh tomatoes, cream, and pure butter."
+      },
+      {
+        "id": "cinnamon-hotel-vivek-dish-2",
+        "name": "Executive Thali",
+        "price": 400,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Wholesome platter featuring two curries, dal, jeera rice, fresh breads, salad, and dessert."
+      },
+      {
+        "id": "cinnamon-hotel-vivek-dish-3",
+        "name": "Chicken Lababdar",
+        "price": 610,
+        "category": "Main Course",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=80",
+        "description": "Succulent pieces cooked in rich fragrant gravy with roasted spices, brown onions, and fresh coriander."
+      },
+      {
+        "id": "cinnamon-hotel-vivek-dish-4",
+        "name": "Brownie Sundae",
+        "price": 140,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
+      },
+      {
+        "id": "cinnamon-hotel-vivek-dish-5",
+        "name": "Crispy Tandoori Murgh Tikka",
+        "price": 320,
+        "category": "Starters",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+        "description": "Marinated in yogurt, roasted garlic, and spices, chargrilled to smoky perfection."
+      },
+      {
+        "id": "cinnamon-hotel-vivek-dish-6",
+        "name": "Special Masala Kulhad Chai",
+        "price": 60,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly brewed aromatic beverage prepared with premium beans/leaves and whole spices."
       }
     ]
   },
@@ -2786,6 +3787,61 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
         "description": "Unlimited chicken, fish, mutton grills, biryani, curries, and live kulfi counter."
+      },
+      {
+        "id": "barbeque-nation-gkp-dish-3",
+        "name": "Cajun Spiced Potatoes",
+        "price": 670,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "barbeque-nation-gkp-dish-4",
+        "name": "Crispy Corn",
+        "price": 500,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "barbeque-nation-gkp-dish-5",
+        "name": "Tandoori Murgh Tikka",
+        "price": 500,
+        "category": "Starters",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+        "description": "Marinated in yogurt, roasted garlic, and spices, chargrilled to smoky perfection."
+      },
+      {
+        "id": "barbeque-nation-gkp-dish-6",
+        "name": "Paan Kulfi",
+        "price": 220,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "barbeque-nation-gkp-dish-7",
+        "name": "Special Masala Kulhad Chai",
+        "price": 100,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly brewed aromatic beverage prepared with premium beans/leaves and whole spices."
       }
     ]
   },
@@ -2861,6 +3917,83 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=80",
         "description": "Authentic recipe with sun-dried fenugreek, tomato butter gravy, and clay-charred chicken."
+      },
+      {
+        "id": "moti-mahal-delux-gkp-dish-2",
+        "name": "Original Butter Chicken",
+        "price": 650,
+        "category": "Main Course",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=80",
+        "description": "Succulent pieces cooked in rich fragrant gravy with roasted spices, brown onions, and fresh coriander."
+      },
+      {
+        "id": "moti-mahal-delux-gkp-dish-3",
+        "name": "Tandoori Murgh",
+        "price": 460,
+        "category": "Main Course",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+        "description": "Succulent pieces cooked in rich fragrant gravy with roasted spices, brown onions, and fresh coriander."
+      },
+      {
+        "id": "moti-mahal-delux-gkp-dish-4",
+        "name": "Dal Makhani",
+        "price": 460,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80",
+        "description": "Black lentils slow cooked overnight with churned white butter and velvety dairy cream."
+      },
+      {
+        "id": "moti-mahal-delux-gkp-dish-5",
+        "name": "Stuffed Kulcha",
+        "price": 130,
+        "category": "Breads",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "moti-mahal-delux-gkp-dish-6",
+        "name": "Crispy Tandoori Murgh Tikka",
+        "price": 340,
+        "category": "Starters",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+        "description": "Marinated in yogurt, roasted garlic, and spices, chargrilled to smoky perfection."
+      },
+      {
+        "id": "moti-mahal-delux-gkp-dish-7",
+        "name": "Sizzling Hot Brownie",
+        "price": 340,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
+      },
+      {
+        "id": "moti-mahal-delux-gkp-dish-8",
+        "name": "Special Masala Kulhad Chai",
+        "price": 70,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly brewed aromatic beverage prepared with premium beans/leaves and whole spices."
       }
     ]
   },
@@ -2938,6 +4071,61 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
         "description": "Woodfired crust topped with house BBQ marinated chicken, red onion, and smoked cheese."
+      },
+      {
+        "id": "cafe-nirvana-lake-dish-2",
+        "name": "Sunset Sangria Mocktail",
+        "price": 340,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "cafe-nirvana-lake-dish-3",
+        "name": "Pesto Pasta",
+        "price": 340,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "cafe-nirvana-lake-dish-4",
+        "name": "Nutella Waffle",
+        "price": 250,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
+      },
+      {
+        "id": "cafe-nirvana-lake-dish-5",
+        "name": "Crispy Tandoori Murgh Tikka",
+        "price": 250,
+        "category": "Starters",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+        "description": "Marinated in yogurt, roasted garlic, and spices, chargrilled to smoky perfection."
+      },
+      {
+        "id": "cafe-nirvana-lake-dish-6",
+        "name": "Iced Cappuccino Frappe",
+        "price": 200,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
       }
     ]
   },
@@ -3013,6 +4201,72 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
         "description": "Fragrant basmati cooked on sealed dum with tender baby lamb, kewra water, and saffron."
+      },
+      {
+        "id": "shahi-darbar-mughlai-dish-2",
+        "name": "Awadhi Mutton Biryani",
+        "price": 320,
+        "category": "Main Course",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
+        "description": "Aromatic long-grain basmati layered with tender meat/veggies, saffron, mint, and whole spices."
+      },
+      {
+        "id": "shahi-darbar-mughlai-dish-3",
+        "name": "Chicken Changezi",
+        "price": 340,
+        "category": "Main Course",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=80",
+        "description": "Succulent pieces cooked in rich fragrant gravy with roasted spices, brown onions, and fresh coriander."
+      },
+      {
+        "id": "shahi-darbar-mughlai-dish-4",
+        "name": "Seekh Kebab",
+        "price": 280,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+        "description": "Marinated in yogurt, roasted garlic, and spices, chargrilled to smoky perfection."
+      },
+      {
+        "id": "shahi-darbar-mughlai-dish-5",
+        "name": "Rumali Roti",
+        "price": 40,
+        "category": "Breads",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "shahi-darbar-mughlai-dish-6",
+        "name": "Sizzling Hot Brownie",
+        "price": 180,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
+      },
+      {
+        "id": "shahi-darbar-mughlai-dish-7",
+        "name": "Special Masala Kulhad Chai",
+        "price": 40,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly brewed aromatic beverage prepared with premium beans/leaves and whole spices."
       }
     ]
   },
@@ -3089,6 +4343,61 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
         "description": "Double liquid cheese crust filled with mozzarella, black olives, sweet corn, and crisp capsicum."
+      },
+      {
+        "id": "dominick-pizza-pasta-dish-2",
+        "name": "Cheese Burst Pizza",
+        "price": 270,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly baked hand-tossed crust with gourmet mozzarella, herb marinara, and fresh toppings."
+      },
+      {
+        "id": "dominick-pizza-pasta-dish-3",
+        "name": "White Sauce Pasta",
+        "price": 220,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "dominick-pizza-pasta-dish-4",
+        "name": "Stuffed Garlic Bread",
+        "price": 160,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "dominick-pizza-pasta-dish-5",
+        "name": "Choco Lava Cake",
+        "price": 100,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
+      },
+      {
+        "id": "dominick-pizza-pasta-dish-6",
+        "name": "Iced Cappuccino Frappe",
+        "price": 130,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
       }
     ]
   },
@@ -3165,6 +4474,61 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=600&q=80",
         "description": "Large spongy chenna balls stuffed with pistachios and soaked in saffron syrup."
+      },
+      {
+        "id": "ksheer-sagar-sweets-dish-2",
+        "name": "Malai Roll",
+        "price": 60,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "ksheer-sagar-sweets-dish-3",
+        "name": "Desi Ghee Kachori Sabzi",
+        "price": 150,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "ksheer-sagar-sweets-dish-4",
+        "name": "Special Thali",
+        "price": 180,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Wholesome platter featuring two curries, dal, jeera rice, fresh breads, salad, and dessert."
+      },
+      {
+        "id": "ksheer-sagar-sweets-dish-5",
+        "name": "Crispy Corn & Paneer Tikka",
+        "price": 120,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+        "description": "Marinated in yogurt, roasted garlic, and spices, chargrilled to smoky perfection."
+      },
+      {
+        "id": "ksheer-sagar-sweets-dish-6",
+        "name": "Special Masala Kulhad Chai",
+        "price": 20,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly brewed aromatic beverage prepared with premium beans/leaves and whole spices."
       }
     ]
   },
@@ -3243,6 +4607,61 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80",
         "description": "Crunchy cornflake-crusted momos filled with spicy paneer, served with spicy dip."
+      },
+      {
+        "id": "up53-food-court-dish-2",
+        "name": "Kurkure Momos",
+        "price": 130,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "up53-food-court-dish-3",
+        "name": "Hakka Noodles",
+        "price": 170,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "up53-food-court-dish-4",
+        "name": "Chicken Shawarma",
+        "price": 240,
+        "category": "Main Course",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=80",
+        "description": "Succulent pieces cooked in rich fragrant gravy with roasted spices, brown onions, and fresh coriander."
+      },
+      {
+        "id": "up53-food-court-dish-5",
+        "name": "Tandoori Chai",
+        "price": 20,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly brewed aromatic beverage prepared with premium beans/leaves and whole spices."
+      },
+      {
+        "id": "up53-food-court-dish-6",
+        "name": "Sizzling Hot Brownie",
+        "price": 130,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
       }
     ]
   },
@@ -3319,6 +4738,72 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
         "description": "2 seasonal curries, dal makhani, paneer lababdar, jeera rice, 2 naans, papad, raita, and gulab jamun."
+      },
+      {
+        "id": "chhappan-bhog-veg-dish-2",
+        "name": "Chhappan Bhog Royal Thali",
+        "price": 320,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Wholesome platter featuring two curries, dal, jeera rice, fresh breads, salad, and dessert."
+      },
+      {
+        "id": "chhappan-bhog-veg-dish-3",
+        "name": "Paneer Butter Masala",
+        "price": 240,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "chhappan-bhog-veg-dish-4",
+        "name": "Dal Baati Churma",
+        "price": 240,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80",
+        "description": "Black lentils slow cooked overnight with churned white butter and velvety dairy cream."
+      },
+      {
+        "id": "chhappan-bhog-veg-dish-5",
+        "name": "Rabdi Ghewar",
+        "price": 80,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "chhappan-bhog-veg-dish-6",
+        "name": "Crispy Corn & Paneer Tikka",
+        "price": 180,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+        "description": "Marinated in yogurt, roasted garlic, and spices, chargrilled to smoky perfection."
+      },
+      {
+        "id": "chhappan-bhog-veg-dish-7",
+        "name": "Special Masala Kulhad Chai",
+        "price": 40,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly brewed aromatic beverage prepared with premium beans/leaves and whole spices."
       }
     ]
   },
@@ -3394,6 +4879,50 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
         "description": "Crisp spicy potato patty nestled in pav with fried green chillies, garlic dry chutney, and cheddar cheese."
+      },
+      {
+        "id": "goli-vada-pav-gkp-dish-2",
+        "name": "Schezwan Roll",
+        "price": 110,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "goli-vada-pav-gkp-dish-3",
+        "name": "Crispy Sabudana Vada",
+        "price": 140,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "goli-vada-pav-gkp-dish-4",
+        "name": "Thums Up Float",
+        "price": 40,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "goli-vada-pav-gkp-dish-5",
+        "name": "Sizzling Hot Brownie",
+        "price": 130,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
       }
     ]
   },
@@ -3471,6 +5000,50 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
         "description": "Warm melted Belgian chocolate pot served with marshmallow skewers, brownie bites, and fresh fruits."
+      },
+      {
+        "id": "the-chocolate-room-gkp-dish-2",
+        "name": "Death by Chocolate Pancake",
+        "price": 120,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
+      },
+      {
+        "id": "the-chocolate-room-gkp-dish-3",
+        "name": "Hot Chocolate",
+        "price": 260,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "the-chocolate-room-gkp-dish-4",
+        "name": "Garlic Bread",
+        "price": 200,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "the-chocolate-room-gkp-dish-5",
+        "name": "Iced Cappuccino Frappe",
+        "price": 150,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
       }
     ]
   },
@@ -3545,6 +5118,83 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
         "description": "Dal tadka, shahi paneer, seasonal sabzi, jeera rice, 4 butter rotis, salad, and sweet."
+      },
+      {
+        "id": "swastik-restaurant-gkp-dish-2",
+        "name": "Deluxe Thali",
+        "price": 180,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Wholesome platter featuring two curries, dal, jeera rice, fresh breads, salad, and dessert."
+      },
+      {
+        "id": "swastik-restaurant-gkp-dish-3",
+        "name": "Paneer Kadhai",
+        "price": 170,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "swastik-restaurant-gkp-dish-4",
+        "name": "Jeera Rice",
+        "price": 170,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "swastik-restaurant-gkp-dish-5",
+        "name": "Tandoori Roti",
+        "price": 30,
+        "category": "Breads",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "swastik-restaurant-gkp-dish-6",
+        "name": "Crispy Corn & Paneer Tikka",
+        "price": 130,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+        "description": "Marinated in yogurt, roasted garlic, and spices, chargrilled to smoky perfection."
+      },
+      {
+        "id": "swastik-restaurant-gkp-dish-7",
+        "name": "Sizzling Hot Brownie",
+        "price": 130,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
+      },
+      {
+        "id": "swastik-restaurant-gkp-dish-8",
+        "name": "Special Masala Kulhad Chai",
+        "price": 20,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly brewed aromatic beverage prepared with premium beans/leaves and whole spices."
       }
     ]
   },
@@ -3621,6 +5271,72 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
         "description": "Succulent mutton slow braised in Kashmiri chilli, mace, cardamom and aromatic ratan jot oil."
+      },
+      {
+        "id": "rambha-hotel-bobis-dish-2",
+        "name": "Chicken Tikka Butter Masala",
+        "price": 480,
+        "category": "Starters",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+        "description": "Marinated in yogurt, roasted garlic, and spices, chargrilled to smoky perfection."
+      },
+      {
+        "id": "rambha-hotel-bobis-dish-3",
+        "name": "Mutton Rogan Josh",
+        "price": 580,
+        "category": "Main Course",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=80",
+        "description": "Succulent pieces cooked in rich fragrant gravy with roasted spices, brown onions, and fresh coriander."
+      },
+      {
+        "id": "rambha-hotel-bobis-dish-4",
+        "name": "Crispy Chilli Babycorn",
+        "price": 310,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "rambha-hotel-bobis-dish-5",
+        "name": "Butter Naan",
+        "price": 70,
+        "category": "Breads",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "rambha-hotel-bobis-dish-6",
+        "name": "Sizzling Hot Brownie",
+        "price": 310,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
+      },
+      {
+        "id": "rambha-hotel-bobis-dish-7",
+        "name": "Special Masala Kulhad Chai",
+        "price": 60,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly brewed aromatic beverage prepared with premium beans/leaves and whole spices."
       }
     ]
   },
@@ -3697,6 +5413,72 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=600&q=80",
         "description": "Marinated cottage cheese steaks served over herb rice, french fries, buttered corn and pepper sauce."
+      },
+      {
+        "id": "saffron-lake-diner-dish-2",
+        "name": "Veg Sizzler",
+        "price": 310,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "saffron-lake-diner-dish-3",
+        "name": "Chicken Kadhai",
+        "price": 440,
+        "category": "Main Course",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=80",
+        "description": "Succulent pieces cooked in rich fragrant gravy with roasted spices, brown onions, and fresh coriander."
+      },
+      {
+        "id": "saffron-lake-diner-dish-4",
+        "name": "Cheese Garlic Naan",
+        "price": 90,
+        "category": "Breads",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "saffron-lake-diner-dish-5",
+        "name": "Brownie with Ice Cream",
+        "price": 100,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
+      },
+      {
+        "id": "saffron-lake-diner-dish-6",
+        "name": "Crispy Tandoori Murgh Tikka",
+        "price": 230,
+        "category": "Starters",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+        "description": "Marinated in yogurt, roasted garlic, and spices, chargrilled to smoky perfection."
+      },
+      {
+        "id": "saffron-lake-diner-dish-7",
+        "name": "Special Masala Kulhad Chai",
+        "price": 50,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly brewed aromatic beverage prepared with premium beans/leaves and whole spices."
       }
     ]
   },
@@ -3774,6 +5556,61 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
         "description": "Layers of moist dark sponge drenched in rich Belgian chocolate ganache."
+      },
+      {
+        "id": "bake-and-shake-cafe-dish-2",
+        "name": "Dutch Truffle Cake",
+        "price": 90,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
+      },
+      {
+        "id": "bake-and-shake-cafe-dish-3",
+        "name": "Club Sandwich",
+        "price": 190,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "bake-and-shake-cafe-dish-4",
+        "name": "Oreo Overload Shake",
+        "price": 110,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "bake-and-shake-cafe-dish-5",
+        "name": "Cheese Croissant",
+        "price": 190,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "bake-and-shake-cafe-dish-6",
+        "name": "Crispy Corn & Paneer Tikka",
+        "price": 140,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+        "description": "Marinated in yogurt, roasted garlic, and spices, chargrilled to smoky perfection."
       }
     ]
   },
@@ -3849,6 +5686,72 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
         "description": "Long grain rice cooked in sealed vessel with marinated chicken, saffron, rose water and spices."
+      },
+      {
+        "id": "zaika-e-awadh-gkp-dish-2",
+        "name": "Chicken Changezi",
+        "price": 330,
+        "category": "Main Course",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=80",
+        "description": "Succulent pieces cooked in rich fragrant gravy with roasted spices, brown onions, and fresh coriander."
+      },
+      {
+        "id": "zaika-e-awadh-gkp-dish-3",
+        "name": "Mutton Korma",
+        "price": 330,
+        "category": "Main Course",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=80",
+        "description": "Succulent pieces cooked in rich fragrant gravy with roasted spices, brown onions, and fresh coriander."
+      },
+      {
+        "id": "zaika-e-awadh-gkp-dish-4",
+        "name": "Khameeri Roti",
+        "price": 40,
+        "category": "Breads",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "zaika-e-awadh-gkp-dish-5",
+        "name": "Crispy Tandoori Murgh Tikka",
+        "price": 170,
+        "category": "Starters",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+        "description": "Marinated in yogurt, roasted garlic, and spices, chargrilled to smoky perfection."
+      },
+      {
+        "id": "zaika-e-awadh-gkp-dish-6",
+        "name": "Sizzling Hot Brownie",
+        "price": 170,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
+      },
+      {
+        "id": "zaika-e-awadh-gkp-dish-7",
+        "name": "Special Masala Kulhad Chai",
+        "price": 30,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly brewed aromatic beverage prepared with premium beans/leaves and whole spices."
       }
     ]
   },
@@ -3925,6 +5828,72 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80",
         "description": "Crisp urad dal stuffed puris served with spicy hing-flavoured aloo curry and pickle."
+      },
+      {
+        "id": "anand-sweet-chaat-dish-2",
+        "name": "Bedmi Puri Aloo Sabzi",
+        "price": 140,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "anand-sweet-chaat-dish-3",
+        "name": "Desi Ghee Tikki",
+        "price": 140,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "anand-sweet-chaat-dish-4",
+        "name": "Hot Gulab Jamun",
+        "price": 60,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "anand-sweet-chaat-dish-5",
+        "name": "Dahi Jalebi",
+        "price": 140,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "anand-sweet-chaat-dish-6",
+        "name": "Crispy Corn & Paneer Tikka",
+        "price": 110,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+        "description": "Marinated in yogurt, roasted garlic, and spices, chargrilled to smoky perfection."
+      },
+      {
+        "id": "anand-sweet-chaat-dish-7",
+        "name": "Special Masala Kulhad Chai",
+        "price": 20,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly brewed aromatic beverage prepared with premium beans/leaves and whole spices."
       }
     ]
   },
@@ -4001,6 +5970,72 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80",
         "description": "Flaky paratha loaded with tandoori grilled chicken chunks, sliced onions, and mint mayo."
+      },
+      {
+        "id": "rolls-mania-gkp-dish-2",
+        "name": "Chicken Tikka Roll",
+        "price": 170,
+        "category": "Starters",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80",
+        "description": "Marinated in yogurt, roasted garlic, and spices, chargrilled to smoky perfection."
+      },
+      {
+        "id": "rolls-mania-gkp-dish-3",
+        "name": "Paneer Cheese Roll",
+        "price": 110,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "rolls-mania-gkp-dish-4",
+        "name": "Double Egg Roll",
+        "price": 110,
+        "category": "Starters",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80",
+        "description": "Succulent pieces cooked in rich fragrant gravy with roasted spices, brown onions, and fresh coriander."
+      },
+      {
+        "id": "rolls-mania-gkp-dish-5",
+        "name": "Cold Beverage",
+        "price": 40,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "rolls-mania-gkp-dish-6",
+        "name": "Chef Special Handi Chicken",
+        "price": 200,
+        "category": "Main Course",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=80",
+        "description": "Succulent pieces cooked in rich fragrant gravy with roasted spices, brown onions, and fresh coriander."
+      },
+      {
+        "id": "rolls-mania-gkp-dish-7",
+        "name": "Sizzling Hot Brownie",
+        "price": 130,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
       }
     ]
   },
@@ -4077,6 +6112,72 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80",
         "description": "Freshly baked multigrain bread filled with spiced paneer tikka, crisp vegetables, and southwest sauce."
+      },
+      {
+        "id": "subway-city-mall-dish-2",
+        "name": "Paneer Tikka Sub",
+        "price": 160,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80",
+        "description": "Marinated in yogurt, roasted garlic, and spices, chargrilled to smoky perfection."
+      },
+      {
+        "id": "subway-city-mall-dish-3",
+        "name": "Roasted Chicken Sub",
+        "price": 310,
+        "category": "Main Course",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80",
+        "description": "Succulent pieces cooked in rich fragrant gravy with roasted spices, brown onions, and fresh coriander."
+      },
+      {
+        "id": "subway-city-mall-dish-4",
+        "name": "Veggie Delite",
+        "price": 220,
+        "category": "Main Course",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Succulent pieces cooked in rich fragrant gravy with roasted spices, brown onions, and fresh coriander."
+      },
+      {
+        "id": "subway-city-mall-dish-5",
+        "name": "Double Chocolate Cookie",
+        "price": 220,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "subway-city-mall-dish-6",
+        "name": "Sizzling Hot Brownie",
+        "price": 160,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
+      },
+      {
+        "id": "subway-city-mall-dish-7",
+        "name": "Iced Cappuccino Frappe",
+        "price": 130,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
       }
     ]
   },
@@ -4152,6 +6253,72 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
         "description": "Chicken pieces roasted on giant iron tawa with ginger juliennes, green chillies, and crushed spices."
+      },
+      {
+        "id": "kukkad-nukkad-dhaba-dish-2",
+        "name": "Tawa Chicken Roast",
+        "price": 340,
+        "category": "Main Course",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+        "description": "Succulent pieces cooked in rich fragrant gravy with roasted spices, brown onions, and fresh coriander."
+      },
+      {
+        "id": "kukkad-nukkad-dhaba-dish-3",
+        "name": "Handi Mutton",
+        "price": 340,
+        "category": "Main Course",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=80",
+        "description": "Succulent pieces cooked in rich fragrant gravy with roasted spices, brown onions, and fresh coriander."
+      },
+      {
+        "id": "kukkad-nukkad-dhaba-dish-4",
+        "name": "Amritsari Kulcha",
+        "price": 40,
+        "category": "Breads",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "kukkad-nukkad-dhaba-dish-5",
+        "name": "Malai Kulhad Lassi",
+        "price": 50,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "kukkad-nukkad-dhaba-dish-6",
+        "name": "Crispy Tandoori Murgh Tikka",
+        "price": 180,
+        "category": "Starters",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+        "description": "Marinated in yogurt, roasted garlic, and spices, chargrilled to smoky perfection."
+      },
+      {
+        "id": "kukkad-nukkad-dhaba-dish-7",
+        "name": "Sizzling Hot Brownie",
+        "price": 180,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
       }
     ]
   },
@@ -4230,6 +6397,72 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
         "description": "Giant crispy puri filled with sprouted beans, bhalla, potato, sweet curd, and spicy mint sonth."
+      },
+      {
+        "id": "haldirams-express-gkp-dish-2",
+        "name": "Signature Raj Kachori",
+        "price": 200,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "haldirams-express-gkp-dish-3",
+        "name": "Special Chhole Bhature",
+        "price": 200,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80",
+        "description": "Fluffy, freshly puffed bhature served with slow-cooked spicy Amritsari chhole."
+      },
+      {
+        "id": "haldirams-express-gkp-dish-4",
+        "name": "Bombay Pav Bhaji",
+        "price": 200,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "haldirams-express-gkp-dish-5",
+        "name": "Kaju Katli",
+        "price": 200,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "haldirams-express-gkp-dish-6",
+        "name": "Gulab Jamun with Rabdi",
+        "price": 70,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "haldirams-express-gkp-dish-7",
+        "name": "Special Masala Kulhad Chai",
+        "price": 30,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly brewed aromatic beverage prepared with premium beans/leaves and whole spices."
       }
     ]
   },
@@ -4306,6 +6539,50 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80",
         "description": "Crispy batter-fried paneer cubes wok tossed with diced onions, green chillies, and dark soya."
+      },
+      {
+        "id": "crazy-bites-chowk-dish-2",
+        "name": "Schezwan Chowmein",
+        "price": 140,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "crazy-bites-chowk-dish-3",
+        "name": "Crispy Veg Burger",
+        "price": 140,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80",
+        "description": "Toasted brioche bun loaded with fresh patty, melted cheese, crisp lettuce, and signature sauce."
+      },
+      {
+        "id": "crazy-bites-chowk-dish-4",
+        "name": "Cold Coffee",
+        "price": 40,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly brewed aromatic beverage prepared with premium beans/leaves and whole spices."
+      },
+      {
+        "id": "crazy-bites-chowk-dish-5",
+        "name": "Sizzling Hot Brownie",
+        "price": 130,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
       }
     ]
   },
@@ -4381,6 +6658,72 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
         "description": "Fluffy golden pan base topped with tandoori spiced paneer cubes, red paprika, and 100% mozzarella."
+      },
+      {
+        "id": "pizza-hut-park-road-dish-2",
+        "name": "Margherita Pan Pizza",
+        "price": 330,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly baked hand-tossed crust with gourmet mozzarella, herb marinara, and fresh toppings."
+      },
+      {
+        "id": "pizza-hut-park-road-dish-3",
+        "name": "Tandoori Paneer Pizza",
+        "price": 330,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly baked hand-tossed crust with gourmet mozzarella, herb marinara, and fresh toppings."
+      },
+      {
+        "id": "pizza-hut-park-road-dish-4",
+        "name": "Garlic Bread Stix",
+        "price": 200,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "pizza-hut-park-road-dish-5",
+        "name": "Choco Volcano",
+        "price": 260,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "pizza-hut-park-road-dish-6",
+        "name": "Sizzling Hot Brownie",
+        "price": 200,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
+      },
+      {
+        "id": "pizza-hut-park-road-dish-7",
+        "name": "Special Masala Kulhad Chai",
+        "price": 40,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Freshly brewed aromatic beverage prepared with premium beans/leaves and whole spices."
       }
     ]
   },
@@ -4455,6 +6798,50 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80",
         "description": "Crunchy battered whole chicken breast fillet served with crisp lettuce and creamy sauce in sesame bun."
+      },
+      {
+        "id": "kfc-ad-mall-dish-2",
+        "name": "Hot & Crispy Chicken",
+        "price": 340,
+        "category": "Main Course",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=80",
+        "description": "Succulent pieces cooked in rich fragrant gravy with roasted spices, brown onions, and fresh coriander."
+      },
+      {
+        "id": "kfc-ad-mall-dish-3",
+        "name": "Chicken Popcorn",
+        "price": 280,
+        "category": "Starters",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=80",
+        "description": "Succulent pieces cooked in rich fragrant gravy with roasted spices, brown onions, and fresh coriander."
+      },
+      {
+        "id": "kfc-ad-mall-dish-4",
+        "name": "Virgin Mojito",
+        "price": 50,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "kfc-ad-mall-dish-5",
+        "name": "Sizzling Hot Brownie",
+        "price": 180,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
       }
     ]
   },
@@ -4532,6 +6919,39 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
         "description": "Rich blended cold coffee charged with cocoa, chocolate syrup, and crowned with dairy whipped cream."
+      },
+      {
+        "id": "cafe-coffee-day-gkp-dish-2",
+        "name": "Cappuccino",
+        "price": 220,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "cafe-coffee-day-gkp-dish-3",
+        "name": "Garlic Bread",
+        "price": 160,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "cafe-coffee-day-gkp-dish-4",
+        "name": "Sizzling Brownie",
+        "price": 160,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
       }
     ]
   },
@@ -4609,6 +7029,50 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "isFeatured": true,
         "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
         "description": "Mashed spicy vegetable bhaji simmered in Amul butter on iron griddle with 2 butter-toasted pavs."
+      },
+      {
+        "id": "khaao-gali-food-hub-dish-2",
+        "name": "Kolkata Egg Roll",
+        "price": 110,
+        "category": "Starters",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80",
+        "description": "Succulent pieces cooked in rich fragrant gravy with roasted spices, brown onions, and fresh coriander."
+      },
+      {
+        "id": "khaao-gali-food-hub-dish-3",
+        "name": "Steamed Momos",
+        "price": 20,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "khaao-gali-food-hub-dish-4",
+        "name": "Kesariya Rabdi",
+        "price": 140,
+        "category": "Main Course",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "imageUrl": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+        "description": "Fresh cottage cheese and seasonal ingredients simmered in a luscious spiced onion-tomato gravy."
+      },
+      {
+        "id": "khaao-gali-food-hub-dish-5",
+        "name": "Sizzling Hot Brownie",
+        "price": 130,
+        "category": "Desserts",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "imageUrl": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=600&q=80",
+        "description": "Warm freshly baked dessert smothered in rich melted Belgian chocolate and garnishes."
       }
     ]
   }

@@ -264,9 +264,12 @@ export default function RestaurantDetailsPage() {
 
             <p className="mt-5 text-sm leading-relaxed text-ink-600 sm:text-base">{restaurant.description}</p>
 
-            <div className="mt-5 flex items-center gap-3 text-sm text-ink-700">
-              <span className="font-bold text-ink-900">{budget.symbol}</span>
-              <span>About {formatRupees(restaurant.costForTwo)} for two</span>
+            <div className="mt-5 flex flex-wrap items-center gap-2.5 text-sm text-ink-700">
+              <span className="rounded-md bg-cream-200 px-2 py-0.5 text-xs font-bold text-ink-900">
+                {budget.symbol}
+              </span>
+              <span className="font-bold text-ink-900">{formatRupees(restaurant.costForTwo)}</span>
+              <span className="text-ink-600 font-medium">for two people</span>
               <span>•</span>
               <span className="flex items-center gap-1">
                 <Clock size={15} className="text-ink-500" />
@@ -310,13 +313,28 @@ export default function RestaurantDetailsPage() {
               </a>
             </div>
 
-            <h2 className="mt-8 text-sm font-semibold tracking-wide text-ink-600 uppercase">Popular dishes</h2>
+            <h2 className="mt-8 text-sm font-semibold tracking-wide text-ink-600 uppercase">Popular dishes & rates</h2>
             <ul role="list" className="mt-3 flex flex-wrap gap-2">
-              {restaurant.popularDishes.map((dish: string) => (
-                <li key={dish}>
-                  <Badge className="px-3 py-1.5 text-sm">{dish}</Badge>
-                </li>
-              ))}
+              {restaurant.popularDishes.map((dish: string) => {
+                const menuItem = restaurant.menu?.find(
+                  (m) =>
+                    m.name.toLowerCase() === dish.toLowerCase() ||
+                    m.name.toLowerCase().includes(dish.toLowerCase()) ||
+                    dish.toLowerCase().includes(m.name.toLowerCase()),
+                );
+                return (
+                  <li key={dish}>
+                    <Badge className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium">
+                      <span>{dish}</span>
+                      {menuItem?.price ? (
+                        <span className="rounded-full bg-accent-100/90 px-2 py-0.5 text-xs font-bold text-accent-800">
+                          ₹{menuItem.price}
+                        </span>
+                      ) : null}
+                    </Badge>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>
@@ -329,29 +347,40 @@ export default function RestaurantDetailsPage() {
             <div className="rounded-3xl border border-cream-300 bg-white p-6 sm:p-8 shadow-sm">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-xl font-bold text-ink-900">Menu Highlights</h3>
-                  <p className="text-xs text-ink-500">Curated dishes from {restaurant.name}</p>
+                  <h3 className="text-xl font-bold text-ink-900">Menu Highlights & Rates</h3>
+                  <p className="text-xs text-ink-500">Authentic dishes and live prices from {restaurant.name}</p>
                 </div>
                 <span className="rounded-full bg-cream-100 px-3 py-1 text-xs font-semibold text-ink-700">
                   {restaurant.menu?.length || 0} items
                 </span>
               </div>
 
-              <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              <div className="mt-6 grid gap-3.5 sm:grid-cols-2">
                 {restaurant.menu && restaurant.menu.length > 0 ? (
                   restaurant.menu.map((item: MenuItem) => (
                     <div
                       key={item.id}
-                      className="flex flex-col justify-between rounded-2xl border border-cream-200 bg-cream-50/50 p-4 transition hover:bg-cream-50"
+                      className="flex flex-col justify-between rounded-2xl border border-cream-200 bg-white p-4 shadow-2xs transition hover:border-cream-300 hover:shadow-xs"
                     >
-                      <div>
-                        <div className="flex items-start justify-between gap-2">
-                          <h4 className="text-sm font-bold text-ink-900">{item.name}</h4>
-                          <span className="shrink-0 text-sm font-bold text-accent-700">₹{item.price}</span>
+                      <div className="flex gap-3">
+                        {item.imageUrl ? (
+                          <img
+                            src={item.imageUrl}
+                            alt={item.name}
+                            className="size-16 shrink-0 rounded-xl object-cover ring-1 ring-ink-900/5 shadow-2xs"
+                          />
+                        ) : null}
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-start justify-between gap-2">
+                            <h4 className="text-sm font-bold text-ink-900 truncate">{item.name}</h4>
+                            <span className="shrink-0 rounded-full bg-accent-50 px-2.5 py-0.5 text-xs font-extrabold text-accent-800 ring-1 ring-accent-200">
+                              ₹{item.price}
+                            </span>
+                          </div>
+                          <p className="mt-1 text-xs text-ink-600 line-clamp-2">{item.description}</p>
                         </div>
-                        <p className="mt-1 text-xs text-ink-600 line-clamp-2">{item.description}</p>
                       </div>
-                      <div className="mt-3 flex items-center justify-between text-[11px] font-semibold">
+                      <div className="mt-3 flex items-center justify-between border-t border-cream-100 pt-2 text-[11px] font-semibold">
                         <span
                           className={
                             item.diet === 'veg' ? 'text-emerald-700' : 'text-rose-700'
@@ -359,7 +388,7 @@ export default function RestaurantDetailsPage() {
                         >
                           {item.diet === 'veg' ? '● Pure Veg' : '▲ Non-Veg'}
                         </span>
-                        <span className="text-ink-500">{item.category}</span>
+                        <span className="rounded-md bg-cream-100 px-2 py-0.5 text-ink-600">{item.category}</span>
                       </div>
                     </div>
                   ))

@@ -73,19 +73,24 @@ export function RestaurantCard({ restaurant }: RestaurantCardProps) {
             )}
           </div>
 
-          <div className="mt-auto flex items-center justify-between gap-3 pt-5">
-            <p className="text-sm text-ink-600">
-              <span aria-hidden="true" className="mr-1.5 font-semibold text-ink-900">
-                {budget.symbol}
-              </span>
-              About {formatRupees(restaurant.costForTwo)} for two
-            </p>
+          <div className="mt-auto flex items-center justify-between gap-2 border-t border-cream-200/80 pt-4">
+            <div className="min-w-0">
+              <div className="flex items-center gap-1.5">
+                <span aria-hidden="true" className="text-xs font-bold text-ink-900 sm:text-sm">
+                  {budget.symbol}
+                </span>
+                <span className="text-xs font-bold text-accent-800 sm:text-sm">
+                  {formatRupees(restaurant.costForTwo)}
+                </span>
+              </div>
+              <p className="text-[11px] font-medium text-ink-500">for two people</p>
+            </div>
             {/* The ::after layer stretches this link over the whole card, so the card is one tap target. */}
             <ButtonLink
               to={ROUTES.restaurant(restaurant.id)}
               size="sm"
               aria-label={`View details for ${restaurant.name}`}
-              className="shrink-0 after:absolute after:inset-0"
+              className="shrink-0 px-3.5 py-1.5 text-xs font-bold after:absolute after:inset-0"
             >
               View Details
             </ButtonLink>
