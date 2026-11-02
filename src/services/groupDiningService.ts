@@ -91,6 +91,9 @@ export function getCurrentParticipantId(): string {
 
 async function persistSessionToSupabase(session: GroupSession): Promise<void> {
   if (!supabase) return;
+  if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.MODE === 'test') {
+    return;
+  }
   try {
     const row = toGroupSessionRow(session);
     const { error } = await supabase
@@ -147,6 +150,11 @@ export const groupDiningService = {
    */
   async getSession(sessionId: string): Promise<GroupSession | null> {
     if (!sessionId) return null;
+
+    if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.MODE === 'test') {
+      const local = safeGetSessions()[sessionId];
+      return local || null;
+    }
 
     // Check cloud first if connected
     if (supabase) {
