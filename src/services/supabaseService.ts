@@ -1,5 +1,16 @@
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
+import { GORAKHPUR_USERS } from '@/data/gorakhpurUsers';
 import type { Restaurant, Review, AuditLogEntry } from '@/types/restaurant';
+
+// In-memory lookup map for simulated user avatars
+const USER_AVATAR_BY_EMAIL = new Map<string, string>();
+const USER_AVATAR_BY_NAME = new Map<string, string>();
+for (const u of GORAKHPUR_USERS) {
+  if (u.avatarUrl) {
+    if (u.email) USER_AVATAR_BY_EMAIL.set(u.email.toLowerCase(), u.avatarUrl);
+    if (u.name) USER_AVATAR_BY_NAME.set(u.name.toLowerCase(), u.avatarUrl);
+  }
+}
 
 export interface ContactInquiry {
   id?: string;
@@ -159,12 +170,21 @@ export function toReviewRow(rev: Review): Record<string, unknown> {
 }
 
 export function fromReviewRow(row: Record<string, unknown>): Review {
+  const email = (row.user_email ?? row.userEmail ?? undefined) as string | undefined;
+  const name = String(row.user_name ?? row.userName ?? 'Anonymous');
+  const avatar =
+    (row.user_avatar as string) ||
+    (row.userAvatar as string) ||
+    (email ? USER_AVATAR_BY_EMAIL.get(email.toLowerCase()) : undefined) ||
+    (name ? USER_AVATAR_BY_NAME.get(name.toLowerCase()) : undefined);
+
   return {
     id: String(row.id),
     restaurantId: String(row.restaurant_id ?? row.restaurantId ?? ''),
     restaurantName: (row.restaurant_name ?? row.restaurantName ?? undefined) as string | undefined,
-    userName: String(row.user_name ?? row.userName ?? 'Anonymous'),
-    userEmail: (row.user_email ?? row.userEmail ?? undefined) as string | undefined,
+    userName: name,
+    userEmail: email,
+    userAvatar: avatar || undefined,
     rating: Number(row.rating ?? 5),
     text: String(row.text ?? ''),
     tags: (Array.isArray(row.tags) ? row.tags : []) as string[],

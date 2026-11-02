@@ -534,7 +534,22 @@ export default function AdminPage() {
                   <tbody className="divide-y divide-cream-100">
                     {filteredUsers.map((u) => (
                       <tr key={u.id} className="hover:bg-cream-50/50">
-                        <td className="py-3.5 pr-4 font-bold text-ink-900">{u.name}</td>
+                        <td className="py-3.5 pr-4 font-bold text-ink-900">
+                          <div className="flex items-center gap-2.5">
+                            {u.avatarUrl ? (
+                              <img
+                                src={u.avatarUrl}
+                                alt={u.name}
+                                className="size-8 rounded-full object-cover ring-1 ring-ink-900/10 shadow-xs shrink-0"
+                              />
+                            ) : (
+                              <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-cream-200 text-xs font-bold text-ink-700">
+                                {u.name[0]}
+                              </div>
+                            )}
+                            <span className="truncate">{u.name}</span>
+                          </div>
+                        </td>
                         <td className="py-3.5 pr-4 text-ink-600">{u.email}</td>
                         <td className="py-3.5 pr-4 font-medium">{u.reviewsCount}</td>
                         <td className="py-3.5 pr-4">
@@ -921,9 +936,17 @@ export default function AdminPage() {
           className="fixed inset-0 z-50 flex items-center justify-center bg-ink-900/60 p-4 backdrop-blur-xs animate-in fade-in"
         >
           <div className="w-full max-w-sm rounded-3xl border border-cream-300 bg-white p-6 shadow-2xl text-center">
-            <div className="mx-auto flex size-12 items-center justify-center rounded-2xl bg-cream-100 text-forest-700 font-bold text-lg">
-              {viewingUser.name[0]}
-            </div>
+            {viewingUser.avatarUrl ? (
+              <img
+                src={viewingUser.avatarUrl}
+                alt={viewingUser.name}
+                className="mx-auto size-16 rounded-full object-cover shadow-sm ring-2 ring-forest-500/20"
+              />
+            ) : (
+              <div className="mx-auto flex size-12 items-center justify-center rounded-2xl bg-cream-100 text-forest-700 font-bold text-lg">
+                {viewingUser.name[0]}
+              </div>
+            )}
             <h3 className="mt-3 text-lg font-bold text-ink-900">{viewingUser.name}</h3>
             <p className="text-xs text-ink-500">{viewingUser.email}</p>
 

@@ -359,9 +359,17 @@ export default function RestaurantDetailsPage() {
                     <article key={rev.id} className="py-5 first:pt-0 last:pb-0">
                       <div className="flex items-center justify-between gap-2">
                         <div className="flex items-center gap-2.5">
-                          <div className="flex size-9 items-center justify-center rounded-full bg-accent-100 font-bold text-accent-800">
-                            {rev.userName[0]?.toUpperCase() || 'U'}
-                          </div>
+                          {rev.userAvatar ? (
+                            <img
+                              src={rev.userAvatar}
+                              alt={rev.userName}
+                              className="size-9 rounded-full object-cover ring-1 ring-ink-900/10 shadow-xs"
+                            />
+                          ) : (
+                            <div className="flex size-9 items-center justify-center rounded-full bg-accent-100 font-bold text-accent-800">
+                              {rev.userName[0]?.toUpperCase() || 'U'}
+                            </div>
+                          )}
                           <div>
                             <span className="text-sm font-bold text-ink-900">{rev.userName}</span>
                             <p className="text-[11px] text-ink-500">{rev.date}</p>

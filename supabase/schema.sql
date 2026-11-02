@@ -56,6 +56,7 @@ CREATE TABLE IF NOT EXISTS public.reviews (
     restaurant_name TEXT,
     user_name TEXT NOT NULL,
     user_email TEXT,
+    user_avatar TEXT,
     rating NUMERIC NOT NULL CHECK (rating >= 1 AND rating <= 5),
     text TEXT NOT NULL,
     tags JSONB DEFAULT '[]'::jsonb,
@@ -67,6 +68,9 @@ CREATE TABLE IF NOT EXISTS public.reviews (
     created_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now()),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now())
 );
+
+-- Idempotent column additions for existing installations
+ALTER TABLE public.reviews ADD COLUMN IF NOT EXISTS user_avatar TEXT;
 
 CREATE INDEX IF NOT EXISTS idx_reviews_restaurant_id ON public.reviews(restaurant_id);
 CREATE INDEX IF NOT EXISTS idx_reviews_rating ON public.reviews(rating);

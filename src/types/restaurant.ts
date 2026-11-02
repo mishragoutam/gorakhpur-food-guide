@@ -46,6 +46,7 @@ export interface Review {
   restaurantName?: string;
   userName: string;
   userEmail?: string;
+  userAvatar?: string;
   rating: number;
   text: string;
   tags?: string[];
@@ -113,6 +114,7 @@ export interface UserProfile {
   id: string | number;
   name: string;
   email: string;
+  avatarUrl?: string;
   reviewsCount: number;
   isBanned: boolean;
   createdAt?: string;

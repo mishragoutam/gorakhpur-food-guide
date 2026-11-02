@@ -1056,9 +1056,17 @@ export default function OwnerDashboardPage() {
                       >
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2.5">
-                            <div className="flex size-9 items-center justify-center rounded-full bg-cream-100 font-bold text-forest-800">
-                              {rev.userName[0]?.toUpperCase()}
-                            </div>
+                            {rev.userAvatar ? (
+                              <img
+                                src={rev.userAvatar}
+                                alt={rev.userName}
+                                className="size-9 rounded-full object-cover ring-1 ring-ink-900/10 shadow-xs"
+                              />
+                            ) : (
+                              <div className="flex size-9 items-center justify-center rounded-full bg-cream-100 font-bold text-forest-800">
+                                {rev.userName[0]?.toUpperCase()}
+                              </div>
+                            )}
                             <div>
                               <span className="text-xs font-bold text-ink-900">{rev.userName}</span>
                               <p className="text-[10px] text-ink-400">{rev.date}</p>
@@ -1068,6 +1076,16 @@ export default function OwnerDashboardPage() {
                         </div>
 
                         <p className="mt-3 text-xs leading-relaxed text-ink-800">{rev.text}</p>
+
+                        {rev.photoUrl ? (
+                          <div className="mt-2.5">
+                            <img
+                              src={rev.photoUrl}
+                              alt="Customer uploaded review photo"
+                              className="h-28 w-44 rounded-xl object-cover ring-1 ring-ink-900/10 shadow-xs"
+                            />
+                          </div>
+                        ) : null}
 
                         {rev.tags && rev.tags.length > 0 ? (
                           <div className="mt-2.5 flex flex-wrap gap-1">
