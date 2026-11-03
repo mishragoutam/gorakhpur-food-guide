@@ -27,7 +27,7 @@ export default function TermsPage() {
             Terms of Use
           </h1>
           <p className="mt-4 text-base text-ink-600 sm:text-lg leading-relaxed">
-            Effective Date: October 2026. Please read these Terms of Use carefully before accessing or using the Gorakhpur Food Guide and RateIt web platform. By browsing restaurant listings, posting reviews, or managing an eatery profile, you agree to be bound by these terms.
+            Effective Date: October 2026. Please read these Terms of Use carefully before accessing or using the Vyora web platform. By browsing restaurant listings, posting reviews, booking tables, or managing an eatery profile, you agree to be bound by these terms.
           </p>
 
           {/* Key Highlights */}
@@ -74,7 +74,7 @@ export default function TermsPage() {
                 <h2 className="text-xl font-bold">Acceptance of Terms</h2>
               </div>
               <p className="text-sm leading-relaxed">
-                By visiting, viewing, or interacting with Gorakhpur Food Guide ("Platform"), you acknowledge that you have read, understood, and agreed to these Terms of Use and our Privacy Policy. If you do not accept these terms, you should discontinue use of the platform immediately.
+                By visiting, viewing, or interacting with Vyora ("Platform"), you acknowledge that you have read, understood, and agreed to these Terms of Use and our Privacy Policy. If you do not accept these terms, you should discontinue use of the platform immediately.
               </p>
             </section>
 
@@ -87,7 +87,7 @@ export default function TermsPage() {
                 <h2 className="text-xl font-bold">Platform Purpose & Scope</h2>
               </div>
               <p className="text-sm leading-relaxed">
-                Gorakhpur Food Guide operates as a local restaurant discovery directory and dining feedback system serving Gorakhpur, Uttar Pradesh. We provide search filters, dish information, table standee QR generation, and verified customer reviews. We do not operate culinary kitchens or offer third-party delivery dispatch services.
+                Vyora operates as a local restaurant discovery directory, table reservation engine, and dining feedback system serving Gorakhpur, Uttar Pradesh. We provide search filters, dish information, table standee QR generation, and verified customer reviews. We do not operate culinary kitchens or offer third-party delivery dispatch services.
               </p>
             </section>
 
@@ -106,7 +106,7 @@ export default function TermsPage() {
                 <li>Your review reflects an actual dining experience at the restaurant.</li>
                 <li>You are not an owner, employee, or direct commercial competitor of the restaurant attempting to artificially alter ratings.</li>
                 <li>Your feedback does not contain hate speech, profanity, harassment, or defamatory remarks.</li>
-                <li>You grant Gorakhpur Food Guide a non-exclusive, royalty-free, worldwide license to display and format your review on the platform.</li>
+                <li>You grant Vyora a non-exclusive, royalty-free, worldwide license to display and format your review on the platform.</li>
               </ul>
             </section>
 
@@ -119,7 +119,7 @@ export default function TermsPage() {
                 <h2 className="text-xl font-bold">Restaurant Partner Obligations</h2>
               </div>
               <p className="text-sm leading-relaxed">
-                Restaurant owners and managers registering on Gorakhpur Food Guide agree to:
+                Restaurant owners and managers registering on Vyora agree to:
               </p>
               <ul className="list-disc pl-5 space-y-2 text-sm leading-relaxed">
                 <li>Provide accurate business details, including address, contact information, operating hours, and average cost for two.</li>
@@ -138,7 +138,7 @@ export default function TermsPage() {
                 <h2 className="text-xl font-bold">Intellectual Property Rights</h2>
               </div>
               <p className="text-sm leading-relaxed">
-                The visual design, brand logos, custom QR generator algorithms, layout, and content across Gorakhpur Food Guide are the proprietary property of the platform. You may not scrape, reproduce, reverse engineer, or redistribute our code or database without explicit written authorization.
+                The visual design, brand logos, custom QR generator algorithms, layout, and content across Vyora are the proprietary property of the platform. You may not scrape, reproduce, reverse engineer, or redistribute our code or database without explicit written authorization.
               </p>
             </section>
 
@@ -169,7 +169,7 @@ export default function TermsPage() {
                 <h2 className="text-xl font-bold">Limitation of Liability</h2>
               </div>
               <p className="text-sm leading-relaxed">
-                To the fullest extent permissible by applicable law, Gorakhpur Food Guide and its contributors shall not be held liable for any direct, indirect, incidental, or consequential damages resulting from restaurant visits, food consumption, or reliance on customer reviews.
+                To the fullest extent permissible by applicable law, Vyora and its contributors shall not be held liable for any direct, indirect, incidental, or consequential damages resulting from restaurant visits, food consumption, or reliance on customer reviews.
               </p>
             </section>
 
@@ -198,8 +198,8 @@ export default function TermsPage() {
                 For questions, clarifications, or reporting violations of these Terms of Use, please reach out to our legal and support team:
               </p>
               <div className="mt-3 rounded-2xl bg-cream-50 p-4 text-xs sm:text-sm space-y-1 border border-cream-200">
-                <p><strong className="text-ink-900">Legal Department:</strong> Gorakhpur Food Guide</p>
-                <p><strong className="text-ink-900">Email:</strong> <a href="mailto:legal@gorakhpurfoodguide.in" className="text-accent-700 hover:underline">legal@gorakhpurfoodguide.in</a></p>
+                <p><strong className="text-ink-900">Legal Department:</strong> Vyora Team</p>
+                <p><strong className="text-ink-900">Email:</strong> <a href="mailto:legal@vyora.in" className="text-accent-700 hover:underline">legal@vyora.in</a></p>
                 <p><strong className="text-ink-900">Address:</strong> Civil Lines, Gorakhpur, Uttar Pradesh 273001</p>
               </div>
             </section>

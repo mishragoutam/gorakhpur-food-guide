@@ -120,7 +120,7 @@ export default function OwnerRegisterPage() {
       ownerName: cleanOwnerName,
     });
 
-    showToast(`Registered "${newRestaurant.name}"! Welcome to RateIt.`);
+    showToast(`Registered "${newRestaurant.name}"! Welcome to Vyora.`);
     navigate(ROUTES.ownerDashboard);
   };
 

@@ -24,7 +24,7 @@ export function Footer() {
           <div className="max-w-sm">
             <Logo />
             <p className="mt-4 text-sm text-ink-600">
-              Discover local restaurants in Gorakhpur, Uttar Pradesh, read what customers say, and submit verified table reviews.
+              Vyora helps you discover verified restaurants in Gorakhpur, book tables, explore chef specials, and submit trusted reviews.
             </p>
           </div>
 

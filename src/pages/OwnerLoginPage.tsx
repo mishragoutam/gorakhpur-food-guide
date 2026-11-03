@@ -72,7 +72,7 @@ export default function OwnerLoginPage() {
                 <span className="flex size-10 items-center justify-center rounded-xl bg-white/15 text-white">
                   <Store size={22} />
                 </span>
-                <span className="font-display text-lg font-bold">RateIt Owner Hub</span>
+                <span className="font-display text-lg font-bold">Vyora Owner Hub</span>
               </div>
 
               <h2 className="mt-6 text-2xl font-bold leading-tight">

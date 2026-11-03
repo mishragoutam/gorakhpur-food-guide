@@ -27,7 +27,7 @@ export default function PrivacyPage() {
             Privacy Policy
           </h1>
           <p className="mt-4 text-base text-ink-600 sm:text-lg leading-relaxed">
-            Effective Date: October 2026. This Privacy Policy details how Gorakhpur Food Guide ("we", "our", or "RateIt") collects, uses, and safeguards information when you explore restaurants, post dining reviews, or manage a restaurant partner dashboard.
+            Effective Date: October 2026. This Privacy Policy details how Vyora ("we", "our", or "Platform") collects, uses, and safeguards information when you explore restaurants, post dining reviews, book tables, or manage a restaurant partner dashboard.
           </p>
 
           {/* Key Principles Banner */}
@@ -117,7 +117,7 @@ export default function PrivacyPage() {
                 <h2 className="text-xl font-bold">Table QR Code Review Experience</h2>
               </div>
               <p className="text-sm leading-relaxed">
-                When you scan an official RateIt table standee QR code, your smartphone browser opens the restaurant review page directly. We do not require you to grant precise GPS location permissions or install third-party native software. Scan timestamps are recorded anonymously to compute aggregate monthly guest engagement for the eatery.
+                When you scan an official Vyora table standee QR code, your smartphone browser opens the restaurant review page directly. We do not require you to grant precise GPS location permissions or install third-party native software. Scan timestamps are recorded anonymously to compute aggregate monthly guest engagement for the eatery.
               </p>
             </section>
 
@@ -188,8 +188,8 @@ export default function PrivacyPage() {
                 If you have questions or concerns regarding this Privacy Policy or data handling practices in Gorakhpur, please contact us:
               </p>
               <div className="mt-3 rounded-2xl bg-cream-50 p-4 text-xs sm:text-sm space-y-1 border border-cream-200">
-                <p><strong className="text-ink-900">Data Protection Officer:</strong> Gorakhpur Food Guide Team</p>
-                <p><strong className="text-ink-900">Email:</strong> <a href="mailto:privacy@gorakhpurfoodguide.in" className="text-accent-700 hover:underline">privacy@gorakhpurfoodguide.in</a></p>
+                <p><strong className="text-ink-900">Data Protection Officer:</strong> Vyora Team</p>
+                <p><strong className="text-ink-900">Email:</strong> <a href="mailto:privacy@vyora.in" className="text-accent-700 hover:underline">privacy@vyora.in</a></p>
                 <p><strong className="text-ink-900">Office:</strong> Civil Lines, Gorakhpur, Uttar Pradesh 273001</p>
               </div>
             </section>

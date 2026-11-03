@@ -20,7 +20,7 @@ export default function AboutPage() {
       icon: QrCode,
       title: 'Table QR Standees',
       description:
-        'Guests scan an official RateIt table standee with their camera to view dishes and submit ratings right from their dining table.',
+        'Guests scan an official Vyora table standee with their camera to view dishes and submit ratings right from their dining table.',
       color: 'bg-accent-100 text-accent-700',
     },
     {
@@ -63,7 +63,7 @@ export default function AboutPage() {
             Celebrating the Flavors & Culinary Heritage of Gorakhpur
           </h1>
           <p className="mt-5 text-base sm:text-xl text-ink-600 leading-relaxed">
-            Gorakhpur Food Guide is dedicated to connecting hungry food lovers with iconic local kitchens, vibrant street food stalls, and hidden culinary gems across Uttar Pradesh.
+            Vyora is dedicated to connecting hungry food lovers with iconic local kitchens, vibrant street food stalls, and hidden culinary gems across Gorakhpur.
           </p>
         </div>
 
@@ -92,7 +92,7 @@ export default function AboutPage() {
               In recent years, Gorakhpur's dining landscape has flourished with modern lakeside cafes along Ramgarh Taal, artisan bakeries, and bustling multi-cuisine family restaurants. Yet, finding reliable, honest ratings without paid hype remained a challenge.
             </p>
             <p className="font-medium text-accent-800">
-              Gorakhpur Food Guide and RateIt bridge that gap: providing transparent table-side feedback for diners, and intuitive digital tools for local restaurant owners to grow their business.
+              Vyora bridges that gap: providing transparent table-side feedback for diners, table reservations, and intuitive digital tools for local restaurant owners to grow their business.
             </p>
           </div>
 

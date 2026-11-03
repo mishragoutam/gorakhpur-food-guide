@@ -2,7 +2,7 @@ import { UtensilsCrossed } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@/lib/routes';
 
-export const BRAND_NAME = 'Gorakhpur Food Guide';
+export const BRAND_NAME = 'Vyora';
 
 export function Logo() {
   return (
@@ -10,9 +10,14 @@ export function Logo() {
       <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-accent-600 text-white shadow-card transition-transform duration-200 group-hover:-rotate-6">
         <UtensilsCrossed aria-hidden="true" size={22} />
       </span>
-      <span className="font-display text-[1.0625rem] leading-none font-bold tracking-tight text-ink-900 sm:text-xl">
-        {BRAND_NAME}
-      </span>
+      <div className="flex flex-col">
+        <span className="font-display text-xl leading-none font-extrabold tracking-tight text-ink-900 sm:text-2xl">
+          Vyora
+        </span>
+        <span className="text-[10px] font-semibold tracking-wider uppercase text-accent-700">
+          Gorakhpur Food Guide
+        </span>
+      </div>
     </Link>
   );
 }

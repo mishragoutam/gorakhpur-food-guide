@@ -38,11 +38,11 @@ const FAQS: FaqItem[] = [
   },
   {
     q: 'How are customer reviews and ratings verified?',
-    a: 'RateIt utilizes table QR code technology so guests scan directly while dining at the table or paying at the counter. Our system also leverages AI sentiment scoring and human moderation to eliminate spam and paid reviews.',
+    a: 'Vyora utilizes table QR code technology so guests scan directly while dining at the table or paying at the counter. Our system also leverages AI sentiment scoring and human moderation to eliminate spam and paid reviews.',
   },
   {
     q: 'Is there any fee for diners or restaurants to use the platform?',
-    a: 'Gorakhpur Food Guide is 100% free for all diners. Basic restaurant discovery profiles and QR code generator access are also complimentary for local restaurant partners.',
+    a: 'Vyora is 100% free for all diners. Basic restaurant discovery profiles and QR code generator access are also complimentary for local restaurant partners.',
   },
 ];
 
@@ -100,10 +100,10 @@ export default function ContactPage() {
         <div className="mx-auto max-w-3xl text-center">
           <Badge tone="accent">Get in Touch</Badge>
           <h1 className="mt-4 text-3xl font-extrabold text-ink-900 sm:text-5xl">
-            Contact Gorakhpur Food Guide
+            Contact Vyora
           </h1>
           <p className="mt-4 text-base text-ink-600 sm:text-lg">
-            Have a question, feedback, or want to list your restaurant? Our local team in Gorakhpur is here to assist you.
+            Have a question, feedback, or want to list your restaurant on Vyora? Our local team in Gorakhpur is here to assist you.
           </p>
         </div>
 
@@ -152,14 +152,14 @@ export default function ContactPage() {
             <div className="mt-3 space-y-1.5 text-sm">
               <p className="text-ink-800">
                 General:{' '}
-                <a href="mailto:support@gorakhpurfoodguide.in" className="font-semibold text-accent-700 hover:underline">
-                  support@gorakhpurfoodguide.in
+                <a href="mailto:support@vyora.in" className="font-semibold text-accent-700 hover:underline">
+                  support@vyora.in
                 </a>
               </p>
               <p className="text-ink-800">
                 Partners:{' '}
-                <a href="mailto:partners@gorakhpurfoodguide.in" className="font-semibold text-accent-700 hover:underline">
-                  partners@gorakhpurfoodguide.in
+                <a href="mailto:partners@vyora.in" className="font-semibold text-accent-700 hover:underline">
+                  partners@vyora.in
                 </a>
               </p>
             </div>
@@ -185,18 +185,42 @@ export default function ContactPage() {
               </div>
 
               {submitted ? (
-                <div className="py-10 text-center">
+                <div className="py-8 text-center animate-in zoom-in-95">
                   <div className="mx-auto flex size-16 items-center justify-center rounded-2xl bg-accent-100 text-accent-700">
                     <CheckCircle2 size={36} />
                   </div>
                   <h3 className="mt-4 text-2xl font-bold text-ink-900">Message Delivered!</h3>
                   <p className="mt-2 text-sm text-ink-600 max-w-md mx-auto">
-                    Thank you for contacting Gorakhpur Food Guide. Our team has received your inquiry and will follow up with you shortly at <span className="font-semibold text-ink-800">{email}</span>.
+                    Thank you for contacting Vyora. Our team has received your inquiry and will follow up with you shortly at <span className="font-semibold text-ink-800">{email}</span>.
                   </p>
+
+                  {/* 1-Click Direct Multi-Channel Dispatch */}
+                  <div className="my-6 space-y-2.5 max-w-md mx-auto text-left">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-ink-600 block text-center">
+                      Need faster assistance? Send directly via:
+                    </span>
+                    <a
+                      href={`https://wa.me/919838091235?text=${encodeURIComponent(`Hello Vyora Support,\nMy Name: ${name}\nEmail: ${email}\nCategory: ${category}\nMessage: ${message}`)}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center justify-center gap-2 rounded-xl bg-emerald-600 px-5 py-3 text-xs font-bold text-white shadow-sm hover:bg-emerald-700 transition"
+                    >
+                      <MessageSquare size={16} />
+                      <span>Chat with Vyora Support on WhatsApp (+91 98380 91235)</span>
+                    </a>
+                    <a
+                      href={`mailto:support@vyora.in?subject=${encodeURIComponent(`Vyora Inquiry: ${category} from ${name}`)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nCategory: ${category}\n\nMessage:\n${message}`)}`}
+                      className="flex items-center justify-center gap-2 rounded-xl bg-ink-900 px-5 py-3 text-xs font-bold text-white shadow-sm hover:bg-ink-800 transition"
+                    >
+                      <Mail size={16} />
+                      <span>Send Direct Email to support@vyora.in</span>
+                    </a>
+                  </div>
+
                   <button
                     type="button"
                     onClick={handleReset}
-                    className="mt-6 inline-flex items-center gap-2 rounded-full bg-accent-600 px-6 py-2.5 text-sm font-bold text-white shadow-sm hover:bg-accent-700 transition cursor-pointer"
+                    className="mt-2 inline-flex items-center gap-2 rounded-full border border-cream-300 bg-white px-6 py-2.5 text-xs font-bold text-ink-800 hover:bg-cream-100 transition cursor-pointer"
                   >
                     Send Another Message
                   </button>
@@ -315,7 +339,7 @@ export default function ContactPage() {
                 Looking to Claim or Add Your Listing?
               </h3>
               <p className="mt-2 text-xs leading-relaxed text-ink-600 sm:text-sm">
-                Get discovered by thousands of diners across Gorakhpur and print official RateIt table standees for customer reviews.
+                Get discovered by thousands of diners across Gorakhpur and print official Vyora table standees for customer reviews.
               </p>
               <div className="mt-4 flex flex-wrap gap-2.5">
                 <Link

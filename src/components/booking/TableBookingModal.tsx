@@ -10,11 +10,22 @@ import {
   Sparkles,
   Share2,
   Armchair,
+  Copy,
+  Download,
+  Send,
+  ExternalLink,
 } from 'lucide-react';
 import { useState } from 'react';
 import { storageService } from '@/services/storageService';
 import { showToast } from '@/lib/toast';
 import type { Restaurant, TableBooking } from '@/types/restaurant';
+import {
+  getBookingNotificationUrls,
+  shareBookingPassViaWebShare,
+  copyBookingPassToClipboard,
+  downloadBookingPassFile,
+  requestAndTriggerPushNotification,
+} from '@/services/notificationService';
 
 interface TableBookingModalProps {
   isOpen: boolean;
@@ -109,7 +120,11 @@ export function TableBookingModal({
       });
 
       setConfirmedBooking(newBooking);
-      showToast(`Table confirmed! SMS & Email sent to ${newBooking.mobile}`);
+      showToast(`Table confirmed! Code: ${newBooking.confirmationCode}`);
+      requestAndTriggerPushNotification(
+        'Vyora Table Reserved!',
+        `Table for ${newBooking.guests} at ${newBooking.restaurantName}. Code: ${newBooking.confirmationCode}`,
+      ).catch(() => {});
       if (onBookingCreated) onBookingCreated(newBooking);
     } catch {
       setError('Failed to book table. Please try again.');
@@ -123,11 +138,27 @@ export function TableBookingModal({
     onClose();
   };
 
-  const getWhatsAppShareUrl = (booking: TableBooking) => {
-    const text = encodeURIComponent(
-      `🎉 Table Booked at ${booking.restaurantName}!\n📅 Date: ${booking.date}\n⏰ Time: ${booking.time}\n👥 Guests: ${booking.guests}\n🔖 Booking ID: ${booking.id}\n📍 Gorakhpur Dining Directory`,
-    );
-    return `https://api.whatsapp.com/send?text=${text}`;
+  const handleCopyPass = async (booking: TableBooking) => {
+    const ok = await copyBookingPassToClipboard(booking);
+    if (ok) {
+      showToast('Booking pass copied to clipboard!');
+    } else {
+      showToast('Could not copy pass to clipboard.', 'error');
+    }
+  };
+
+  const handleSharePass = async (booking: TableBooking) => {
+    const ok = await shareBookingPassViaWebShare(booking);
+    if (!ok) {
+      // Fallback to WhatsApp
+      const urls = getBookingNotificationUrls(booking);
+      window.open(urls.whatsappUrl, '_blank');
+    }
+  };
+
+  const handleDownloadPass = (booking: TableBooking) => {
+    downloadBookingPassFile(booking);
+    showToast('Booking ticket downloaded!');
   };
 
   return (
@@ -151,7 +182,7 @@ export function TableBookingModal({
         </button>
 
         {confirmedBooking ? (
-          /* CONFIRMED BOOKING SCREEN WITH SMS & EMAIL NOTIFICATION CARDS */
+          /* CONFIRMED BOOKING SCREEN WITH LIVE MULTI-CHANNEL DISPATCH */
           <div className="text-center py-2 animate-in zoom-in-95">
             <div className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-amber-100 text-amber-700 shadow-xs mb-3">
               <CheckCircle2 size={32} />
@@ -165,7 +196,7 @@ export function TableBookingModal({
               Table Reserved at {confirmedBooking.restaurantName}
             </h2>
             <p className="mt-1 text-xs text-ink-600">
-              Booking Ref: <strong className="text-accent-800 font-mono text-sm">{confirmedBooking.id}</strong>
+              Booking Ref: <strong className="text-accent-800 font-mono text-sm">{confirmedBooking.id}</strong> • Code: <strong className="text-ink-900 font-mono text-sm">{confirmedBooking.confirmationCode}</strong>
             </p>
 
             {/* Voucher Details Card */}
@@ -190,66 +221,132 @@ export function TableBookingModal({
               </div>
             </div>
 
-            {/* Simulated Live Dispatch Status */}
-            <div className="space-y-2.5 text-left mb-6">
-              {/* SMS Notification */}
-              <div className="flex items-start gap-3 rounded-2xl border border-cream-300 bg-cream-50/80 p-3 text-xs">
-                <div className="flex size-8 shrink-0 items-center justify-center rounded-xl bg-accent-600 text-white font-bold">
-                  <MessageSquare size={16} />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center justify-between">
-                    <span className="font-bold text-ink-900">SMS Sent Successfully</span>
-                    <span className="text-[10px] font-bold text-accent-700 uppercase">Delivered</span>
+            {/* Live Interactive Notification Dispatch Channels */}
+            {(() => {
+              const urls = getBookingNotificationUrls(confirmedBooking);
+              return (
+                <div className="space-y-3 text-left mb-6">
+                  <div className="flex items-center justify-between px-1">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-ink-700">
+                      Deliver Booking Pass & Voucher:
+                    </span>
+                    <span className="text-[10px] font-semibold text-accent-700">1-Click Dispatch</span>
                   </div>
-                  <p className="text-[11px] text-ink-700 mt-0.5">
-                    To: <strong>{confirmedBooking.mobile}</strong>
-                  </p>
-                  <p className="text-[10px] text-ink-600 mt-1 italic bg-white rounded-md p-1.5 border border-cream-200">
-                    "{confirmedBooking.notifications.smsText}"
-                  </p>
-                </div>
-              </div>
 
-              {/* Email Notification */}
-              <div className="flex items-start gap-3 rounded-2xl border border-cream-300 bg-cream-50/80 p-3 text-xs">
-                <div className="flex size-8 shrink-0 items-center justify-center rounded-xl bg-ink-900 text-white font-bold">
-                  <Mail size={16} />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center justify-between">
-                    <span className="font-bold text-ink-900">Email Confirmation Sent</span>
-                    <span className="text-[10px] font-bold text-ink-600 uppercase">Inbox Delivered</span>
+                  {/* WhatsApp Channel */}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 rounded-2xl border border-cream-300 bg-cream-50/80 p-3 text-xs">
+                    <div className="flex items-start gap-2.5">
+                      <div className="flex size-8 shrink-0 items-center justify-center rounded-xl bg-emerald-600 text-white font-bold">
+                        <MessageSquare size={16} />
+                      </div>
+                      <div>
+                        <div className="font-bold text-ink-900">WhatsApp Notification</div>
+                        <p className="text-[11px] text-ink-600">Send pass to <strong>{confirmedBooking.mobile}</strong></p>
+                      </div>
+                    </div>
+                    <a
+                      href={urls.whatsappUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-emerald-600 px-3.5 py-2 text-xs font-bold text-white shadow-xs hover:bg-emerald-700 transition"
+                    >
+                      <Send size={13} />
+                      <span>Send WhatsApp</span>
+                    </a>
                   </div>
-                  <p className="text-[11px] text-ink-700 mt-0.5">
-                    To: <strong>{confirmedBooking.email}</strong>
-                  </p>
-                  <p className="text-[10px] text-ink-600 mt-1">
-                    Subject: <em>{confirmedBooking.notifications.emailSubject}</em>
-                  </p>
-                </div>
-              </div>
-            </div>
 
-            {/* Actions */}
-            <div className="flex flex-col sm:flex-row gap-2.5">
-              <a
-                href={getWhatsAppShareUrl(confirmedBooking)}
-                target="_blank"
-                rel="noreferrer"
-                className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-accent-600 py-3 text-xs font-bold text-white shadow-sm hover:bg-accent-700 transition"
-              >
-                <Share2 size={15} />
-                <span>Share via WhatsApp</span>
-              </a>
+                  {/* SMS Channel */}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 rounded-2xl border border-cream-300 bg-cream-50/80 p-3 text-xs">
+                    <div className="flex items-start gap-2.5">
+                      <div className="flex size-8 shrink-0 items-center justify-center rounded-xl bg-accent-600 text-white font-bold">
+                        <Phone size={16} />
+                      </div>
+                      <div>
+                        <div className="font-bold text-ink-900">Mobile SMS Pass</div>
+                        <p className="text-[11px] text-ink-600">Open in phone Messages app</p>
+                      </div>
+                    </div>
+                    <a
+                      href={urls.smsUrl}
+                      className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-accent-600 px-3.5 py-2 text-xs font-bold text-white shadow-xs hover:bg-accent-700 transition"
+                    >
+                      <MessageSquare size={13} />
+                      <span>Open SMS App</span>
+                    </a>
+                  </div>
+
+                  {/* Email Channel */}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 rounded-2xl border border-cream-300 bg-cream-50/80 p-3 text-xs">
+                    <div className="flex items-start gap-2.5">
+                      <div className="flex size-8 shrink-0 items-center justify-center rounded-xl bg-ink-900 text-white font-bold">
+                        <Mail size={16} />
+                      </div>
+                      <div>
+                        <div className="font-bold text-ink-900">Email Voucher Pass</div>
+                        <p className="text-[11px] text-ink-600">Deliver voucher to <strong>{confirmedBooking.email}</strong></p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <a
+                        href={urls.gmailUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center justify-center gap-1 rounded-xl bg-ink-900 px-3 py-2 text-xs font-bold text-white shadow-xs hover:bg-ink-800 transition"
+                        title="Open voucher in Gmail"
+                      >
+                        <Mail size={13} />
+                        <span>Gmail</span>
+                      </a>
+                      <a
+                        href={urls.mailtoUrl}
+                        className="inline-flex items-center justify-center gap-1 rounded-xl border border-cream-300 bg-white px-3 py-2 text-xs font-bold text-ink-800 hover:bg-cream-100 transition"
+                        title="Open in default mail client"
+                      >
+                        <ExternalLink size={13} />
+                        <span>Mail App</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              );
+            })()}
+
+            {/* Quick Utility Actions: Copy & Download */}
+            <div className="mb-6 grid grid-cols-2 sm:grid-cols-3 gap-2">
               <button
                 type="button"
-                onClick={handleReset}
-                className="flex-1 rounded-xl bg-ink-900 py-3 text-xs font-bold text-white hover:bg-ink-800 transition cursor-pointer"
+                onClick={() => handleCopyPass(confirmedBooking)}
+                className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-cream-300 bg-white py-2 text-xs font-bold text-ink-800 hover:bg-cream-100 transition cursor-pointer"
               >
-                Done
+                <Copy size={13} />
+                <span>Copy Ticket</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => handleDownloadPass(confirmedBooking)}
+                className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-cream-300 bg-white py-2 text-xs font-bold text-ink-800 hover:bg-cream-100 transition cursor-pointer"
+              >
+                <Download size={13} />
+                <span>Save Pass</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => handleSharePass(confirmedBooking)}
+                className="col-span-2 sm:col-span-1 inline-flex items-center justify-center gap-1.5 rounded-xl border border-cream-300 bg-white py-2 text-xs font-bold text-ink-800 hover:bg-cream-100 transition cursor-pointer"
+              >
+                <Share2 size={13} />
+                <span>Share Any App</span>
               </button>
             </div>
+
+            {/* Done Action */}
+            <button
+              type="button"
+              onClick={handleReset}
+              className="w-full rounded-2xl bg-ink-900 py-3.5 text-xs font-bold text-white hover:bg-ink-800 transition cursor-pointer shadow-md"
+            >
+              Done & Return to Restaurant
+            </button>
           </div>
         ) : (
           /* RESERVATION FORM */

@@ -220,7 +220,7 @@ export function CustomerAuthModal({
           </div>
           <div>
             <h2 id="auth-modal-title" className="text-xl font-bold text-ink-900">
-              {mode === 'login' ? 'Sign In to RateIt' : 'Create New Account'}
+              {mode === 'login' ? 'Sign In to Vyora' : 'Create Vyora Account'}
             </h2>
             <p className="text-xs text-ink-500">Gorakhpur Food Guide & Verified Dining</p>
           </div>

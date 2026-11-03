@@ -713,8 +713,8 @@ export const storageService = {
     const id = `TB-${Date.now().toString().slice(-5)}`;
     const confirmationCode = Math.floor(100000 + Math.random() * 900000).toString();
 
-    const smsText = `RateIt Gorakhpur: Your table for ${data.guests} at ${data.restaurantName} is CONFIRMED for ${data.date} at ${data.time}. Booking Code: ${confirmationCode}. Show this SMS upon arrival.`;
-    const emailSubject = `Table Confirmed: ${data.restaurantName} on ${data.date} (${data.time})`;
+    const smsText = `Vyora Gorakhpur: Your table for ${data.guests} at ${data.restaurantName} is CONFIRMED for ${data.date} at ${data.time}. Booking Code: ${confirmationCode}. Show this SMS upon arrival.`;
+    const emailSubject = `Vyora Table Confirmed: ${data.restaurantName} on ${data.date} (${data.time}) - Code ${confirmationCode}`;
 
     const booking: TableBooking = {
       ...data,
