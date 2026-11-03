@@ -41,8 +41,9 @@ export function DineInTrayModal({
   const totalAmount = items.reduce((sum, entry) => sum + entry.item.price * entry.quantity, 0);
   const totalItemCount = items.reduce((sum, entry) => sum + entry.quantity, 0);
 
-  const rawPhone = (restaurant.phone || '919838091235').replace(/[^0-9]/g, '');
+  const rawPhone = (restaurant.whatsappPhone || restaurant.phone || '8382999557').replace(/[^0-9]/g, '');
   const cleanPhone = rawPhone.length === 10 ? `91${rawPhone}` : rawPhone;
+  const displayPhone = rawPhone.length === 10 ? `+91 ${rawPhone}` : `+${rawPhone}`;
 
   const orderLines = items
     .map(
@@ -54,7 +55,7 @@ export function DineInTrayModal({
     .join('\n');
 
   const whatsappMessage = encodeURIComponent(
-    `Hello ${restaurant.name}! 👋\n\nI want to place an order from your Vyora (Gorakhpur Food Guide) menu:\n\n${orderLines}\n\n*Total Items:* ${totalItemCount}\n*Estimated Bill:* ₹${totalAmount}\n*Address:* ${restaurant.address || restaurant.area}, Gorakhpur\n\nPlease confirm order receipt & preparation time. Thank you!`,
+    `Hello ${restaurant.ownerName ? `${restaurant.ownerName} (` : ''}${restaurant.name}${restaurant.ownerName ? ')' : ''}! 👋\n\nI want to place an order from your VYORA menu:\n\n${orderLines}\n\n*Total Items:* ${totalItemCount}\n*Estimated Bill:* ₹${totalAmount}\n*Address:* ${restaurant.address || restaurant.area}, Gorakhpur\n\nPlease confirm order receipt & preparation time. Thank you!`,
   );
 
   return (
@@ -188,15 +189,23 @@ export function DineInTrayModal({
               <span className="text-2xl font-black text-accent-700">{formatRupees(totalAmount)}</span>
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-2.5">
+              <div className="flex items-center justify-between rounded-xl bg-emerald-50 px-3.5 py-2 border border-emerald-200 text-xs">
+                <span className="font-semibold text-emerald-800 flex items-center gap-1.5">
+                  <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+                  Owner&apos;s Direct WhatsApp:
+                </span>
+                <span className="font-bold text-emerald-900">{displayPhone}</span>
+              </div>
+
               <a
                 href={`https://wa.me/${cleanPhone}?text=${whatsappMessage}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex w-full items-center justify-center gap-2 rounded-2xl bg-accent-600 py-3.5 text-xs font-bold text-white shadow-md transition hover:bg-accent-700 cursor-pointer"
+                className="flex w-full items-center justify-center gap-2 rounded-2xl bg-emerald-600 py-3.5 text-xs sm:text-sm font-bold text-white shadow-md transition hover:bg-emerald-700 cursor-pointer"
               >
-                <MessageCircle size={16} />
-                <span>Send Order via WhatsApp • {formatRupees(totalAmount)}</span>
+                <MessageCircle size={18} />
+                <span>Send Order to Owner&apos;s WhatsApp ({displayPhone})</span>
               </a>
 
               {restaurant.phone ? (
@@ -205,14 +214,14 @@ export function DineInTrayModal({
                   className="flex w-full items-center justify-center gap-2 rounded-xl border border-cream-300 bg-cream-100 py-2.5 text-xs font-bold text-ink-800 transition hover:bg-cream-200"
                 >
                   <Phone size={15} className="text-ink-700" />
-                  <span>Call to Confirm Order ({restaurant.phone})</span>
+                  <span>Call Owner Directly ({displayPhone})</span>
                 </a>
               ) : null}
             </div>
 
-            <p className="text-center text-[11px] text-ink-400 flex items-center justify-center gap-1">
-              <CheckCircle2 size={12} className="text-amber-600" />
-              Direct connection with {restaurant.name}. No hidden fees or commissions.
+            <p className="text-center text-[11px] text-ink-500 flex items-center justify-center gap-1">
+              <CheckCircle2 size={12} className="text-emerald-600 shrink-0" />
+              Direct connection with {restaurant.ownerName ? `${restaurant.ownerName} (${restaurant.name})` : restaurant.name}. No customer care or third-party commissions.
             </p>
           </div>
         ) : null}

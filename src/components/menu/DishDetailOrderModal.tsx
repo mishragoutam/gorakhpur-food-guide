@@ -38,11 +38,12 @@ export function DishDetailOrderModal({
   if (!isOpen || !item) return null;
 
   const totalCost = item.price * quantity;
-  const rawPhone = (restaurant.phone || '919838091235').replace(/[^0-9]/g, '');
+  const rawPhone = (restaurant.whatsappPhone || restaurant.phone || '8382999557').replace(/[^0-9]/g, '');
   const cleanPhone = rawPhone.length === 10 ? `91${rawPhone}` : rawPhone;
+  const displayPhone = rawPhone.length === 10 ? `+91 ${rawPhone}` : `+${rawPhone}`;
 
   const whatsappMessage = encodeURIComponent(
-    `Hello ${restaurant.name}! 👋\n\nI want to order from your menu on Vyora (Gorakhpur Food Guide):\n• ${quantity}x ${item.name} (₹${item.price} each = ₹${totalCost})\n\nCategory: ${item.category}\nDiet: ${item.diet === 'veg' ? 'Pure Veg' : 'Non-Veg'}\nRestaurant Address: ${restaurant.address || restaurant.area}, Gorakhpur\n\nPlease confirm preparation time and table/delivery availability. Thank you!`,
+    `Hello ${restaurant.ownerName ? `${restaurant.ownerName} (` : ''}${restaurant.name}${restaurant.ownerName ? ')' : ''}! 👋\n\nI want to order from your menu on VYORA (Gorakhpur Food Guide):\n• ${quantity}x ${item.name} (₹${item.price} each = ₹${totalCost})\n\nCategory: ${item.category}\nDiet: ${item.diet === 'veg' ? 'Pure Veg' : 'Non-Veg'}\nRestaurant Address: ${restaurant.address || restaurant.area}, Gorakhpur\n\nPlease confirm preparation time and availability. Thank you!`,
   );
 
   const zomatoSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(
@@ -177,6 +178,14 @@ export function DishDetailOrderModal({
 
             {/* Order Action Choices */}
             <div className="mt-6 space-y-2.5">
+              <div className="flex items-center justify-between rounded-xl bg-emerald-50 px-3.5 py-1.5 border border-emerald-200 text-xs">
+                <span className="font-semibold text-emerald-800 flex items-center gap-1.5">
+                  <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+                  Owner&apos;s Direct WhatsApp:
+                </span>
+                <span className="font-bold text-emerald-900">{displayPhone}</span>
+              </div>
+
               <button
                 type="button"
                 onClick={handleAdd}
@@ -191,10 +200,10 @@ export function DishDetailOrderModal({
                   href={`https://wa.me/${cleanPhone}?text=${whatsappMessage}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 rounded-xl border border-amber-300 bg-amber-50/80 py-2.5 text-xs font-bold text-amber-900 transition hover:bg-amber-100"
+                  className="flex items-center justify-center gap-2 rounded-xl bg-emerald-600 py-2.5 text-xs font-bold text-white shadow-xs transition hover:bg-emerald-700"
                 >
-                  <MessageCircle size={15} className="text-amber-700" />
-                  <span>WhatsApp Order</span>
+                  <MessageCircle size={15} />
+                  <span>WhatsApp Owner</span>
                 </a>
 
                 {restaurant.phone ? (
@@ -203,7 +212,7 @@ export function DishDetailOrderModal({
                     className="flex items-center justify-center gap-2 rounded-xl border border-cream-300 bg-cream-100 py-2.5 text-xs font-bold text-ink-800 transition hover:bg-cream-200"
                   >
                     <Phone size={15} className="text-ink-700" />
-                    <span>Call Restaurant</span>
+                    <span>Call Owner</span>
                   </a>
                 ) : (
                   <a

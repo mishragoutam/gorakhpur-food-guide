@@ -16,6 +16,7 @@ import {
   Plus,
   ShoppingBag,
   UtensilsCrossed,
+  MessageCircle,
 } from 'lucide-react';
 import { useEffect, useState, useMemo } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
@@ -894,8 +895,21 @@ export default function RestaurantDetailsPage() {
                 <div className="flex items-start gap-2.5">
                   <Phone size={16} className="shrink-0 text-accent-700 mt-0.5" />
                   <div>
-                    <span className="font-bold text-ink-900">Contact</span>
-                    <p className="text-ink-600">{restaurant.phone || '+91 98380 12345'}</p>
+                    <span className="font-bold text-ink-900">Owner Contact &amp; WhatsApp</span>
+                    <div className="flex items-center gap-2 mt-0.5 flex-wrap">
+                      <p className="text-ink-600 font-medium">{restaurant.phone || '+91 98380 12345'}</p>
+                      {restaurant.phone ? (
+                        <a
+                          href={`https://wa.me/${(restaurant.whatsappPhone || restaurant.phone).replace(/\D/g, '').length === 10 ? `91${(restaurant.whatsappPhone || restaurant.phone).replace(/\D/g, '')}` : (restaurant.whatsappPhone || restaurant.phone).replace(/\D/g, '')}?text=${encodeURIComponent(`Hello ${restaurant.name}! 👋 I am viewing your menu on VYORA.`)}`}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2 py-0.5 text-[11px] font-bold text-emerald-800 hover:bg-emerald-200 transition"
+                        >
+                          <MessageCircle size={11} />
+                          <span>Chat on WhatsApp</span>
+                        </a>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
               </div>

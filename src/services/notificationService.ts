@@ -12,6 +12,7 @@ export const VYORA_SUPPORT_EMAIL = 'lazyotakumg@gmail.com';
 export interface NotificationResult {
   whatsappUrl: string;
   supportWhatsappUrl: string;
+  ownerWhatsappUrl: string;
   smsUrl: string;
   gmailUrl: string;
   mailtoUrl: string;
@@ -77,14 +78,24 @@ export function formatEmailVoucher(booking: TableBooking): { subject: string; bo
 /**
  * Generate 1-click delivery URLs
  */
-export function getBookingNotificationUrls(booking: TableBooking): NotificationResult {
+export function getBookingNotificationUrls(
+  booking: TableBooking,
+  restaurantPhone?: string,
+): NotificationResult {
   const cleanMobile = booking.mobile.replace(/\D/g, '').slice(-10);
   const text = formatBookingPass(booking);
   const smsText = formatSmsPass(booking);
   const { subject, body } = formatEmailVoucher(booking);
 
-  // WhatsApp: direct send to user's phone or restaurant
+  // WhatsApp: direct send to user's phone
   const whatsappUrl = `https://wa.me/91${cleanMobile}?text=${encodeURIComponent(text)}`;
+
+  // WhatsApp: direct send to restaurant owner
+  const rawOwner = (restaurantPhone || '8382999557').replace(/\D/g, '');
+  const cleanOwner = rawOwner.length === 10 ? `91${rawOwner}` : rawOwner;
+  const ownerText = `Hello! 🛎️ Table Reservation Request from VYORA for ${booking.restaurantName}:\n\nGuest: ${booking.guestName} (${booking.guests} Guests)\nDate: ${booking.date} at ${booking.time}\nBooking ID: ${booking.confirmationCode}\nGuest Mobile: ${booking.mobile}\nGuest Email: ${booking.email}\n${booking.specialRequests ? `Special Request: ${booking.specialRequests}\n` : ''}\nPlease confirm table availability. Thank you!`;
+  const ownerWhatsappUrl = `https://wa.me/${cleanOwner}?text=${encodeURIComponent(ownerText)}`;
+
   // WhatsApp: send to Vyora official helpline
   const supportWhatsappUrl = `https://wa.me/918382999557?text=${encodeURIComponent(text)}`;
 
@@ -100,6 +111,7 @@ export function getBookingNotificationUrls(booking: TableBooking): NotificationR
   return {
     whatsappUrl,
     supportWhatsappUrl,
+    ownerWhatsappUrl,
     smsUrl,
     gmailUrl,
     mailtoUrl,

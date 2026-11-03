@@ -308,7 +308,13 @@ export const storageService = {
     const cleanId = decoded.replace(/^demo-/, '');
 
     // 2. Resilient fallback matching (case-insensitive, optional demo- prefix, or slugified name)
-    const found = list.find((r) => {
+    // Prioritize non-demo and newest verified restaurants so user-edited restaurants always win
+    const sorted = [...list].sort((a, b) => {
+      if (a.isDemo !== b.isDemo) return a.isDemo ? 1 : -1;
+      return (b.id || '').localeCompare(a.id || '');
+    });
+
+    const found = sorted.find((r) => {
       const restId = r.id.toLowerCase();
       const restCleanId = restId.replace(/^demo-/, '');
       const restSlug = r.name
@@ -343,6 +349,54 @@ export const storageService = {
       (r) => r.id === id || r.id.toLowerCase() === decoded || r.id.replace(/^demo-/, '') === cleanId,
     );
     return fallback ? { ...fallback } : null;
+  },
+
+  /**
+   * Synchronizes full restaurant list from cloud database into local storage.
+   */
+  syncRestaurantsFromCloud(cloudList: Restaurant[]): void {
+    if (!cloudList || !Array.isArray(cloudList) || cloudList.length === 0) return;
+    const current = this.getRawRestaurants();
+    const cloudMap = new Map(cloudList.map((r) => [r.id, r]));
+
+    // Start with all cloud restaurants (source of truth)
+    const merged: Restaurant[] = [...cloudList];
+
+    // Keep any local demo fixtures if they aren't already represented in cloud
+    for (const localRest of current) {
+      if (!cloudMap.has(localRest.id) && localRest.isDemo) {
+        merged.push(localRest);
+      }
+    }
+
+    safeSet(STORAGE_KEYS.restaurants, merged);
+    window.dispatchEvent(new CustomEvent('rateit-storage-change', { detail: { key: STORAGE_KEYS.restaurants } }));
+  },
+
+  /**
+   * Realtime upsert of an individual restaurant from cloud subscription.
+   */
+  upsertRestaurantFromCloud(rest: Restaurant): void {
+    if (!rest || !rest.id) return;
+    const list = this.getRawRestaurants();
+    const idx = list.findIndex((r) => r.id === rest.id);
+    if (idx >= 0) {
+      list[idx] = { ...list[idx], ...rest };
+    } else {
+      list.unshift(rest);
+    }
+    safeSet(STORAGE_KEYS.restaurants, list);
+    window.dispatchEvent(new CustomEvent('rateit-storage-change', { detail: { key: STORAGE_KEYS.restaurants } }));
+  },
+
+  /**
+   * Remove a restaurant from local storage (e.g. after cloud deletion).
+   */
+  removeRestaurantFromStorage(id: string): void {
+    if (!id) return;
+    const list = this.getRawRestaurants().filter((r) => r.id !== id);
+    safeSet(STORAGE_KEYS.restaurants, list);
+    window.dispatchEvent(new CustomEvent('rateit-storage-change', { detail: { key: STORAGE_KEYS.restaurants } }));
   },
 
   /**

@@ -4,6 +4,8 @@ import { Layout } from '@/components/layout/Layout';
 import { ToastContainer } from '@/components/ui/Toast';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 import { storageService } from '@/services/storageService';
+import { restaurantService } from '@/services/restaurantService';
+import { fromRestaurantRow } from '@/services/supabaseService';
 import HomePage from '@/pages/HomePage';
 import RestaurantDetailsPage from '@/pages/RestaurantDetailsPage';
 import NotFoundPage from '@/pages/NotFoundPage';
@@ -31,7 +33,11 @@ function RouteLoadingFallback() {
 
 export default function App() {
   useEffect(() => {
-    if (isSupabaseConfigured() && supabase) {
+    if (import.meta.env.MODE !== 'test' && isSupabaseConfigured() && supabase) {
+      // 1. Initial Cloud Sync: Ensure mobile and desktop stay 100% identical
+      restaurantService.fetchFromCloud().catch(() => {});
+
+      // 2. Auth State Change Listener
       const {
         data: { subscription },
       } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -58,8 +64,32 @@ export default function App() {
         }
       });
 
+      // 3. Realtime Subscription: Instant sync when an owner registers or edits their restaurant
+      const restaurantChannel = supabase
+        .channel('realtime:restaurants-sync')
+        .on(
+          'postgres_changes',
+          { event: '*', schema: 'public', table: 'restaurants' },
+          (payload) => {
+            if (payload.eventType === 'INSERT' || payload.eventType === 'UPDATE') {
+              const row = payload.new as Record<string, unknown>;
+              const rest = fromRestaurantRow(row);
+              storageService.upsertRestaurantFromCloud(rest);
+            } else if (payload.eventType === 'DELETE') {
+              const old = payload.old as Record<string, unknown>;
+              if (old?.id) {
+                storageService.removeRestaurantFromStorage(String(old.id));
+              }
+            }
+          },
+        )
+        .subscribe();
+
       return () => {
         subscription.unsubscribe();
+        if (supabase) {
+          supabase.removeChannel(restaurantChannel);
+        }
       };
     }
   }, []);

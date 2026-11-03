@@ -87,6 +87,7 @@ export default function OwnerRegisterPage() {
       city: 'Gorakhpur',
       address: `${area}, Gorakhpur`,
       phone: phone.trim() || '+91 98380 12345',
+      whatsappPhone: phone.trim() || '+91 98380 12345',
       costForTwo: 450,
       averageRating: 5.0,
       reviewCount: 0,
@@ -239,16 +240,19 @@ export default function OwnerRegisterPage() {
 
               <div>
                 <label className="mb-1 block text-xs font-bold text-ink-800" htmlFor="reg-phone">
-                  Phone Number
+                  Owner&apos;s WhatsApp &amp; Order Phone Number <span className="text-red-500">*</span>
                 </label>
                 <input
                   id="reg-phone"
                   type="tel"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  placeholder="+91 98380 12345"
+                  placeholder="e.g. 8382999557 or +91 98380 12345"
                   className="w-full rounded-xl border border-cream-300 px-3.5 py-2.5 text-sm text-ink-900 outline-none focus:border-accent-600 focus:ring-2 focus:ring-accent-100"
                 />
+                <p className="mt-1 text-[11px] text-ink-500">
+                  Customers ordering food or booking tables will be connected directly to this WhatsApp number.
+                </p>
               </div>
             </div>
 

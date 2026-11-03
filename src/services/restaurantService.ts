@@ -11,32 +11,50 @@ export interface RestaurantService {
 
 export const restaurantService: RestaurantService = {
   async list() {
-    // Instant local cache response ensures UI never hangs or waits on slow network
-    return storageService.getRestaurants();
+    // 1. Instant local response
+    const localList = storageService.getRestaurants();
+
+    // 2. In non-test mode, background sync from cloud if configured
+    if (import.meta.env.MODE !== 'test' && supabaseService.isConfigured()) {
+      supabaseService
+        .getRestaurants()
+        .then((cloudRests) => {
+          if (cloudRests && cloudRests.length > 0) {
+            storageService.syncRestaurantsFromCloud(cloudRests);
+          }
+        })
+        .catch(() => {});
+    }
+
+    return localList;
   },
 
   async getById(id: string) {
-    const local = storageService.getRestaurantById(id);
-    if (local) return local;
-
-    // In test environment, immediately return null to avoid network timeouts
+    // In test environment, immediately return local to avoid network timeouts
     if (import.meta.env.MODE === 'test') {
-      return null;
+      return storageService.getRestaurantById(id);
     }
 
-    // If not found locally and Supabase is configured, attempt fast cloud fetch with 1s timeout
+    const local = storageService.getRestaurantById(id);
+
+    // If Supabase is configured, fetch fresh data from cloud to guarantee mobile matches desktop
     if (supabaseService.isConfigured()) {
       try {
+        const timeoutMs = local ? 1800 : 5000;
         const cloudRest = await Promise.race([
           supabaseService.getRestaurantById(id),
-          new Promise<null>((resolve) => setTimeout(() => resolve(null), 1000)),
+          new Promise<null>((resolve) => setTimeout(() => resolve(null), timeoutMs)),
         ]);
-        if (cloudRest) return cloudRest;
+        if (cloudRest) {
+          storageService.upsertRestaurantFromCloud(cloudRest);
+          return cloudRest;
+        }
       } catch {
-        // Fallback gracefully
+        // Fallback gracefully to local
       }
     }
-    return null;
+
+    return local;
   },
 
   async save(restaurant: Restaurant) {
@@ -48,6 +66,10 @@ export const restaurantService: RestaurantService = {
 
   async fetchFromCloud() {
     if (!supabaseService.isConfigured()) return [];
-    return supabaseService.getRestaurants();
+    const list = await supabaseService.getRestaurants();
+    if (list && list.length > 0) {
+      storageService.syncRestaurantsFromCloud(list);
+    }
+    return list;
   },
 };

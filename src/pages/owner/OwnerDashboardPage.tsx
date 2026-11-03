@@ -307,6 +307,7 @@ export default function OwnerDashboardPage() {
       name: profileName,
       description: profileDesc,
       phone: profilePhone,
+      whatsappPhone: profilePhone,
       address: profileAddress,
       openTime: profileOpenTime,
       closeTime: profileCloseTime,
@@ -1137,15 +1138,19 @@ export default function OwnerDashboardPage() {
 
                     <div>
                       <label className="mb-1 block text-xs font-bold text-ink-800" htmlFor="prof-phone">
-                        Contact Phone
+                        Owner&apos;s WhatsApp &amp; Direct Order Phone
                       </label>
                       <input
                         id="prof-phone"
                         type="text"
                         value={profilePhone}
                         onChange={(e) => setProfilePhone(e.target.value)}
+                        placeholder="e.g. 8382999557 or +91 98380 12345"
                         className="w-full rounded-xl border border-cream-300 p-2.5 text-sm outline-none focus:border-accent-600"
                       />
+                      <p className="mt-1 text-[11px] text-ink-500">
+                        Orders from customers on your menu will be sent directly to this WhatsApp number.
+                      </p>
                     </div>
                   </div>
 

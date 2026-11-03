@@ -84,6 +84,7 @@ export interface Restaurant {
 
   // Rich metadata for restaurant profile and dining insights:
   phone?: string;
+  whatsappPhone?: string;
   address?: string;
   openTime?: string; // e.g. "11:00"
   closeTime?: string; // e.g. "23:00"

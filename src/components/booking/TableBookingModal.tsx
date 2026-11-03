@@ -151,7 +151,7 @@ export function TableBookingModal({
     const ok = await shareBookingPassViaWebShare(booking);
     if (!ok) {
       // Fallback to WhatsApp
-      const urls = getBookingNotificationUrls(booking);
+      const urls = getBookingNotificationUrls(booking, restaurant.whatsappPhone || restaurant.phone);
       window.open(urls.whatsappUrl, '_blank');
     }
   };
@@ -223,12 +223,12 @@ export function TableBookingModal({
 
             {/* Live Interactive Notification Dispatch Channels */}
             {(() => {
-              const urls = getBookingNotificationUrls(confirmedBooking);
+              const urls = getBookingNotificationUrls(confirmedBooking, restaurant.whatsappPhone || restaurant.phone);
               return (
                 <div className="space-y-3 text-left mb-6">
                   <div className="flex items-center justify-between px-1">
                     <span className="text-[11px] font-bold uppercase tracking-wider text-ink-700">
-                      Deliver Booking Pass & Voucher:
+                      Deliver Booking Pass &amp; Voucher:
                     </span>
                     <span className="text-[10px] font-semibold text-accent-700">1-Click Dispatch</span>
                   </div>
@@ -241,27 +241,28 @@ export function TableBookingModal({
                       </div>
                       <div>
                         <div className="font-bold text-ink-900">WhatsApp Notification</div>
-                        <p className="text-[11px] text-ink-600">Send pass to <strong>{confirmedBooking.mobile}</strong></p>
+                        <p className="text-[11px] text-ink-600">Send pass directly to owner or your number</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-1.5">
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      <a
+                        href={urls.ownerWhatsappUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-emerald-600 px-3.5 py-2 text-xs font-bold text-white shadow-xs hover:bg-emerald-700 transition"
+                        title="Send booking pass directly to restaurant owner WhatsApp"
+                      >
+                        <Send size={13} />
+                        <span>Send to Owner WhatsApp</span>
+                      </a>
                       <a
                         href={urls.whatsappUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-emerald-600 px-3.5 py-2 text-xs font-bold text-white shadow-xs hover:bg-emerald-700 transition"
-                      >
-                        <Send size={13} />
-                        <span>Send WhatsApp</span>
-                      </a>
-                      <a
-                        href={urls.supportWhatsappUrl}
-                        target="_blank"
-                        rel="noreferrer"
                         className="inline-flex items-center justify-center gap-1 rounded-xl border border-emerald-600 bg-emerald-50 px-2.5 py-2 text-xs font-bold text-emerald-800 shadow-2xs hover:bg-emerald-100 transition"
-                        title="Send booking pass to Vyora Helpline +91 8382999557"
+                        title="Send copy to diner WhatsApp"
                       >
-                        <span>Helpline</span>
+                        <span>Send to My WhatsApp</span>
                       </a>
                     </div>
                   </div>
