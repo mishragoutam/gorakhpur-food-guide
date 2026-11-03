@@ -21,6 +21,19 @@ function getOptimizedImageUrl(url: string, width = 600): string {
 /** Shows the restaurant's photo when one exists, otherwise a themed illustration. */
 export function RestaurantImage({ restaurant, className, priority = false }: RestaurantImageProps) {
   if (restaurant.imageUrl) {
+    const isUnsplash = restaurant.imageUrl.includes('unsplash.com');
+    if (!isUnsplash) {
+      return (
+        <img
+          src={restaurant.imageUrl}
+          alt={`${restaurant.name} in ${restaurant.area}, ${restaurant.city}`}
+          loading={priority ? 'eager' : 'lazy'}
+          decoding="async"
+          className={cn('size-full object-cover transition-opacity duration-300', className)}
+        />
+      );
+    }
+
     const srcSmall = getOptimizedImageUrl(restaurant.imageUrl, 400);
     const srcMed = getOptimizedImageUrl(restaurant.imageUrl, 750);
     const srcLarge = getOptimizedImageUrl(restaurant.imageUrl, 1100);

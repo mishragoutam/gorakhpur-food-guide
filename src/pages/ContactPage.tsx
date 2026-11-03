@@ -134,10 +134,10 @@ export default function ContactPage() {
             <p className="mt-1 text-xs text-ink-500">Immediate telephone assistance</p>
             <div className="mt-3 space-y-1.5 text-sm">
               <p className="font-semibold text-ink-800">
-                Helpline: <a href="tel:+919838091234" className="text-accent-700 hover:underline">+91 98380 91234</a>
+                Helpline: <a href="tel:+918382999557" className="text-accent-700 hover:underline">+91 8382999557</a>
               </p>
               <p className="font-semibold text-ink-800">
-                WhatsApp: <a href="https://wa.me/919838091235" target="_blank" rel="noreferrer" className="text-accent-700 hover:underline">+91 98380 91235</a>
+                WhatsApp: <a href="https://wa.me/918382999557" target="_blank" rel="noreferrer" className="text-accent-700 hover:underline">+91 8382999557</a>
               </p>
             </div>
             <p className="mt-4 text-xs text-ink-500">Fast responses during active business hours</p>
@@ -152,14 +152,14 @@ export default function ContactPage() {
             <div className="mt-3 space-y-1.5 text-sm">
               <p className="text-ink-800">
                 General:{' '}
-                <a href="mailto:support@vyora.in" className="font-semibold text-accent-700 hover:underline">
-                  support@vyora.in
+                <a href="mailto:lazyotakumg@gmail.com" className="font-semibold text-accent-700 hover:underline">
+                  lazyotakumg@gmail.com
                 </a>
               </p>
               <p className="text-ink-800">
-                Partners:{' '}
-                <a href="mailto:partners@vyora.in" className="font-semibold text-accent-700 hover:underline">
-                  partners@vyora.in
+                Support:{' '}
+                <a href="mailto:lazyotakumg@gmail.com" className="font-semibold text-accent-700 hover:underline">
+                  lazyotakumg@gmail.com
                 </a>
               </p>
             </div>
@@ -200,20 +200,20 @@ export default function ContactPage() {
                       Need faster assistance? Send directly via:
                     </span>
                     <a
-                      href={`https://wa.me/919838091235?text=${encodeURIComponent(`Hello Vyora Support,\nMy Name: ${name}\nEmail: ${email}\nCategory: ${category}\nMessage: ${message}`)}`}
+                      href={`https://wa.me/918382999557?text=${encodeURIComponent(`Hello Vyora Support,\nMy Name: ${name}\nEmail: ${email}\nCategory: ${category}\nMessage: ${message}`)}`}
                       target="_blank"
                       rel="noreferrer"
                       className="flex items-center justify-center gap-2 rounded-xl bg-emerald-600 px-5 py-3 text-xs font-bold text-white shadow-sm hover:bg-emerald-700 transition"
                     >
                       <MessageSquare size={16} />
-                      <span>Chat with Vyora Support on WhatsApp (+91 98380 91235)</span>
+                      <span>Chat with Vyora Support on WhatsApp (+91 8382999557)</span>
                     </a>
                     <a
-                      href={`mailto:support@vyora.in?subject=${encodeURIComponent(`Vyora Inquiry: ${category} from ${name}`)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nCategory: ${category}\n\nMessage:\n${message}`)}`}
+                      href={`mailto:lazyotakumg@gmail.com?subject=${encodeURIComponent(`Vyora Inquiry: ${category} from ${name}`)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nCategory: ${category}\n\nMessage:\n${message}`)}`}
                       className="flex items-center justify-center gap-2 rounded-xl bg-ink-900 px-5 py-3 text-xs font-bold text-white shadow-sm hover:bg-ink-800 transition"
                     >
                       <Mail size={16} />
-                      <span>Send Direct Email to support@vyora.in</span>
+                      <span>Send Direct Email to lazyotakumg@gmail.com</span>
                     </a>
                   </div>
 

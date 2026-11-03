@@ -6,8 +6,12 @@ import type { TableBooking } from '@/types/restaurant';
  * Web Share API, Clipboard copy, and Browser Push Notifications.
  */
 
+export const VYORA_SUPPORT_PHONE = '8382999557';
+export const VYORA_SUPPORT_EMAIL = 'lazyotakumg@gmail.com';
+
 export interface NotificationResult {
   whatsappUrl: string;
+  supportWhatsappUrl: string;
   smsUrl: string;
   gmailUrl: string;
   mailtoUrl: string;
@@ -62,7 +66,7 @@ export function formatEmailVoucher(booking: TableBooking): { subject: string; bo
     ``,
     `Warm regards,`,
     `Team Vyora • Gorakhpur Food Guide`,
-    `Need help? Helpline: +91 98380 91234 | contact@vyora.in`,
+    `Need help? Helpline: +91 8382999557 | lazyotakumg@gmail.com`,
   ]
     .filter((line) => line !== null)
     .join('\n');
@@ -81,6 +85,8 @@ export function getBookingNotificationUrls(booking: TableBooking): NotificationR
 
   // WhatsApp: direct send to user's phone or restaurant
   const whatsappUrl = `https://wa.me/91${cleanMobile}?text=${encodeURIComponent(text)}`;
+  // WhatsApp: send to Vyora official helpline
+  const supportWhatsappUrl = `https://wa.me/918382999557?text=${encodeURIComponent(text)}`;
 
   // SMS: universal cross-platform format for iOS and Android
   const smsUrl = `sms:+91${cleanMobile}?&body=${encodeURIComponent(smsText)}`;
@@ -93,6 +99,7 @@ export function getBookingNotificationUrls(booking: TableBooking): NotificationR
 
   return {
     whatsappUrl,
+    supportWhatsappUrl,
     smsUrl,
     gmailUrl,
     mailtoUrl,

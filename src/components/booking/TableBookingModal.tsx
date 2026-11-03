@@ -244,15 +244,26 @@ export function TableBookingModal({
                         <p className="text-[11px] text-ink-600">Send pass to <strong>{confirmedBooking.mobile}</strong></p>
                       </div>
                     </div>
-                    <a
-                      href={urls.whatsappUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-emerald-600 px-3.5 py-2 text-xs font-bold text-white shadow-xs hover:bg-emerald-700 transition"
-                    >
-                      <Send size={13} />
-                      <span>Send WhatsApp</span>
-                    </a>
+                    <div className="flex items-center gap-1.5">
+                      <a
+                        href={urls.whatsappUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-emerald-600 px-3.5 py-2 text-xs font-bold text-white shadow-xs hover:bg-emerald-700 transition"
+                      >
+                        <Send size={13} />
+                        <span>Send WhatsApp</span>
+                      </a>
+                      <a
+                        href={urls.supportWhatsappUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center justify-center gap-1 rounded-xl border border-emerald-600 bg-emerald-50 px-2.5 py-2 text-xs font-bold text-emerald-800 shadow-2xs hover:bg-emerald-100 transition"
+                        title="Send booking pass to Vyora Helpline +91 8382999557"
+                      >
+                        <span>Helpline</span>
+                      </a>
+                    </div>
                   </div>
 
                   {/* SMS Channel */}

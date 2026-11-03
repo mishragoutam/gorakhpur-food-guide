@@ -54,7 +54,7 @@ export function DineInTrayModal({
     .join('\n');
 
   const whatsappMessage = encodeURIComponent(
-    `Hello ${restaurant.name}! 👋\n\nI want to place an order from your Gorakhpur Food Guide menu:\n\n${orderLines}\n\n*Total Items:* ${totalItemCount}\n*Estimated Bill:* ₹${totalAmount}\n*Address:* ${restaurant.address || restaurant.area}, Gorakhpur\n\nPlease confirm order receipt & preparation time. Thank you!`,
+    `Hello ${restaurant.name}! 👋\n\nI want to place an order from your Vyora (Gorakhpur Food Guide) menu:\n\n${orderLines}\n\n*Total Items:* ${totalItemCount}\n*Estimated Bill:* ₹${totalAmount}\n*Address:* ${restaurant.address || restaurant.area}, Gorakhpur\n\nPlease confirm order receipt & preparation time. Thank you!`,
   );
 
   return (

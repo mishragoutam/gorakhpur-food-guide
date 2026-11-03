@@ -15,6 +15,7 @@ import {
   Calendar,
   Plus,
   ShoppingBag,
+  UtensilsCrossed,
 } from 'lucide-react';
 import { useEffect, useState, useMemo } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
@@ -661,8 +662,16 @@ export default function RestaurantDetailsPage() {
                                 alt={item.name}
                                 className="size-20 shrink-0 rounded-2xl object-cover ring-1 ring-ink-900/5 shadow-2xs group-hover:scale-[1.03] transition-transform duration-200"
                                 loading="lazy"
+                                onError={(e) => {
+                                  e.currentTarget.style.display = 'none';
+                                }}
                               />
-                            ) : null}
+                            ) : (
+                              <div className="flex size-20 shrink-0 flex-col items-center justify-center rounded-2xl border border-cream-200 bg-cream-100/70 text-accent-700/80 shadow-2xs group-hover:scale-[1.03] transition-transform duration-200">
+                                <UtensilsCrossed size={22} className="opacity-60" />
+                                <span className="mt-1 text-[9px] font-bold text-ink-500">Dish</span>
+                              </div>
+                            )}
                             <div className="min-w-0 flex-1">
                               <div className="flex items-start justify-between gap-2">
                                 <h4 className="text-sm font-bold text-ink-900 leading-snug line-clamp-2 group-hover:text-accent-700 transition">

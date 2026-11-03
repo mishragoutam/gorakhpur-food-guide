@@ -1,11 +1,12 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { Store, Sparkles, ArrowLeft } from 'lucide-react';
+import { Store, Sparkles, ArrowLeft, Camera, Upload } from 'lucide-react';
 import { useState } from 'react';
 import { Container } from '@/components/ui/Container';
 import { showToast } from '@/lib/toast';
 import { usePageTitle } from '@/hooks/usePageTitle';
 import { ROUTES } from '@/lib/routes';
 import { storageService } from '@/services/storageService';
+import { STOREFRONT_PRESETS, compressImageFile } from '@/lib/imageUpload';
 import type { CategoryId, Restaurant } from '@/types/restaurant';
 
 function mapCuisineToCategory(cuisine: string): CategoryId {
@@ -38,6 +39,11 @@ export default function OwnerRegisterPage() {
   const [phone, setPhone] = useState('');
   const [cuisine, setCuisine] = useState('North Indian');
   const [area, setArea] = useState('Golghar');
+  const [selectedStorefrontUrl, setSelectedStorefrontUrl] = useState<string>(
+    STOREFRONT_PRESETS[0]?.url || '',
+  );
+  const [logoUrl, setLogoUrl] = useState<string>('');
+  const [isUploadingPhoto, setIsUploadingPhoto] = useState(false);
   const [error, setError] = useState('');
 
   const handleRegister = (e: React.FormEvent) => {
@@ -57,7 +63,8 @@ export default function OwnerRegisterPage() {
       name: restaurantName.trim(),
       cuisines: [cuisine],
       popularDishes: [`${cuisine} Platter`, 'Chef Special Starter'],
-      imageUrl: null,
+      imageUrl: selectedStorefrontUrl || null,
+      logoUrl: logoUrl.trim() || undefined,
       area: area,
       city: 'Gorakhpur',
       address: `${area}, Gorakhpur`,
@@ -83,6 +90,7 @@ export default function OwnerRegisterPage() {
           category: 'Main Course',
           diet: 'veg',
           description: 'Special prepared dish featuring chef signature spices.',
+          imageUrl: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80',
           isAvailable: true,
           isFeatured: true,
         },
@@ -93,6 +101,7 @@ export default function OwnerRegisterPage() {
           category: 'Starters',
           diet: 'veg',
           description: 'Flavourful starter prepared fresh to order with house mint dip.',
+          imageUrl: 'https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=600&q=80',
           isAvailable: true,
           isFeatured: true,
         },
@@ -263,6 +272,105 @@ export default function OwnerRegisterPage() {
                   <option>Shahpur</option>
                   <option>Bank Road</option>
                 </select>
+              </div>
+            </div>
+
+            {/* Storefront Atmosphere / Photo */}
+            <div className="rounded-2xl border border-cream-200 bg-cream-50/70 p-4 space-y-3">
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-bold text-ink-800 flex items-center gap-1.5">
+                  <Camera size={14} className="text-accent-700" />
+                  Storefront Photo & Ambience (Optional)
+                </label>
+                <label className="inline-flex items-center gap-1 text-[11px] font-bold text-accent-700 hover:text-accent-800 cursor-pointer">
+                  <Upload size={12} />
+                  <span>{isUploadingPhoto ? 'Uploading...' : 'Upload custom photo'}</span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={async (e) => {
+                      const file = e.target.files?.[0];
+                      if (!file) return;
+                      try {
+                        setIsUploadingPhoto(true);
+                        const compressed = await compressImageFile(file, 1200, 800, 0.85);
+                        setSelectedStorefrontUrl(compressed);
+                        showToast('Storefront photo uploaded!');
+                      } catch {
+                        showToast('Failed to load photo', 'error');
+                      } finally {
+                        setIsUploadingPhoto(false);
+                      }
+                    }}
+                    className="hidden"
+                  />
+                </label>
+              </div>
+
+              {/* Presets Grid */}
+              <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
+                {STOREFRONT_PRESETS.map((preset) => {
+                  const isSelected = selectedStorefrontUrl === preset.url;
+                  return (
+                    <button
+                      key={preset.name}
+                      type="button"
+                      onClick={() => setSelectedStorefrontUrl(preset.url)}
+                      className={`rounded-xl overflow-hidden border p-1 text-left transition cursor-pointer ${
+                        isSelected
+                          ? 'border-accent-600 ring-2 ring-accent-400 bg-accent-50'
+                          : 'border-cream-300 bg-white hover:border-cream-400'
+                      }`}
+                    >
+                      <img
+                        src={preset.url}
+                        alt={preset.name}
+                        className="aspect-[4/3] w-full rounded-lg object-cover"
+                        loading="lazy"
+                      />
+                      <span className="block mt-1 text-[9px] font-bold text-ink-800 truncate">
+                        {preset.name}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Brand Logo (Optional) */}
+              <div className="pt-2 border-t border-cream-200">
+                <div className="flex items-center justify-between mb-1">
+                  <label className="text-xs font-bold text-ink-800" htmlFor="reg-logo">
+                    Brand Logo URL (Optional)
+                  </label>
+                  <label className="inline-flex items-center gap-1 text-[11px] font-bold text-accent-700 hover:text-accent-800 cursor-pointer">
+                    <Upload size={12} />
+                    <span>Upload logo</span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={async (e) => {
+                        const file = e.target.files?.[0];
+                        if (!file) return;
+                        try {
+                          const compressed = await compressImageFile(file, 400, 400, 0.85);
+                          setLogoUrl(compressed);
+                          showToast('Brand logo uploaded!');
+                        } catch {
+                          showToast('Failed to load logo', 'error');
+                        }
+                      }}
+                      className="hidden"
+                    />
+                  </label>
+                </div>
+                <input
+                  id="reg-logo"
+                  type="url"
+                  value={logoUrl}
+                  onChange={(e) => setLogoUrl(e.target.value)}
+                  placeholder="https://example.com/logo.png (or upload above)"
+                  className="w-full rounded-xl border border-cream-300 px-3.5 py-2 text-xs text-ink-900 outline-none focus:border-accent-600 bg-white"
+                />
               </div>
             </div>
 

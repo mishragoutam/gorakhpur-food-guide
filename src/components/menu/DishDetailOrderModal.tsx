@@ -42,7 +42,7 @@ export function DishDetailOrderModal({
   const cleanPhone = rawPhone.length === 10 ? `91${rawPhone}` : rawPhone;
 
   const whatsappMessage = encodeURIComponent(
-    `Hello ${restaurant.name}! 👋\n\nI want to order from your menu on Gorakhpur Food Guide:\n• ${quantity}x ${item.name} (₹${item.price} each = ₹${totalCost})\n\nCategory: ${item.category}\nDiet: ${item.diet === 'veg' ? 'Pure Veg' : 'Non-Veg'}\nRestaurant Address: ${restaurant.address || restaurant.area}, Gorakhpur\n\nPlease confirm preparation time and table/delivery availability. Thank you!`,
+    `Hello ${restaurant.name}! 👋\n\nI want to order from your menu on Vyora (Gorakhpur Food Guide):\n• ${quantity}x ${item.name} (₹${item.price} each = ₹${totalCost})\n\nCategory: ${item.category}\nDiet: ${item.diet === 'veg' ? 'Pure Veg' : 'Non-Veg'}\nRestaurant Address: ${restaurant.address || restaurant.area}, Gorakhpur\n\nPlease confirm preparation time and table/delivery availability. Thank you!`,
   );
 
   const zomatoSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(

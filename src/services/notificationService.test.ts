@@ -57,14 +57,18 @@ describe('notificationService', () => {
     expect(email.subject).toContain('582914');
     expect(email.body).toContain('Hello Rahul Verma');
     expect(email.body).toContain('Team Vyora');
+    expect(email.body).toContain('8382999557');
+    expect(email.body).toContain('lazyotakumg@gmail.com');
   });
 
   it('generates working 1-click notification URLs for WhatsApp, SMS, Gmail, and mailto', () => {
     const urls = getBookingNotificationUrls(sampleBooking);
     expect(urls.whatsappUrl).toContain('https://wa.me/919838012345');
+    expect(urls.supportWhatsappUrl).toContain('https://wa.me/918382999557');
     expect(urls.smsUrl).toContain('sms:+919838012345');
     expect(urls.gmailUrl).toContain('https://mail.google.com/mail/');
     expect(urls.gmailUrl).toContain('to=rahul%40gmail.com');
     expect(urls.mailtoUrl).toContain('mailto:rahul%40gmail.com');
   });
 });
+

@@ -27,16 +27,21 @@ import {
   ShieldCheck,
   Calendar,
   Shield,
+  Upload,
+  Camera,
+  Link2,
 } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { QrCodeView } from '@/components/ui/QrCodeView';
 import { getRestaurantPublicUrl, getRestaurantQrFilename } from '@/lib/restaurantUrl';
 import { StarRating } from '@/components/ui/StarRating';
+import { FoodArt } from '@/components/art/FoodArt';
 import { showToast } from '@/lib/toast';
 import { usePageTitle } from '@/hooks/usePageTitle';
 import { ROUTES } from '@/lib/routes';
 import { storageService } from '@/services/storageService';
+import { compressImageFile, STOREFRONT_PRESETS, FOOD_DISH_PRESETS } from '@/lib/imageUpload';
 import type { MenuItem, Restaurant, Review, TableBooking } from '@/types/restaurant';
 
 type TabId =
@@ -104,6 +109,8 @@ export default function OwnerDashboardPage() {
   const [dishCategory, setDishCategory] = useState('Main Course');
   const [dishDiet, setDishDiet] = useState<'veg' | 'nonveg'>('veg');
   const [dishDesc, setDishDesc] = useState('');
+  const [dishImageUrl, setDishImageUrl] = useState('');
+  const [isUploadingDishImg, setIsUploadingDishImg] = useState(false);
 
   // QR sub-state
   const [tableSelection, setTableSelection] = useState<string>('1');
@@ -124,6 +131,10 @@ export default function OwnerDashboardPage() {
   );
   const [profileOpenTime, setProfileOpenTime] = useState(initialData.rest?.openTime || '11:00');
   const [profileCloseTime, setProfileCloseTime] = useState(initialData.rest?.closeTime || '23:00');
+  const [profileLogoUrl, setProfileLogoUrl] = useState(initialData.rest?.logoUrl || '');
+  const [profileImageUrl, setProfileImageUrl] = useState(initialData.rest?.imageUrl || '');
+  const [isUploadingLogo, setIsUploadingLogo] = useState(false);
+  const [isUploadingStorefront, setIsUploadingStorefront] = useState(false);
 
   // Reviews sub-state
   const [starFilter, setStarFilter] = useState<string>('all');
@@ -149,6 +160,8 @@ export default function OwnerDashboardPage() {
       setProfileAddress(rest.address || `${rest.area}, ${rest.city}`);
       setProfileOpenTime(rest.openTime || '11:00');
       setProfileCloseTime(rest.closeTime || '23:00');
+      setProfileLogoUrl(rest.logoUrl || '');
+      setProfileImageUrl(rest.imageUrl || '');
 
       const allReviews = storageService.getReviews(rest.id);
       setReviews(allReviews);
@@ -194,6 +207,51 @@ export default function OwnerDashboardPage() {
     navigate(ROUTES.ownerLogin);
   };
 
+  const handleLogoFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try {
+      setIsUploadingLogo(true);
+      const compressed = await compressImageFile(file, 400, 400, 0.85);
+      setProfileLogoUrl(compressed);
+      showToast('Brand logo uploaded and compressed successfully!');
+    } catch (err) {
+      showToast(err instanceof Error ? err.message : 'Failed to load logo', 'error');
+    } finally {
+      setIsUploadingLogo(false);
+    }
+  };
+
+  const handleStorefrontFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try {
+      setIsUploadingStorefront(true);
+      const compressed = await compressImageFile(file, 1200, 800, 0.85);
+      setProfileImageUrl(compressed);
+      showToast('Storefront photo uploaded and compressed successfully!');
+    } catch (err) {
+      showToast(err instanceof Error ? err.message : 'Failed to load storefront photo', 'error');
+    } finally {
+      setIsUploadingStorefront(false);
+    }
+  };
+
+  const handleDishImageFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try {
+      setIsUploadingDishImg(true);
+      const compressed = await compressImageFile(file, 800, 800, 0.85);
+      setDishImageUrl(compressed);
+      showToast('Dish photo uploaded and compressed successfully!');
+    } catch (err) {
+      showToast(err instanceof Error ? err.message : 'Failed to load dish photo', 'error');
+    } finally {
+      setIsUploadingDishImg(false);
+    }
+  };
+
   const handleSaveProfile = (e: React.FormEvent) => {
     e.preventDefault();
     if (!restaurant) return;
@@ -205,8 +263,10 @@ export default function OwnerDashboardPage() {
       address: profileAddress,
       openTime: profileOpenTime,
       closeTime: profileCloseTime,
+      logoUrl: profileLogoUrl.trim() || undefined,
+      imageUrl: profileImageUrl.trim() || null,
     });
-    showToast('Restaurant profile updated!');
+    showToast('Restaurant profile & visuals updated!');
     loadData();
   };
 
@@ -226,6 +286,7 @@ export default function OwnerDashboardPage() {
           category: dishCategory,
           diet: dishDiet,
           description: dishDesc,
+          imageUrl: dishImageUrl.trim() || undefined,
         };
       }
       showToast(`Updated ${dishName}`);
@@ -237,6 +298,7 @@ export default function OwnerDashboardPage() {
         category: dishCategory,
         diet: dishDiet,
         description: dishDesc,
+        imageUrl: dishImageUrl.trim() || undefined,
         isAvailable: true,
         isFeatured: false,
       };
@@ -281,6 +343,7 @@ export default function OwnerDashboardPage() {
       setDishCategory(dish.category);
       setDishDiet(dish.diet === 'nonveg' ? 'nonveg' : 'veg');
       setDishDesc(dish.description);
+      setDishImageUrl(dish.imageUrl || '');
     } else {
       setEditingDish(null);
       setDishName('');
@@ -288,6 +351,7 @@ export default function OwnerDashboardPage() {
       setDishCategory('Main Course');
       setDishDiet('veg');
       setDishDesc('');
+      setDishImageUrl('');
     }
     setIsDishModalOpen(true);
   };
@@ -407,10 +471,10 @@ export default function OwnerDashboardPage() {
               <div className="flex items-center justify-between px-3 py-3 border-b border-cream-200">
                 <div className="flex items-center gap-2.5">
                   <div className="flex size-9 items-center justify-center rounded-xl bg-accent-600 text-white font-bold">
-                    R
+                    V
                   </div>
                   <div>
-                    <h2 className="font-display text-sm font-bold leading-none text-ink-900">RateIt Hub</h2>
+                    <h2 className="font-display text-sm font-bold leading-none text-ink-900">Vyora Hub</h2>
                     <span className="text-[11px] text-ink-500">Owner Dashboard</span>
                   </div>
                 </div>
@@ -818,13 +882,198 @@ export default function OwnerDashboardPage() {
 
             {/* 2. PROFILE TAB */}
             {activeTab === 'profile' ? (
-              <div className="rounded-3xl border border-cream-300 bg-white p-6 sm:p-10 shadow-sm">
-                <h3 className="text-xl font-bold text-ink-900">Restaurant Profile Information</h3>
-                <p className="text-xs text-ink-500">
-                  Update public listing information shown to diners in Gorakhpur.
-                </p>
+              <div className="rounded-3xl border border-cream-300 bg-white p-6 sm:p-10 shadow-sm space-y-8">
+                <div>
+                  <h3 className="text-xl font-bold text-ink-900">Restaurant Profile Information</h3>
+                  <p className="text-xs text-ink-500">
+                    Update public listing information, brand logo, and storefront imagery shown to diners in Gorakhpur.
+                  </p>
+                </div>
 
-                <form onSubmit={handleSaveProfile} className="mt-6 space-y-4">
+                {/* Visual Branding: Storefront Photo & Brand Logo */}
+                <div className="rounded-2xl border border-cream-200 bg-cream-50/70 p-5 sm:p-6 space-y-6">
+                  <div>
+                    <h4 className="text-sm font-bold text-ink-900 flex items-center gap-2">
+                      <Camera size={16} className="text-accent-700" />
+                      Visual Branding & Photos
+                    </h4>
+                    <p className="text-xs text-ink-500 mt-0.5">
+                      Upload your official restaurant logo and storefront/interior photo to help diners easily recognize your place.
+                    </p>
+                  </div>
+
+                  <div className="grid gap-6 md:grid-cols-2">
+                    {/* Brand Logo Uploader */}
+                    <div className="rounded-2xl border border-cream-300 bg-white p-4 flex flex-col justify-between">
+                      <div>
+                        <span className="text-xs font-bold text-ink-800 block mb-2">Brand Logo / Emblem</span>
+                        <div className="flex items-center gap-4">
+                          <div className="relative size-20 shrink-0 rounded-2xl border border-cream-300 bg-cream-100 flex items-center justify-center overflow-hidden shadow-2xs">
+                            {profileLogoUrl ? (
+                              <img
+                                src={profileLogoUrl}
+                                alt="Brand Logo Preview"
+                                className="size-full object-cover"
+                              />
+                            ) : (
+                              <div className="text-center font-display font-extrabold text-2xl text-accent-700">
+                                {restaurant.name.charAt(0)}
+                              </div>
+                            )}
+                            {isUploadingLogo ? (
+                              <div className="absolute inset-0 bg-ink-900/60 flex items-center justify-center text-white text-[10px] font-bold">
+                                Uploading...
+                              </div>
+                            ) : null}
+                          </div>
+
+                          <div className="flex-1 space-y-2">
+                            <label className="inline-flex items-center gap-1.5 rounded-xl bg-accent-600 px-3.5 py-1.5 text-xs font-bold text-white shadow-xs hover:bg-accent-700 cursor-pointer transition">
+                              <Upload size={13} />
+                              <span>{isUploadingLogo ? 'Processing...' : 'Upload Logo'}</span>
+                              <input
+                                type="file"
+                                accept="image/*"
+                                onChange={handleLogoFileUpload}
+                                disabled={isUploadingLogo}
+                                className="hidden"
+                              />
+                            </label>
+                            {profileLogoUrl ? (
+                              <button
+                                type="button"
+                                onClick={() => setProfileLogoUrl('')}
+                                className="block text-[11px] font-semibold text-rose-600 hover:text-rose-800 underline cursor-pointer"
+                              >
+                                Remove custom logo
+                              </button>
+                            ) : (
+                              <p className="text-[11px] text-ink-400">PNG, JPG, WebP supported</p>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Direct URL input for logo */}
+                        <div className="mt-3">
+                          <div className="flex items-center gap-1.5 text-[11px] text-ink-500 font-semibold mb-1">
+                            <Link2 size={12} />
+                            <span>Or paste logo link / URL:</span>
+                          </div>
+                          <input
+                            type="url"
+                            value={profileLogoUrl}
+                            onChange={(e) => setProfileLogoUrl(e.target.value)}
+                            placeholder="https://example.com/logo.png"
+                            className="w-full rounded-xl border border-cream-300 bg-white px-3 py-1.5 text-xs text-ink-900 outline-none focus:border-accent-600"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Storefront Photo Uploader */}
+                    <div className="rounded-2xl border border-cream-300 bg-white p-4 flex flex-col justify-between">
+                      <div>
+                        <span className="text-xs font-bold text-ink-800 block mb-2">Storefront / Interior Cover</span>
+                        <div className="relative aspect-[16/9] w-full rounded-xl overflow-hidden border border-cream-300 bg-cream-100 shadow-2xs mb-3">
+                          {profileImageUrl ? (
+                            <img
+                              src={profileImageUrl}
+                              alt="Storefront Preview"
+                              className="size-full object-cover"
+                            />
+                          ) : (
+                            <div className="size-full flex flex-col items-center justify-center p-4 text-center">
+                              <FoodArt category={restaurant.categories[0] ?? 'north-indian'} className="h-20 w-auto opacity-70" />
+                              <span className="text-[10px] font-medium text-ink-500 mt-1">Default vector illustration active</span>
+                            </div>
+                          )}
+                          {isUploadingStorefront ? (
+                            <div className="absolute inset-0 bg-ink-900/60 flex items-center justify-center text-white text-xs font-bold">
+                              Compressing photo...
+                            </div>
+                          ) : null}
+                        </div>
+
+                        <div className="flex flex-wrap items-center gap-2">
+                          <label className="inline-flex items-center gap-1.5 rounded-xl bg-accent-600 px-3.5 py-1.5 text-xs font-bold text-white shadow-xs hover:bg-accent-700 cursor-pointer transition">
+                            <Camera size={13} />
+                            <span>{isUploadingStorefront ? 'Processing...' : 'Upload Cover Photo'}</span>
+                            <input
+                              type="file"
+                              accept="image/*"
+                              onChange={handleStorefrontFileUpload}
+                              disabled={isUploadingStorefront}
+                              className="hidden"
+                            />
+                          </label>
+                          {profileImageUrl ? (
+                            <button
+                              type="button"
+                              onClick={() => setProfileImageUrl('')}
+                              className="text-[11px] font-semibold text-rose-600 hover:text-rose-800 underline cursor-pointer"
+                            >
+                              Reset to illustration
+                            </button>
+                          ) : null}
+                        </div>
+
+                        {/* Direct URL input for Storefront */}
+                        <div className="mt-3">
+                          <div className="flex items-center gap-1.5 text-[11px] text-ink-500 font-semibold mb-1">
+                            <Link2 size={12} />
+                            <span>Or paste cover image URL:</span>
+                          </div>
+                          <input
+                            type="url"
+                            value={profileImageUrl}
+                            onChange={(e) => setProfileImageUrl(e.target.value)}
+                            placeholder="https://images.unsplash.com/photo-..."
+                            className="w-full rounded-xl border border-cream-300 bg-white px-3 py-1.5 text-xs text-ink-900 outline-none focus:border-accent-600"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Curated Storefront Facade Presets */}
+                  <div className="pt-2 border-t border-cream-200">
+                    <span className="text-xs font-bold text-ink-800 block mb-2">
+                      Or pick from curated Gorakhpur dining atmosphere presets:
+                    </span>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2">
+                      {STOREFRONT_PRESETS.map((preset) => {
+                        const isSelected = profileImageUrl === preset.url;
+                        return (
+                          <button
+                            key={preset.name}
+                            type="button"
+                            onClick={() => {
+                              setProfileImageUrl(preset.url);
+                              showToast(`Applied "${preset.name}" preset`);
+                            }}
+                            className={`group relative rounded-xl overflow-hidden border p-1 text-left transition cursor-pointer ${
+                              isSelected
+                                ? 'border-accent-600 ring-2 ring-accent-400 bg-accent-50'
+                                : 'border-cream-300 hover:border-accent-300 bg-white'
+                            }`}
+                          >
+                            <img
+                              src={preset.url}
+                              alt={preset.name}
+                              className="aspect-[4/3] w-full rounded-lg object-cover"
+                              loading="lazy"
+                            />
+                            <span className="block mt-1 text-[10px] font-bold text-ink-800 line-clamp-1">
+                              {preset.name}
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+
+                <form onSubmit={handleSaveProfile} className="space-y-4">
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div>
                       <label className="mb-1 block text-xs font-bold text-ink-800" htmlFor="prof-name">
@@ -980,18 +1229,40 @@ export default function OwnerDashboardPage() {
                       }`}
                     >
                       <div>
-                        <div className="flex items-start justify-between gap-2">
-                          <h4 className="text-sm font-bold text-ink-900">{dish.name}</h4>
-                          <span className="font-display font-extrabold text-accent-700 text-sm">
-                            ₹{dish.price}
-                          </span>
-                        </div>
-                        <p className="mt-1 text-xs text-ink-600 line-clamp-2">{dish.description}</p>
-                        <div className="mt-3 flex items-center gap-2 text-[11px] font-semibold">
-                          <span className={dish.diet === 'veg' ? 'text-emerald-700' : 'text-rose-700'}>
-                            {dish.diet === 'veg' ? '● Pure Veg' : '▲ Non-Veg'}
-                          </span>
-                          <span className="text-ink-400">• {dish.category}</span>
+                        <div className="flex gap-3">
+                          {dish.imageUrl ? (
+                            <img
+                              src={dish.imageUrl}
+                              alt={dish.name}
+                              className="size-16 shrink-0 rounded-2xl object-cover ring-1 ring-ink-900/5 shadow-2xs"
+                              loading="lazy"
+                            />
+                          ) : (
+                            <button
+                              type="button"
+                              onClick={() => openAddDishModal(dish)}
+                              className="size-16 shrink-0 rounded-2xl border border-dashed border-cream-300 bg-cream-50 flex flex-col items-center justify-center text-ink-400 hover:text-accent-700 hover:border-accent-300 transition text-[10px] font-bold cursor-pointer"
+                              title="Click to add photo to dish"
+                            >
+                              <Camera size={16} />
+                              <span className="mt-0.5 text-[9px]">+ Photo</span>
+                            </button>
+                          )}
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-start justify-between gap-2">
+                              <h4 className="text-sm font-bold text-ink-900 leading-snug">{dish.name}</h4>
+                              <span className="font-display font-extrabold text-accent-700 text-sm">
+                                ₹{dish.price}
+                              </span>
+                            </div>
+                            <p className="mt-1 text-xs text-ink-600 line-clamp-2">{dish.description}</p>
+                            <div className="mt-2 flex items-center gap-2 text-[11px] font-semibold">
+                              <span className={dish.diet === 'veg' ? 'text-emerald-700' : 'text-rose-700'}>
+                                {dish.diet === 'veg' ? '● Pure Veg' : '▲ Non-Veg'}
+                              </span>
+                              <span className="text-ink-400">• {dish.category}</span>
+                            </div>
+                          </div>
                         </div>
                       </div>
 
@@ -1652,6 +1923,100 @@ export default function OwnerDashboardPage() {
                   placeholder="Ingredients and culinary style..."
                   className="w-full rounded-xl border border-cream-300 p-2.5 text-xs outline-none focus:border-accent-600"
                 />
+              </div>
+
+              {/* Dish Photo / Image Upload Section */}
+              <div className="rounded-2xl border border-cream-200 bg-cream-50/70 p-3.5 space-y-3">
+                <div className="flex items-center justify-between">
+                  <label className="text-xs font-bold text-ink-800 flex items-center gap-1.5">
+                    <Camera size={14} className="text-accent-700" />
+                    Dish Food Photo
+                  </label>
+                  {dishImageUrl ? (
+                    <button
+                      type="button"
+                      onClick={() => setDishImageUrl('')}
+                      className="text-[11px] font-semibold text-rose-600 hover:text-rose-800 underline cursor-pointer"
+                    >
+                      Remove Photo
+                    </button>
+                  ) : null}
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <div className="relative size-16 shrink-0 rounded-2xl border border-cream-300 bg-white flex items-center justify-center overflow-hidden shadow-2xs">
+                    {dishImageUrl ? (
+                      <img
+                        src={dishImageUrl}
+                        alt="Dish Preview"
+                        className="size-full object-cover"
+                      />
+                    ) : (
+                      <UtensilsCrossed size={20} className="text-ink-400" />
+                    )}
+                    {isUploadingDishImg ? (
+                      <div className="absolute inset-0 bg-ink-900/60 flex items-center justify-center text-white text-[9px] font-bold">
+                        Uploading...
+                      </div>
+                    ) : null}
+                  </div>
+
+                  <div className="flex-1 space-y-1.5">
+                    <label className="inline-flex items-center gap-1.5 rounded-xl bg-accent-600 px-3 py-1.5 text-xs font-bold text-white shadow-xs hover:bg-accent-700 cursor-pointer transition">
+                      <Upload size={13} />
+                      <span>{isUploadingDishImg ? 'Compressing...' : 'Upload from Device / Camera'}</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleDishImageFileUpload}
+                        disabled={isUploadingDishImg}
+                        className="hidden"
+                      />
+                    </label>
+                    <p className="text-[10px] text-ink-500">Pick from camera roll or local files</p>
+                  </div>
+                </div>
+
+                <div>
+                  <div className="flex items-center gap-1 text-[11px] text-ink-500 font-semibold mb-1">
+                    <Link2 size={11} />
+                    <span>Or direct image URL:</span>
+                  </div>
+                  <input
+                    type="url"
+                    value={dishImageUrl}
+                    onChange={(e) => setDishImageUrl(e.target.value)}
+                    placeholder="https://images.unsplash.com/photo-..."
+                    className="w-full rounded-xl border border-cream-300 bg-white px-3 py-1.5 text-xs text-ink-900 outline-none focus:border-accent-600"
+                  />
+                </div>
+
+                {/* Quick Food Presets */}
+                <div>
+                  <span className="text-[11px] font-bold text-ink-700 block mb-1.5">
+                    Quick food presets:
+                  </span>
+                  <div className="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto">
+                    {FOOD_DISH_PRESETS.map((preset) => (
+                      <button
+                        key={preset.name}
+                        type="button"
+                        onClick={() => {
+                          setDishImageUrl(preset.url);
+                          showToast(`Set photo: ${preset.name}`);
+                        }}
+                        className={`inline-flex items-center gap-1.5 rounded-lg border px-2 py-1 text-[11px] font-semibold transition cursor-pointer ${
+                          dishImageUrl === preset.url
+                            ? 'border-accent-600 bg-accent-100 text-accent-800'
+                            : 'border-cream-300 bg-white text-ink-700 hover:bg-cream-100'
+                        }`}
+                      >
+                        <img src={preset.url} alt="" className="size-4 rounded-full object-cover" />
+                        <span>{preset.name}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
 
               <div className="mt-5 flex gap-2.5 pt-2">
