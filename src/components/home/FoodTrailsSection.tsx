@@ -150,7 +150,7 @@ export function FoodTrailsSection({ onSelectTrail }: FoodTrailsSectionProps) {
               Know an iconic Gorakhpur food spot or want to report an update?
             </h4>
             <p className="text-xs text-ink-500 mt-0.5">
-              Help us keep Gorakhpur Food Guide 100% verified and up to date for our community.
+              Help us keep Vyora 100% verified and up to date for our community.
             </p>
           </div>
           <div className="mt-4 sm:mt-0 flex gap-2 justify-center sm:justify-end">

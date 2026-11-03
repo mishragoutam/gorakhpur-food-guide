@@ -32,7 +32,7 @@ export function AiInsightsSection() {
       <Container>
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-forest-500/30 bg-forest-900/60 px-3.5 py-1 text-xs font-semibold text-emerald-300">
+            <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-950/60 px-3.5 py-1 text-xs font-semibold text-amber-300">
               <Sparkles size={14} />
               AI Review Intelligence
             </div>
@@ -40,11 +40,11 @@ export function AiInsightsSection() {
               Turn Customer Words into Instant Actionable Insights.
             </h2>
             <p className="mt-4 text-base text-cream-200/80">
-              Instead of manually sorting through hundreds of reviews, RateIt analyzes sentiment across food taste, cleanliness, and service speed in real time.
+              Instead of manually sorting through hundreds of reviews, Vyora analyzes sentiment across food taste, cleanliness, and service speed in real time.
             </p>
 
             <div className="mt-8 flex flex-col gap-3">
-              <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">
+              <span className="text-xs font-bold uppercase tracking-wider text-amber-400">
                 Select a diner review to see real-time AI breakdown:
               </span>
               <div className="flex flex-col gap-2">

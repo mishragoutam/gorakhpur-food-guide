@@ -1,4 +1,4 @@
-import { TableBooking } from '@/types/restaurant';
+import type { TableBooking } from '@/types/restaurant';
 
 /**
  * Vyora Notification Service

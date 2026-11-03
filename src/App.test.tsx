@@ -55,7 +55,7 @@ describe('App routing', () => {
 
     expect(await screen.findByRole('heading', { level: 1, name: 'Lotus Wok House' })).toBeInTheDocument();
     expect(screen.getByText('Full details and reviews are coming soon')).toBeInTheDocument();
-    expect(document.title).toBe('Lotus Wok House | Gorakhpur Food Guide');
+    expect(document.title).toBe('Lotus Wok House | Vyora');
   });
 
   it('says so when a restaurant does not exist', async () => {
@@ -76,7 +76,7 @@ describe('App routing', () => {
     window.history.pushState({}, '', '/contact');
     render(<App />);
 
-    expect(await screen.findByRole('heading', { level: 1, name: 'Contact Gorakhpur Food Guide' })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { level: 1, name: 'Contact Vyora' })).toBeInTheDocument();
     expect(screen.getByText('Gorakhpur Office')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Send Message' })).toBeInTheDocument();
     expect(screen.getByText('Frequently Asked Questions')).toBeInTheDocument();

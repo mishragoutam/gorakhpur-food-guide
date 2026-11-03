@@ -14,8 +14,8 @@ export function HowItWorksSection() {
       icon: QrCode,
       title: '2. Scan table QR & review',
       description:
-        'Scan the RateIt QR standee at your table or billing counter to share ratings, photos, and highlight tags in seconds.',
-      color: 'bg-forest-100 text-forest-700',
+        'Scan the Vyora QR standee at your table or billing counter to share ratings, photos, and highlight tags in seconds.',
+      color: 'bg-amber-100 text-amber-800',
     },
     {
       icon: HeartHandshake,
@@ -32,7 +32,7 @@ export function HowItWorksSection() {
         <div className="mx-auto max-w-2xl text-center">
           <span className="text-xs font-bold uppercase tracking-wider text-accent-700">Simple & Transparent</span>
           <h2 className="mt-2 text-2xl font-bold tracking-tight text-ink-900 sm:text-3xl">
-            How RateIt Works
+            How Vyora Works
           </h2>
           <p className="mt-3 text-sm text-ink-600 sm:text-base">
             Connecting diners and local restaurant owners through honest, verified feedback and smart table QR reviews.

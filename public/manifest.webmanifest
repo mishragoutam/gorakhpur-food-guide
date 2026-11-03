@@ -1,7 +1,7 @@
 {
-  "name": "Gorakhpur Food Guide",
-  "short_name": "Food Guide",
-  "description": "Explore local restaurants in Gorakhpur, compare ratings, and find your next favourite meal.",
+  "name": "Vyora - Gorakhpur Food Guide",
+  "short_name": "Vyora",
+  "description": "Vyora - Discover verified restaurants in Gorakhpur, book dining tables, and share honest reviews.",
   "id": "/",
   "start_url": "/",
   "scope": "/",

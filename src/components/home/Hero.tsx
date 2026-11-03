@@ -29,8 +29,8 @@ export function Hero({
     <section aria-labelledby="hero-heading" className="relative isolate overflow-hidden">
       <Container className="grid items-center gap-12 py-12 sm:py-16 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-10 lg:py-24">
         <div>
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-forest-200 bg-forest-50/90 px-3.5 py-1 text-xs font-bold text-forest-800 shadow-2xs">
-            <MapPin size={13} className="text-forest-600 shrink-0" />
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cream-300 bg-cream-50 px-3.5 py-1 text-xs font-bold text-accent-800 shadow-2xs">
+            <MapPin size={13} className="text-accent-700 shrink-0" />
             <span>Gorakhpur, Uttar Pradesh</span>
           </div>
 
@@ -41,7 +41,7 @@ export function Hero({
             Discover the Best Food in Gorakhpur
           </h1>
           <p className="mt-5 max-w-xl text-lg text-ink-600 sm:text-xl">
-            Explore authentic eateries, lakefront cafes, table QR reviews, and decide group meals together across Gorakhpur.
+            Explore authentic eateries, book dining tables, scan QR menus, and decide group meals together on Vyora.
           </p>
 
           <div className="mt-8 max-w-2xl">
