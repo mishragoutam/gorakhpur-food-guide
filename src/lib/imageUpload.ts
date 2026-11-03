@@ -130,3 +130,4 @@ export const FOOD_DISH_PRESETS = [
     url: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80',
   },
 ];
+
