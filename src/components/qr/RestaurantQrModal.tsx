@@ -67,11 +67,11 @@ export function RestaurantQrModal({
         <div
           ref={printRef}
           id="printable-qr-standee"
-          className="my-5 rounded-3xl border-2 border-forest-800/20 bg-cream-50/70 p-5 shadow-xs"
+          className="my-5 rounded-3xl border-2 border-accent-600/30 bg-cream-50/70 p-5 shadow-xs"
         >
           <div className="flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-wider text-accent-700">
             <Sparkles size={14} />
-            <span>Gorakhpur Food Guide</span>
+            <span>Vyora • Gorakhpur Dining</span>
           </div>
 
           <h3 className="mt-1 text-lg font-extrabold text-ink-900">{restaurant.name}</h3>
@@ -80,7 +80,7 @@ export function RestaurantQrModal({
           </p>
 
           {tableNumber ? (
-            <div className="mt-2 inline-block rounded-full bg-forest-700 px-3 py-0.5 text-xs font-bold text-white">
+            <div className="mt-2 inline-block rounded-full bg-accent-600 px-3 py-0.5 text-xs font-bold text-white">
               Table {tableNumber}
             </div>
           ) : null}

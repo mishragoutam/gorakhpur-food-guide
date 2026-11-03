@@ -1153,7 +1153,7 @@ export default function OwnerDashboardPage() {
                     <p className="text-xs text-ink-500">What your dining guests will see on the table.</p>
 
                     <div className="standee-print-card mt-6 mx-auto max-w-xs rounded-3xl border-4 border-ink-900 bg-white p-6 text-center shadow-lg">
-                      <div className="font-display font-extrabold text-accent-700 text-lg">Gorakhpur Food Guide</div>
+                      <div className="font-display font-extrabold text-accent-700 text-lg">Vyora | Gorakhpur Dining</div>
                       <h4 className="mt-2 text-base font-bold text-ink-900">{restaurant.name}</h4>
                       <div className="mt-1">
                         <span className="inline-block rounded-full bg-accent-100 px-3 py-0.5 text-xs font-bold text-accent-800">
@@ -1777,7 +1777,7 @@ export default function OwnerDashboardPage() {
                     className="standee-print-card rounded-3xl border-4 border-ink-900 bg-white p-5 text-center shadow-sm"
                   >
                     <div className="font-display font-extrabold text-accent-700 text-xs">
-                      Gorakhpur Food Guide
+                      Vyora | Gorakhpur Dining
                     </div>
                     <h4 className="mt-1 text-sm font-bold text-ink-900 truncate">{restaurant.name}</h4>
                     <div className="mt-1">
