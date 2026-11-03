@@ -1,4 +1,4 @@
-import { X, Mail, Lock, CheckCircle2, UserPlus, LogIn } from 'lucide-react';
+import { X, Mail, Lock, CheckCircle2, UserPlus, LogIn, Eye, EyeOff } from 'lucide-react';
 import { useState } from 'react';
 import { storageService } from '@/services/storageService';
 import { showToast } from '@/lib/toast';
@@ -47,6 +47,7 @@ export function CustomerAuthModal({
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -117,7 +118,12 @@ export function CustomerAuthModal({
       return;
     }
 
-    if (password.length > 0 && password.length < 6) {
+    if (!password) {
+      setError('Please enter your password.');
+      return;
+    }
+
+    if (password.length < 6) {
       setError('Password must be at least 6 characters.');
       return;
     }
@@ -125,7 +131,7 @@ export function CustomerAuthModal({
     setIsLoading(true);
 
     try {
-      if (isSupabaseConfigured() && supabase && password) {
+      if (isSupabaseConfigured() && supabase) {
         if (mode === 'register') {
           const { data, error: signUpError } = await supabase.auth.signUp({
             email: cleanEmail,
@@ -141,7 +147,7 @@ export function CustomerAuthModal({
               name: cleanName || data.user.user_metadata?.name || cleanEmail.split('@')[0] || 'Diner',
               email: cleanEmail,
             };
-            storageService.setCustomerUser(user);
+            storageService.registerCustomerUser(user.name, cleanEmail, password);
             showToast(`Account created! Welcome, ${user.name}`);
             if (onSuccess) onSuccess(user);
             onClose();
@@ -168,22 +174,39 @@ export function CustomerAuthModal({
         }
       }
 
-      // Fast email authentication
-      const allUsers = storageService.getUsers();
-      const existing = allUsers.find((u) => u.email.toLowerCase() === cleanEmail);
-
+      // Verified Local & Offline Authentication
       if (mode === 'login') {
-        const userName = existing?.name || cleanEmail.split('@')[0] || 'Diner';
-        const user = { name: userName, email: cleanEmail, avatarUrl: existing?.avatarUrl };
+        const check = storageService.verifyCustomerPassword(cleanEmail, password);
+        if (!check.valid || !check.user) {
+          setError(check.error || 'Incorrect password. Please verify your credentials and try again.');
+          return;
+        }
+
+        const user = {
+          name: check.user.name,
+          email: check.user.email,
+          avatarUrl: check.user.avatarUrl,
+        };
         storageService.setCustomerUser(user);
         showToast(`Welcome back, ${user.name}!`);
         if (onSuccess) onSuccess(user);
         onClose();
       } else {
-        const user = { name: cleanName, email: cleanEmail };
-        storageService.setCustomerUser(user);
-        showToast(`Account created! Welcome, ${user.name}`);
-        if (onSuccess) onSuccess(user);
+        // Register mode
+        const reg = storageService.registerCustomerUser(cleanName, cleanEmail, password);
+        if (!reg.success || !reg.user) {
+          setError(reg.error || 'Registration failed. Please try again.');
+          return;
+        }
+
+        showToast(`Account created! Welcome to VYORA, ${reg.user.name}`);
+        if (onSuccess) {
+          onSuccess({
+            name: reg.user.name,
+            email: reg.user.email,
+            avatarUrl: reg.user.avatarUrl,
+          });
+        }
         onClose();
       }
     } catch (err: unknown) {
@@ -208,7 +231,7 @@ export function CustomerAuthModal({
         <button
           type="button"
           onClick={onClose}
-          className="absolute right-5 top-5 rounded-full p-2 text-ink-500 hover:bg-cream-100 hover:text-ink-900"
+          className="absolute right-5 top-5 rounded-full p-2 text-ink-500 hover:bg-cream-100 hover:text-ink-900 cursor-pointer"
           aria-label="Close dialog"
         >
           <X size={20} />
@@ -220,9 +243,9 @@ export function CustomerAuthModal({
           </div>
           <div>
             <h2 id="auth-modal-title" className="text-xl font-bold text-ink-900">
-              {mode === 'login' ? 'Sign In to Vyora' : 'Create Vyora Account'}
+              {mode === 'login' ? 'Sign In to VYORA' : 'Create VYORA Account'}
             </h2>
-            <p className="text-xs text-ink-500">Gorakhpur Food Guide & Verified Dining</p>
+            <p className="text-xs text-ink-500">Gorakhpur Dining Directory & Verified Reviews</p>
           </div>
         </div>
 
@@ -234,7 +257,7 @@ export function CustomerAuthModal({
               setMode('login');
               setError('');
             }}
-            className={`flex-1 rounded-full py-2 text-xs font-bold transition ${
+            className={`flex-1 rounded-full py-2 text-xs font-bold transition cursor-pointer ${
               mode === 'login' ? 'bg-white text-ink-900 shadow-xs' : 'text-ink-600 hover:text-ink-900'
             }`}
           >
@@ -246,7 +269,7 @@ export function CustomerAuthModal({
               setMode('register');
               setError('');
             }}
-            className={`flex-1 rounded-full py-2 text-xs font-bold transition ${
+            className={`flex-1 rounded-full py-2 text-xs font-bold transition cursor-pointer ${
               mode === 'register' ? 'bg-white text-ink-900 shadow-xs' : 'text-ink-600 hover:text-ink-900'
             }`}
           >
@@ -329,6 +352,7 @@ export function CustomerAuthModal({
               <input
                 id="auth-name"
                 type="text"
+                required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="e.g. Priya Mishra"
@@ -358,26 +382,41 @@ export function CustomerAuthModal({
           <div>
             <div className="flex items-center justify-between mb-1">
               <label className="block text-xs font-bold text-ink-800" htmlFor="auth-pw">
-                Password {mode === 'login' ? '(Optional)' : ''}
+                Password
               </label>
-              {mode === 'login' ? (
-                <span className="text-[10px] text-ink-500">Leave blank for fast sign-in</span>
-              ) : null}
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="text-[11px] font-semibold text-accent-700 hover:text-accent-800 inline-flex items-center gap-1 cursor-pointer"
+              >
+                {showPassword ? <EyeOff size={12} /> : <Eye size={12} />}
+                <span>{showPassword ? 'Hide' : 'Show'}</span>
+              </button>
             </div>
             <div className="relative">
               <Lock size={15} className="absolute left-3.5 top-2.5 text-ink-400" />
               <input
                 id="auth-pw"
-                type="password"
+                type={showPassword ? 'text' : 'password'}
+                required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder={mode === 'register' ? 'At least 6 characters' : 'Enter password or leave blank'}
+                placeholder={mode === 'register' ? 'Min 6 characters' : 'Enter your password'}
                 className="w-full rounded-xl border border-cream-300 pl-9 pr-3.5 py-2 text-xs text-ink-900 outline-none focus:border-accent-600 focus:ring-2 focus:ring-accent-100"
               />
             </div>
           </div>
 
-          {error ? <p className="text-xs font-semibold text-red-600">{error}</p> : null}
+          {error ? (
+            <div className="rounded-xl border border-red-200 bg-red-50 p-2.5 text-xs text-red-700">
+              <p className="font-semibold">{error}</p>
+              {mode === 'login' ? (
+                <p className="mt-1 text-[11px] text-red-600">
+                  Initial password for sample users is: <code className="bg-white px-1 py-0.5 rounded font-mono font-bold">Vyora@2026</code>
+                </p>
+              ) : null}
+            </div>
+          ) : null}
 
           <button
             type="submit"

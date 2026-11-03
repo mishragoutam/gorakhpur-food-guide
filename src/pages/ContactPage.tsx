@@ -100,10 +100,10 @@ export default function ContactPage() {
         <div className="mx-auto max-w-3xl text-center">
           <Badge tone="accent">Get in Touch</Badge>
           <h1 className="mt-4 text-3xl font-extrabold text-ink-900 sm:text-5xl">
-            Contact Vyora
+            Contact VYORA
           </h1>
           <p className="mt-4 text-base text-ink-600 sm:text-lg">
-            Have a question, feedback, or want to list your restaurant on Vyora? Our local team in Gorakhpur is here to assist you.
+            Have a question, feedback, or want to list your restaurant on VYORA? Our local team in Gorakhpur is here to assist you.
           </p>
         </div>
 

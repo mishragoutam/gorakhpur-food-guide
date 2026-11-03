@@ -2,7 +2,7 @@ import { UtensilsCrossed } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@/lib/routes';
 
-export const BRAND_NAME = 'Vyora';
+export const BRAND_NAME = 'VYORA';
 
 export function Logo() {
   return (
@@ -12,7 +12,7 @@ export function Logo() {
       </span>
       <div className="flex flex-col">
         <span className="font-display text-xl leading-none font-extrabold tracking-tight text-ink-900 sm:text-2xl">
-          Vyora
+          VYORA
         </span>
         <span className="text-[10px] font-semibold tracking-wider uppercase text-accent-700">
           Gorakhpur Food Guide

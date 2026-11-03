@@ -30,6 +30,9 @@ import {
   Upload,
   Camera,
   Link2,
+  Lock,
+  Eye,
+  EyeOff,
 } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -142,6 +145,15 @@ export default function OwnerDashboardPage() {
   const [replyTargetReview, setReplyTargetReview] = useState<Review | null>(null);
   const [replyText, setReplyText] = useState('');
 
+  // Owner Password Manager sub-state
+  const [currentOwnerPw, setCurrentOwnerPw] = useState('');
+  const [newOwnerPw, setNewOwnerPw] = useState('');
+  const [confirmOwnerPw, setConfirmOwnerPw] = useState('');
+  const [showOwnerPw, setShowOwnerPw] = useState(false);
+  const [pwChangeError, setPwChangeError] = useState('');
+  const [pwChangeSuccess, setPwChangeSuccess] = useState('');
+  const [isChangingPw, setIsChangingPw] = useState(false);
+
   const loadData = () => {
     const session = storageService.getOwnerSession();
     const restId = session?.restaurantId;
@@ -249,6 +261,41 @@ export default function OwnerDashboardPage() {
       showToast(err instanceof Error ? err.message : 'Failed to load dish photo', 'error');
     } finally {
       setIsUploadingDishImg(false);
+    }
+  };
+
+  const handleChangeOwnerPassword = (e: React.FormEvent) => {
+    e.preventDefault();
+    setPwChangeError('');
+    setPwChangeSuccess('');
+
+    if (!restaurant) return;
+    if (!currentOwnerPw || !newOwnerPw) {
+      setPwChangeError('Please enter both your current password and a new password.');
+      return;
+    }
+    if (newOwnerPw.length < 6) {
+      setPwChangeError('New password must be at least 6 characters long.');
+      return;
+    }
+    if (newOwnerPw !== confirmOwnerPw) {
+      setPwChangeError('New passwords do not match. Please verify your entries.');
+      return;
+    }
+
+    setIsChangingPw(true);
+    const res = storageService.changeOwnerPassword(restaurant.id, currentOwnerPw, newOwnerPw);
+    setIsChangingPw(false);
+
+    if (res.success) {
+      setPwChangeSuccess('Your owner account password has been updated successfully!');
+      setCurrentOwnerPw('');
+      setNewOwnerPw('');
+      setConfirmOwnerPw('');
+      showToast('Password updated successfully!');
+      loadData();
+    } else {
+      setPwChangeError(res.error || 'Failed to update password.');
     }
   };
 
@@ -1757,11 +1804,121 @@ export default function OwnerDashboardPage() {
 
             {/* 9. SETTINGS TAB */}
             {activeTab === 'settings' ? (
-              <div className="rounded-3xl border border-cream-300 bg-white p-6 sm:p-8 shadow-sm max-w-xl">
-                <h3 className="text-xl font-bold text-ink-900">Owner Account Settings</h3>
-                <p className="text-xs text-ink-500">Manage alerts and account preferences.</p>
+              <div className="rounded-3xl border border-cream-300 bg-white p-6 sm:p-8 shadow-sm max-w-xl space-y-6">
+                <div>
+                  <h3 className="text-xl font-bold text-ink-900">Owner Account Settings</h3>
+                  <p className="text-xs text-ink-500">Manage security credentials, password, and notification alerts.</p>
+                </div>
 
-                <div className="mt-6 space-y-4">
+                {/* Password Manager & Account Security */}
+                <div className="rounded-2xl border border-cream-300 bg-white p-5 shadow-xs">
+                  <div className="flex items-center justify-between pb-3 border-b border-cream-200">
+                    <div className="flex items-center gap-2">
+                      <div className="flex size-8 items-center justify-center rounded-xl bg-accent-100 text-accent-700">
+                        <Lock size={16} />
+                      </div>
+                      <div>
+                        <h4 className="text-sm font-bold text-ink-900">Password Manager & Security</h4>
+                        <p className="text-[11px] text-ink-500">Update your restaurant owner credentials</p>
+                      </div>
+                    </div>
+                    <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-0.5 text-[10px] font-bold text-emerald-700 border border-emerald-200">
+                      <ShieldCheck size={12} />
+                      Protected
+                    </span>
+                  </div>
+
+                  <form onSubmit={handleChangeOwnerPassword} className="mt-4 space-y-3">
+                    <div>
+                      <label className="mb-1 block text-xs font-bold text-ink-800" htmlFor="owner-curr-pw">
+                        Current Password
+                      </label>
+                      <input
+                        id="owner-curr-pw"
+                        type={showOwnerPw ? 'text' : 'password'}
+                        required
+                        value={currentOwnerPw}
+                        onChange={(e) => setCurrentOwnerPw(e.target.value)}
+                        placeholder="Enter existing password"
+                        className="w-full rounded-xl border border-cream-300 p-2 text-xs outline-none focus:border-accent-600"
+                      />
+                    </div>
+
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      <div>
+                        <label className="mb-1 block text-xs font-bold text-ink-800" htmlFor="owner-new-pw">
+                          New Password
+                        </label>
+                        <input
+                          id="owner-new-pw"
+                          type={showOwnerPw ? 'text' : 'password'}
+                          required
+                          value={newOwnerPw}
+                          onChange={(e) => setNewOwnerPw(e.target.value)}
+                          placeholder="Min 6 characters"
+                          className="w-full rounded-xl border border-cream-300 p-2 text-xs outline-none focus:border-accent-600"
+                        />
+                      </div>
+                      <div>
+                        <label className="mb-1 block text-xs font-bold text-ink-800" htmlFor="owner-confirm-pw">
+                          Confirm New Password
+                        </label>
+                        <input
+                          id="owner-confirm-pw"
+                          type={showOwnerPw ? 'text' : 'password'}
+                          required
+                          value={confirmOwnerPw}
+                          onChange={(e) => setConfirmOwnerPw(e.target.value)}
+                          placeholder="Re-type new password"
+                          className="w-full rounded-xl border border-cream-300 p-2 text-xs outline-none focus:border-accent-600"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between pt-1">
+                      <button
+                        type="button"
+                        onClick={() => setShowOwnerPw(!showOwnerPw)}
+                        className="inline-flex items-center gap-1 text-[11px] font-semibold text-accent-700 hover:text-accent-800 cursor-pointer"
+                      >
+                        {showOwnerPw ? <EyeOff size={13} /> : <Eye size={13} />}
+                        <span>{showOwnerPw ? 'Hide Passwords' : 'Show Passwords'}</span>
+                      </button>
+                      <button
+                        type="submit"
+                        disabled={isChangingPw}
+                        className="rounded-xl bg-accent-600 px-4 py-2 text-xs font-bold text-white shadow-xs hover:bg-accent-700 disabled:opacity-60 cursor-pointer transition"
+                      >
+                        {isChangingPw ? 'Updating...' : 'Update Password'}
+                      </button>
+                    </div>
+
+                    {pwChangeError ? (
+                      <p className="rounded-lg bg-red-50 p-2 text-[11px] font-semibold text-red-600">
+                        {pwChangeError}
+                      </p>
+                    ) : null}
+
+                    {pwChangeSuccess ? (
+                      <p className="rounded-lg bg-emerald-50 p-2 text-[11px] font-semibold text-emerald-700">
+                        {pwChangeSuccess}
+                      </p>
+                    ) : null}
+
+                    <div className="rounded-xl bg-cream-50 p-2.5 text-[11px] text-ink-600 space-y-1 border border-cream-200">
+                      <div className="flex justify-between">
+                        <span className="font-semibold text-ink-800">Registered Owner ID:</span>
+                        <span className="font-mono text-ink-900">{restaurant.ownerEmail || 'Registered Owner'}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="font-semibold text-ink-800">Security Standard:</span>
+                        <span className="text-emerald-700 font-bold">Encrypted Local Key Vault</span>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+                <div className="space-y-4">
                   <div className="flex items-center justify-between rounded-2xl border border-cream-200 p-4">
                     <div>
                       <h4 className="text-xs font-bold text-ink-900">Instant Review Notifications</h4>

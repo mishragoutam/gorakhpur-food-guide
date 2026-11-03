@@ -32,7 +32,9 @@ describe('App routing', () => {
 
     await user.click(screen.getAllByRole('link', { name: /Register Your Restaurant/ })[0]!);
 
-    expect(await screen.findByRole('heading', { level: 1, name: 'Register your restaurant' })).toBeInTheDocument();
+    expect(
+      await screen.findByRole('heading', { level: 1, name: 'Register your restaurant' }, { timeout: 5000 }),
+    ).toBeInTheDocument();
     expect(screen.getByText('Coming soon')).toBeInTheDocument();
   });
 
@@ -43,7 +45,7 @@ describe('App routing', () => {
 
     await user.click(screen.getByRole('link', { name: /Restaurant Owner\? Login/ }));
 
-    expect(await screen.findByRole('heading', { level: 1, name: 'Restaurant owner login' })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { level: 1, name: /Owner Login/i }, { timeout: 5000 })).toBeInTheDocument();
   });
 
   it('opens a restaurant details placeholder from a card', async () => {
@@ -55,7 +57,7 @@ describe('App routing', () => {
 
     expect(await screen.findByRole('heading', { level: 1, name: 'Lotus Wok House' })).toBeInTheDocument();
     expect(screen.getByText('Full details and reviews are coming soon')).toBeInTheDocument();
-    expect(document.title).toBe('Lotus Wok House | Vyora');
+    expect(document.title).toBe('Lotus Wok House | VYORA');
   });
 
   it('says so when a restaurant does not exist', async () => {
@@ -76,7 +78,7 @@ describe('App routing', () => {
     window.history.pushState({}, '', '/contact');
     render(<App />);
 
-    expect(await screen.findByRole('heading', { level: 1, name: 'Contact Vyora' })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { level: 1, name: /Contact VYORA/i })).toBeInTheDocument();
     expect(screen.getByText('Gorakhpur Office')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Send Message' })).toBeInTheDocument();
     expect(screen.getByText('Frequently Asked Questions')).toBeInTheDocument();

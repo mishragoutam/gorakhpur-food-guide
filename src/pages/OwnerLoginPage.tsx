@@ -1,4 +1,4 @@
-import { LogIn, Sparkles, Store, ShieldCheck, ArrowRight, ArrowLeft } from 'lucide-react';
+import { LogIn, Sparkles, Store, ShieldCheck, ArrowRight, ArrowLeft, Eye, EyeOff } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Container } from '@/components/ui/Container';
@@ -13,6 +13,7 @@ export default function OwnerLoginPage() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
 
   const handleLogin = (e: React.FormEvent) => {
@@ -29,19 +30,18 @@ export default function OwnerLoginPage() {
       return;
     }
 
-    const restaurants = storageService.getRestaurants();
     const cleanEmail = email.trim().toLowerCase();
-    const matched = restaurants.find(
-      (r) => r.ownerEmail?.toLowerCase() === cleanEmail,
-    );
+    const result = storageService.verifyOwnerPassword(cleanEmail, password);
 
-    if (!matched) {
+    if (!result.valid || !result.restaurant) {
       setError(
-        `No restaurant account found for "${email.trim()}". Please enter your registered owner email or register your restaurant below.`,
+        result.error ||
+          'Authentication failed. Please verify your registered email and password.',
       );
       return;
     }
 
+    const matched = result.restaurant;
     storageService.setOwnerSession({
       restaurantId: matched.id,
       restaurantName: matched.name,
@@ -72,7 +72,7 @@ export default function OwnerLoginPage() {
                 <span className="flex size-10 items-center justify-center rounded-xl bg-white/15 text-white">
                   <Store size={22} />
                 </span>
-                <span className="font-display text-lg font-bold">Vyora Owner Hub</span>
+                <span className="font-display text-lg font-bold">VYORA Owner Hub</span>
               </div>
 
               <h2 className="mt-6 text-2xl font-bold leading-tight">
@@ -98,25 +98,21 @@ export default function OwnerLoginPage() {
           {/* Login Form Panel */}
           <div className="p-8 sm:p-10 lg:col-span-3">
             <div className="mb-6">
-              <span className="inline-block rounded-full bg-cream-200 px-3 py-1 text-xs font-bold text-ink-800">
-                Partner Portal
-              </span>
-              <h1 className="mt-2 text-2xl font-extrabold text-ink-900 sm:text-3xl">
-                Restaurant owner login
-              </h1>
-              <p className="mt-1 text-xs text-ink-500">
-                Log in to manage your menu, standee QR code, and customer reviews.
+              <h1 className="text-2xl font-extrabold text-ink-900">Owner Login</h1>
+              <p className="mt-1 text-xs text-ink-600">
+                Sign in with your verified owner credentials to access your dashboard.
               </p>
             </div>
 
             <form onSubmit={handleLogin} className="space-y-4">
               <div>
                 <label className="mb-1 block text-xs font-bold text-ink-800" htmlFor="owner-email">
-                  Owner Email Address
+                  Registered Owner Email
                 </label>
                 <input
                   id="owner-email"
                   type="email"
+                  required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="owner@restaurant.com"
@@ -125,20 +121,38 @@ export default function OwnerLoginPage() {
               </div>
 
               <div>
-                <label className="mb-1 block text-xs font-bold text-ink-800" htmlFor="owner-pw">
-                  Password
-                </label>
+                <div className="flex items-center justify-between mb-1">
+                  <label className="text-xs font-bold text-ink-800" htmlFor="owner-pw">
+                    Password
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="text-[11px] font-semibold text-accent-700 hover:text-accent-800 inline-flex items-center gap-1 cursor-pointer"
+                  >
+                    {showPassword ? <EyeOff size={12} /> : <Eye size={12} />}
+                    <span>{showPassword ? 'Hide' : 'Show'}</span>
+                  </button>
+                </div>
                 <input
                   id="owner-pw"
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
+                  required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="At least 6 characters"
+                  placeholder="Enter your owner password"
                   className="w-full rounded-xl border border-cream-300 px-3.5 py-2.5 text-sm text-ink-900 outline-none focus:border-accent-600 focus:ring-2 focus:ring-accent-100"
                 />
               </div>
 
-              {error ? <p className="text-xs font-semibold text-red-600">{error}</p> : null}
+              {error ? (
+                <div className="rounded-xl border border-red-200 bg-red-50 p-3 text-xs text-red-700">
+                  <p className="font-semibold">{error}</p>
+                  <p className="mt-1 text-[11px] text-red-600">
+                    Default demo password for sample restaurants is: <code className="bg-white px-1 py-0.5 rounded font-mono font-bold">Vyora@2026</code>
+                  </p>
+                </div>
+              ) : null}
 
               <button
                 type="submit"

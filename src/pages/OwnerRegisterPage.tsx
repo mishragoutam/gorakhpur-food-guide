@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { Store, Sparkles, ArrowLeft, Camera, Upload } from 'lucide-react';
+import { Store, Sparkles, ArrowLeft, Camera, Upload, Lock, Eye, EyeOff } from 'lucide-react';
 import { useState } from 'react';
 import { Container } from '@/components/ui/Container';
 import { showToast } from '@/lib/toast';
@@ -36,6 +36,9 @@ export default function OwnerRegisterPage() {
   const [restaurantName, setRestaurantName] = useState('');
   const [ownerName, setOwnerName] = useState('');
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [phone, setPhone] = useState('');
   const [cuisine, setCuisine] = useState('North Indian');
   const [area, setArea] = useState('Golghar');
@@ -55,8 +58,23 @@ export default function OwnerRegisterPage() {
       return;
     }
 
+    if (!password) {
+      setError('Please create a secure password for your owner account.');
+      return;
+    }
+
+    if (password.length < 6) {
+      setError('Password must be at least 6 characters long.');
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError('Passwords do not match. Please re-enter your password.');
+      return;
+    }
+
     const restId = `rest-${Date.now()}`;
-    const cleanOwnerEmail = email.trim();
+    const cleanOwnerEmail = email.trim().toLowerCase();
     const cleanOwnerName = ownerName.trim();
     const newRestaurant: Restaurant = {
       id: restId,
@@ -80,6 +98,8 @@ export default function OwnerRegisterPage() {
       status: 'Active',
       ownerName: cleanOwnerName,
       ownerEmail: cleanOwnerEmail,
+      ownerPassword: password,
+      passwordUpdatedAt: new Date().toISOString(),
       description: `Welcome to ${restaurantName.trim()} in ${area}, Gorakhpur! Serving authentic ${cuisine} dishes with fresh ingredients.`,
       facilities: ['Air Conditioned', 'Free Wi-Fi', 'Family Friendly', 'Card Payments'],
       menu: [
@@ -120,6 +140,7 @@ export default function OwnerRegisterPage() {
 
     // Save newly created restaurant
     storageService.createRestaurant(newRestaurant);
+    storageService.setOwnerPassword(cleanOwnerEmail, password);
 
     // Set owner session for this newly registered restaurant
     storageService.setOwnerSession({
@@ -129,7 +150,7 @@ export default function OwnerRegisterPage() {
       ownerName: cleanOwnerName,
     });
 
-    showToast(`Registered "${newRestaurant.name}"! Welcome to Vyora.`);
+    showToast(`Registered "${newRestaurant.name}"! Welcome to VYORA.`);
     navigate(ROUTES.ownerDashboard);
   };
 
@@ -226,6 +247,50 @@ export default function OwnerRegisterPage() {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="+91 98380 12345"
+                  className="w-full rounded-xl border border-cream-300 px-3.5 py-2.5 text-sm text-ink-900 outline-none focus:border-accent-600 focus:ring-2 focus:ring-accent-100"
+                />
+              </div>
+            </div>
+
+            {/* Account Password & Security */}
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div>
+                <div className="flex items-center justify-between mb-1">
+                  <label className="text-xs font-bold text-ink-800 flex items-center gap-1.5" htmlFor="reg-pw">
+                    <Lock size={13} className="text-accent-700" />
+                    Account Password <span className="text-red-500">*</span>
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="text-[11px] font-semibold text-accent-700 hover:text-accent-800 inline-flex items-center gap-1 cursor-pointer"
+                  >
+                    {showPassword ? <EyeOff size={12} /> : <Eye size={12} />}
+                    <span>{showPassword ? 'Hide' : 'Show'}</span>
+                  </button>
+                </div>
+                <input
+                  id="reg-pw"
+                  type={showPassword ? 'text' : 'password'}
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Min 6 characters"
+                  className="w-full rounded-xl border border-cream-300 px-3.5 py-2.5 text-sm text-ink-900 outline-none focus:border-accent-600 focus:ring-2 focus:ring-accent-100"
+                />
+              </div>
+
+              <div>
+                <label className="mb-1 block text-xs font-bold text-ink-800" htmlFor="reg-confirm-pw">
+                  Confirm Password <span className="text-red-500">*</span>
+                </label>
+                <input
+                  id="reg-confirm-pw"
+                  type={showPassword ? 'text' : 'password'}
+                  required
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  placeholder="Re-enter password"
                   className="w-full rounded-xl border border-cream-300 px-3.5 py-2.5 text-sm text-ink-900 outline-none focus:border-accent-600 focus:ring-2 focus:ring-accent-100"
                 />
               </div>

@@ -24,6 +24,9 @@ const STORAGE_KEYS = {
   adminSession: 'rateit_admin_session',
   dataCleared: 'rateit_data_cleared',
   bookings: 'rateit_table_bookings_v1',
+  ownerPasswords: 'vyora_owner_passwords_v1',
+  userPasswords: 'vyora_user_passwords_v1',
+  adminCredentials: 'vyora_admin_credentials_v1',
 };
 
 export const COMMON_REVIEW_TAGS = [
@@ -592,8 +595,8 @@ export const storageService = {
   /**
    * Auth Sessions
    */
-  getCustomerUser(): { name: string; email?: string } | null {
-    return safeGet<{ name: string; email?: string } | null>(STORAGE_KEYS.customerUser, null);
+  getCustomerUser(): { name: string; email?: string; avatarUrl?: string } | null {
+    return safeGet<{ name: string; email?: string; avatarUrl?: string } | null>(STORAGE_KEYS.customerUser, null);
   },
 
   setCustomerUser(user: { name: string; email?: string; avatarUrl?: string } | null): void {
@@ -776,5 +779,240 @@ export const storageService = {
    */
   async syncToFirestore(): Promise<{ restaurantsCount: number; reviewsCount: number }> {
     return this.syncToSupabase();
+  },
+
+  // ── Authentication & Password Manager Services ──
+
+  DEFAULT_OWNER_PASSWORD: 'Vyora@2026',
+  DEFAULT_USER_PASSWORD: 'Vyora@2026',
+  DEFAULT_ADMIN_EMAIL: 'admin@vyora.com',
+  DEFAULT_ADMIN_PASSWORD: 'VyoraAdmin@2026',
+
+  // Owner Auth & Password Management
+  getOwnerPassword(email: string): string {
+    const clean = email.trim().toLowerCase();
+    const map = safeGet<Record<string, string>>(STORAGE_KEYS.ownerPasswords, {});
+    if (map[clean]) return map[clean];
+    const rest = this.getRestaurants().find((r) => r.ownerEmail?.toLowerCase() === clean);
+    if (rest?.ownerPassword) return rest.ownerPassword;
+    return this.DEFAULT_OWNER_PASSWORD;
+  },
+
+  setOwnerPassword(email: string, password: string): void {
+    const clean = email.trim().toLowerCase();
+    const map = safeGet<Record<string, string>>(STORAGE_KEYS.ownerPasswords, {});
+    map[clean] = password;
+    safeSet(STORAGE_KEYS.ownerPasswords, map);
+
+    const list = this.getRawRestaurants();
+    const idx = list.findIndex((r) => r.ownerEmail?.toLowerCase() === clean);
+    if (idx >= 0) {
+      list[idx] = {
+        ...list[idx]!,
+        ownerPassword: password,
+        passwordUpdatedAt: new Date().toISOString(),
+      };
+      safeSet(STORAGE_KEYS.restaurants, list);
+    }
+    window.dispatchEvent(new CustomEvent('rateit-storage-change', { detail: { key: STORAGE_KEYS.ownerPasswords } }));
+  },
+
+  verifyOwnerPassword(email: string, password: string): { valid: boolean; restaurant?: Restaurant; error?: string } {
+    const clean = email.trim().toLowerCase();
+    const rest = this.getRestaurants().find((r) => r.ownerEmail?.toLowerCase() === clean);
+    if (!rest) {
+      return {
+        valid: false,
+        error: `No restaurant account found for "${email.trim()}". Please verify your registered email or register your restaurant below.`,
+      };
+    }
+    const expected = this.getOwnerPassword(clean);
+    if (password !== expected) {
+      return {
+        valid: false,
+        error: 'Incorrect password for this restaurant account. Please enter the password you registered with.',
+      };
+    }
+    return { valid: true, restaurant: rest };
+  },
+
+  changeOwnerPassword(restaurantId: string, currentPassword: string, newPassword: string): { success: boolean; error?: string } {
+    const rest = this.getRestaurantById(restaurantId);
+    if (!rest || !rest.ownerEmail) {
+      return { success: false, error: 'Restaurant account not found.' };
+    }
+    const clean = rest.ownerEmail.toLowerCase();
+    const expected = this.getOwnerPassword(clean);
+    if (currentPassword !== expected) {
+      return { success: false, error: 'Current password is incorrect.' };
+    }
+    if (!newPassword || newPassword.length < 6) {
+      return { success: false, error: 'New password must be at least 6 characters.' };
+    }
+    this.setOwnerPassword(clean, newPassword);
+    this.addAuditLog(`Owner password updated for ${rest.name}`, rest.ownerEmail);
+    return { success: true };
+  },
+
+  // Customer / Diner Auth & Password Management
+  getUserPassword(email: string): string {
+    const clean = email.trim().toLowerCase();
+    const map = safeGet<Record<string, string>>(STORAGE_KEYS.userPasswords, {});
+    if (map[clean]) return map[clean];
+    const user = this.getUsers().find((u) => u.email.toLowerCase() === clean);
+    if (user?.password) return user.password;
+    return this.DEFAULT_USER_PASSWORD;
+  },
+
+  setUserPassword(email: string, password: string): void {
+    const clean = email.trim().toLowerCase();
+    const map = safeGet<Record<string, string>>(STORAGE_KEYS.userPasswords, {});
+    map[clean] = password;
+    safeSet(STORAGE_KEYS.userPasswords, map);
+
+    const users = this.getUsers();
+    const user = users.find((u) => u.email.toLowerCase() === clean);
+    if (user) {
+      user.password = password;
+      user.passwordUpdatedAt = new Date().toISOString();
+      safeSet(STORAGE_KEYS.users, users);
+    }
+    window.dispatchEvent(new CustomEvent('rateit-storage-change', { detail: { key: STORAGE_KEYS.userPasswords } }));
+  },
+
+  verifyCustomerPassword(email: string, password: string): { valid: boolean; user?: UserProfile; error?: string } {
+    const clean = email.trim().toLowerCase();
+    const user = this.getUsers().find((u) => u.email.toLowerCase() === clean);
+    if (!user) {
+      return { valid: false, error: `No customer account found for "${email.trim()}". Please switch to Create Account.` };
+    }
+    const expected = this.getUserPassword(clean);
+    if (password !== expected) {
+      return { valid: false, error: 'Incorrect password. Please verify your credentials and try again.' };
+    }
+    return { valid: true, user };
+  },
+
+  registerCustomerUser(
+    name: string,
+    email: string,
+    password: string,
+    avatarUrl?: string,
+  ): { success: boolean; user?: UserProfile; error?: string } {
+    const cleanEmail = email.trim().toLowerCase();
+    const cleanName = name.trim();
+    if (!cleanEmail || !cleanEmail.includes('@')) {
+      return { success: false, error: 'Please enter a valid email address.' };
+    }
+    if (!password || password.length < 6) {
+      return { success: false, error: 'Password must be at least 6 characters.' };
+    }
+
+    const allUsers = this.getUsers();
+    const existing = allUsers.find((u) => u.email.toLowerCase() === cleanEmail);
+    const existingPasswordMap = safeGet<Record<string, string>>(STORAGE_KEYS.userPasswords, {});
+
+    if (existing && existingPasswordMap[cleanEmail]) {
+      return { success: false, error: 'An account with this email already exists. Please switch to Email Login.' };
+    }
+
+    let userToReturn: UserProfile;
+    if (existing) {
+      existing.name = cleanName || existing.name;
+      existing.password = password;
+      existing.passwordUpdatedAt = new Date().toISOString();
+      if (avatarUrl) existing.avatarUrl = avatarUrl;
+      userToReturn = existing;
+    } else {
+      userToReturn = {
+        id: `usr-${Date.now()}`,
+        name: cleanName,
+        email: cleanEmail,
+        password,
+        passwordUpdatedAt: new Date().toISOString(),
+        avatarUrl:
+          avatarUrl ||
+          'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150&q=80',
+        reviewsCount: 0,
+        isBanned: false,
+        createdAt: new Date().toISOString().slice(0, 10),
+      };
+      allUsers.unshift(userToReturn);
+    }
+
+    safeSet(STORAGE_KEYS.users, allUsers);
+    this.setUserPassword(cleanEmail, password);
+    this.setCustomerUser({
+      name: userToReturn.name,
+      email: userToReturn.email,
+      avatarUrl: userToReturn.avatarUrl,
+    });
+    this.addAuditLog(`Registered new customer account: ${userToReturn.name} (${userToReturn.email})`);
+    return { success: true, user: userToReturn };
+  },
+
+  changeCustomerPassword(
+    email: string,
+    currentPassword: string,
+    newPassword: string,
+  ): { success: boolean; error?: string } {
+    const clean = email.trim().toLowerCase();
+    const expected = this.getUserPassword(clean);
+    if (currentPassword !== expected) {
+      return { success: false, error: 'Current password is incorrect.' };
+    }
+    if (!newPassword || newPassword.length < 6) {
+      return { success: false, error: 'New password must be at least 6 characters.' };
+    }
+    this.setUserPassword(clean, newPassword);
+    this.addAuditLog(`Customer password updated for ${clean}`);
+    return { success: true };
+  },
+
+  // Admin Auth & Password Management
+  getAdminCredentials(): { email: string; password: string; updatedAt?: string } {
+    return safeGet<{ email: string; password: string; updatedAt?: string }>(
+      STORAGE_KEYS.adminCredentials,
+      {
+        email: this.DEFAULT_ADMIN_EMAIL,
+        password: this.DEFAULT_ADMIN_PASSWORD,
+      },
+    );
+  },
+
+  verifyAdminPassword(email: string, password: string): { valid: boolean; error?: string } {
+    const cleanEmail = email.trim().toLowerCase();
+    const creds = this.getAdminCredentials();
+    const validEmails = [
+      creds.email.toLowerCase(),
+      'admin@vyora.com',
+      'lazyotakumg@gmail.com',
+    ];
+
+    if (!validEmails.includes(cleanEmail)) {
+      return { valid: false, error: 'Unauthorized admin email. Access is restricted to platform administrators.' };
+    }
+    if (password !== creds.password) {
+      return { valid: false, error: 'Incorrect administrator password. Access denied.' };
+    }
+    return { valid: true };
+  },
+
+  changeAdminPassword(currentPassword: string, newPassword: string): { success: boolean; error?: string } {
+    const creds = this.getAdminCredentials();
+    if (currentPassword !== creds.password) {
+      return { success: false, error: 'Current admin password is incorrect.' };
+    }
+    if (!newPassword || newPassword.length < 6) {
+      return { success: false, error: 'New password must be at least 6 characters.' };
+    }
+    const updated = {
+      ...creds,
+      password: newPassword,
+      updatedAt: new Date().toISOString(),
+    };
+    safeSet(STORAGE_KEYS.adminCredentials, updated);
+    this.addAuditLog('Master Administrator password updated');
+    return { success: true };
   },
 };

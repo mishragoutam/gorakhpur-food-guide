@@ -1,9 +1,22 @@
-import { Trash2, Edit3, MessageSquarePlus, Store, ArrowLeft } from 'lucide-react';
+import {
+  Trash2,
+  Edit3,
+  MessageSquarePlus,
+  Store,
+  ArrowLeft,
+  Lock,
+  ShieldCheck,
+  Eye,
+  EyeOff,
+  User,
+  LogIn,
+} from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Container } from '@/components/ui/Container';
 import { StarRating } from '@/components/ui/StarRating';
 import { WriteReviewModal } from '@/components/reviews/WriteReviewModal';
+import { CustomerAuthModal } from '@/components/auth/CustomerAuthModal';
 import { showToast } from '@/lib/toast';
 import { usePageTitle } from '@/hooks/usePageTitle';
 import { ROUTES } from '@/lib/routes';
@@ -26,20 +39,33 @@ function getMyReviewsData() {
 }
 
 export default function MyReviewsPage() {
-  usePageTitle('My Reviews');
+  usePageTitle('My Reviews & Account Security');
 
   const [data, setData] = useState(() => getMyReviewsData());
   const { reviews, restaurants } = data;
+  const [currentUser, setCurrentUser] = useState(() => storageService.getCustomerUser());
   const [editingReview, setEditingReview] = useState<Review | null>(null);
   const [modalRestaurant, setModalRestaurant] = useState<Restaurant | null>(null);
   const [deleteTargetId, setDeleteTargetId] = useState<string | number | null>(null);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+
+  // Password Manager State
+  const [showPwManager, setShowPwManager] = useState(false);
+  const [currentPw, setCurrentPw] = useState('');
+  const [newPw, setNewPw] = useState('');
+  const [confirmPw, setConfirmPw] = useState('');
+  const [showPw, setShowPw] = useState(false);
+  const [pwError, setPwError] = useState('');
+  const [pwSuccess, setPwSuccess] = useState('');
+  const [isUpdatingPw, setIsUpdatingPw] = useState(false);
 
   const loadData = () => {
     setData(getMyReviewsData());
+    setCurrentUser(storageService.getCustomerUser());
   };
 
   useEffect(() => {
-    const handleStorageChange = () => setData(getMyReviewsData());
+    const handleStorageChange = () => loadData();
     window.addEventListener('rateit-storage-change', handleStorageChange);
     return () => window.removeEventListener('rateit-storage-change', handleStorageChange);
   }, []);
@@ -59,6 +85,43 @@ export default function MyReviewsPage() {
     }
   };
 
+  const handleChangePassword = (e: React.FormEvent) => {
+    e.preventDefault();
+    setPwError('');
+    setPwSuccess('');
+
+    if (!currentUser?.email) {
+      setPwError('Please sign in to update your account password.');
+      return;
+    }
+    if (!currentPw || !newPw) {
+      setPwError('Please fill in both current and new password.');
+      return;
+    }
+    if (newPw.length < 6) {
+      setPwError('New password must be at least 6 characters long.');
+      return;
+    }
+    if (newPw !== confirmPw) {
+      setPwError('New passwords do not match. Please verify your entries.');
+      return;
+    }
+
+    setIsUpdatingPw(true);
+    const res = storageService.changeCustomerPassword(currentUser.email, currentPw, newPw);
+    setIsUpdatingPw(false);
+
+    if (res.success) {
+      setPwSuccess('Your diner account password has been updated successfully!');
+      setCurrentPw('');
+      setNewPw('');
+      setConfirmPw('');
+      showToast('Password updated successfully!');
+    } else {
+      setPwError(res.error || 'Failed to update password.');
+    }
+  };
+
   return (
     <section className="py-8 sm:py-12">
       <Container>
@@ -72,20 +135,169 @@ export default function MyReviewsPage() {
 
         <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-b border-cream-300 pb-5">
           <div>
-            <h1 className="text-3xl font-extrabold text-ink-900 sm:text-4xl">My Reviews</h1>
+            <h1 className="text-3xl font-extrabold text-ink-900 sm:text-4xl">My Reviews & Profile</h1>
             <p className="mt-1 text-sm text-ink-600">
-              Reviews written and saved in this browser. You can edit or remove them anytime.
+              Manage your verified dining reviews, account credentials, and password security.
             </p>
           </div>
-          <Link
-            to={ROUTES.explore}
-            className="inline-flex items-center gap-2 rounded-full bg-accent-600 px-5 py-2.5 text-xs font-bold text-white shadow-sm transition hover:bg-accent-700"
-          >
-            <MessageSquarePlus size={16} />
-            Explore & Write Review
-          </Link>
+          <div className="flex items-center gap-2.5">
+            <Link
+              to={ROUTES.explore}
+              className="inline-flex items-center gap-2 rounded-full bg-accent-600 px-5 py-2.5 text-xs font-bold text-white shadow-sm transition hover:bg-accent-700"
+            >
+              <MessageSquarePlus size={16} />
+              Explore & Write Review
+            </Link>
+          </div>
         </div>
 
+        {/* Customer Account & Password Manager Card */}
+        <div className="mt-6 rounded-3xl border border-cream-300 bg-white p-6 shadow-sm">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center gap-3.5">
+              <div className="flex size-12 items-center justify-center rounded-2xl bg-accent-100 text-accent-700 font-bold text-lg">
+                {currentUser?.avatarUrl ? (
+                  <img
+                    src={currentUser.avatarUrl}
+                    alt={currentUser.name}
+                    className="size-full rounded-2xl object-cover"
+                  />
+                ) : (
+                  <User size={24} />
+                )}
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h2 className="text-base font-bold text-ink-900">
+                    {currentUser ? currentUser.name : 'Guest Diner'}
+                  </h2>
+                  <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-700 border border-emerald-200">
+                    <ShieldCheck size={11} />
+                    {currentUser ? 'Verified Account' : 'Guest Mode'}
+                  </span>
+                </div>
+                <p className="text-xs text-ink-500">
+                  {currentUser?.email ? currentUser.email : 'Not signed in with email'}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2">
+              {currentUser ? (
+                <button
+                  type="button"
+                  onClick={() => setShowPwManager(!showPwManager)}
+                  className="inline-flex items-center gap-1.5 rounded-xl border border-cream-300 bg-cream-50 px-3.5 py-2 text-xs font-bold text-ink-800 hover:bg-cream-100 cursor-pointer transition"
+                >
+                  <Lock size={13} className="text-accent-700" />
+                  <span>{showPwManager ? 'Close Password Manager' : 'Password Manager'}</span>
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setIsAuthModalOpen(true)}
+                  className="inline-flex items-center gap-1.5 rounded-xl bg-accent-600 px-4 py-2 text-xs font-bold text-white shadow-xs hover:bg-accent-700 cursor-pointer transition"
+                >
+                  <LogIn size={14} />
+                  <span>Sign In / Create Account</span>
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Collapsible Customer Password Manager Form */}
+          {showPwManager && currentUser?.email ? (
+            <div className="mt-5 border-t border-cream-200 pt-5">
+              <h3 className="text-sm font-bold text-ink-900 flex items-center gap-2">
+                <Lock size={15} className="text-accent-700" />
+                Change Your Account Password
+              </h3>
+              <p className="text-xs text-ink-500 mt-0.5">
+                Protect your reviews and diner profile with a personalized password.
+              </p>
+
+              <form onSubmit={handleChangePassword} className="mt-4 space-y-3.5 max-w-lg">
+                <div>
+                  <label className="mb-1 block text-xs font-bold text-ink-800" htmlFor="user-curr-pw">
+                    Current Password
+                  </label>
+                  <input
+                    id="user-curr-pw"
+                    type={showPw ? 'text' : 'password'}
+                    required
+                    value={currentPw}
+                    onChange={(e) => setCurrentPw(e.target.value)}
+                    placeholder="Enter existing password (or Vyora@2026)"
+                    className="w-full rounded-xl border border-cream-300 p-2.5 text-xs outline-none focus:border-accent-600"
+                  />
+                </div>
+
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <div>
+                    <label className="mb-1 block text-xs font-bold text-ink-800" htmlFor="user-new-pw">
+                      New Password
+                    </label>
+                    <input
+                      id="user-new-pw"
+                      type={showPw ? 'text' : 'password'}
+                      required
+                      value={newPw}
+                      onChange={(e) => setNewPw(e.target.value)}
+                      placeholder="Min 6 characters"
+                      className="w-full rounded-xl border border-cream-300 p-2.5 text-xs outline-none focus:border-accent-600"
+                    />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-xs font-bold text-ink-800" htmlFor="user-conf-pw">
+                      Confirm New Password
+                    </label>
+                    <input
+                      id="user-conf-pw"
+                      type={showPw ? 'text' : 'password'}
+                      required
+                      value={confirmPw}
+                      onChange={(e) => setConfirmPw(e.target.value)}
+                      placeholder="Re-type new password"
+                      className="w-full rounded-xl border border-cream-300 p-2.5 text-xs outline-none focus:border-accent-600"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between pt-1">
+                  <button
+                    type="button"
+                    onClick={() => setShowPw(!showPw)}
+                    className="inline-flex items-center gap-1 text-[11px] font-semibold text-accent-700 hover:text-accent-800 cursor-pointer"
+                  >
+                    {showPw ? <EyeOff size={13} /> : <Eye size={13} />}
+                    <span>{showPw ? 'Hide Passwords' : 'Show Passwords'}</span>
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={isUpdatingPw}
+                    className="rounded-xl bg-accent-600 px-4 py-2 text-xs font-bold text-white shadow-xs hover:bg-accent-700 disabled:opacity-60 cursor-pointer transition"
+                  >
+                    {isUpdatingPw ? 'Updating...' : 'Save New Password'}
+                  </button>
+                </div>
+
+                {pwError ? (
+                  <p className="rounded-lg bg-red-50 p-2 text-[11px] font-semibold text-red-600">
+                    {pwError}
+                  </p>
+                ) : null}
+
+                {pwSuccess ? (
+                  <p className="rounded-lg bg-emerald-50 p-2 text-[11px] font-semibold text-emerald-700">
+                    {pwSuccess}
+                  </p>
+                ) : null}
+              </form>
+            </div>
+          ) : null}
+        </div>
+
+        {/* Reviews List */}
         <div className="mt-8 space-y-6">
           {reviews.length > 0 ? (
             reviews.map((rev) => {
@@ -115,7 +327,7 @@ export default function MyReviewsPage() {
                       <button
                         type="button"
                         onClick={() => startEdit(rev)}
-                        className="inline-flex items-center gap-1.5 rounded-full border border-cream-300 bg-cream-50 px-3.5 py-1.5 text-xs font-semibold text-ink-800 transition hover:bg-cream-100"
+                        className="inline-flex items-center gap-1.5 rounded-full border border-cream-300 bg-cream-50 px-3.5 py-1.5 text-xs font-semibold text-ink-800 transition hover:bg-cream-100 cursor-pointer"
                       >
                         <Edit3 size={13} />
                         Edit
@@ -123,7 +335,7 @@ export default function MyReviewsPage() {
                       <button
                         type="button"
                         onClick={() => setDeleteTargetId(rev.id)}
-                        className="inline-flex items-center gap-1.5 rounded-full border border-red-200 bg-red-50 px-3.5 py-1.5 text-xs font-semibold text-red-700 transition hover:bg-red-100"
+                        className="inline-flex items-center gap-1.5 rounded-full border border-red-200 bg-red-50 px-3.5 py-1.5 text-xs font-semibold text-red-700 transition hover:bg-red-100 cursor-pointer"
                       >
                         <Trash2 size={13} />
                         Delete
@@ -203,14 +415,14 @@ export default function MyReviewsPage() {
               <button
                 type="button"
                 onClick={() => setDeleteTargetId(null)}
-                className="flex-1 rounded-xl border border-cream-300 py-2.5 text-xs font-bold text-ink-700 hover:bg-cream-100"
+                className="flex-1 rounded-xl border border-cream-300 py-2.5 text-xs font-bold text-ink-700 hover:bg-cream-100 cursor-pointer"
               >
                 Cancel
               </button>
               <button
                 type="button"
                 onClick={() => handleDelete(deleteTargetId)}
-                className="flex-1 rounded-xl bg-red-600 py-2.5 text-xs font-bold text-white hover:bg-red-700"
+                className="flex-1 rounded-xl bg-red-600 py-2.5 text-xs font-bold text-white hover:bg-red-700 cursor-pointer"
               >
                 Confirm Delete
               </button>
@@ -236,6 +448,13 @@ export default function MyReviewsPage() {
           }}
         />
       ) : null}
+
+      {/* Customer Auth Modal */}
+      <CustomerAuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        onSuccess={() => loadData()}
+      />
     </section>
   );
 }

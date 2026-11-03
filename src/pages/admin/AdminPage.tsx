@@ -16,6 +16,9 @@ import {
   Download,
   Printer,
   ExternalLink,
+  Lock,
+  Eye,
+  EyeOff,
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -28,15 +31,27 @@ import { getRestaurantPublicUrl, getRestaurantQrFilename } from '@/lib/restauran
 import { generateQrDataUrl } from '@/lib/qrCode';
 import type { AuditLogEntry, Restaurant, Review, UserProfile } from '@/types/restaurant';
 
-type AdminTab = 'dash' | 'users' | 'shops' | 'revs' | 'qr' | 'audit';
+type AdminTab = 'dash' | 'users' | 'shops' | 'revs' | 'qr' | 'audit' | 'security';
 
 export default function AdminPage() {
   usePageTitle('Admin Moderation Panel');
   const navigate = useNavigate();
 
   const [isLoggedIn, setIsLoggedIn] = useState(() => storageService.isAdminLoggedIn());
-  const [adminEmail, setAdminEmail] = useState('admin@rateit.com');
-  const [adminPw, setAdminPw] = useState('admin123');
+  const [adminEmail, setAdminEmail] = useState('admin@vyora.com');
+  const [adminPw, setAdminPw] = useState('VyoraAdmin@2026');
+  const [showAdminLoginPw, setShowAdminLoginPw] = useState(false);
+  const [adminLoginError, setAdminLoginError] = useState('');
+
+  // Password Manager Sub-state for Administrator
+  const [currAdminPw, setCurrAdminPw] = useState('');
+  const [newAdminPw, setNewAdminPw] = useState('');
+  const [confirmAdminPw, setConfirmAdminPw] = useState('');
+  const [showAdminPwChange, setShowAdminPwChange] = useState(false);
+  const [adminPwError, setAdminPwError] = useState('');
+  const [adminPwSuccess, setAdminPwSuccess] = useState('');
+  const [isSavingAdminPw, setIsSavingAdminPw] = useState(false);
+
   const [isSyncingDatabase, setIsSyncingDatabase] = useState(false);
   const [activeTab, setActiveTab] = useState<AdminTab>('dash');
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -77,13 +92,24 @@ export default function AdminPage() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
+    setAdminLoginError('');
+
     if (!adminEmail.trim() || !adminPw) {
-      showToast('Please enter admin email and password', 'error');
+      setAdminLoginError('Please enter admin email and password.');
       return;
     }
+
+    const check = storageService.verifyAdminPassword(adminEmail, adminPw);
+    if (!check.valid) {
+      setAdminLoginError(check.error || 'Invalid administrator credentials. Access denied.');
+      showToast('Invalid administrator credentials', 'error');
+      return;
+    }
+
     storageService.setAdminLoggedIn(true);
     setIsLoggedIn(true);
-    storageService.addAuditLog('Admin logged in', adminEmail);
+    setAdminLoginError('');
+    storageService.addAuditLog('Admin authenticated successfully', adminEmail);
     showToast('Admin logged in');
   };
 
@@ -93,11 +119,46 @@ export default function AdminPage() {
     showToast('Admin logged out');
   };
 
+  const handleChangeAdminPassword = (e: React.FormEvent) => {
+    e.preventDefault();
+    setAdminPwError('');
+    setAdminPwSuccess('');
+
+    if (!currAdminPw || !newAdminPw) {
+      setAdminPwError('Please enter both your current and new password.');
+      return;
+    }
+
+    if (newAdminPw.length < 6) {
+      setAdminPwError('New password must be at least 6 characters long.');
+      return;
+    }
+
+    if (newAdminPw !== confirmAdminPw) {
+      setAdminPwError('New passwords do not match. Please verify your entries.');
+      return;
+    }
+
+    setIsSavingAdminPw(true);
+    const res = storageService.changeAdminPassword(currAdminPw, newAdminPw);
+    setIsSavingAdminPw(false);
+
+    if (res.success) {
+      setAdminPwSuccess('Master Administrator password successfully updated!');
+      setCurrAdminPw('');
+      setNewAdminPw('');
+      setConfirmAdminPw('');
+      showToast('Admin password updated!');
+    } else {
+      setAdminPwError(res.error || 'Failed to update admin password.');
+    }
+  };
+
   const openShopAsAdmin = (s: Restaurant) => {
     storageService.setOwnerSession({
       restaurantId: s.id,
       restaurantName: s.name,
-      ownerEmail: s.ownerEmail || 'admin@rateit.com',
+      ownerEmail: s.ownerEmail || 'admin@vyora.com',
       ownerName: s.ownerName || 'Admin Super-User',
       isAdminManaged: true,
     });
@@ -218,13 +279,19 @@ export default function AdminPage() {
               🛡
             </div>
             <div>
-              <h1 className="text-xl font-bold text-ink-900">RateIt Admin Panel</h1>
-              <p className="text-xs text-ink-500">Moderation & Platform Governance</p>
+              <h1 className="text-xl font-bold text-ink-900">VYORA Admin Panel</h1>
+              <p className="text-xs text-ink-500">Moderation, Governance & Platform Administration</p>
             </div>
           </div>
 
-          <div className="my-5 rounded-2xl bg-cream-50 p-3.5 text-xs text-ink-600 border border-cream-200">
-            💡 Demo Mode: Use the default credentials below or click Log In to enter the admin dashboard.
+          <div className="my-5 rounded-2xl bg-cream-50 p-3.5 text-xs text-ink-600 border border-cream-200 space-y-1">
+            <p className="font-semibold text-ink-800">🔐 Master Admin Access</p>
+            <p className="text-[11px] text-ink-600">
+              Authorized admin: <code className="bg-white px-1 py-0.5 rounded font-mono font-bold">admin@vyora.com</code> or <code className="bg-white px-1 py-0.5 rounded font-mono font-bold">lazyotakumg@gmail.com</code>
+            </p>
+            <p className="text-[11px] text-ink-600">
+              Default password: <code className="bg-white px-1 py-0.5 rounded font-mono font-bold">VyoraAdmin@2026</code>
+            </p>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-4">
@@ -235,6 +302,7 @@ export default function AdminPage() {
               <input
                 id="adm-em"
                 type="email"
+                required
                 value={adminEmail}
                 onChange={(e) => setAdminEmail(e.target.value)}
                 className="w-full rounded-xl border border-cream-300 p-2.5 text-sm outline-none focus:border-forest-600"
@@ -242,21 +310,38 @@ export default function AdminPage() {
             </div>
 
             <div>
-              <label className="mb-1 block text-xs font-bold text-ink-800" htmlFor="adm-pw">
-                Password
-              </label>
+              <div className="flex items-center justify-between mb-1">
+                <label className="text-xs font-bold text-ink-800" htmlFor="adm-pw">
+                  Admin Master Password
+                </label>
+                <button
+                  type="button"
+                  onClick={() => setShowAdminLoginPw(!showAdminLoginPw)}
+                  className="text-[11px] font-semibold text-forest-700 hover:text-forest-800 inline-flex items-center gap-1 cursor-pointer"
+                >
+                  {showAdminLoginPw ? <EyeOff size={12} /> : <Eye size={12} />}
+                  <span>{showAdminLoginPw ? 'Hide' : 'Show'}</span>
+                </button>
+              </div>
               <input
                 id="adm-pw"
-                type="password"
+                type={showAdminLoginPw ? 'text' : 'password'}
+                required
                 value={adminPw}
                 onChange={(e) => setAdminPw(e.target.value)}
                 className="w-full rounded-xl border border-cream-300 p-2.5 text-sm outline-none focus:border-forest-600"
               />
             </div>
 
+            {adminLoginError ? (
+              <div className="rounded-xl border border-red-200 bg-red-50 p-2.5 text-xs text-red-700 font-semibold">
+                {adminLoginError}
+              </div>
+            ) : null}
+
             <button
               type="submit"
-              className="flex w-full items-center justify-center rounded-xl bg-forest-600 py-3 text-sm font-bold text-white shadow-md hover:bg-forest-700"
+              className="flex w-full items-center justify-center rounded-xl bg-forest-600 py-3 text-sm font-bold text-white shadow-md hover:bg-forest-700 cursor-pointer transition"
             >
               Log in to Admin Panel
             </button>
@@ -300,7 +385,7 @@ export default function AdminPage() {
                   🛡
                 </div>
                 <div>
-                  <h2 className="text-sm font-bold text-ink-900 leading-none">RateIt Admin</h2>
+                  <h2 className="text-sm font-bold text-ink-900 leading-none">VYORA Admin</h2>
                   <span className="text-[11px] text-ink-500">Gorakhpur Region</span>
                 </div>
               </div>
@@ -321,6 +406,7 @@ export default function AdminPage() {
                 { id: 'revs', label: 'Review Moderation', icon: MessageSquare },
                 { id: 'qr', label: 'QR Standee Management', icon: QrCode },
                 { id: 'audit', label: 'Audit Log', icon: ClipboardList },
+                { id: 'security', label: 'Password Manager', icon: Lock },
               ].map((tab) => {
                 const Icon = tab.icon;
                 const isActive = activeTab === tab.id;
@@ -332,7 +418,7 @@ export default function AdminPage() {
                       setActiveTab(tab.id as AdminTab);
                       setSidebarOpen(false);
                     }}
-                    className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-bold transition ${
+                    className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-bold transition cursor-pointer ${
                       isActive
                         ? 'bg-forest-100 text-forest-800 shadow-xs'
                         : 'text-ink-600 hover:bg-cream-100 hover:text-ink-900'
@@ -945,6 +1031,107 @@ export default function AdminPage() {
                   </div>
                 ))}
               </div>
+            </div>
+          ) : null}
+
+          {/* PASSWORD MANAGER & SECURITY TAB */}
+          {activeTab === 'security' ? (
+            <div className="rounded-3xl border border-cream-300 bg-white p-6 sm:p-8 shadow-sm max-w-xl space-y-6">
+              <div>
+                <h3 className="text-xl font-bold text-ink-900">Admin Password Manager</h3>
+                <p className="text-xs text-ink-500">
+                  Update the master administrator credentials for platform governance.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-cream-200 bg-cream-50 p-4 text-xs space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="font-semibold text-ink-800">Master Admin Account:</span>
+                  <span className="font-mono text-ink-900 font-bold">{adminEmail}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="font-semibold text-ink-800">Security Vault:</span>
+                  <span className="text-emerald-700 font-bold">Active & Enforced</span>
+                </div>
+              </div>
+
+              <form onSubmit={handleChangeAdminPassword} className="space-y-4">
+                <div>
+                  <label className="mb-1 block text-xs font-bold text-ink-800" htmlFor="curr-adm-pw">
+                    Current Admin Password
+                  </label>
+                  <input
+                    id="curr-adm-pw"
+                    type={showAdminPwChange ? 'text' : 'password'}
+                    required
+                    value={currAdminPw}
+                    onChange={(e) => setCurrAdminPw(e.target.value)}
+                    placeholder="Enter current password"
+                    className="w-full rounded-xl border border-cream-300 p-2.5 text-xs outline-none focus:border-forest-600"
+                  />
+                </div>
+
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <div>
+                    <label className="mb-1 block text-xs font-bold text-ink-800" htmlFor="new-adm-pw">
+                      New Password
+                    </label>
+                    <input
+                      id="new-adm-pw"
+                      type={showAdminPwChange ? 'text' : 'password'}
+                      required
+                      value={newAdminPw}
+                      onChange={(e) => setNewAdminPw(e.target.value)}
+                      placeholder="Min 6 characters"
+                      className="w-full rounded-xl border border-cream-300 p-2.5 text-xs outline-none focus:border-forest-600"
+                    />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-xs font-bold text-ink-800" htmlFor="conf-adm-pw">
+                      Confirm New Password
+                    </label>
+                    <input
+                      id="conf-adm-pw"
+                      type={showAdminPwChange ? 'text' : 'password'}
+                      required
+                      value={confirmAdminPw}
+                      onChange={(e) => setConfirmAdminPw(e.target.value)}
+                      placeholder="Re-type new password"
+                      className="w-full rounded-xl border border-cream-300 p-2.5 text-xs outline-none focus:border-forest-600"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between pt-1">
+                  <button
+                    type="button"
+                    onClick={() => setShowAdminPwChange(!showAdminPwChange)}
+                    className="inline-flex items-center gap-1 text-[11px] font-semibold text-forest-700 hover:text-forest-800 cursor-pointer"
+                  >
+                    {showAdminPwChange ? <EyeOff size={13} /> : <Eye size={13} />}
+                    <span>{showAdminPwChange ? 'Hide Passwords' : 'Show Passwords'}</span>
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={isSavingAdminPw}
+                    className="rounded-xl bg-forest-600 px-5 py-2.5 text-xs font-bold text-white shadow-xs hover:bg-forest-700 disabled:opacity-60 cursor-pointer transition"
+                  >
+                    {isSavingAdminPw ? 'Saving...' : 'Update Admin Password'}
+                  </button>
+                </div>
+
+                {adminPwError ? (
+                  <p className="rounded-lg bg-red-50 p-2 text-[11px] font-semibold text-red-600">
+                    {adminPwError}
+                  </p>
+                ) : null}
+
+                {adminPwSuccess ? (
+                  <p className="rounded-lg bg-emerald-50 p-2 text-[11px] font-semibold text-emerald-700">
+                    {adminPwSuccess}
+                  </p>
+                ) : null}
+              </form>
             </div>
           ) : null}
         </main>

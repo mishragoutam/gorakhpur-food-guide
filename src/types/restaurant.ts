@@ -92,6 +92,8 @@ export interface Restaurant {
   status?: 'Active' | 'Suspended' | 'Flagged';
   ownerName?: string;
   ownerEmail?: string;
+  ownerPassword?: string;
+  passwordUpdatedAt?: string;
   facilities?: string[];
   menu?: MenuItem[];
   ratingsBreakdown?: RatingBreakdown;
@@ -114,6 +116,8 @@ export interface UserProfile {
   id: string | number;
   name: string;
   email: string;
+  password?: string;
+  passwordUpdatedAt?: string;
   avatarUrl?: string;
   reviewsCount: number;
   isBanned: boolean;
