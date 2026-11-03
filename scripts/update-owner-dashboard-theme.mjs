@@ -37,3 +37,4 @@ content = content.replace(/#2f7d5f/g, '#b84221');
 
 fs.writeFileSync(filePath, content, 'utf8');
 console.log('Successfully updated OwnerDashboardPage.tsx theme!');
+
