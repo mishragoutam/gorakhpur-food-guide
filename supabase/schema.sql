@@ -122,14 +122,40 @@ CREATE TABLE IF NOT EXISTS public.group_sessions (
 
 CREATE INDEX IF NOT EXISTS idx_group_sessions_status ON public.group_sessions(status);
 
+-- 7. TABLE BOOKINGS TABLE
+CREATE TABLE IF NOT EXISTS public.table_bookings (
+    id TEXT PRIMARY KEY,
+    restaurant_id TEXT NOT NULL REFERENCES public.restaurants(id) ON DELETE CASCADE,
+    restaurant_name TEXT NOT NULL,
+    guest_name TEXT NOT NULL,
+    mobile TEXT NOT NULL,
+    email TEXT NOT NULL,
+    date TEXT NOT NULL,
+    time TEXT NOT NULL,
+    guests INTEGER NOT NULL DEFAULT 2,
+    seating_area TEXT,
+    special_requests TEXT,
+    status TEXT NOT NULL DEFAULT 'Confirmed',
+    confirmation_code TEXT NOT NULL,
+    notifications JSONB DEFAULT '{}'::jsonb,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now()),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now())
+);
+
+CREATE INDEX IF NOT EXISTS idx_table_bookings_restaurant ON public.table_bookings(restaurant_id);
+CREATE INDEX IF NOT EXISTS idx_table_bookings_email ON public.table_bookings(email);
+CREATE INDEX IF NOT EXISTS idx_table_bookings_mobile ON public.table_bookings(mobile);
+CREATE INDEX IF NOT EXISTS idx_table_bookings_date ON public.table_bookings(date DESC);
+
 -- ==============================================================================
--- 7. ROW LEVEL SECURITY (RLS) POLICIES
+-- 8. ROW LEVEL SECURITY (RLS) POLICIES
 -- ==============================================================================
 ALTER TABLE public.restaurants ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.reviews ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.inquiries ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.audit_logs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.group_sessions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.table_bookings ENABLE ROW LEVEL SECURITY;
 
 -- Allow public read access (anon and authenticated)
 DROP POLICY IF EXISTS "Public read restaurants" ON public.restaurants;
@@ -152,6 +178,9 @@ CREATE POLICY "Public read/write audit logs" ON public.audit_logs FOR ALL USING 
 
 DROP POLICY IF EXISTS "Public read/write group sessions" ON public.group_sessions;
 CREATE POLICY "Public read/write group sessions" ON public.group_sessions FOR ALL USING (true) WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Public read/write table bookings" ON public.table_bookings;
+CREATE POLICY "Public read/write table bookings" ON public.table_bookings FOR ALL USING (true) WITH CHECK (true);
 
 -- ==============================================================================
 -- 8. REALTIME REPLICATION CONFIGURATION

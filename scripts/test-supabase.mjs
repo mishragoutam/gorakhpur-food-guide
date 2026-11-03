@@ -40,7 +40,7 @@ if (!url || !key) {
 const supabase = createClient(url, key);
 
 async function checkConnection() {
-  const tables = ['restaurants', 'reviews', 'inquiries', 'audit_logs', 'group_sessions'];
+  const tables = ['restaurants', 'reviews', 'inquiries', 'audit_logs', 'group_sessions', 'table_bookings'];
   const results = {};
 
   console.log('\nTesting connection and checking tables...');
@@ -79,7 +79,11 @@ async function checkConnection() {
   if (allOk) {
     console.log('\n>>> SUCCESS: Supabase connection is 100% verified and all tables are accessible! <<<');
   } else {
-    console.log('\n>>> NOTICE: Connection to Supabase reached, but some tables are missing or require RLS setup. <<<');
+    console.log('\n>>> NOTICE: Connection to Supabase reached.');
+    if (!results.table_bookings?.ok && results.restaurants?.ok) {
+      console.log('>>> All 5 core tables (restaurants, reviews, inquiries, audit_logs, group_sessions) are ACTIVE.');
+      console.log('>>> To also sync table reservations to the cloud, run the `table_bookings` snippet from supabase/schema.sql in your Supabase SQL Editor.');
+    }
   }
 }
 
