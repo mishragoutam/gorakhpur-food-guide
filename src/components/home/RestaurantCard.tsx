@@ -43,19 +43,31 @@ export function RestaurantCard({ restaurant }: RestaurantCardProps) {
                 setQrModalOpen(true);
               }}
               aria-label={`View QR code for ${restaurant.name}`}
-              className="inline-flex items-center gap-1 rounded-full bg-white/95 px-2.5 py-1 text-xs font-bold text-ink-800 shadow-sm backdrop-blur-xs transition hover:bg-white hover:text-forest-700"
+              className="inline-flex items-center gap-1 rounded-full bg-white/95 px-2.5 py-1 text-xs font-bold text-ink-800 shadow-sm backdrop-blur-xs transition hover:bg-white hover:text-accent-700 cursor-pointer"
             >
-              <QrCode size={13} className="text-forest-700" />
+              <QrCode size={13} className="text-accent-700" />
               <span>QR</span>
             </button>
           </div>
         </div>
 
         <div className="flex flex-1 flex-col p-5">
-          <h3 className="text-xl font-bold text-ink-900">{restaurant.name}</h3>
-          <p className="mt-1 text-sm font-medium text-ink-600">{restaurant.cuisines.join(' · ')}</p>
-          <p className="mt-2 flex items-center gap-1.5 text-sm text-ink-600">
-            <MapPin aria-hidden="true" size={15} className="shrink-0 text-accent-700" />
+          <div className="flex items-start gap-3">
+            {restaurant.logoUrl ? (
+              <img
+                src={restaurant.logoUrl}
+                alt={`${restaurant.name} logo`}
+                className="size-11 shrink-0 rounded-2xl border border-cream-200 bg-white shadow-2xs object-cover"
+                loading="lazy"
+              />
+            ) : null}
+            <div className="min-w-0 flex-1">
+              <h3 className="text-lg font-bold text-ink-900 leading-snug line-clamp-1">{restaurant.name}</h3>
+              <p className="mt-0.5 text-xs font-medium text-ink-600 truncate">{restaurant.cuisines.join(' · ')}</p>
+            </div>
+          </div>
+          <p className="mt-2.5 flex items-center gap-1.5 text-xs text-ink-600">
+            <MapPin aria-hidden="true" size={14} className="shrink-0 text-accent-700" />
             {restaurant.area}, {restaurant.city}
           </p>
 

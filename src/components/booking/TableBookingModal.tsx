@@ -153,11 +153,11 @@ export function TableBookingModal({
         {confirmedBooking ? (
           /* CONFIRMED BOOKING SCREEN WITH SMS & EMAIL NOTIFICATION CARDS */
           <div className="text-center py-2 animate-in zoom-in-95">
-            <div className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-700 shadow-xs mb-3">
+            <div className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-amber-100 text-amber-700 shadow-xs mb-3">
               <CheckCircle2 size={32} />
             </div>
 
-            <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800">
+            <span className="rounded-full bg-accent-100 px-3 py-1 text-xs font-bold text-accent-800">
               Reservation Confirmed
             </span>
 
@@ -193,38 +193,38 @@ export function TableBookingModal({
             {/* Simulated Live Dispatch Status */}
             <div className="space-y-2.5 text-left mb-6">
               {/* SMS Notification */}
-              <div className="flex items-start gap-3 rounded-2xl border border-emerald-200 bg-emerald-50/70 p-3 text-xs">
-                <div className="flex size-8 shrink-0 items-center justify-center rounded-xl bg-emerald-600 text-white font-bold">
+              <div className="flex items-start gap-3 rounded-2xl border border-cream-300 bg-cream-50/80 p-3 text-xs">
+                <div className="flex size-8 shrink-0 items-center justify-center rounded-xl bg-accent-600 text-white font-bold">
                   <MessageSquare size={16} />
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center justify-between">
-                    <span className="font-bold text-emerald-950">SMS Sent Successfully</span>
-                    <span className="text-[10px] font-bold text-emerald-700 uppercase">Delivered</span>
+                    <span className="font-bold text-ink-900">SMS Sent Successfully</span>
+                    <span className="text-[10px] font-bold text-accent-700 uppercase">Delivered</span>
                   </div>
-                  <p className="text-[11px] text-emerald-900 mt-0.5">
+                  <p className="text-[11px] text-ink-700 mt-0.5">
                     To: <strong>{confirmedBooking.mobile}</strong>
                   </p>
-                  <p className="text-[10px] text-emerald-800 mt-1 italic bg-white/70 rounded-md p-1.5 border border-emerald-100">
+                  <p className="text-[10px] text-ink-600 mt-1 italic bg-white rounded-md p-1.5 border border-cream-200">
                     "{confirmedBooking.notifications.smsText}"
                   </p>
                 </div>
               </div>
 
               {/* Email Notification */}
-              <div className="flex items-start gap-3 rounded-2xl border border-blue-200 bg-blue-50/70 p-3 text-xs">
-                <div className="flex size-8 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white font-bold">
+              <div className="flex items-start gap-3 rounded-2xl border border-cream-300 bg-cream-50/80 p-3 text-xs">
+                <div className="flex size-8 shrink-0 items-center justify-center rounded-xl bg-ink-900 text-white font-bold">
                   <Mail size={16} />
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center justify-between">
-                    <span className="font-bold text-blue-950">Email Confirmation Sent</span>
-                    <span className="text-[10px] font-bold text-blue-700 uppercase">Inbox Delivered</span>
+                    <span className="font-bold text-ink-900">Email Confirmation Sent</span>
+                    <span className="text-[10px] font-bold text-ink-600 uppercase">Inbox Delivered</span>
                   </div>
-                  <p className="text-[11px] text-blue-900 mt-0.5">
+                  <p className="text-[11px] text-ink-700 mt-0.5">
                     To: <strong>{confirmedBooking.email}</strong>
                   </p>
-                  <p className="text-[10px] text-blue-800 mt-1">
+                  <p className="text-[10px] text-ink-600 mt-1">
                     Subject: <em>{confirmedBooking.notifications.emailSubject}</em>
                   </p>
                 </div>
@@ -237,7 +237,7 @@ export function TableBookingModal({
                 href={getWhatsAppShareUrl(confirmedBooking)}
                 target="_blank"
                 rel="noreferrer"
-                className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-600 py-3 text-xs font-bold text-white shadow-sm hover:bg-emerald-700 transition"
+                className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-accent-600 py-3 text-xs font-bold text-white shadow-sm hover:bg-accent-700 transition"
               >
                 <Share2 size={15} />
                 <span>Share via WhatsApp</span>
@@ -245,7 +245,7 @@ export function TableBookingModal({
               <button
                 type="button"
                 onClick={handleReset}
-                className="flex-1 rounded-xl bg-ink-900 py-3 text-xs font-bold text-white hover:bg-ink-800 transition"
+                className="flex-1 rounded-xl bg-ink-900 py-3 text-xs font-bold text-white hover:bg-ink-800 transition cursor-pointer"
               >
                 Done
               </button>
@@ -255,7 +255,7 @@ export function TableBookingModal({
           /* RESERVATION FORM */
           <div>
             <div className="mb-5 flex items-center gap-3">
-              <div className="flex size-11 items-center justify-center rounded-2xl bg-forest-100 text-forest-700 shadow-2xs">
+              <div className="flex size-11 items-center justify-center rounded-2xl bg-accent-100 text-accent-700 shadow-2xs">
                 <Calendar size={22} />
               </div>
               <div>
@@ -270,7 +270,7 @@ export function TableBookingModal({
               {/* Guests Count */}
               <div>
                 <label className="block text-xs font-bold text-ink-800 mb-1.5">
-                  <Users size={14} className="inline mr-1 text-forest-700" />
+                  <Users size={14} className="inline mr-1 text-accent-700" />
                   Number of Guests
                 </label>
                 <div className="flex flex-wrap gap-1.5">
@@ -281,7 +281,7 @@ export function TableBookingModal({
                       onClick={() => setGuests(num)}
                       className={`rounded-xl px-3 py-1.5 text-xs font-bold transition cursor-pointer ${
                         guests === num
-                          ? 'bg-forest-700 text-white shadow-xs'
+                          ? 'bg-accent-600 text-white shadow-xs'
                           : 'bg-cream-100 text-ink-700 hover:bg-cream-200'
                       }`}
                     >
@@ -295,7 +295,7 @@ export function TableBookingModal({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-bold text-ink-800 mb-1" htmlFor="book-date">
-                    <Calendar size={14} className="inline mr-1 text-forest-700" />
+                    <Calendar size={14} className="inline mr-1 text-accent-700" />
                     Reservation Date
                   </label>
                   <input
@@ -305,20 +305,20 @@ export function TableBookingModal({
                     value={date}
                     min={TODAY_DATE_STR}
                     onChange={(e) => setDate(e.target.value)}
-                    className="w-full rounded-xl border border-cream-300 bg-white px-3 py-2 text-xs font-semibold text-ink-900 outline-none focus:border-forest-600 focus:ring-1 focus:ring-forest-200"
+                    className="w-full rounded-xl border border-cream-300 bg-white px-3 py-2 text-xs font-semibold text-ink-900 outline-none focus:border-accent-600 focus:ring-1 focus:ring-accent-200"
                   />
                 </div>
 
                 <div>
                   <label className="block text-xs font-bold text-ink-800 mb-1" htmlFor="book-time">
-                    <Clock size={14} className="inline mr-1 text-forest-700" />
+                    <Clock size={14} className="inline mr-1 text-accent-700" />
                     Time Slot
                   </label>
                   <select
                     id="book-time"
                     value={time}
                     onChange={(e) => setTime(e.target.value)}
-                    className="w-full rounded-xl border border-cream-300 bg-white px-3 py-2 text-xs font-semibold text-ink-900 outline-none focus:border-forest-600 cursor-pointer"
+                    className="w-full rounded-xl border border-cream-300 bg-white px-3 py-2 text-xs font-semibold text-ink-900 outline-none focus:border-accent-600 cursor-pointer"
                   >
                     {TIME_SLOTS.map((slot) => (
                       <option key={slot} value={slot}>
@@ -332,7 +332,7 @@ export function TableBookingModal({
               {/* Seating Area Preference */}
               <div>
                 <label className="block text-xs font-bold text-ink-800 mb-1.5">
-                  <Armchair size={14} className="inline mr-1 text-forest-700" />
+                  <Armchair size={14} className="inline mr-1 text-accent-700" />
                   Seating Preference
                 </label>
                 <div className="grid grid-cols-2 gap-2">
@@ -343,7 +343,7 @@ export function TableBookingModal({
                       onClick={() => setSeatingArea(area)}
                       className={`rounded-xl border p-2 text-left text-xs font-semibold transition cursor-pointer ${
                         seatingArea === area
-                          ? 'border-forest-700 bg-forest-50/80 text-forest-950 font-bold'
+                          ? 'border-accent-600 bg-accent-50/80 text-accent-950 font-bold'
                           : 'border-cream-200 bg-white text-ink-700 hover:border-cream-300'
                       }`}
                     >
@@ -370,7 +370,7 @@ export function TableBookingModal({
                     value={guestName}
                     onChange={(e) => setGuestName(e.target.value)}
                     placeholder="e.g. Amit Srivastav"
-                    className="w-full rounded-xl border border-cream-300 bg-white px-3 py-1.5 text-xs text-ink-900 outline-none focus:border-forest-600"
+                    className="w-full rounded-xl border border-cream-300 bg-white px-3 py-1.5 text-xs text-ink-900 outline-none focus:border-accent-600"
                   />
                 </div>
 
@@ -392,7 +392,7 @@ export function TableBookingModal({
                         onChange={(e) => setMobile(e.target.value)}
                         placeholder="98380 12345"
                         maxLength={10}
-                        className="w-full rounded-r-xl border border-cream-300 bg-white px-3 py-1.5 text-xs text-ink-900 outline-none focus:border-forest-600"
+                        className="w-full rounded-r-xl border border-cream-300 bg-white px-3 py-1.5 text-xs text-ink-900 outline-none focus:border-accent-600"
                       />
                     </div>
                   </div>
@@ -409,7 +409,7 @@ export function TableBookingModal({
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="you@gmail.com"
-                      className="w-full rounded-xl border border-cream-300 bg-white px-3 py-1.5 text-xs text-ink-900 outline-none focus:border-forest-600"
+                      className="w-full rounded-xl border border-cream-300 bg-white px-3 py-1.5 text-xs text-ink-900 outline-none focus:border-accent-600"
                     />
                   </div>
                 </div>
@@ -424,7 +424,7 @@ export function TableBookingModal({
                     value={specialRequests}
                     onChange={(e) => setSpecialRequests(e.target.value)}
                     placeholder="e.g. Birthday decoration, high chair, window view..."
-                    className="w-full rounded-xl border border-cream-300 bg-white px-3 py-1.5 text-xs text-ink-900 outline-none focus:border-forest-600"
+                    className="w-full rounded-xl border border-cream-300 bg-white px-3 py-1.5 text-xs text-ink-900 outline-none focus:border-accent-600"
                   />
                 </div>
               </div>
@@ -434,8 +434,7 @@ export function TableBookingModal({
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex w-full items-center justify-center gap-2 rounded-xl bg-forest-700 py-3 text-sm font-bold text-white shadow-md transition hover:bg-forest-800 active:scale-[0.99] disabled:opacity-60 cursor-pointer"
-                style={{ backgroundColor: '#2f7d5f', color: '#ffffff' }}
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-accent-600 py-3 text-sm font-bold text-white shadow-md transition hover:bg-accent-700 active:scale-[0.99] disabled:opacity-60 cursor-pointer"
               >
                 <Sparkles size={16} />
                 <span>{isSubmitting ? 'Confirming Reservation...' : 'Confirm Table Reservation (Instant Free Booking)'}</span>

@@ -313,7 +313,7 @@ export default function OwnerDashboardPage() {
     return (
       <section className="py-16 sm:py-24 bg-cream-50/50 min-h-[70vh] flex items-center justify-center">
         <div className="mx-auto max-w-lg text-center rounded-3xl border border-cream-300 bg-white p-8 sm:p-12 shadow-card">
-          <div className="mx-auto flex size-16 items-center justify-center rounded-2xl bg-forest-100 text-forest-700">
+          <div className="mx-auto flex size-16 items-center justify-center rounded-2xl bg-accent-100 text-accent-700">
             <Store size={32} />
           </div>
           <h2 className="mt-4 text-2xl font-bold text-ink-900">No Restaurant Connected</h2>
@@ -323,8 +323,8 @@ export default function OwnerDashboardPage() {
           <div className="mt-6 flex flex-col sm:flex-row justify-center gap-3">
             <Link
               to={ROUTES.ownerRegister}
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-forest-600 px-5 py-3 text-sm font-bold text-white shadow-sm hover:bg-forest-700 cursor-pointer"
-              style={{ backgroundColor: '#2f7d5f', color: '#ffffff' }}
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent-600 px-5 py-3 text-sm font-bold text-white shadow-sm hover:bg-accent-700 cursor-pointer"
+              style={{ backgroundColor: '#b84221', color: '#ffffff' }}
             >
               <Plus size={16} />
               Register New Restaurant
@@ -406,7 +406,7 @@ export default function OwnerDashboardPage() {
               {/* Brand Header */}
               <div className="flex items-center justify-between px-3 py-3 border-b border-cream-200">
                 <div className="flex items-center gap-2.5">
-                  <div className="flex size-9 items-center justify-center rounded-xl bg-forest-600 text-white font-bold">
+                  <div className="flex size-9 items-center justify-center rounded-xl bg-accent-600 text-white font-bold">
                     R
                   </div>
                   <div>
@@ -426,18 +426,18 @@ export default function OwnerDashboardPage() {
               {/* Authenticated Restaurant Card (Strictly Isolated to Logged-in Owner) */}
               <div className="my-3 rounded-2xl bg-cream-100/90 p-3 border border-cream-300/80">
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-forest-700">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-accent-700">
                     Your Restaurant
                   </span>
-                  <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-forest-800">
-                    <ShieldCheck size={12} className="text-forest-600" />
+                  <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-accent-800">
+                    <ShieldCheck size={12} className="text-accent-700" />
                     Verified Partner
                   </span>
                 </div>
                 <h3 className="mt-1 text-sm font-bold text-ink-900 truncate">{restaurant.name}</h3>
                 <p className="mt-1 text-[11px] text-ink-500 flex items-center justify-between">
                   <span>{restaurant.area}, Gorakhpur</span>
-                  <span className="font-bold text-forest-700">★ {restaurant.averageRating}</span>
+                  <span className="font-bold text-accent-700">★ {restaurant.averageRating}</span>
                 </p>
               </div>
 
@@ -456,14 +456,14 @@ export default function OwnerDashboardPage() {
                       }}
                       className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-bold transition ${
                         isActive
-                          ? 'bg-forest-100 text-forest-800 shadow-xs'
+                          ? 'bg-accent-100 text-accent-800 shadow-xs'
                           : 'text-ink-600 hover:bg-cream-100 hover:text-ink-900'
                       }`}
                     >
-                      <Icon size={17} className={isActive ? 'text-forest-700' : 'text-ink-400'} />
+                      <Icon size={17} className={isActive ? 'text-accent-700' : 'text-ink-400'} />
                       <span>{tab.label}</span>
                       {tab.id === 'bookings' && bookings.length > 0 ? (
-                        <span className="ml-auto rounded-full bg-forest-600 px-2 py-0.5 text-[10px] font-bold text-white">
+                        <span className="ml-auto rounded-full bg-accent-600 px-2 py-0.5 text-[10px] font-bold text-white">
                           {bookings.length}
                         </span>
                       ) : null}
@@ -518,7 +518,7 @@ export default function OwnerDashboardPage() {
                 Live Store
               </span>
               <div className="flex items-center gap-2 rounded-full border border-cream-300 bg-cream-50 px-3 py-1.5 text-xs font-bold text-ink-900">
-                <div className="size-5 rounded-full bg-forest-600 text-center text-[10px] leading-5 text-white">
+                <div className="size-5 rounded-full bg-accent-600 text-center text-[10px] leading-5 text-white">
                   O
                 </div>
                 <span className="hidden sm:inline">{restaurant.ownerName || 'Neha Kapoor'}</span>
@@ -564,7 +564,7 @@ export default function OwnerDashboardPage() {
 
                   <div className="rounded-3xl border border-cream-300 bg-white p-5 shadow-sm">
                     <span className="text-xs font-bold text-ink-500">Positive Sentiment</span>
-                    <div className="mt-2 font-display text-3xl font-extrabold text-forest-700">88%</div>
+                    <div className="mt-2 font-display text-3xl font-extrabold text-accent-700">88%</div>
                     <span className="mt-1 block text-[11px] text-ink-500">High satisfaction score</span>
                   </div>
                 </div>
@@ -585,7 +585,7 @@ export default function OwnerDashboardPage() {
                         <div key={b.star} className="flex items-center gap-2 text-xs">
                           <span className="w-7 font-bold text-ink-700">{b.star}</span>
                           <div className="h-2 flex-1 rounded-full bg-cream-100 overflow-hidden">
-                            <div className="h-full rounded-full bg-forest-600" style={{ width: `${b.pct}%` }} />
+                            <div className="h-full rounded-full bg-accent-600" style={{ width: `${b.pct}%` }} />
                           </div>
                           <span className="w-8 text-right font-medium text-ink-500">{b.pct}%</span>
                         </div>
@@ -599,7 +599,7 @@ export default function OwnerDashboardPage() {
                         {[40, 65, 80, 55, 90, 110, 125].map((h, i) => (
                           <div key={i} className="flex-1 flex flex-col items-center gap-1">
                             <div
-                              className="w-full rounded-t-md bg-forest-600 transition-all hover:bg-forest-700"
+                              className="w-full rounded-t-md bg-accent-600 transition-all hover:bg-accent-700"
                               style={{ height: `${h * 0.7}px` }}
                             />
                             <span className="text-[10px] text-ink-400">
@@ -618,7 +618,7 @@ export default function OwnerDashboardPage() {
                       <button
                         type="button"
                         onClick={() => setActiveTab('reviews')}
-                        className="text-xs font-bold text-forest-700 hover:underline"
+                        className="text-xs font-bold text-accent-700 hover:underline"
                       >
                         View All ({reviews.length})
                       </button>
@@ -636,7 +636,7 @@ export default function OwnerDashboardPage() {
                           </div>
                           <p className="mt-1.5 text-xs text-ink-700 line-clamp-2">{r.text}</p>
                           {r.ownerReply ? (
-                            <p className="mt-2 text-[11px] font-medium text-forest-700 bg-forest-50 p-2 rounded-xl">
+                            <p className="mt-2 text-[11px] font-medium text-accent-700 bg-accent-50 p-2 rounded-xl">
                               ✓ Replied: "{r.ownerReply.text}"
                             </p>
                           ) : (
@@ -669,7 +669,7 @@ export default function OwnerDashboardPage() {
                       Live diner reservations for {restaurant.name} with instant SMS and email notifications.
                     </p>
                   </div>
-                  <span className="rounded-full bg-forest-100 px-3 py-1 text-xs font-bold text-forest-800">
+                  <span className="rounded-full bg-accent-100 px-3 py-1 text-xs font-bold text-accent-800">
                     {bookings.length} Total Bookings
                   </span>
                 </div>
@@ -678,7 +678,7 @@ export default function OwnerDashboardPage() {
                 <div className="grid gap-4 sm:grid-cols-3">
                   <div className="rounded-2xl border border-cream-300 bg-white p-4 shadow-sm">
                     <span className="text-xs font-bold text-ink-500">Confirmed Bookings</span>
-                    <div className="mt-1 text-2xl font-extrabold text-forest-700">
+                    <div className="mt-1 text-2xl font-extrabold text-accent-700">
                       {bookings.filter((b) => b.status === 'Confirmed').length}
                     </div>
                     <span className="text-[11px] text-ink-500">Ready for dining</span>
@@ -732,7 +732,7 @@ export default function OwnerDashboardPage() {
                               <td className="py-3.5 pr-4 font-bold text-ink-900">
                                 <div>{b.guestName}</div>
                                 <div className="text-[11px] font-normal text-ink-600 flex items-center gap-1 mt-0.5">
-                                  <a href={`tel:${b.mobile}`} className="hover:text-forest-700 underline">
+                                  <a href={`tel:${b.mobile}`} className="hover:text-accent-700 underline">
                                     {b.mobile}
                                   </a>
                                 </div>
@@ -774,8 +774,8 @@ export default function OwnerDashboardPage() {
                                           setBookings(storageService.getBookings(restaurant.id));
                                           showToast(`Marked ${b.guestName}'s party as Seated`);
                                         }}
-                                        className="rounded-lg bg-forest-600 px-2.5 py-1 text-[11px] font-bold text-white hover:bg-forest-700"
-                                        style={{ backgroundColor: '#2f7d5f', color: '#ffffff' }}
+                                        className="rounded-lg bg-accent-600 px-2.5 py-1 text-[11px] font-bold text-white hover:bg-accent-700"
+                                        style={{ backgroundColor: '#b84221', color: '#ffffff' }}
                                       >
                                         Seat Guests
                                       </button>
@@ -835,7 +835,7 @@ export default function OwnerDashboardPage() {
                         type="text"
                         value={profileName}
                         onChange={(e) => setProfileName(e.target.value)}
-                        className="w-full rounded-xl border border-cream-300 p-2.5 text-sm outline-none focus:border-forest-600"
+                        className="w-full rounded-xl border border-cream-300 p-2.5 text-sm outline-none focus:border-accent-600"
                       />
                     </div>
 
@@ -848,7 +848,7 @@ export default function OwnerDashboardPage() {
                         type="text"
                         value={profilePhone}
                         onChange={(e) => setProfilePhone(e.target.value)}
-                        className="w-full rounded-xl border border-cream-300 p-2.5 text-sm outline-none focus:border-forest-600"
+                        className="w-full rounded-xl border border-cream-300 p-2.5 text-sm outline-none focus:border-accent-600"
                       />
                     </div>
                   </div>
@@ -862,7 +862,7 @@ export default function OwnerDashboardPage() {
                       rows={3}
                       value={profileDesc}
                       onChange={(e) => setProfileDesc(e.target.value)}
-                      className="w-full rounded-xl border border-cream-300 p-2.5 text-sm outline-none focus:border-forest-600"
+                      className="w-full rounded-xl border border-cream-300 p-2.5 text-sm outline-none focus:border-accent-600"
                     />
                   </div>
 
@@ -875,7 +875,7 @@ export default function OwnerDashboardPage() {
                       type="text"
                       value={profileAddress}
                       onChange={(e) => setProfileAddress(e.target.value)}
-                      className="w-full rounded-xl border border-cream-300 p-2.5 text-sm outline-none focus:border-forest-600"
+                      className="w-full rounded-xl border border-cream-300 p-2.5 text-sm outline-none focus:border-accent-600"
                     />
                   </div>
 
@@ -889,7 +889,7 @@ export default function OwnerDashboardPage() {
                         type="time"
                         value={profileOpenTime}
                         onChange={(e) => setProfileOpenTime(e.target.value)}
-                        className="w-full rounded-xl border border-cream-300 p-2.5 text-sm outline-none focus:border-forest-600"
+                        className="w-full rounded-xl border border-cream-300 p-2.5 text-sm outline-none focus:border-accent-600"
                       />
                     </div>
                     <div>
@@ -901,7 +901,7 @@ export default function OwnerDashboardPage() {
                         type="time"
                         value={profileCloseTime}
                         onChange={(e) => setProfileCloseTime(e.target.value)}
-                        className="w-full rounded-xl border border-cream-300 p-2.5 text-sm outline-none focus:border-forest-600"
+                        className="w-full rounded-xl border border-cream-300 p-2.5 text-sm outline-none focus:border-accent-600"
                       />
                     </div>
                   </div>
@@ -909,7 +909,7 @@ export default function OwnerDashboardPage() {
                   <div className="pt-4">
                     <button
                       type="submit"
-                      className="rounded-full bg-forest-600 px-7 py-2.5 text-xs font-bold text-white shadow-sm hover:bg-forest-700"
+                      className="rounded-full bg-accent-600 px-7 py-2.5 text-xs font-bold text-white shadow-sm hover:bg-accent-700"
                     >
                       Save Profile Changes
                     </button>
@@ -931,7 +931,7 @@ export default function OwnerDashboardPage() {
                   <button
                     type="button"
                     onClick={() => openAddDishModal()}
-                    className="inline-flex items-center gap-1.5 rounded-full bg-forest-600 px-5 py-2.5 text-xs font-bold text-white shadow-sm hover:bg-forest-700"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-accent-600 px-5 py-2.5 text-xs font-bold text-white shadow-sm hover:bg-accent-700"
                   >
                     <Plus size={15} />
                     Add New Dish
@@ -948,7 +948,7 @@ export default function OwnerDashboardPage() {
                         onClick={() => setSelectedMenuCat(cat)}
                         className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition ${
                           selectedMenuCat === cat
-                            ? 'bg-forest-600 text-white shadow-xs'
+                            ? 'bg-accent-600 text-white shadow-xs'
                             : 'border border-cream-300 bg-white text-ink-700 hover:bg-cream-100'
                         }`}
                       >
@@ -963,7 +963,7 @@ export default function OwnerDashboardPage() {
                       placeholder="Filter dishes..."
                       value={searchDish}
                       onChange={(e) => setSearchDish(e.target.value)}
-                      className="w-full sm:w-48 rounded-xl border border-cream-300 bg-white px-3 py-1.5 text-xs text-ink-900 outline-none focus:border-forest-600"
+                      className="w-full sm:w-48 rounded-xl border border-cream-300 bg-white px-3 py-1.5 text-xs text-ink-900 outline-none focus:border-accent-600"
                     />
                   </div>
                 </div>
@@ -982,7 +982,7 @@ export default function OwnerDashboardPage() {
                       <div>
                         <div className="flex items-start justify-between gap-2">
                           <h4 className="text-sm font-bold text-ink-900">{dish.name}</h4>
-                          <span className="font-display font-extrabold text-forest-700 text-sm">
+                          <span className="font-display font-extrabold text-accent-700 text-sm">
                             ₹{dish.price}
                           </span>
                         </div>
@@ -1056,7 +1056,7 @@ export default function OwnerDashboardPage() {
                               showToast('Reset to current browser origin');
                             }
                           }}
-                          className="text-[11px] font-bold text-forest-700 hover:text-forest-800 underline"
+                          className="text-[11px] font-bold text-accent-700 hover:text-accent-800 underline"
                         >
                           Use Current Origin
                         </button>
@@ -1067,14 +1067,14 @@ export default function OwnerDashboardPage() {
                         value={customQrBaseUrl}
                         onChange={(e) => setCustomQrBaseUrl(e.target.value)}
                         placeholder="https://gorakhpur-food-guide.vercel.app"
-                        className="mt-1 w-full rounded-xl border border-cream-300 bg-white px-3 py-1.5 text-xs text-ink-900 outline-none focus:border-forest-600"
+                        className="mt-1 w-full rounded-xl border border-cream-300 bg-white px-3 py-1.5 text-xs text-ink-900 outline-none focus:border-accent-600"
                       />
                     </div>
 
                     <div className="flex items-center justify-between gap-2 rounded-xl bg-white p-2.5 border border-cream-200">
                       <div className="truncate text-[11px] text-ink-600">
                         <span className="font-bold text-ink-900 block">Active QR Target:</span>
-                        <span className="text-forest-700 font-mono text-[10px] truncate block" title={qrUrl}>
+                        <span className="text-accent-700 font-mono text-[10px] truncate block" title={qrUrl}>
                           {qrUrl}
                         </span>
                       </div>
@@ -1082,7 +1082,7 @@ export default function OwnerDashboardPage() {
                         href={qrUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex shrink-0 items-center gap-1 rounded-lg bg-forest-100 px-2.5 py-1 text-[11px] font-bold text-forest-800 hover:bg-forest-200"
+                        className="inline-flex shrink-0 items-center gap-1 rounded-lg bg-accent-100 px-2.5 py-1 text-[11px] font-bold text-accent-800 hover:bg-accent-200"
                       >
                         <ExternalLink size={12} />
                         Test Link
@@ -1117,7 +1117,7 @@ export default function OwnerDashboardPage() {
                           onClick={() => setTableSelection(tabVal)}
                           className={`rounded-xl px-3 py-1.5 text-xs font-bold transition ${
                             tableSelection === tabVal
-                              ? 'bg-forest-600 text-white shadow-xs'
+                              ? 'bg-accent-600 text-white shadow-xs'
                               : 'bg-white border border-cream-300 text-ink-800 hover:bg-cream-100'
                           }`}
                         >
@@ -1152,11 +1152,11 @@ export default function OwnerDashboardPage() {
                     <h3 className="text-xl font-bold text-ink-900">Table Standee Preview</h3>
                     <p className="text-xs text-ink-500">What your dining guests will see on the table.</p>
 
-                    <div className="standee-print-card mt-6 mx-auto max-w-xs rounded-3xl border-4 border-forest-800 bg-white p-6 text-center shadow-lg">
-                      <div className="font-display font-extrabold text-forest-700 text-lg">Gorakhpur Food Guide</div>
+                    <div className="standee-print-card mt-6 mx-auto max-w-xs rounded-3xl border-4 border-ink-900 bg-white p-6 text-center shadow-lg">
+                      <div className="font-display font-extrabold text-accent-700 text-lg">Gorakhpur Food Guide</div>
                       <h4 className="mt-2 text-base font-bold text-ink-900">{restaurant.name}</h4>
                       <div className="mt-1">
-                        <span className="inline-block rounded-full bg-forest-100 px-3 py-0.5 text-xs font-bold text-forest-800">
+                        <span className="inline-block rounded-full bg-accent-100 px-3 py-0.5 text-xs font-bold text-accent-800">
                           {tableSelection === 'counter' ? 'Billing Counter' : `Table ${tableSelection}`}
                         </span>
                       </div>
@@ -1182,7 +1182,7 @@ export default function OwnerDashboardPage() {
                     <button
                       type="button"
                       onClick={() => window.print()}
-                      className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-forest-600 py-3 text-xs font-bold text-white shadow-md hover:bg-forest-700"
+                      className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-accent-600 py-3 text-xs font-bold text-white shadow-md hover:bg-accent-700"
                     >
                       <Printer size={15} />
                       Print Selected Standee
@@ -1190,7 +1190,7 @@ export default function OwnerDashboardPage() {
                     <button
                       type="button"
                       onClick={() => setIsBatchPrintModalOpen(true)}
-                      className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-forest-600 bg-forest-50 py-3 text-xs font-bold text-forest-800 shadow-sm hover:bg-forest-100"
+                      className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-accent-600 bg-accent-50 py-3 text-xs font-bold text-accent-800 shadow-sm hover:bg-accent-100"
                     >
                       <QrCode size={15} />
                       Batch Print Tables 1–10
@@ -1251,7 +1251,7 @@ export default function OwnerDashboardPage() {
                                 className="size-9 rounded-full object-cover ring-1 ring-ink-900/10 shadow-xs"
                               />
                             ) : (
-                              <div className="flex size-9 items-center justify-center rounded-full bg-cream-100 font-bold text-forest-800">
+                              <div className="flex size-9 items-center justify-center rounded-full bg-cream-100 font-bold text-accent-800">
                                 {rev.userName[0]?.toUpperCase()}
                               </div>
                             )}
@@ -1290,12 +1290,12 @@ export default function OwnerDashboardPage() {
 
                         {/* Owner Reply Section */}
                         {rev.ownerReply ? (
-                          <div className="mt-3.5 rounded-2xl border border-forest-200 bg-forest-50 p-3 text-xs">
-                            <div className="flex items-center justify-between font-bold text-forest-900">
+                          <div className="mt-3.5 rounded-2xl border border-cream-300 bg-accent-50 p-3 text-xs">
+                            <div className="flex items-center justify-between font-bold text-ink-900">
                               <span>Your Management Reply:</span>
-                              <span className="text-[10px] text-forest-600">{rev.ownerReply.date}</span>
+                              <span className="text-[10px] text-accent-700">{rev.ownerReply.date}</span>
                             </div>
-                            <p className="mt-1 text-forest-800">{rev.ownerReply.text}</p>
+                            <p className="mt-1 text-accent-800">{rev.ownerReply.text}</p>
                           </div>
                         ) : (
                           <div className="mt-3 pt-2 border-t border-cream-100">
@@ -1305,7 +1305,7 @@ export default function OwnerDashboardPage() {
                                 setReplyTargetReview(rev);
                                 setReplyText('');
                               }}
-                              className="inline-flex items-center gap-1.5 text-xs font-bold text-forest-700 hover:text-forest-800"
+                              className="inline-flex items-center gap-1.5 text-xs font-bold text-accent-700 hover:text-accent-800"
                             >
                               <MessageSquareReply size={14} />
                               Reply to this review
@@ -1329,7 +1329,7 @@ export default function OwnerDashboardPage() {
                 <div className="grid gap-6 sm:grid-cols-3">
                   <div className="rounded-3xl border border-cream-300 bg-white p-5 shadow-xs">
                     <span className="text-xs font-bold text-ink-500">Satisfaction Ratio</span>
-                    <div className="mt-2 text-2xl font-bold text-forest-700">88% Positive</div>
+                    <div className="mt-2 text-2xl font-bold text-accent-700">88% Positive</div>
                     <p className="mt-1 text-[11px] text-ink-500">Based on food, service & cleanliness</p>
                   </div>
                   <div className="rounded-3xl border border-cream-300 bg-white p-5 shadow-xs">
@@ -1414,7 +1414,7 @@ export default function OwnerDashboardPage() {
                     <button
                       type="button"
                       onClick={() => showToast('Action marked as scheduled for next staff roster')}
-                      className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-forest-600 px-4 py-2 text-xs font-bold text-white hover:bg-forest-700"
+                      className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-accent-600 px-4 py-2 text-xs font-bold text-white hover:bg-accent-700"
                     >
                       <Check size={14} /> Mark as In Progress
                     </button>
@@ -1433,7 +1433,7 @@ export default function OwnerDashboardPage() {
                     <button
                       type="button"
                       onClick={() => showToast('Promotional dish banner enabled on digital menu')}
-                      className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-forest-600 px-4 py-2 text-xs font-bold text-white hover:bg-forest-700"
+                      className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-accent-600 px-4 py-2 text-xs font-bold text-white hover:bg-accent-700"
                     >
                       <Check size={14} /> Promote on Standee
                     </button>
@@ -1467,7 +1467,7 @@ export default function OwnerDashboardPage() {
                       {competitorsList.map((c, i) => (
                         <tr
                           key={c.name}
-                          className={c.you ? 'bg-forest-50/80 font-bold text-forest-900' : 'text-ink-700'}
+                          className={c.you ? 'bg-accent-50/80 font-bold text-ink-900' : 'text-ink-700'}
                         >
                           <td className="py-3.5 pr-4">#{i + 1}</td>
                           <td className="py-3.5 pr-4">{c.name}</td>
@@ -1496,7 +1496,7 @@ export default function OwnerDashboardPage() {
                       <h4 className="text-xs font-bold text-ink-900">Instant Review Notifications</h4>
                       <p className="text-[11px] text-ink-500">Receive alerts when guests post reviews</p>
                     </div>
-                    <input type="checkbox" defaultChecked className="size-4 accent-forest-600" />
+                    <input type="checkbox" defaultChecked className="size-4 accent-accent-600" />
                   </div>
 
                   <div className="flex items-center justify-between rounded-2xl border border-cream-200 p-4">
@@ -1504,26 +1504,26 @@ export default function OwnerDashboardPage() {
                       <h4 className="text-xs font-bold text-ink-900">Weekly Performance Digest</h4>
                       <p className="text-[11px] text-ink-500">Weekly email with AI sentiment summary</p>
                     </div>
-                    <input type="checkbox" defaultChecked className="size-4 accent-forest-600" />
+                    <input type="checkbox" defaultChecked className="size-4 accent-accent-600" />
                   </div>
 
                   {/* Supabase PostgreSQL Card */}
-                  <div className="rounded-2xl border border-forest-200 bg-forest-50/60 p-4">
+                  <div className="rounded-2xl border border-cream-300 bg-accent-50/60 p-4">
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 text-forest-800">
+                      <div className="flex items-center gap-2 text-accent-800">
                         <Database size={18} />
                         <h4 className="text-xs font-bold">Supabase PostgreSQL</h4>
                       </div>
-                      <span className="inline-flex items-center gap-1 rounded-full bg-forest-100 px-2 py-0.5 text-[10px] font-bold text-forest-800">
+                      <span className="inline-flex items-center gap-1 rounded-full bg-accent-100 px-2 py-0.5 text-[10px] font-bold text-accent-800">
                         <Cloud size={10} />
                         SDK Active
                       </span>
                     </div>
-                    <p className="mt-1.5 text-[11px] leading-relaxed text-forest-900/80">
+                    <p className="mt-1.5 text-[11px] leading-relaxed text-ink-800">
                       Connected to Supabase database tables for real-time reviews, menu updates, and diner feedback sync.
                     </p>
-                    <div className="mt-3 flex items-center justify-between pt-2 border-t border-forest-200/60">
-                      <span className="text-[10px] font-semibold text-forest-700">
+                    <div className="mt-3 flex items-center justify-between pt-2 border-t border-cream-200">
+                      <span className="text-[10px] font-semibold text-accent-700">
                         Tables: restaurants, reviews, inquiries
                       </span>
                       <button
@@ -1540,7 +1540,7 @@ export default function OwnerDashboardPage() {
                             setIsSyncingDatabase(false);
                           }
                         }}
-                        className="inline-flex items-center gap-1.5 rounded-lg bg-forest-600 px-3 py-1.5 text-xs font-bold text-white shadow-2xs hover:bg-forest-700 disabled:opacity-60 transition"
+                        className="inline-flex items-center gap-1.5 rounded-lg bg-accent-600 px-3 py-1.5 text-xs font-bold text-white shadow-2xs hover:bg-accent-700 disabled:opacity-60 transition"
                       >
                         <RefreshCw size={12} className={isSyncingDatabase ? 'animate-spin' : ''} />
                         {isSyncingDatabase ? 'Syncing...' : 'Sync to Supabase'}
@@ -1588,7 +1588,7 @@ export default function OwnerDashboardPage() {
                   value={dishName}
                   onChange={(e) => setDishName(e.target.value)}
                   placeholder="e.g. Saffron Mutton Rogan Josh"
-                  className="w-full rounded-xl border border-cream-300 p-2.5 text-xs outline-none focus:border-forest-600"
+                  className="w-full rounded-xl border border-cream-300 p-2.5 text-xs outline-none focus:border-accent-600"
                 />
               </div>
 
@@ -1600,7 +1600,7 @@ export default function OwnerDashboardPage() {
                     required
                     value={dishPrice}
                     onChange={(e) => setDishPrice(Number(e.target.value))}
-                    className="w-full rounded-xl border border-cream-300 p-2.5 text-xs outline-none focus:border-forest-600"
+                    className="w-full rounded-xl border border-cream-300 p-2.5 text-xs outline-none focus:border-accent-600"
                   />
                 </div>
                 <div>
@@ -1608,7 +1608,7 @@ export default function OwnerDashboardPage() {
                   <select
                     value={dishCategory}
                     onChange={(e) => setDishCategory(e.target.value)}
-                    className="w-full rounded-xl border border-cream-300 p-2.5 text-xs outline-none focus:border-forest-600 bg-white"
+                    className="w-full rounded-xl border border-cream-300 p-2.5 text-xs outline-none focus:border-accent-600 bg-white"
                   >
                     {MENU_CATEGORIES.filter((c) => c !== 'All').map((c) => (
                       <option key={c}>{c}</option>
@@ -1650,7 +1650,7 @@ export default function OwnerDashboardPage() {
                   value={dishDesc}
                   onChange={(e) => setDishDesc(e.target.value)}
                   placeholder="Ingredients and culinary style..."
-                  className="w-full rounded-xl border border-cream-300 p-2.5 text-xs outline-none focus:border-forest-600"
+                  className="w-full rounded-xl border border-cream-300 p-2.5 text-xs outline-none focus:border-accent-600"
                 />
               </div>
 
@@ -1664,7 +1664,7 @@ export default function OwnerDashboardPage() {
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 rounded-xl bg-forest-600 py-2.5 text-xs font-bold text-white hover:bg-forest-700"
+                  className="flex-1 rounded-xl bg-accent-600 py-2.5 text-xs font-bold text-white hover:bg-accent-700"
                 >
                   {editingDish ? 'Save Changes' : 'Add Dish'}
                 </button>
@@ -1699,7 +1699,7 @@ export default function OwnerDashboardPage() {
                   value={replyText}
                   onChange={(e) => setReplyText(e.target.value)}
                   placeholder="Thank you for visiting! We appreciate your feedback..."
-                  className="w-full rounded-xl border border-cream-300 p-2.5 text-xs outline-none focus:border-forest-600"
+                  className="w-full rounded-xl border border-cream-300 p-2.5 text-xs outline-none focus:border-accent-600"
                 />
               </div>
 
@@ -1713,7 +1713,7 @@ export default function OwnerDashboardPage() {
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 rounded-xl bg-forest-600 py-2.5 text-xs font-bold text-white hover:bg-forest-700"
+                  className="flex-1 rounded-xl bg-accent-600 py-2.5 text-xs font-bold text-white hover:bg-accent-700"
                 >
                   Publish Reply
                 </button>
@@ -1745,7 +1745,7 @@ export default function OwnerDashboardPage() {
                 <button
                   type="button"
                   onClick={() => window.print()}
-                  className="inline-flex items-center gap-1.5 rounded-full bg-forest-600 px-5 py-2 text-xs font-bold text-white shadow-sm hover:bg-forest-700 cursor-pointer"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-accent-600 px-5 py-2 text-xs font-bold text-white shadow-sm hover:bg-accent-700 cursor-pointer"
                 >
                   <Printer size={15} />
                   Print All 11 Cards
@@ -1774,14 +1774,14 @@ export default function OwnerDashboardPage() {
                 return (
                   <div
                     key={tbl}
-                    className="standee-print-card rounded-3xl border-4 border-forest-800 bg-white p-5 text-center shadow-sm"
+                    className="standee-print-card rounded-3xl border-4 border-ink-900 bg-white p-5 text-center shadow-sm"
                   >
-                    <div className="font-display font-extrabold text-forest-700 text-xs">
+                    <div className="font-display font-extrabold text-accent-700 text-xs">
                       Gorakhpur Food Guide
                     </div>
                     <h4 className="mt-1 text-sm font-bold text-ink-900 truncate">{restaurant.name}</h4>
                     <div className="mt-1">
-                      <span className="inline-block rounded-full bg-forest-100 px-3 py-0.5 text-[11px] font-bold text-forest-800">
+                      <span className="inline-block rounded-full bg-accent-100 px-3 py-0.5 text-[11px] font-bold text-accent-800">
                         {tbl === 'Billing Counter' ? 'Billing Counter' : `Table ${tbl}`}
                       </span>
                     </div>

@@ -32,12 +32,12 @@ export default function PrivacyPage() {
 
           {/* Key Principles Banner */}
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
-            <div className="rounded-2xl border border-forest-200 bg-forest-50/60 p-4">
-              <div className="flex items-center gap-2 text-forest-700 font-bold text-sm">
+            <div className="rounded-2xl border border-amber-200 bg-amber-50/60 p-4">
+              <div className="flex items-center gap-2 text-amber-800 font-bold text-sm">
                 <Lock size={18} />
                 <span>Zero Data Selling</span>
               </div>
-              <p className="mt-1 text-xs text-forest-900/80 leading-relaxed">
+              <p className="mt-1 text-xs text-amber-950/80 leading-relaxed">
                 We never monetize or sell personal dining information to external data brokers or advertisers.
               </p>
             </div>
@@ -68,7 +68,7 @@ export default function PrivacyPage() {
             {/* Section 1 */}
             <section className="space-y-3">
               <div className="flex items-center gap-2.5 text-ink-900">
-                <span className="flex size-8 items-center justify-center rounded-xl bg-forest-100 text-xs font-bold text-forest-800">
+                <span className="flex size-8 items-center justify-center rounded-xl bg-accent-100 text-xs font-bold text-accent-800">
                   1
                 </span>
                 <h2 className="text-xl font-bold">Information We Collect</h2>
@@ -92,7 +92,7 @@ export default function PrivacyPage() {
             {/* Section 2 */}
             <section className="space-y-3">
               <div className="flex items-center gap-2.5 text-ink-900">
-                <span className="flex size-8 items-center justify-center rounded-xl bg-forest-100 text-xs font-bold text-forest-800">
+                <span className="flex size-8 items-center justify-center rounded-xl bg-accent-100 text-xs font-bold text-accent-800">
                   2
                 </span>
                 <h2 className="text-xl font-bold">How We Use Your Information</h2>
@@ -111,7 +111,7 @@ export default function PrivacyPage() {
             {/* Section 3 */}
             <section className="space-y-3">
               <div className="flex items-center gap-2.5 text-ink-900">
-                <span className="flex size-8 items-center justify-center rounded-xl bg-forest-100 text-xs font-bold text-forest-800">
+                <span className="flex size-8 items-center justify-center rounded-xl bg-accent-100 text-xs font-bold text-accent-800">
                   3
                 </span>
                 <h2 className="text-xl font-bold">Table QR Code Review Experience</h2>
@@ -124,7 +124,7 @@ export default function PrivacyPage() {
             {/* Section 4 */}
             <section className="space-y-3">
               <div className="flex items-center gap-2.5 text-ink-900">
-                <span className="flex size-8 items-center justify-center rounded-xl bg-forest-100 text-xs font-bold text-forest-800">
+                <span className="flex size-8 items-center justify-center rounded-xl bg-accent-100 text-xs font-bold text-accent-800">
                   4
                 </span>
                 <h2 className="text-xl font-bold">Local Storage & Cookies</h2>
@@ -137,7 +137,7 @@ export default function PrivacyPage() {
             {/* Section 5 */}
             <section className="space-y-3">
               <div className="flex items-center gap-2.5 text-ink-900">
-                <span className="flex size-8 items-center justify-center rounded-xl bg-forest-100 text-xs font-bold text-forest-800">
+                <span className="flex size-8 items-center justify-center rounded-xl bg-accent-100 text-xs font-bold text-accent-800">
                   5
                 </span>
                 <h2 className="text-xl font-bold">Data Sharing & Disclosure</h2>
@@ -161,7 +161,7 @@ export default function PrivacyPage() {
             {/* Section 6 */}
             <section className="space-y-3">
               <div className="flex items-center gap-2.5 text-ink-900">
-                <span className="flex size-8 items-center justify-center rounded-xl bg-forest-100 text-xs font-bold text-forest-800">
+                <span className="flex size-8 items-center justify-center rounded-xl bg-accent-100 text-xs font-bold text-accent-800">
                   6
                 </span>
                 <h2 className="text-xl font-bold">Your Rights & Choices</h2>
@@ -170,7 +170,7 @@ export default function PrivacyPage() {
                 As a valued member of the Gorakhpur dining community, you retain full rights over your data:
               </p>
               <ul className="list-disc pl-5 space-y-2 text-sm leading-relaxed">
-                <li>Edit or permanently delete your customer reviews through the <Link to={ROUTES.myReviews} className="text-forest-700 font-semibold hover:underline">My Reviews</Link> dashboard.</li>
+                <li>Edit or permanently delete your customer reviews through the <Link to={ROUTES.myReviews} className="text-accent-700 font-semibold hover:underline">My Reviews</Link> dashboard.</li>
                 <li>Request removal of personal data by contacting our support inbox.</li>
                 <li>Opt out of owner review notifications and weekly email digests.</li>
               </ul>
@@ -179,7 +179,7 @@ export default function PrivacyPage() {
             {/* Section 7 */}
             <section className="space-y-3">
               <div className="flex items-center gap-2.5 text-ink-900">
-                <span className="flex size-8 items-center justify-center rounded-xl bg-forest-100 text-xs font-bold text-forest-800">
+                <span className="flex size-8 items-center justify-center rounded-xl bg-accent-100 text-xs font-bold text-accent-800">
                   7
                 </span>
                 <h2 className="text-xl font-bold">Contact Our Privacy Team</h2>
@@ -189,7 +189,7 @@ export default function PrivacyPage() {
               </p>
               <div className="mt-3 rounded-2xl bg-cream-50 p-4 text-xs sm:text-sm space-y-1 border border-cream-200">
                 <p><strong className="text-ink-900">Data Protection Officer:</strong> Gorakhpur Food Guide Team</p>
-                <p><strong className="text-ink-900">Email:</strong> <a href="mailto:privacy@gorakhpurfoodguide.in" className="text-forest-700 hover:underline">privacy@gorakhpurfoodguide.in</a></p>
+                <p><strong className="text-ink-900">Email:</strong> <a href="mailto:privacy@gorakhpurfoodguide.in" className="text-accent-700 hover:underline">privacy@gorakhpurfoodguide.in</a></p>
                 <p><strong className="text-ink-900">Office:</strong> Civil Lines, Gorakhpur, Uttar Pradesh 273001</p>
               </div>
             </section>
@@ -199,7 +199,7 @@ export default function PrivacyPage() {
           <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-cream-300 pt-6">
             <Link
               to={ROUTES.terms}
-              className="inline-flex items-center gap-1.5 text-sm font-bold text-forest-700 hover:text-forest-800"
+              className="inline-flex items-center gap-1.5 text-sm font-bold text-accent-700 hover:text-accent-800"
             >
               Read Terms of Use
               <ArrowUpRight size={16} />

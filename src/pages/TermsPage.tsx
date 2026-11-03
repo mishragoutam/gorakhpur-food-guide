@@ -32,12 +32,12 @@ export default function TermsPage() {
 
           {/* Key Highlights */}
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
-            <div className="rounded-2xl border border-forest-200 bg-forest-50/60 p-4">
-              <div className="flex items-center gap-2 text-forest-700 font-bold text-sm">
+            <div className="rounded-2xl border border-amber-200 bg-amber-50/60 p-4">
+              <div className="flex items-center gap-2 text-amber-800 font-bold text-sm">
                 <CheckCircle size={18} />
                 <span>Authentic Reviews</span>
               </div>
-              <p className="mt-1 text-xs text-forest-900/80 leading-relaxed">
+              <p className="mt-1 text-xs text-amber-950/80 leading-relaxed">
                 Reviews must reflect first-hand dining visits. Spam, paid reviews, and commercial extortion are prohibited.
               </p>
             </div>
@@ -68,7 +68,7 @@ export default function TermsPage() {
             {/* 1. Acceptance */}
             <section className="space-y-3">
               <div className="flex items-center gap-2.5 text-ink-900">
-                <span className="flex size-8 items-center justify-center rounded-xl bg-forest-100 text-xs font-bold text-forest-800">
+                <span className="flex size-8 items-center justify-center rounded-xl bg-accent-100 text-xs font-bold text-accent-800">
                   1
                 </span>
                 <h2 className="text-xl font-bold">Acceptance of Terms</h2>
@@ -81,7 +81,7 @@ export default function TermsPage() {
             {/* 2. Platform Description */}
             <section className="space-y-3">
               <div className="flex items-center gap-2.5 text-ink-900">
-                <span className="flex size-8 items-center justify-center rounded-xl bg-forest-100 text-xs font-bold text-forest-800">
+                <span className="flex size-8 items-center justify-center rounded-xl bg-accent-100 text-xs font-bold text-accent-800">
                   2
                 </span>
                 <h2 className="text-xl font-bold">Platform Purpose & Scope</h2>
@@ -94,7 +94,7 @@ export default function TermsPage() {
             {/* 3. Diner Reviews & Code of Conduct */}
             <section className="space-y-3">
               <div className="flex items-center gap-2.5 text-ink-900">
-                <span className="flex size-8 items-center justify-center rounded-xl bg-forest-100 text-xs font-bold text-forest-800">
+                <span className="flex size-8 items-center justify-center rounded-xl bg-accent-100 text-xs font-bold text-accent-800">
                   3
                 </span>
                 <h2 className="text-xl font-bold">Diner Reviews & Community Guidelines</h2>
@@ -113,7 +113,7 @@ export default function TermsPage() {
             {/* 4. Restaurant Partner Standards */}
             <section className="space-y-3">
               <div className="flex items-center gap-2.5 text-ink-900">
-                <span className="flex size-8 items-center justify-center rounded-xl bg-forest-100 text-xs font-bold text-forest-800">
+                <span className="flex size-8 items-center justify-center rounded-xl bg-accent-100 text-xs font-bold text-accent-800">
                   4
                 </span>
                 <h2 className="text-xl font-bold">Restaurant Partner Obligations</h2>
@@ -132,7 +132,7 @@ export default function TermsPage() {
             {/* 5. Intellectual Property */}
             <section className="space-y-3">
               <div className="flex items-center gap-2.5 text-ink-900">
-                <span className="flex size-8 items-center justify-center rounded-xl bg-forest-100 text-xs font-bold text-forest-800">
+                <span className="flex size-8 items-center justify-center rounded-xl bg-accent-100 text-xs font-bold text-accent-800">
                   5
                 </span>
                 <h2 className="text-xl font-bold">Intellectual Property Rights</h2>
@@ -145,7 +145,7 @@ export default function TermsPage() {
             {/* 6. Disclaimers & Food Safety */}
             <section className="space-y-3">
               <div className="flex items-center gap-2.5 text-ink-900">
-                <span className="flex size-8 items-center justify-center rounded-xl bg-forest-100 text-xs font-bold text-forest-800">
+                <span className="flex size-8 items-center justify-center rounded-xl bg-accent-100 text-xs font-bold text-accent-800">
                   6
                 </span>
                 <h2 className="text-xl font-bold">Disclaimer of Warranties & Food Safety</h2>
@@ -163,7 +163,7 @@ export default function TermsPage() {
             {/* 7. Limitation of Liability */}
             <section className="space-y-3">
               <div className="flex items-center gap-2.5 text-ink-900">
-                <span className="flex size-8 items-center justify-center rounded-xl bg-forest-100 text-xs font-bold text-forest-800">
+                <span className="flex size-8 items-center justify-center rounded-xl bg-accent-100 text-xs font-bold text-accent-800">
                   7
                 </span>
                 <h2 className="text-xl font-bold">Limitation of Liability</h2>
@@ -176,7 +176,7 @@ export default function TermsPage() {
             {/* 8. Governing Law */}
             <section className="space-y-3">
               <div className="flex items-center gap-2.5 text-ink-900">
-                <span className="flex size-8 items-center justify-center rounded-xl bg-forest-100 text-xs font-bold text-forest-800">
+                <span className="flex size-8 items-center justify-center rounded-xl bg-accent-100 text-xs font-bold text-accent-800">
                   8
                 </span>
                 <h2 className="text-xl font-bold">Governing Law & Jurisdiction</h2>
@@ -189,7 +189,7 @@ export default function TermsPage() {
             {/* 9. Contact */}
             <section className="space-y-3">
               <div className="flex items-center gap-2.5 text-ink-900">
-                <span className="flex size-8 items-center justify-center rounded-xl bg-forest-100 text-xs font-bold text-forest-800">
+                <span className="flex size-8 items-center justify-center rounded-xl bg-accent-100 text-xs font-bold text-accent-800">
                   9
                 </span>
                 <h2 className="text-xl font-bold">Questions Regarding Terms</h2>
@@ -199,7 +199,7 @@ export default function TermsPage() {
               </p>
               <div className="mt-3 rounded-2xl bg-cream-50 p-4 text-xs sm:text-sm space-y-1 border border-cream-200">
                 <p><strong className="text-ink-900">Legal Department:</strong> Gorakhpur Food Guide</p>
-                <p><strong className="text-ink-900">Email:</strong> <a href="mailto:legal@gorakhpurfoodguide.in" className="text-forest-700 hover:underline">legal@gorakhpurfoodguide.in</a></p>
+                <p><strong className="text-ink-900">Email:</strong> <a href="mailto:legal@gorakhpurfoodguide.in" className="text-accent-700 hover:underline">legal@gorakhpurfoodguide.in</a></p>
                 <p><strong className="text-ink-900">Address:</strong> Civil Lines, Gorakhpur, Uttar Pradesh 273001</p>
               </div>
             </section>
@@ -209,7 +209,7 @@ export default function TermsPage() {
           <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-cream-300 pt-6">
             <Link
               to={ROUTES.privacy}
-              className="inline-flex items-center gap-1.5 text-sm font-bold text-forest-700 hover:text-forest-800"
+              className="inline-flex items-center gap-1.5 text-sm font-bold text-accent-700 hover:text-accent-800"
             >
               Read Privacy Policy
               <ArrowUpRight size={16} />

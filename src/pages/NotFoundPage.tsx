@@ -17,7 +17,7 @@ export default function NotFoundPage() {
             <span className="grid size-20 place-items-center rounded-3xl bg-accent-50 text-accent-700 ring-1 ring-accent-200 shadow-sm">
               <SearchX aria-hidden="true" size={38} />
             </span>
-            <span className="absolute -bottom-2 -right-2 flex size-8 items-center justify-center rounded-full bg-forest-600 text-white shadow-md">
+            <span className="absolute -bottom-2 -right-2 flex size-8 items-center justify-center rounded-full bg-accent-600 text-white shadow-md">
               <Utensils size={14} />
             </span>
           </div>
@@ -42,7 +42,7 @@ export default function NotFoundPage() {
                 <Link
                   key={tag}
                   to={`${ROUTES.home}#search`}
-                  className="rounded-full bg-white px-2.5 py-1 font-semibold text-ink-800 border border-cream-300 hover:border-forest-600 transition"
+                  className="rounded-full bg-white px-2.5 py-1 font-semibold text-ink-800 border border-cream-300 hover:border-accent-600 transition"
                 >
                   {tag}
                 </Link>

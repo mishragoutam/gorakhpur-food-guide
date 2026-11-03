@@ -139,7 +139,7 @@ export default function OwnerRegisterPage() {
           <div className="mb-6 flex flex-wrap items-center justify-between gap-3 border-b border-cream-200 pb-5">
             <div>
               <div className="flex items-center gap-2">
-                <span className="flex size-9 items-center justify-center rounded-xl bg-forest-100 text-forest-700">
+                <span className="flex size-9 items-center justify-center rounded-xl bg-accent-100 text-accent-700">
                   <Store size={20} />
                 </span>
                 <span className="rounded-full bg-accent-100 px-3 py-0.5 text-xs font-bold text-accent-800">
@@ -155,7 +155,7 @@ export default function OwnerRegisterPage() {
             </div>
             <Link
               to={ROUTES.ownerLogin}
-              className="text-xs font-bold text-forest-700 hover:text-forest-800"
+              className="text-xs font-bold text-accent-700 hover:text-accent-800"
             >
               Already registered? Owner login
             </Link>
@@ -173,7 +173,7 @@ export default function OwnerRegisterPage() {
                   value={restaurantName}
                   onChange={(e) => setRestaurantName(e.target.value)}
                   placeholder="e.g. Royal Awadh Rasoi"
-                  className="w-full rounded-xl border border-cream-300 px-3.5 py-2.5 text-sm text-ink-900 outline-none focus:border-forest-600 focus:ring-2 focus:ring-forest-100"
+                  className="w-full rounded-xl border border-cream-300 px-3.5 py-2.5 text-sm text-ink-900 outline-none focus:border-accent-600 focus:ring-2 focus:ring-accent-100"
                 />
               </div>
 
@@ -187,7 +187,7 @@ export default function OwnerRegisterPage() {
                   value={ownerName}
                   onChange={(e) => setOwnerName(e.target.value)}
                   placeholder="e.g. Ramesh Srivastava"
-                  className="w-full rounded-xl border border-cream-300 px-3.5 py-2.5 text-sm text-ink-900 outline-none focus:border-forest-600 focus:ring-2 focus:ring-forest-100"
+                  className="w-full rounded-xl border border-cream-300 px-3.5 py-2.5 text-sm text-ink-900 outline-none focus:border-accent-600 focus:ring-2 focus:ring-accent-100"
                 />
               </div>
             </div>
@@ -203,7 +203,7 @@ export default function OwnerRegisterPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="owner@restaurant.com"
-                  className="w-full rounded-xl border border-cream-300 px-3.5 py-2.5 text-sm text-ink-900 outline-none focus:border-forest-600 focus:ring-2 focus:ring-forest-100"
+                  className="w-full rounded-xl border border-cream-300 px-3.5 py-2.5 text-sm text-ink-900 outline-none focus:border-accent-600 focus:ring-2 focus:ring-accent-100"
                 />
               </div>
 
@@ -217,7 +217,7 @@ export default function OwnerRegisterPage() {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="+91 98380 12345"
-                  className="w-full rounded-xl border border-cream-300 px-3.5 py-2.5 text-sm text-ink-900 outline-none focus:border-forest-600 focus:ring-2 focus:ring-forest-100"
+                  className="w-full rounded-xl border border-cream-300 px-3.5 py-2.5 text-sm text-ink-900 outline-none focus:border-accent-600 focus:ring-2 focus:ring-accent-100"
                 />
               </div>
             </div>
@@ -231,7 +231,7 @@ export default function OwnerRegisterPage() {
                   id="reg-cuisine"
                   value={cuisine}
                   onChange={(e) => setCuisine(e.target.value)}
-                  className="w-full rounded-xl border border-cream-300 px-3.5 py-2.5 text-sm text-ink-900 outline-none focus:border-forest-600 focus:ring-2 focus:ring-forest-100 bg-white"
+                  className="w-full rounded-xl border border-cream-300 px-3.5 py-2.5 text-sm text-ink-900 outline-none focus:border-accent-600 focus:ring-2 focus:ring-accent-100 bg-white"
                 >
                   <option>North Indian</option>
                   <option>Mughlai</option>
@@ -251,7 +251,7 @@ export default function OwnerRegisterPage() {
                   id="reg-area"
                   value={area}
                   onChange={(e) => setArea(e.target.value)}
-                  className="w-full rounded-xl border border-cream-300 px-3.5 py-2.5 text-sm text-ink-900 outline-none focus:border-forest-600 focus:ring-2 focus:ring-forest-100 bg-white"
+                  className="w-full rounded-xl border border-cream-300 px-3.5 py-2.5 text-sm text-ink-900 outline-none focus:border-accent-600 focus:ring-2 focus:ring-accent-100 bg-white"
                 >
                   <option>Golghar</option>
                   <option>Civil Lines</option>
@@ -272,8 +272,7 @@ export default function OwnerRegisterPage() {
               <button
                 type="submit"
                 id="btn-register-restaurant"
-                style={{ backgroundColor: '#2f7d5f', color: '#ffffff' }}
-                className="flex w-full items-center justify-center gap-2 rounded-xl bg-forest-600 px-6 py-3.5 text-sm font-bold text-white shadow-md transition hover:bg-forest-700 active:scale-[0.99] cursor-pointer"
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-accent-600 px-6 py-3.5 text-sm font-bold text-white shadow-md transition hover:bg-accent-700 active:scale-[0.99] cursor-pointer"
               >
                 <Sparkles size={16} />
                 Register Restaurant & Launch Dashboard

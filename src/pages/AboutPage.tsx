@@ -21,7 +21,7 @@ export default function AboutPage() {
       title: 'Table QR Standees',
       description:
         'Guests scan an official RateIt table standee with their camera to view dishes and submit ratings right from their dining table.',
-      color: 'bg-forest-100 text-forest-700',
+      color: 'bg-accent-100 text-accent-700',
     },
     {
       icon: UtensilsCrossed,
@@ -42,7 +42,7 @@ export default function AboutPage() {
       title: 'Authentic & Scam-Free',
       description:
         'Zero pay-for-placement bias. Rankings and average ratings are driven purely by honest diner visits and verified customer feedback.',
-      color: 'bg-emerald-100 text-emerald-700',
+      color: 'bg-amber-100 text-amber-800',
     },
   ];
 
@@ -71,7 +71,7 @@ export default function AboutPage() {
         <div className="mt-12 grid grid-cols-2 gap-4 rounded-3xl border border-cream-300 bg-white p-6 sm:grid-cols-4 sm:p-8 shadow-xs">
           {stats.map((s) => (
             <div key={s.label} className="text-center p-2">
-              <div className="font-display text-3xl sm:text-4xl font-extrabold text-forest-700">
+              <div className="font-display text-3xl sm:text-4xl font-extrabold text-accent-700">
                 {s.value}
               </div>
               <div className="mt-1 text-xs sm:text-sm font-semibold text-ink-600">{s.label}</div>
@@ -91,15 +91,15 @@ export default function AboutPage() {
             <p>
               In recent years, Gorakhpur's dining landscape has flourished with modern lakeside cafes along Ramgarh Taal, artisan bakeries, and bustling multi-cuisine family restaurants. Yet, finding reliable, honest ratings without paid hype remained a challenge.
             </p>
-            <p className="font-medium text-forest-800">
+            <p className="font-medium text-accent-800">
               Gorakhpur Food Guide and RateIt bridge that gap: providing transparent table-side feedback for diners, and intuitive digital tools for local restaurant owners to grow their business.
             </p>
           </div>
 
-          <div className="rounded-3xl border border-cream-300 bg-gradient-to-br from-forest-800 via-forest-700 to-forest-900 p-8 text-white shadow-xl flex flex-col justify-between gap-6">
+          <div className="rounded-3xl border border-cream-300 bg-gradient-to-br from-ink-950 via-ink-900 to-accent-950 p-8 text-white shadow-xl flex flex-col justify-between gap-6">
             <div>
-              <span className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-bold text-emerald-200">
-                <Heart size={14} className="fill-emerald-200" />
+              <span className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-bold text-amber-200">
+                <Heart size={14} className="fill-amber-200" />
                 Community First
               </span>
               <h3 className="mt-4 text-2xl font-bold">Our Foodie Promise</h3>
@@ -110,15 +110,15 @@ export default function AboutPage() {
 
             <div className="space-y-3 border-t border-white/20 pt-4 text-xs sm:text-sm">
               <div className="flex items-center gap-2.5">
-                <span className="size-2 rounded-full bg-emerald-400"></span>
+                <span className="size-2 rounded-full bg-amber-400"></span>
                 <span>100% Free search, filters, and dining guides for everyone</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <span className="size-2 rounded-full bg-emerald-400"></span>
+                <span className="size-2 rounded-full bg-amber-400"></span>
                 <span>No pay-to-rank sponsorship; genuine community-led ratings</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <span className="size-2 rounded-full bg-emerald-400"></span>
+                <span className="size-2 rounded-full bg-amber-400"></span>
                 <span>Direct table feedback that helps chefs maintain quality</span>
               </div>
             </div>
@@ -174,9 +174,9 @@ export default function AboutPage() {
           </div>
 
           {/* Owner CTA */}
-          <div className="rounded-3xl border border-forest-200 bg-forest-50/70 p-8 text-center flex flex-col justify-between items-center">
+          <div className="rounded-3xl border border-cream-300 bg-white p-8 text-center flex flex-col justify-between items-center shadow-xs">
             <div>
-              <div className="mx-auto flex size-12 items-center justify-center rounded-2xl bg-forest-200 text-forest-800">
+              <div className="mx-auto flex size-12 items-center justify-center rounded-2xl bg-accent-100 text-accent-700">
                 <Store size={24} />
               </div>
               <h3 className="mt-4 text-xl font-bold text-ink-900">Own an Eatery in Gorakhpur?</h3>

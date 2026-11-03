@@ -359,7 +359,7 @@ export default function GroupDiningPage() {
       <Container>
         {/* Header Breadcrumbs & Intro */}
         <div className="mx-auto max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-forest-300 bg-forest-50 px-4 py-1.5 text-xs font-bold text-forest-800">
+          <div className="inline-flex items-center gap-2 rounded-full border border-accent-200 bg-accent-50 px-4 py-1.5 text-xs font-bold text-accent-800">
             <Users size={15} />
             <span>Decide Together • ग्रुप डाइनिंग वोटिंग</span>
           </div>
@@ -401,7 +401,7 @@ export default function GroupDiningPage() {
                     value={newHostName}
                     onChange={(e) => setNewHostName(e.target.value)}
                     placeholder="e.g. Rahul or Priya"
-                    className="w-full rounded-2xl border border-cream-300 bg-cream-50/50 px-4 py-3 text-sm text-ink-900 focus:border-forest-600 focus:bg-white focus:outline-hidden"
+                    className="w-full rounded-2xl border border-cream-300 bg-cream-50/50 px-4 py-3 text-sm text-ink-900 focus:border-accent-600 focus:bg-white focus:outline-hidden"
                   />
                 </div>
 
@@ -415,7 +415,7 @@ export default function GroupDiningPage() {
                     value={newTitle}
                     onChange={(e) => setNewTitle(e.target.value)}
                     placeholder="e.g. College Reunion or Friday Night Dinner"
-                    className="w-full rounded-2xl border border-cream-300 bg-cream-50/50 px-4 py-3 text-sm text-ink-900 focus:border-forest-600 focus:bg-white focus:outline-hidden"
+                    className="w-full rounded-2xl border border-cream-300 bg-cream-50/50 px-4 py-3 text-sm text-ink-900 focus:border-accent-600 focus:bg-white focus:outline-hidden"
                   />
                 </div>
 
@@ -431,7 +431,7 @@ export default function GroupDiningPage() {
                       step={50}
                       value={newTargetBudget}
                       onChange={(e) => setNewTargetBudget(Number(e.target.value))}
-                      className="w-full rounded-2xl border border-cream-300 bg-cream-50/50 px-4 py-3 text-sm text-ink-900 focus:border-forest-600 focus:bg-white focus:outline-hidden"
+                      className="w-full rounded-2xl border border-cream-300 bg-cream-50/50 px-4 py-3 text-sm text-ink-900 focus:border-accent-600 focus:bg-white focus:outline-hidden"
                     />
                   </div>
 
@@ -442,7 +442,7 @@ export default function GroupDiningPage() {
                     <select
                       value={newTargetArea}
                       onChange={(e) => setNewTargetArea(e.target.value)}
-                      className="w-full rounded-2xl border border-cream-300 bg-cream-50/50 px-4 py-3 text-sm text-ink-900 focus:border-forest-600 focus:bg-white focus:outline-hidden"
+                      className="w-full rounded-2xl border border-cream-300 bg-cream-50/50 px-4 py-3 text-sm text-ink-900 focus:border-accent-600 focus:bg-white focus:outline-hidden"
                     >
                       {GORAKHPUR_AREAS.map((a) => (
                         <option key={a} value={a}>
@@ -456,7 +456,7 @@ export default function GroupDiningPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="mt-4 flex w-full items-center justify-center gap-2 rounded-2xl bg-forest-600 py-3.5 text-sm font-bold text-white shadow-md transition hover:bg-forest-700 disabled:opacity-50"
+                  className="mt-4 flex w-full items-center justify-center gap-2 rounded-2xl bg-accent-600 py-3.5 text-sm font-bold text-white shadow-md transition hover:bg-accent-700 disabled:opacity-50 cursor-pointer"
                 >
                   <Sparkles size={18} />
                   {loading ? 'Creating Outing…' : 'Start Group Dining Session'}
@@ -472,14 +472,14 @@ export default function GroupDiningPage() {
                     value={joinCode}
                     onChange={(e) => setJoinCode(e.target.value.trim())}
                     placeholder="Paste session code (e.g. grp-xyz)"
-                    className="flex-1 rounded-2xl border border-cream-300 bg-cream-50/50 px-4 py-2.5 text-xs text-ink-900 focus:border-forest-600 focus:outline-hidden"
+                    className="flex-1 rounded-2xl border border-cream-300 bg-cream-50/50 px-4 py-2.5 text-xs text-ink-900 focus:border-accent-600 focus:outline-hidden"
                   />
                   <button
                     type="button"
                     onClick={() => {
                       if (joinCode) navigate(`/decide-together/${joinCode}`);
                     }}
-                    className="rounded-2xl border border-forest-600 bg-forest-50 px-5 py-2.5 text-xs font-bold text-forest-800 hover:bg-forest-100"
+                    className="rounded-2xl border border-cream-300 bg-cream-100 px-5 py-2.5 text-xs font-bold text-ink-800 hover:bg-cream-200 cursor-pointer"
                   >
                     Join
                   </button>
@@ -497,7 +497,7 @@ export default function GroupDiningPage() {
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="rounded-full bg-forest-100 px-3 py-0.5 text-xs font-bold text-forest-800">
+                    <span className="rounded-full bg-accent-100 px-3 py-0.5 text-xs font-bold text-accent-800">
                       {currentSession.status === 'collecting' && 'Step 1: Collecting Preferences'}
                       {currentSession.status === 'voting' && 'Step 2: Voting Active'}
                       {currentSession.status === 'decided' && 'Decision Consensused!'}
@@ -525,7 +525,7 @@ export default function GroupDiningPage() {
                     onClick={copyInviteLink}
                     className="inline-flex items-center gap-1.5 rounded-full border border-cream-300 bg-cream-50 px-3.5 py-2 text-xs font-semibold text-ink-800 hover:bg-cream-100"
                   >
-                    {copiedLink ? <Check size={14} className="text-forest-600" /> : <Copy size={14} />}
+                    {copiedLink ? <Check size={14} className="text-accent-700" /> : <Copy size={14} />}
                     {copiedLink ? 'Copied' : 'Copy Code'}
                   </button>
                 </div>
@@ -558,14 +558,14 @@ export default function GroupDiningPage() {
                 <div className="mt-6 flex flex-wrap justify-center gap-3">
                   <Link
                     to={ROUTES.restaurant(winningRestaurant.id)}
-                    className="inline-flex items-center gap-2 rounded-full bg-forest-700 px-6 py-3 text-sm font-bold text-white shadow-md hover:bg-forest-800"
+                    className="inline-flex items-center gap-2 rounded-full bg-accent-600 px-6 py-3 text-sm font-bold text-white shadow-md hover:bg-accent-700"
                   >
                     View Menu & Directions <ArrowRight size={16} />
                   </Link>
                   <button
                     type="button"
                     onClick={() => setSelectedRestForQr(winningRestaurant)}
-                    className="inline-flex items-center gap-2 rounded-full border border-forest-600 bg-white px-5 py-3 text-sm font-bold text-forest-800 hover:bg-forest-50"
+                    className="inline-flex items-center gap-2 rounded-full border border-accent-600 bg-white px-5 py-3 text-sm font-bold text-accent-800 hover:bg-accent-50"
                   >
                     <QrCode size={16} /> View Table QR
                   </button>
@@ -613,7 +613,7 @@ export default function GroupDiningPage() {
                         value={pName}
                         onChange={(e) => setPName(e.target.value)}
                         placeholder="e.g. Aarav, Meera"
-                        className="w-full rounded-2xl border border-cream-300 bg-cream-50/50 px-4 py-2.5 text-sm text-ink-900 focus:border-forest-600 focus:bg-white focus:outline-hidden"
+                        className="w-full rounded-2xl border border-cream-300 bg-cream-50/50 px-4 py-2.5 text-sm text-ink-900 focus:border-accent-600 focus:bg-white focus:outline-hidden"
                       />
                     </div>
 
@@ -637,7 +637,7 @@ export default function GroupDiningPage() {
                             onClick={() => setPDiet(d.id)}
                             className={`rounded-2xl border p-3 text-xs font-bold transition text-center ${
                               pDiet === d.id
-                                ? 'border-forest-600 bg-forest-600 text-white shadow-xs'
+                                ? 'border-accent-600 bg-accent-600 text-white shadow-xs'
                                 : 'border-cream-300 bg-cream-50 text-ink-700 hover:bg-cream-100'
                             }`}
                           >
@@ -653,7 +653,7 @@ export default function GroupDiningPage() {
                         <label className="text-xs font-bold uppercase tracking-wider text-ink-700">
                           Your Max Per-Person Budget
                         </label>
-                        <span className="text-sm font-extrabold text-forest-700">₹{pBudget}</span>
+                        <span className="text-sm font-extrabold text-accent-700">₹{pBudget}</span>
                       </div>
                       <input
                         type="range"
@@ -662,7 +662,7 @@ export default function GroupDiningPage() {
                         step={50}
                         value={pBudget}
                         onChange={(e) => setPBudget(Number(e.target.value))}
-                        className="w-full accent-forest-600"
+                        className="w-full accent-accent-600"
                       />
                       <div className="flex justify-between text-[11px] text-ink-500">
                         <span>₹150 (Street/Budget)</span>
@@ -712,7 +712,7 @@ export default function GroupDiningPage() {
                               onClick={() => toggleArea(a)}
                               className={`rounded-full px-3 py-1 text-xs font-medium transition ${
                                 active
-                                  ? 'bg-forest-700 text-white font-semibold'
+                                  ? 'bg-accent-600 text-white font-semibold'
                                   : 'border border-cream-300 bg-cream-50 text-ink-700 hover:bg-cream-100'
                               }`}
                             >
@@ -744,7 +744,7 @@ export default function GroupDiningPage() {
                     <div className="pt-2">
                       <button
                         type="submit"
-                        className="flex w-full items-center justify-center gap-2 rounded-2xl bg-forest-600 py-3 text-sm font-bold text-white shadow-sm hover:bg-forest-700"
+                        className="flex w-full items-center justify-center gap-2 rounded-2xl bg-accent-600 py-3 text-sm font-bold text-white shadow-sm hover:bg-accent-700"
                       >
                         <Check size={16} />
                         {prefSubmitted ? 'Update My Preferences' : 'Save My Preferences'}
@@ -759,7 +759,7 @@ export default function GroupDiningPage() {
                 <div className="rounded-3xl border border-cream-300 bg-white p-6 shadow-sm">
                   <div className="flex items-center justify-between">
                     <h3 className="text-base font-bold text-ink-900">Room Participants</h3>
-                    <span className="rounded-full bg-forest-100 px-2.5 py-0.5 text-xs font-bold text-forest-800">
+                    <span className="rounded-full bg-accent-100 px-2.5 py-0.5 text-xs font-bold text-accent-800">
                       {currentSession.participants.length} Ready
                     </span>
                   </div>
@@ -777,7 +777,7 @@ export default function GroupDiningPage() {
                                 {p.name} {p.participantId === currentParticipantId ? '(You)' : ''}
                               </span>
                             </div>
-                            <span className="text-[11px] font-semibold text-forest-700">
+                            <span className="text-[11px] font-semibold text-accent-700">
                               ₹{p.maxBudgetPerPerson}
                             </span>
                           </div>
@@ -837,7 +837,7 @@ export default function GroupDiningPage() {
                     <button
                       type="button"
                       onClick={handleFinalize}
-                      className="inline-flex items-center gap-1.5 rounded-full bg-forest-700 px-4 py-2 text-xs font-bold text-white shadow-xs hover:bg-forest-800"
+                      className="inline-flex items-center gap-1.5 rounded-full bg-accent-600 px-4 py-2 text-xs font-bold text-white shadow-xs hover:bg-accent-700"
                     >
                       <Trophy size={14} /> Finalize Decision
                     </button>
@@ -864,7 +864,7 @@ export default function GroupDiningPage() {
                             <span className="flex size-7 items-center justify-center rounded-full bg-cream-200 text-xs font-bold text-ink-900">
                               #{idx + 1}
                             </span>
-                            <span className="inline-flex items-center gap-1 rounded-full bg-forest-100 px-3 py-1 text-xs font-extrabold text-forest-800">
+                            <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-3 py-1 text-xs font-extrabold text-amber-900">
                               <Sparkles size={13} /> {rec.score}% Match
                             </span>
                           </div>
@@ -887,7 +887,7 @@ export default function GroupDiningPage() {
 
                           {/* Matched Highlights */}
                           <div className="mt-3 space-y-1.5">
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-forest-700">
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-accent-700">
                               Why it matches:
                             </span>
                             <ul className="space-y-1 text-xs text-ink-700">

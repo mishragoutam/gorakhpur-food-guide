@@ -157,9 +157,9 @@ export default function MyReviewsPage() {
                   ) : null}
 
                   {rev.ownerReply ? (
-                    <div className="mt-4 rounded-2xl border border-forest-200 bg-forest-50/70 p-3.5 text-xs">
-                      <span className="font-bold text-forest-900">Restaurant Owner Response:</span>
-                      <p className="mt-1 text-forest-800">{rev.ownerReply.text}</p>
+                    <div className="mt-4 rounded-2xl border border-cream-300 bg-cream-50/80 p-3.5 text-xs">
+                      <span className="font-bold text-accent-800">Restaurant Owner Response:</span>
+                      <p className="mt-1 text-ink-800">{rev.ownerReply.text}</p>
                     </div>
                   ) : null}
                 </div>

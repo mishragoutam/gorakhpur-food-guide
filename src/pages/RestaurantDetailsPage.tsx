@@ -13,6 +13,8 @@ import {
   CheckCircle2,
   Search,
   Calendar,
+  Plus,
+  ShoppingBag,
 } from 'lucide-react';
 import { useEffect, useState, useMemo } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
@@ -27,6 +29,9 @@ import { QrReviewModal } from '@/components/qr/QrReviewModal';
 import { RestaurantQrModal } from '@/components/qr/RestaurantQrModal';
 import { CustomerAuthModal } from '@/components/auth/CustomerAuthModal';
 import { TableBookingModal } from '@/components/booking/TableBookingModal';
+import { DishDetailOrderModal } from '@/components/menu/DishDetailOrderModal';
+import { DineInTrayModal, type TrayItem } from '@/components/menu/DineInTrayModal';
+import { showToast } from '@/lib/toast';
 import { usePageTitle } from '@/hooks/usePageTitle';
 import { useRestaurant } from '@/hooks/useRestaurants';
 import { getBudgetBand } from '@/lib/budget';
@@ -84,6 +89,45 @@ export default function RestaurantDetailsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [dietFilter, setDietFilter] = useState<'all' | 'veg' | 'nonveg'>('all');
   const [menuSearch, setMenuSearch] = useState<string>('');
+  const [selectedDishForOrder, setSelectedDishForOrder] = useState<MenuItem | null>(null);
+  const [dishOrderModalOpen, setDishOrderModalOpen] = useState(false);
+  const [trayItems, setTrayItems] = useState<TrayItem[]>([]);
+  const [trayModalOpen, setTrayModalOpen] = useState(false);
+
+  const handleAddToTray = (item: MenuItem, quantity: number) => {
+    setTrayItems((prev) => {
+      const existing = prev.find((entry) => entry.item.id === item.id);
+      if (existing) {
+        return prev.map((entry) =>
+          entry.item.id === item.id ? { ...entry, quantity: entry.quantity + quantity } : entry,
+        );
+      }
+      return [...prev, { item, quantity }];
+    });
+    showToast(`Added ${quantity}x ${item.name} to dining tray`);
+  };
+
+  const handleUpdateTrayQuantity = (itemId: string | number, delta: number) => {
+    setTrayItems((prev) =>
+      prev
+        .map((entry) => {
+          if (entry.item.id === itemId) {
+            const nextQty = entry.quantity + delta;
+            return nextQty > 0 ? { ...entry, quantity: nextQty } : null;
+          }
+          return entry;
+        })
+        .filter((entry): entry is TrayItem => entry !== null),
+    );
+  };
+
+  const handleRemoveTrayItem = (itemId: string | number) => {
+    setTrayItems((prev) => prev.filter((entry) => entry.item.id !== itemId));
+  };
+
+  const handleClearTray = () => {
+    setTrayItems([]);
+  };
 
   const menuCategories = useMemo(() => {
     if (!restaurant?.menu) return [];
@@ -201,21 +245,21 @@ export default function RestaurantDetailsPage() {
         {/* QR Scan Welcome Notice & Google Login Check-in */}
         {Boolean(isQrScanned || tableNumber) && (
           currentUser ? (
-            <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 rounded-2xl border border-emerald-300 bg-emerald-50/95 p-4 text-xs sm:text-sm text-emerald-950 shadow-xs">
+            <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 rounded-2xl border border-accent-200 bg-accent-50/90 p-4 text-xs sm:text-sm text-accent-950 shadow-xs">
               <div className="flex items-center gap-3">
-                <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-emerald-600 text-white shadow-xs font-bold">
+                <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-accent-600 text-white shadow-xs font-bold">
                   <CheckCircle2 size={20} />
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="font-bold text-emerald-950">Table QR Check-In Verified</span>
+                    <span className="font-bold text-accent-950">Table QR Check-In Verified</span>
                     {tableNumber ? (
-                      <span className="rounded-md bg-emerald-200/80 px-2 py-0.5 text-[11px] font-bold text-emerald-800">
+                      <span className="rounded-md bg-accent-200/80 px-2 py-0.5 text-[11px] font-bold text-accent-800">
                         Table {tableNumber}
                       </span>
                     ) : null}
                   </div>
-                  <p className="text-xs text-emerald-800">
+                  <p className="text-xs text-accent-900">
                     Logged in as <strong>{currentUser.name}</strong> ({currentUser.email}). Your dining review will be saved as a verified diner.
                   </p>
                 </div>
@@ -223,27 +267,27 @@ export default function RestaurantDetailsPage() {
               <button
                 type="button"
                 onClick={() => setWriteModalOpen(true)}
-                className="inline-flex items-center gap-1.5 rounded-xl bg-emerald-700 px-3.5 py-2 text-xs font-bold text-white shadow-xs hover:bg-emerald-800 transition shrink-0"
+                className="inline-flex items-center gap-1.5 rounded-xl bg-accent-600 px-3.5 py-2 text-xs font-bold text-white shadow-xs hover:bg-accent-700 transition shrink-0 cursor-pointer"
               >
                 <PenLine size={13} /> Write Verified Review
               </button>
             </div>
           ) : (
-            <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 rounded-2xl border border-forest-300 bg-forest-50/95 p-4 text-xs sm:text-sm text-forest-950 shadow-xs">
+            <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 rounded-2xl border border-cream-300 bg-cream-50/95 p-4 text-xs sm:text-sm text-ink-950 shadow-xs">
               <div className="flex items-center gap-3">
-                <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-forest-700 text-white shadow-xs font-bold">
+                <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-accent-600 text-white shadow-xs font-bold">
                   <QrCode size={20} />
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <strong className="font-bold text-forest-950">Welcome to {restaurant.name}!</strong>
+                    <strong className="font-bold text-ink-950">Welcome to {restaurant.name}!</strong>
                     {tableNumber ? (
-                      <span className="rounded-md bg-forest-200/80 px-2 py-0.5 text-[11px] font-bold text-forest-800">
+                      <span className="rounded-md bg-cream-200 px-2 py-0.5 text-[11px] font-bold text-ink-800">
                         Table {tableNumber}
                       </span>
                     ) : null}
                   </div>
-                  <p className="text-xs text-forest-800">
+                  <p className="text-xs text-ink-600">
                     Scanned via table QR code. Sign in with your Google email ID to unlock verified diner status and submit reviews.
                   </p>
                 </div>
@@ -254,7 +298,7 @@ export default function RestaurantDetailsPage() {
                   setAuthGoogleMode(true);
                   setAuthModalOpen(true);
                 }}
-                className="inline-flex items-center gap-2 rounded-xl bg-forest-700 px-4 py-2 text-xs font-bold text-white shadow-xs hover:bg-forest-800 transition shrink-0"
+                className="inline-flex items-center gap-2 rounded-xl bg-ink-900 px-4 py-2 text-xs font-bold text-white shadow-xs hover:bg-ink-800 transition shrink-0 cursor-pointer"
               >
                 Sign In with Google
               </button>
@@ -274,8 +318,8 @@ export default function RestaurantDetailsPage() {
             <Badge tone="accent">Sample listing</Badge>
           </div>
         ) : (
-          <div className="mt-4 flex items-center gap-2 rounded-2xl border border-forest-200 bg-forest-50/70 px-4 py-2.5 text-xs font-semibold text-forest-800">
-            <Sparkles size={15} className="shrink-0 text-forest-600" />
+          <div className="mt-4 flex items-center gap-2 rounded-2xl border border-cream-300 bg-cream-50/80 px-4 py-2.5 text-xs font-semibold text-ink-800">
+            <Sparkles size={15} className="shrink-0 text-accent-600" />
             <span>Verified Restaurant Partner • Gorakhpur Dining Directory</span>
           </div>
         )}
@@ -297,8 +341,8 @@ export default function RestaurantDetailsPage() {
             <div className="flex flex-wrap items-center gap-2">
               <Badge tone="neutral">{restaurant.cuisines[0] || 'Multi-cuisine'}</Badge>
               {restaurant.diet === 'veg' ? (
-                <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-bold text-emerald-800">
-                  <Leaf size={12} /> Pure Veg
+                <span className="inline-flex items-center gap-1 rounded-full bg-cream-200 px-2.5 py-0.5 text-xs font-bold text-ink-800">
+                  <Leaf size={12} className="text-emerald-600" /> Pure Veg
                 </span>
               ) : (
                 <span className="inline-flex items-center gap-1 rounded-full bg-cream-200 px-2.5 py-0.5 text-xs font-bold text-ink-800">
@@ -307,10 +351,21 @@ export default function RestaurantDetailsPage() {
               )}
             </div>
 
-            <h1 className="mt-3 text-3xl font-extrabold text-ink-900 sm:text-4xl">{restaurant.name}</h1>
-            <p className="mt-2 font-medium text-ink-600">{restaurant.cuisines.join(' · ')}</p>
+            <div className="mt-4 flex items-start gap-3.5">
+              {restaurant.logoUrl ? (
+                <img
+                  src={restaurant.logoUrl}
+                  alt={`${restaurant.name} logo`}
+                  className="size-16 sm:size-20 shrink-0 rounded-2xl border border-cream-300 bg-white p-0.5 shadow-md object-cover"
+                />
+              ) : null}
+              <div className="min-w-0 flex-1">
+                <h1 className="text-2xl font-extrabold text-ink-900 sm:text-4xl leading-tight">{restaurant.name}</h1>
+                <p className="mt-1 font-medium text-ink-600">{restaurant.cuisines.join(' · ')}</p>
+              </div>
+            </div>
 
-            <p className="mt-1 flex items-center gap-1.5 text-sm text-ink-600">
+            <p className="mt-2 flex items-center gap-1.5 text-sm text-ink-600">
               <MapPin aria-hidden="true" size={16} className="shrink-0 text-accent-700" />
               {restaurant.address || `${restaurant.area}, ${restaurant.city}`}
             </p>
@@ -343,8 +398,7 @@ export default function RestaurantDetailsPage() {
               <button
                 type="button"
                 onClick={() => setBookingModalOpen(true)}
-                className="inline-flex items-center gap-2 rounded-full bg-forest-700 px-6 py-3 text-sm font-bold text-white shadow-md transition hover:bg-forest-800 hover:shadow-lg cursor-pointer"
-                style={{ backgroundColor: '#2f7d5f', color: '#ffffff' }}
+                className="inline-flex items-center gap-2 rounded-full bg-accent-600 px-6 py-3 text-sm font-bold text-white shadow-md transition hover:bg-accent-700 hover:shadow-lg cursor-pointer"
               >
                 <Calendar size={16} />
                 Book a Table
@@ -352,7 +406,7 @@ export default function RestaurantDetailsPage() {
               <button
                 type="button"
                 onClick={() => setWriteModalOpen(true)}
-                className="inline-flex items-center gap-2 rounded-full bg-accent-600 px-6 py-3 text-sm font-bold text-white shadow-md transition hover:bg-accent-700 hover:shadow-lg"
+                className="inline-flex items-center gap-2 rounded-full bg-ink-900 px-6 py-3 text-sm font-bold text-white shadow-md transition hover:bg-ink-800 hover:shadow-lg cursor-pointer"
               >
                 <PenLine size={16} />
                 Write a Review
@@ -360,15 +414,15 @@ export default function RestaurantDetailsPage() {
               <button
                 type="button"
                 onClick={() => setStandeeModalOpen(true)}
-                className="inline-flex items-center gap-2 rounded-full border border-forest-600 bg-forest-50 px-5 py-3 text-sm font-bold text-forest-800 transition hover:bg-forest-100"
+                className="inline-flex items-center gap-2 rounded-full border border-cream-300 bg-white px-5 py-3 text-sm font-bold text-ink-800 transition hover:bg-cream-100 shadow-2xs cursor-pointer"
               >
-                <QrCode size={16} />
+                <QrCode size={16} className="text-accent-700" />
                 View QR Standee
               </button>
               <button
                 type="button"
                 onClick={() => setQrModalOpen(true)}
-                className="inline-flex items-center gap-2 rounded-full border border-cream-300 bg-white px-4 py-3 text-sm font-semibold text-ink-700 transition hover:bg-cream-100"
+                className="inline-flex items-center gap-2 rounded-full border border-cream-300 bg-white px-4 py-3 text-sm font-semibold text-ink-700 transition hover:bg-cream-100 cursor-pointer"
               >
                 Try QR Review
               </button>
@@ -394,14 +448,25 @@ export default function RestaurantDetailsPage() {
                 );
                 return (
                   <li key={dish}>
-                    <Badge className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium">
-                      <span>{dish}</span>
-                      {menuItem?.price ? (
-                        <span className="rounded-full bg-accent-100/90 px-2 py-0.5 text-xs font-bold text-accent-800">
-                          ₹{menuItem.price}
-                        </span>
-                      ) : null}
-                    </Badge>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (menuItem) {
+                          setSelectedDishForOrder(menuItem);
+                          setDishOrderModalOpen(true);
+                        }
+                      }}
+                      className="cursor-pointer transition active:scale-95"
+                    >
+                      <Badge className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium hover:border-accent-400">
+                        <span>{dish}</span>
+                        {menuItem?.price ? (
+                          <span className="rounded-full bg-accent-100/90 px-2 py-0.5 text-xs font-bold text-accent-800">
+                            ₹{menuItem.price}
+                          </span>
+                        ) : null}
+                      </Badge>
+                    </button>
                   </li>
                 );
               })}
@@ -490,12 +555,33 @@ export default function RestaurantDetailsPage() {
                   </div>
                 </div>
 
+                {/* Mobile Category Select Dropdown */}
+                <div className="sm:hidden">
+                  <label htmlFor="mobile-category-select" className="mb-1 block text-[11px] font-bold text-ink-700 uppercase tracking-wider">
+                    Select Menu Section
+                  </label>
+                  <select
+                    id="mobile-category-select"
+                    value={selectedCategory}
+                    onChange={(e) => setSelectedCategory(e.target.value)}
+                    className="w-full rounded-xl border border-cream-300 bg-white px-3 py-2 text-xs font-bold text-ink-900 outline-none focus:border-accent-600 shadow-2xs"
+                  >
+                    <option value="All">All Dishes ({restaurant.menu?.length || 0})</option>
+                    <option value="Bestsellers">★ Bestsellers</option>
+                    {menuCategories.map((cat) => (
+                      <option key={cat} value={cat}>
+                        {cat} ({restaurant.menu?.filter((m) => m.category === cat).length || 0})
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
                 {/* Horizontal Category Navigation Tabs */}
-                <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar text-xs">
+                <div className="hidden sm:flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar text-xs">
                   <button
                     type="button"
                     onClick={() => setSelectedCategory('All')}
-                    className={`shrink-0 rounded-full px-3.5 py-1.5 font-bold transition ${
+                    className={`shrink-0 rounded-full px-3.5 py-1.5 font-bold transition cursor-pointer ${
                       selectedCategory === 'All'
                         ? 'bg-ink-900 text-white shadow-xs'
                         : 'bg-cream-100 text-ink-700 hover:bg-cream-200'
@@ -507,7 +593,7 @@ export default function RestaurantDetailsPage() {
                   <button
                     type="button"
                     onClick={() => setSelectedCategory('Bestsellers')}
-                    className={`shrink-0 flex items-center gap-1 rounded-full px-3.5 py-1.5 font-bold transition ${
+                    className={`shrink-0 flex items-center gap-1 rounded-full px-3.5 py-1.5 font-bold transition cursor-pointer ${
                       selectedCategory === 'Bestsellers'
                         ? 'bg-amber-600 text-white shadow-xs'
                         : 'bg-amber-50 text-amber-800 border border-amber-200/80 hover:bg-amber-100'
@@ -516,20 +602,23 @@ export default function RestaurantDetailsPage() {
                     <span>★ Bestsellers</span>
                   </button>
 
-                  {menuCategories.map((cat) => (
-                    <button
-                      key={cat}
-                      type="button"
-                      onClick={() => setSelectedCategory(cat)}
-                      className={`shrink-0 rounded-full px-3.5 py-1.5 font-bold transition ${
-                        selectedCategory === cat
-                          ? 'bg-ink-900 text-white shadow-xs'
-                          : 'bg-cream-100 text-ink-700 hover:bg-cream-200'
-                      }`}
-                    >
-                      {cat}
-                    </button>
-                  ))}
+                  {menuCategories.map((cat) => {
+                    const count = restaurant.menu?.filter((m) => m.category === cat).length || 0;
+                    return (
+                      <button
+                        key={cat}
+                        type="button"
+                        onClick={() => setSelectedCategory(cat)}
+                        className={`shrink-0 rounded-full px-3.5 py-1.5 font-bold transition cursor-pointer ${
+                          selectedCategory === cat
+                            ? 'bg-ink-900 text-white shadow-xs'
+                            : 'bg-cream-100 text-ink-700 hover:bg-cream-200'
+                        }`}
+                      >
+                        {cat} ({count})
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -549,7 +638,11 @@ export default function RestaurantDetailsPage() {
                     return (
                       <div
                         key={item.id}
-                        className="group flex flex-col justify-between rounded-2xl border border-cream-200 bg-white p-4 shadow-2xs transition hover:border-cream-300 hover:shadow-xs"
+                        onClick={() => {
+                          setSelectedDishForOrder(item);
+                          setDishOrderModalOpen(true);
+                        }}
+                        className="group flex flex-col justify-between rounded-2xl border border-cream-200 bg-white p-4 shadow-2xs transition hover:border-accent-300 hover:shadow-md cursor-pointer"
                       >
                         <div>
                           {/* Bestseller Badge */}
@@ -566,13 +659,13 @@ export default function RestaurantDetailsPage() {
                               <img
                                 src={item.imageUrl}
                                 alt={item.name}
-                                className="size-20 shrink-0 rounded-2xl object-cover ring-1 ring-ink-900/5 shadow-2xs group-hover:scale-[1.02] transition-transform duration-200"
+                                className="size-20 shrink-0 rounded-2xl object-cover ring-1 ring-ink-900/5 shadow-2xs group-hover:scale-[1.03] transition-transform duration-200"
                                 loading="lazy"
                               />
                             ) : null}
                             <div className="min-w-0 flex-1">
                               <div className="flex items-start justify-between gap-2">
-                                <h4 className="text-sm font-bold text-ink-900 leading-snug line-clamp-2">
+                                <h4 className="text-sm font-bold text-ink-900 leading-snug line-clamp-2 group-hover:text-accent-700 transition">
                                   {item.name}
                                 </h4>
                                 <span className="shrink-0 rounded-full bg-accent-50 px-2.5 py-0.5 text-xs font-extrabold text-accent-800 ring-1 ring-accent-200">
@@ -586,7 +679,7 @@ export default function RestaurantDetailsPage() {
                           </div>
                         </div>
 
-                        <div className="mt-3 flex items-center justify-between border-t border-cream-100 pt-2 text-[11px] font-semibold">
+                        <div className="mt-3 flex items-center justify-between border-t border-cream-100 pt-2.5 text-[11px] font-semibold">
                           <span
                             className={
                               item.diet === 'veg'
@@ -601,7 +694,22 @@ export default function RestaurantDetailsPage() {
                             />
                             {item.diet === 'veg' ? 'Pure Veg' : 'Non-Veg'}
                           </span>
-                          <span className="rounded-md bg-cream-100 px-2 py-0.5 text-ink-600">{item.category}</span>
+
+                          <div className="flex items-center gap-2">
+                            <span className="rounded-md bg-cream-100 px-2 py-0.5 text-ink-600">{item.category}</span>
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setSelectedDishForOrder(item);
+                                setDishOrderModalOpen(true);
+                              }}
+                              className="inline-flex items-center gap-1 rounded-full bg-accent-600 px-2.5 py-1 text-[11px] font-bold text-white shadow-2xs hover:bg-accent-700 active:scale-95 transition cursor-pointer"
+                            >
+                              <Plus size={12} />
+                              <span>Order</span>
+                            </button>
+                          </div>
                         </div>
                       </div>
                     );
@@ -642,7 +750,7 @@ export default function RestaurantDetailsPage() {
                     </div>
                     <div className="h-2.5 w-full overflow-hidden rounded-full bg-cream-200">
                       <div
-                        className="h-full rounded-full bg-forest-600 transition-all duration-500"
+                        className="h-full rounded-full bg-accent-600 transition-all duration-500"
                         style={{ width: `${(Number(val) / 5) * 100}%` }}
                       />
                     </div>
@@ -720,14 +828,14 @@ export default function RestaurantDetailsPage() {
 
                       {/* Owner Management Reply */}
                       {rev.ownerReply ? (
-                        <div className="mt-3.5 flex gap-2.5 rounded-2xl border border-forest-200 bg-forest-50/70 p-3.5 text-xs">
-                          <MessageSquareReply size={18} className="shrink-0 text-forest-700 mt-0.5" />
+                        <div className="mt-3.5 flex gap-2.5 rounded-2xl border border-cream-200 bg-cream-50/80 p-3.5 text-xs">
+                          <MessageSquareReply size={18} className="shrink-0 text-accent-700 mt-0.5" />
                           <div>
                             <div className="flex items-center gap-2">
-                              <span className="font-bold text-forest-900">Owner Response</span>
-                              <span className="text-[10px] text-forest-600">{rev.ownerReply.date}</span>
+                              <span className="font-bold text-ink-900">Owner Response</span>
+                              <span className="text-[10px] text-ink-500">{rev.ownerReply.date}</span>
                             </div>
-                            <p className="mt-1 text-forest-800">{rev.ownerReply.text}</p>
+                            <p className="mt-1 text-ink-700">{rev.ownerReply.text}</p>
                           </div>
                         </div>
                       ) : null}
@@ -748,8 +856,8 @@ export default function RestaurantDetailsPage() {
               <h3 className="text-lg font-bold text-ink-900">Location & Hours</h3>
 
               {/* Map Illustration Preview */}
-              <div className="relative mt-4 flex h-36 items-center justify-center rounded-2xl bg-gradient-to-br from-forest-50 to-cream-200 border border-forest-200 text-forest-800">
-                <MapPin size={32} className="text-forest-700 animate-bounce" />
+              <div className="relative mt-4 flex h-36 items-center justify-center rounded-2xl bg-gradient-to-br from-cream-100 to-cream-200 border border-cream-300 text-ink-800">
+                <MapPin size={32} className="text-accent-700 animate-bounce" />
                 <span className="absolute bottom-2 text-[11px] font-semibold text-ink-500">
                   Gorakhpur, Uttar Pradesh
                 </span>
@@ -785,18 +893,18 @@ export default function RestaurantDetailsPage() {
             </div>
 
             {/* Quick QR Table Standee Card */}
-            <div className="rounded-3xl border border-forest-300/80 bg-forest-50 p-6 text-center shadow-sm">
-              <div className="mx-auto mb-3 flex size-12 items-center justify-center rounded-2xl bg-forest-600 text-white">
+            <div className="rounded-3xl border border-cream-300 bg-white p-6 text-center shadow-sm">
+              <div className="mx-auto mb-3 flex size-12 items-center justify-center rounded-2xl bg-accent-600 text-white">
                 <QrCode size={24} />
               </div>
-              <h4 className="text-base font-bold text-forest-900">Dining at the Table?</h4>
-              <p className="mt-1 text-xs text-forest-700">
+              <h4 className="text-base font-bold text-ink-900">Dining at the Table?</h4>
+              <p className="mt-1 text-xs text-ink-600">
                 Scan the table QR code to write a review or preview the digital menu standee.
               </p>
               <button
                 type="button"
                 onClick={() => setStandeeModalOpen(true)}
-                className="mt-4 inline-flex w-full items-center justify-center rounded-xl bg-forest-600 py-2.5 text-xs font-bold text-white shadow-xs transition hover:bg-forest-700"
+                className="mt-4 inline-flex w-full items-center justify-center rounded-xl bg-accent-600 py-2.5 text-xs font-bold text-white shadow-xs transition hover:bg-accent-700 cursor-pointer"
               >
                 Launch QR Standee
               </button>
@@ -805,7 +913,58 @@ export default function RestaurantDetailsPage() {
         </div>
       </Container>
 
+      {/* Persistent Floating Dining Tray Bar */}
+      {trayItems.length > 0 ? (
+        <aside
+          aria-label="Dining order tray summary"
+          className="fixed bottom-4 left-4 right-4 z-40 mx-auto max-w-md rounded-2xl bg-ink-950/95 p-3.5 text-white shadow-2xl backdrop-blur-md ring-1 ring-white/10 animate-in slide-in-from-bottom"
+        >
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <div className="flex size-9 items-center justify-center rounded-xl bg-accent-600 font-black text-white text-xs">
+                {trayItems.reduce((acc, curr) => acc + curr.quantity, 0)}
+              </div>
+              <div>
+                <div className="text-xs font-extrabold text-white">Your Dining Tray</div>
+                <div className="text-[11px] text-cream-200">
+                  Total: {formatRupees(trayItems.reduce((acc, curr) => acc + curr.item.price * curr.quantity, 0))}
+                </div>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => setTrayModalOpen(true)}
+              className="flex items-center gap-1.5 rounded-xl bg-accent-600 px-4 py-2 text-xs font-bold text-white shadow-md hover:bg-accent-700 active:scale-95 transition cursor-pointer"
+            >
+              <ShoppingBag size={14} />
+              <span>View Order</span>
+            </button>
+          </div>
+        </aside>
+      ) : null}
+
       {/* Modals */}
+      <DishDetailOrderModal
+        isOpen={dishOrderModalOpen}
+        onClose={() => {
+          setDishOrderModalOpen(false);
+          setSelectedDishForOrder(null);
+        }}
+        item={selectedDishForOrder}
+        restaurant={restaurant}
+        onAddToTray={handleAddToTray}
+      />
+
+      <DineInTrayModal
+        isOpen={trayModalOpen}
+        onClose={() => setTrayModalOpen(false)}
+        items={trayItems}
+        onUpdateQuantity={handleUpdateTrayQuantity}
+        onRemoveItem={handleRemoveTrayItem}
+        onClearTray={handleClearTray}
+        restaurant={restaurant}
+      />
+
       <WriteReviewModal
         isOpen={writeModalOpen}
         restaurant={restaurant}

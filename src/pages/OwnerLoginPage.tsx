@@ -66,7 +66,7 @@ export default function OwnerLoginPage() {
 
         <div className="mt-6 mx-auto max-w-4xl overflow-hidden rounded-3xl border border-cream-300 bg-white shadow-xl lg:grid lg:grid-cols-5">
           {/* Brand & Perks Panel */}
-          <div className="bg-gradient-to-br from-forest-800 via-forest-700 to-forest-600 p-8 text-white lg:col-span-2 flex flex-col justify-between gap-8">
+          <div className="bg-gradient-to-br from-ink-950 via-ink-900 to-accent-950 p-8 text-white lg:col-span-2 flex flex-col justify-between gap-8">
             <div>
               <div className="flex items-center gap-2.5">
                 <span className="flex size-10 items-center justify-center rounded-xl bg-white/15 text-white">
@@ -78,18 +78,18 @@ export default function OwnerLoginPage() {
               <h2 className="mt-6 text-2xl font-bold leading-tight">
                 Know what your guests really think.
               </h2>
-              <p className="mt-3 text-xs leading-relaxed text-emerald-100">
+              <p className="mt-3 text-xs leading-relaxed text-cream-200">
                 Manage your Gorakhpur restaurant profile, generate printable QR table tent cards, and learn from verified customer feedback.
               </p>
             </div>
 
             <div className="space-y-3 text-xs">
               <div className="flex items-center gap-2.5 rounded-xl bg-white/10 p-2.5">
-                <ShieldCheck size={18} className="text-emerald-300 shrink-0" />
+                <ShieldCheck size={18} className="text-amber-400 shrink-0" />
                 <span>Instant QR code for billing counter and tables</span>
               </div>
               <div className="flex items-center gap-2.5 rounded-xl bg-white/10 p-2.5">
-                <Sparkles size={18} className="text-emerald-300 shrink-0" />
+                <Sparkles size={18} className="text-amber-400 shrink-0" />
                 <span>AI sentiment breakdown for food and service speed</span>
               </div>
             </div>
@@ -120,7 +120,7 @@ export default function OwnerLoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="owner@restaurant.com"
-                  className="w-full rounded-xl border border-cream-300 px-3.5 py-2.5 text-sm text-ink-900 outline-none focus:border-forest-600 focus:ring-2 focus:ring-forest-100"
+                  className="w-full rounded-xl border border-cream-300 px-3.5 py-2.5 text-sm text-ink-900 outline-none focus:border-accent-600 focus:ring-2 focus:ring-accent-100"
                 />
               </div>
 
@@ -134,7 +134,7 @@ export default function OwnerLoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="At least 6 characters"
-                  className="w-full rounded-xl border border-cream-300 px-3.5 py-2.5 text-sm text-ink-900 outline-none focus:border-forest-600 focus:ring-2 focus:ring-forest-100"
+                  className="w-full rounded-xl border border-cream-300 px-3.5 py-2.5 text-sm text-ink-900 outline-none focus:border-accent-600 focus:ring-2 focus:ring-accent-100"
                 />
               </div>
 
@@ -143,8 +143,7 @@ export default function OwnerLoginPage() {
               <button
                 type="submit"
                 id="btn-owner-login"
-                style={{ backgroundColor: '#2f7d5f', color: '#ffffff' }}
-                className="flex w-full items-center justify-center gap-2 rounded-xl bg-forest-600 px-6 py-3.5 text-sm font-bold text-white shadow-md transition hover:bg-forest-700 active:scale-[0.99] cursor-pointer"
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-accent-600 px-6 py-3.5 text-sm font-bold text-white shadow-md transition hover:bg-accent-700 active:scale-[0.99] cursor-pointer"
               >
                 <LogIn size={16} />
                 Log In to Dashboard
