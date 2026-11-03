@@ -390,6 +390,22 @@ export const storageService = {
   },
 
   /**
+   * Silently caches a restaurant to local storage without emitting storage change event,
+   * avoiding recursive reload loops in single-restaurant detail views.
+   */
+  silentUpsertRestaurant(rest: Restaurant): void {
+    if (!rest || !rest.id) return;
+    const list = this.getRawRestaurants();
+    const idx = list.findIndex((r) => r.id === rest.id);
+    if (idx >= 0) {
+      list[idx] = { ...list[idx], ...rest };
+    } else {
+      list.unshift(rest);
+    }
+    safeSet(STORAGE_KEYS.restaurants, list);
+  },
+
+  /**
    * Remove a restaurant from local storage (e.g. after cloud deletion).
    */
   removeRestaurantFromStorage(id: string): void {

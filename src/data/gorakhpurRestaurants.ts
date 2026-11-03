@@ -11058,5 +11058,3301 @@ export const GORAKHPUR_RESTAURANTS: readonly Restaurant[] = [
         "description": "Hot melt-in-mouth milk solids dumplings soaked in cardamom and rose sugar syrup."
       }
     ]
+  },
+{
+    "id": "sharma-chaat-golghar",
+    "name": "Sharma Ji Famous Chaat Bhandar",
+    "area": "Golghar",
+    "city": "Gorakhpur",
+    "address": "Near Baldev Plaza, Cinema Road, Golghar, Gorakhpur",
+    "description": "Gorakhpur legendary street chaat stall famous for pure desi ghee crispy Aloo Tikki, tangy Matar Chaat, and spicy Dahi Bhalla since 1988.",
+    "categories": [
+      "street-food"
+    ],
+    "cuisines": [
+      "Street Food & Chaat",
+      "North Indian"
+    ],
+    "popularDishes": [
+      "Desi Ghee Aloo Tikki",
+      "Matar Chaat",
+      "Dahi Papdi Chaat",
+      "Pani Puri (5 Flavours)"
+    ],
+    "costForTwo": 120,
+    "averageRating": 4.8,
+    "reviewCount": 284,
+    "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 94152 88410",
+    "whatsappPhone": "+91 94152 88410",
+    "openTime": "15:30",
+    "closeTime": "22:30",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Ramesh Sharma",
+    "ownerEmail": "sharmaji.chaat@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Counter",
+      "Takeaway",
+      "UPI Accepted",
+      "Quick Service"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.9,
+      "taste": 5,
+      "hygiene": 4.5,
+      "service": 4.7,
+      "ambience": 4.2
+    },
+    "priceRange": {
+      "min": 40,
+      "max": 100
+    },
+    "distanceKm": 0.3,
+    "menu": [
+      {
+        "id": "sh-1",
+        "name": "Desi Ghee Aloo Tikki Chaat",
+        "price": 60,
+        "category": "Chaat Specials",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Golden crisp aloo tikki shallow-fried in desi ghee with spiced chana, sweet tamarind and spicy mint chutneys.",
+        "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "id": "sh-2",
+        "name": "Gorakhpuri Matar Chaat",
+        "price": 50,
+        "category": "Chaat Specials",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Slow cooked white peas tempered with roasted cumin, rock salt, ginger juliennes and lemon juice.",
+        "imageUrl": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "id": "sh-3",
+        "name": "Dahi Papdi Chaat",
+        "price": 60,
+        "category": "Dahi Specials",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "description": "Crispy flour wafers topped with boiled potatoes, chilled sweet curd, and chaat masalas.",
+        "imageUrl": "https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "id": "sh-4",
+        "name": "5-Pani Golgappe (6 Pcs)",
+        "price": 40,
+        "category": "Pani Puri",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Crispy suji puris served with hing, pudina, jeera, khatta-meetha, and garlic spicy pani.",
+        "imageUrl": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_sharma-chaat-golghar%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_sharma-chaat-golghar%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_sharma-chaat-golghar)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_sharma-chaat-golghar)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3ESJ%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "ganesh-bhelpuri-baldev",
+    "name": "Ganesh Bhelpuri & Sevpuri Center",
+    "area": "Golghar",
+    "city": "Gorakhpur",
+    "address": "Opposite Baldev Plaza Main Entrance, Golghar, Gorakhpur",
+    "description": "Popular Mumbai-style street snacks stall famous for authentic wet & dry Bhelpuri, loaded Sevpuri, and crunchy Sukha Bhel.",
+    "categories": [
+      "street-food"
+    ],
+    "cuisines": [
+      "Street Food & Chaat",
+      "Fast Food"
+    ],
+    "popularDishes": [
+      "Special Bombay Bhelpuri",
+      "Loaded Sev Puri",
+      "Sukha Bhel",
+      "Dahi Bhel"
+    ],
+    "costForTwo": 90,
+    "averageRating": 4.7,
+    "reviewCount": 196,
+    "imageUrl": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 98381 44520",
+    "whatsappPhone": "+91 98381 44520",
+    "openTime": "16:00",
+    "closeTime": "22:30",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Ganesh Gupta",
+    "ownerEmail": "ganesh.bhel@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Counter",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.8,
+      "taste": 4.8,
+      "hygiene": 4.6,
+      "service": 4.7,
+      "ambience": 4.1
+    },
+    "priceRange": {
+      "min": 40,
+      "max": 80
+    },
+    "distanceKm": 0.4,
+    "menu": [
+      {
+        "id": "gb-1",
+        "name": "Special Bombay Bhelpuri",
+        "price": 50,
+        "category": "Bhel",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Crisp puffed rice, papdi, sev, peanuts, onions, potatoes tossed with tangy raw mango chutney.",
+        "imageUrl": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "id": "gb-2",
+        "name": "Mumbai Masala Sev Puri (6 Pcs)",
+        "price": 60,
+        "category": "Sevpuri",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Flat crispy puris layered with potato cubes, onions, trio of chutneys and buried under nylon sev.",
+        "imageUrl": "https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "id": "gb-3",
+        "name": "Sukha Masala Bhel",
+        "price": 40,
+        "category": "Bhel",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "description": "Dry crunch bhel tossed with roasted spices and lemon sprinkle.",
+        "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_ganesh-bhelpuri-baldev%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_ganesh-bhelpuri-baldev%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_ganesh-bhelpuri-baldev)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_ganesh-bhelpuri-baldev)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3EGB%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "pandit-kulfi-golghar",
+    "name": "Pandit Ji Kulfi & Falooda Stall",
+    "area": "Golghar",
+    "city": "Gorakhpur",
+    "address": "Near Maya Cinema Gate, Cinema Road, Golghar, Gorakhpur",
+    "description": "Renowned nighttime sweet street spot serving traditional rabdi malai kulfi, kesar pista falooda, and rose syrup sundaes in earthen kulhads.",
+    "categories": [
+      "street-food",
+      "sweets"
+    ],
+    "cuisines": [
+      "Kulfi & Falooda",
+      "Desserts"
+    ],
+    "popularDishes": [
+      "Kesar Pista Matka Kulfi",
+      "Special Rabdi Falooda",
+      "Malai Roll Cut Kulfi",
+      "Rose Falooda"
+    ],
+    "costForTwo": 120,
+    "averageRating": 4.9,
+    "reviewCount": 312,
+    "imageUrl": "https://images.unsplash.com/photo-1505394033641-40c6ad1178d7?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 94500 77192",
+    "whatsappPhone": "+91 94500 77192",
+    "openTime": "14:00",
+    "closeTime": "23:30",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Pandit Ramakant Tiwari",
+    "ownerEmail": "panditji.kulfi@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Stall",
+      "Takeaway",
+      "UPI Accepted",
+      "Night Dining"
+    ],
+    "ratingsBreakdown": {
+      "food": 5,
+      "taste": 5,
+      "hygiene": 4.7,
+      "service": 4.8,
+      "ambience": 4.4
+    },
+    "priceRange": {
+      "min": 40,
+      "max": 90
+    },
+    "distanceKm": 0.5,
+    "menu": [
+      {
+        "id": "pk-1",
+        "name": "Special Rabdi Falooda",
+        "price": 70,
+        "category": "Falooda",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Handmade cornstarch noodles over rich condensed rabdi topped with basil seeds and pure rose syrup.",
+        "imageUrl": "https://images.unsplash.com/photo-1505394033641-40c6ad1178d7?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "id": "pk-2",
+        "name": "Kesar Pista Matka Kulfi",
+        "price": 60,
+        "category": "Kulfi",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Traditional slow-boiled milk kulfi enriched with saffron threads and roasted pistachios in clay pot.",
+        "imageUrl": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "id": "pk-3",
+        "name": "Malai Roll Cut Kulfi",
+        "price": 50,
+        "category": "Kulfi",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "description": "Chilled creamy milk slice kulfi garnished with cardamom powder.",
+        "imageUrl": "https://images.unsplash.com/photo-1505394033641-40c6ad1178d7?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_pandit-kulfi-golghar%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_pandit-kulfi-golghar%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_pandit-kulfi-golghar)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_pandit-kulfi-golghar)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3EPJ%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "lakeview-kurkure-momos-naukayan",
+    "name": "Lakeview Kurkure Momos Corner",
+    "area": "Taramandal",
+    "city": "Gorakhpur",
+    "address": "Near Naukayan Boating Ghat, Ramgarh Taal Lakefront, Taramandal, Gorakhpur",
+    "description": "Gorakhpur youth hotspot by Ramgarh lake famous for ultra-crispy Kurkure Momos, fiery red garlic chutney, and cheese corn steamed dumplings.",
+    "categories": [
+      "street-food",
+      "fast-food"
+    ],
+    "cuisines": [
+      "Momos & Chinese",
+      "Street Food"
+    ],
+    "popularDishes": [
+      "Kurkure Veg Momos",
+      "Paneer Fried Momos",
+      "Cheese Corn Steamed Momos",
+      "Cold Coffee"
+    ],
+    "costForTwo": 160,
+    "averageRating": 4.7,
+    "reviewCount": 245,
+    "imageUrl": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 72750 66810",
+    "whatsappPhone": "+91 72750 66810",
+    "openTime": "15:00",
+    "closeTime": "23:00",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "both",
+    "status": "Active",
+    "ownerName": "Vikas Kushwaha",
+    "ownerEmail": "lakeview.momos@gorakhpurfoodguide.in",
+    "facilities": [
+      "Lake View Seating",
+      "Takeaway Counter",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.8,
+      "taste": 4.8,
+      "hygiene": 4.5,
+      "service": 4.6,
+      "ambience": 4.9
+    },
+    "priceRange": {
+      "min": 60,
+      "max": 130
+    },
+    "distanceKm": 2.1,
+    "menu": [
+      {
+        "id": "lm-1",
+        "name": "Kurkure Veg Momos (6 Pcs)",
+        "price": 80,
+        "category": "Kurkure Momos",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Crispy cornflake crusted dumplings with shredded cabbage, carrots and herbs served with spicy chutney.",
+        "imageUrl": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "id": "lm-2",
+        "name": "Kurkure Paneer Momos (6 Pcs)",
+        "price": 100,
+        "category": "Kurkure Momos",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Crumb-coated paneer momos deep fried to golden crisp with mayonnaise dip.",
+        "imageUrl": "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "id": "lm-3",
+        "name": "Steamed Veg Momos (6 Pcs)",
+        "price": 60,
+        "category": "Steamed Momos",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "description": "Soft thin-skinned dumplings stuffed with savory garden veggies.",
+        "imageUrl": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_lakeview-kurkure-momos-naukayan%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_lakeview-kurkure-momos-naukayan%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_lakeview-kurkure-momos-naukayan)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_lakeview-kurkure-momos-naukayan)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3ELK%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "banarasi-tamatar-chaat-taramandal",
+    "name": "Banarasi Tamatar Chaat & Pani Puri Corner",
+    "area": "Taramandal",
+    "city": "Gorakhpur",
+    "address": "Near Planetarium Gate, Ring Road, Taramandal, Gorakhpur",
+    "description": "Authentic Banarasi street taste in Gorakhpur! Hot tomato chaat cooked on huge brass tawa with sugar syrup and roasted spices, plus 6-flavor pani puri.",
+    "categories": [
+      "street-food"
+    ],
+    "cuisines": [
+      "Street Food & Chaat"
+    ],
+    "popularDishes": [
+      "Banarasi Tamatar Chaat",
+      "Puchka (6 Flavors)",
+      "Aloo Palak Chaat",
+      "Dahi Gujiya"
+    ],
+    "costForTwo": 110,
+    "averageRating": 4.8,
+    "reviewCount": 220,
+    "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 99360 44129",
+    "whatsappPhone": "+91 99360 44129",
+    "openTime": "16:00",
+    "closeTime": "22:30",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Satish Chandra Keshari",
+    "ownerEmail": "banarasi.chaat@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Stall",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.9,
+      "taste": 5,
+      "hygiene": 4.6,
+      "service": 4.7,
+      "ambience": 4.3
+    },
+    "priceRange": {
+      "min": 40,
+      "max": 80
+    },
+    "distanceKm": 2.3,
+    "menu": [
+      {
+        "id": "btc-1",
+        "name": "Authentic Banarasi Tamatar Chaat",
+        "price": 60,
+        "category": "Hot Chaat",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Tawa-cooked spiced ripe tomatoes mashed with khoya, dry fruits, spices and finished with sweet sugar syrup.",
+        "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "id": "btc-2",
+        "name": "6-Flavor Golgappe Platter",
+        "price": 40,
+        "category": "Pani Puri",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Six puris filled with spicy potato mash served with mint, lemon, hing, jaljeera, garlic and sweet pani.",
+        "imageUrl": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_banarasi-tamatar-chaat-taramandal%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_banarasi-tamatar-chaat-taramandal%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_banarasi-tamatar-chaat-taramandal)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_banarasi-tamatar-chaat-taramandal)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3EBT%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "royal-kulhad-chai-naukayan",
+    "name": "Royal Kulhad Chai & Bun Makkhan Adda",
+    "area": "Taramandal",
+    "city": "Gorakhpur",
+    "address": "Naukayan Waterfront Walkway, Ramgarh Taal, Gorakhpur",
+    "description": "Iconic lakefront gathering spot serving piping hot Tandoori Kulhad Chai, freshly toasted Kadak Bun Makkhan, and crunchy vegetable maggi.",
+    "categories": [
+      "street-food",
+      "cafe"
+    ],
+    "cuisines": [
+      "Chai & Snacks",
+      "Fast Food"
+    ],
+    "popularDishes": [
+      "Tandoori Kulhad Chai",
+      "Masked Bun Makkhan",
+      "Cheese Tadka Maggi",
+      "Adrak Elaichi Chai"
+    ],
+    "costForTwo": 90,
+    "averageRating": 4.8,
+    "reviewCount": 380,
+    "imageUrl": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 94158 22390",
+    "whatsappPhone": "+91 94158 22390",
+    "openTime": "06:30",
+    "closeTime": "23:00",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Alok Singh",
+    "ownerEmail": "royal.chai@gorakhpurfoodguide.in",
+    "facilities": [
+      "Lake Breeze Seating",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.8,
+      "taste": 4.9,
+      "hygiene": 4.7,
+      "service": 4.8,
+      "ambience": 5
+    },
+    "priceRange": {
+      "min": 25,
+      "max": 80
+    },
+    "distanceKm": 2,
+    "menu": [
+      {
+        "id": "rc-1",
+        "name": "Smoky Tandoori Kulhad Chai",
+        "price": 30,
+        "category": "Chai",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Strong milk tea poured into red hot clay kulhad roasted in tandoor creating intense earthy aroma.",
+        "imageUrl": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "id": "rc-2",
+        "name": "Toasted Bun Makkhan",
+        "price": 40,
+        "category": "Snacks",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Soft sweet bun toasted crisp on tawa and loaded with generous dollop of butter.",
+        "imageUrl": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "id": "rc-3",
+        "name": "Lakefront Veggie Masala Maggi",
+        "price": 60,
+        "category": "Quick Bites",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "description": "Double packet maggi cooked with capsicum, tomatoes, sweet corn and spicy desi tadka.",
+        "imageUrl": "https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_royal-kulhad-chai-naukayan%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_royal-kulhad-chai-naukayan%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_royal-kulhad-chai-naukayan)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_royal-kulhad-chai-naukayan)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3ERK%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "calcutta-rolls-townhall",
+    "name": "Calcutta Rolls & Kebab Corner",
+    "area": "Golghar",
+    "city": "Gorakhpur",
+    "address": "Near Town Hall Fountain, Civil Lines / Golghar Border, Gorakhpur",
+    "description": "The go-to stall for flaky paratha rolls! Hot lachha parathas fried on iron skillet wrapped around spiced paneer tikka, soya chaap or juicy chicken.",
+    "categories": [
+      "street-food",
+      "fast-food"
+    ],
+    "cuisines": [
+      "Rolls & Kebabs",
+      "Street Food"
+    ],
+    "popularDishes": [
+      "Paneer Tikka Roll",
+      "Double Egg Roll",
+      "Soya Malai Chaap Roll",
+      "Chicken Kathi Roll"
+    ],
+    "costForTwo": 180,
+    "averageRating": 4.7,
+    "reviewCount": 260,
+    "imageUrl": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 98380 99420",
+    "whatsappPhone": "+91 98380 99420",
+    "openTime": "13:00",
+    "closeTime": "23:00",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "both",
+    "status": "Active",
+    "ownerName": "Mohammed Shamim",
+    "ownerEmail": "calcutta.rolls@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Stall",
+      "Quick Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.8,
+      "taste": 4.8,
+      "hygiene": 4.6,
+      "service": 4.7,
+      "ambience": 4.2
+    },
+    "priceRange": {
+      "min": 60,
+      "max": 140
+    },
+    "distanceKm": 0.6,
+    "menu": [
+      {
+        "id": "cr-1",
+        "name": "Paneer Tikka Lachha Roll",
+        "price": 90,
+        "category": "Veg Rolls",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Charcoal grilled spicy paneer cubes rolled in flaky crispy paratha with onions and mint dip.",
+        "imageUrl": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "id": "cr-2",
+        "name": "Chicken Seekh Kathi Roll",
+        "price": 110,
+        "category": "Non-Veg Rolls",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Succulent chicken seekh wrapped in egg coated lachha paratha with spiced onion relish.",
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_calcutta-rolls-townhall%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_calcutta-rolls-townhall%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_calcutta-rolls-townhall)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_calcutta-rolls-townhall)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3ECR%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "asuran-momo-burger-point",
+    "name": "Asuran Momo Corner & Crispy Burger",
+    "area": "Medical College Road",
+    "city": "Gorakhpur",
+    "address": "Asuran Chowk, Near SBI ATM, Gorakhpur",
+    "description": "Student favorite fast food joint in Asuran serving gravy fried momos, giant double patty crispy burgers, and loaded peri peri fries.",
+    "categories": [
+      "street-food",
+      "fast-food"
+    ],
+    "cuisines": [
+      "Momos & Chinese",
+      "Fast Food"
+    ],
+    "popularDishes": [
+      "Gravy Fried Veg Momos",
+      "Crispy Paneer Burger",
+      "Peri Peri Fries",
+      "Veg Chowmein"
+    ],
+    "costForTwo": 150,
+    "averageRating": 4.6,
+    "reviewCount": 210,
+    "imageUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 94511 88320",
+    "whatsappPhone": "+91 94511 88320",
+    "openTime": "14:00",
+    "closeTime": "22:30",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "both",
+    "status": "Active",
+    "ownerName": "Deepak Jaiswal",
+    "ownerEmail": "asuran.momos@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Stall",
+      "Quick Counter",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.7,
+      "taste": 4.8,
+      "hygiene": 4.4,
+      "service": 4.6,
+      "ambience": 4.3
+    },
+    "priceRange": {
+      "min": 50,
+      "max": 120
+    },
+    "distanceKm": 2.8,
+    "menu": [
+      {
+        "id": "am-1",
+        "name": "Tandoori Gravy Momos (6 Pcs)",
+        "price": 90,
+        "category": "Momos",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Deep fried momos tossed in rich creamy spicy tandoori gravy with chaat masala.",
+        "imageUrl": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "id": "am-2",
+        "name": "Jumbo Crispy Paneer Burger",
+        "price": 80,
+        "category": "Burgers",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Crunchy paneer patty inside toasted sesame bun with melted cheese slice and lettuce.",
+        "imageUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_asuran-momo-burger-point%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_asuran-momo-burger-point%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_asuran-momo-burger-point)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_asuran-momo-burger-point)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3EAM%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "kashi-nath-kachori-reti",
+    "name": "Kashi Nath Kachori Bhandar",
+    "area": "Reti Chowk",
+    "city": "Gorakhpur",
+    "address": "Near Old Police Chowki, Reti Chowk, Gorakhpur",
+    "description": "Famous morning heritage breakfast stall since 1974! Golden urad dal khasta kachoris served with spicy aloo-dum sabzi and steaming hot jalebi.",
+    "categories": [
+      "street-food",
+      "sweets"
+    ],
+    "cuisines": [
+      "Kachori & Samosa",
+      "Mithai"
+    ],
+    "popularDishes": [
+      "Khasta Kachori with Aloo Sabzi",
+      "Desi Ghee Jalebi",
+      "Urad Dal Bedmi Poori",
+      "Kulhad Chaas"
+    ],
+    "costForTwo": 90,
+    "averageRating": 4.9,
+    "reviewCount": 340,
+    "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 94152 11980",
+    "whatsappPhone": "+91 94152 11980",
+    "openTime": "06:00",
+    "closeTime": "13:30",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Kashi Nath Gupta",
+    "ownerEmail": "kashinath.kachori@gorakhpurfoodguide.in",
+    "facilities": [
+      "Morning Counter",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 5,
+      "taste": 5,
+      "hygiene": 4.6,
+      "service": 4.8,
+      "ambience": 4.2
+    },
+    "priceRange": {
+      "min": 30,
+      "max": 70
+    },
+    "distanceKm": 1.8,
+    "menu": [
+      {
+        "id": "kn-1",
+        "name": "Khasta Kachori with Spicy Aloo Sabzi (4 Pcs)",
+        "price": 40,
+        "category": "Kachori",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Crumbled crispy kachori filled with spiced urad dal topped with steaming hot peppery potato gravy.",
+        "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "id": "kn-2",
+        "name": "Hot Desi Ghee Jalebi (100g)",
+        "price": 40,
+        "category": "Sweets",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Thin and crunchy spiral jalebis soaked in saffron sugar syrup.",
+        "imageUrl": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_kashi-nath-kachori-reti%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_kashi-nath-kachori-reti%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_kashi-nath-kachori-reti)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_kashi-nath-kachori-reti)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3EKN%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "gupta-samosa-medical",
+    "name": "Gupta Ji Mashhoor Samosa & Chutney Stall",
+    "area": "Medical College Road",
+    "city": "Gorakhpur",
+    "address": "Near BRD Medical College Gate No 2, Gorakhpur",
+    "description": "Renowned samosa stall serving jumbo golden samosas filled with whole cashew-spiced potatoes, paired with sweet saunth and fiery coriander chutney.",
+    "categories": [
+      "street-food"
+    ],
+    "cuisines": [
+      "Kachori & Samosa",
+      "Street Food"
+    ],
+    "popularDishes": [
+      "Kaju Masala Samosa",
+      "Samosa Chaat",
+      "Paneer Bread Pakoda",
+      "Masala Chai"
+    ],
+    "costForTwo": 70,
+    "averageRating": 4.8,
+    "reviewCount": 290,
+    "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 98391 77210",
+    "whatsappPhone": "+91 98391 77210",
+    "openTime": "08:00",
+    "closeTime": "21:00",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Manoj Gupta",
+    "ownerEmail": "guptaji.samosa@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Counter",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.9,
+      "taste": 5,
+      "hygiene": 4.7,
+      "service": 4.8,
+      "ambience": 4.3
+    },
+    "priceRange": {
+      "min": 20,
+      "max": 50
+    },
+    "distanceKm": 3.5,
+    "menu": [
+      {
+        "id": "gs-1",
+        "name": "Kaju Masala Samosa (2 Pcs)",
+        "price": 30,
+        "category": "Samosa",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Extra crispy golden samosas packed with spiced potato chunks, green peas and whole cashews.",
+        "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "id": "gs-2",
+        "name": "Special Samosa Chaat",
+        "price": 50,
+        "category": "Chaat",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Two crushed samosas smothered with hot chana masala, beaten curd, onions and chutneys.",
+        "imageUrl": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_gupta-samosa-medical%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_gupta-samosa-medical%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_gupta-samosa-medical)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_gupta-samosa-medical)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3EGJ%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "sagar-dosa-indralok",
+    "name": "Sagar Dosa & Pav Bhaji Cart",
+    "area": "Golghar",
+    "city": "Gorakhpur",
+    "address": "Indralok Commercial Complex Lane, Golghar, Gorakhpur",
+    "description": "Street-side South Indian & Pav Bhaji counter famous for paper-thin butter masala dosas, sizzling Amul butter pav bhaji, and soft idlis.",
+    "categories": [
+      "street-food",
+      "fast-food"
+    ],
+    "cuisines": [
+      "Pav Bhaji & South Indian",
+      "Street Food"
+    ],
+    "popularDishes": [
+      "Butter Masala Dosa",
+      "Amul Pav Bhaji",
+      "Mysore Masala Dosa",
+      "Cheese Pav Bhaji"
+    ],
+    "costForTwo": 140,
+    "averageRating": 4.7,
+    "reviewCount": 235,
+    "imageUrl": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 94155 33219",
+    "whatsappPhone": "+91 94155 33219",
+    "openTime": "13:00",
+    "closeTime": "22:30",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Suresh Kumar",
+    "ownerEmail": "sagar.dosa@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Counter",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.8,
+      "taste": 4.8,
+      "hygiene": 4.6,
+      "service": 4.7,
+      "ambience": 4.3
+    },
+    "priceRange": {
+      "min": 50,
+      "max": 110
+    },
+    "distanceKm": 0.4,
+    "menu": [
+      {
+        "id": "sd-1",
+        "name": "Crispy Butter Masala Dosa",
+        "price": 80,
+        "category": "Dosa",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Golden fermented rice-lentil crepe brushed with Amul butter and filled with spiced aloo masala.",
+        "imageUrl": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "id": "sd-2",
+        "name": "Amul Butter Pav Bhaji",
+        "price": 80,
+        "category": "Pav Bhaji",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Mashed vegetable curry cooked with fragrant spices on flat tawa served with 2 buttery pavs.",
+        "imageUrl": "https://images.unsplash.com/photo-1606491956689-2ea866880c84?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_sagar-dosa-indralok%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_sagar-dosa-indralok%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_sagar-dosa-indralok)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_sagar-dosa-indralok)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3ESD%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "bombay-chowpatty-pavbhaji",
+    "name": "Bombay Chowpatty Pav Bhaji & Pulao",
+    "area": "Golghar",
+    "city": "Gorakhpur",
+    "address": "Backside Parking, Baldev Plaza, Golghar, Gorakhpur",
+    "description": "Tawa-cooked Mumbai style fast food favorites! Sizzling extra butter pav bhaji and aromatic tawa pulao prepared live on giant iron griddle.",
+    "categories": [
+      "street-food",
+      "fast-food"
+    ],
+    "cuisines": [
+      "Pav Bhaji & South Indian",
+      "Fast Food"
+    ],
+    "popularDishes": [
+      "Special Amul Pav Bhaji",
+      "Bombay Tawa Pulao",
+      "Cheese Loaded Pav Bhaji",
+      "Masala Pav"
+    ],
+    "costForTwo": 160,
+    "averageRating": 4.7,
+    "reviewCount": 185,
+    "imageUrl": "https://images.unsplash.com/photo-1606491956689-2ea866880c84?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 98387 11402",
+    "whatsappPhone": "+91 98387 11402",
+    "openTime": "15:00",
+    "closeTime": "23:00",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Praveen Chaurasia",
+    "ownerEmail": "bombay.chowpatty@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Seating",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.8,
+      "taste": 4.9,
+      "hygiene": 4.6,
+      "service": 4.7,
+      "ambience": 4.4
+    },
+    "priceRange": {
+      "min": 60,
+      "max": 120
+    },
+    "distanceKm": 0.4,
+    "menu": [
+      {
+        "id": "bc-1",
+        "name": "Special Amul Pav Bhaji",
+        "price": 90,
+        "category": "Pav Bhaji",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Velvety spicy vegetable mash topped with melting butter slab, served with lime, onions and warm pav.",
+        "imageUrl": "https://images.unsplash.com/photo-1606491956689-2ea866880c84?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "id": "bc-2",
+        "name": "Bombay Tawa Pulao",
+        "price": 90,
+        "category": "Tawa Rice",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Basmati rice tossed on pav bhaji tawa with tomatoes, peas, paneer cubes and pav bhaji masala.",
+        "imageUrl": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_bombay-chowpatty-pavbhaji%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_bombay-chowpatty-pavbhaji%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_bombay-chowpatty-pavbhaji)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_bombay-chowpatty-pavbhaji)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3EBC%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "buxipur-seekh-kebab-corner",
+    "name": "Buxipur Seekh Kebab & Tikka Corner",
+    "area": "Buxipur",
+    "city": "Gorakhpur",
+    "address": "Buxipur Main Chauraha, Near Jama Masjid Road, Gorakhpur",
+    "description": "Iconic evening street barbecue spot in Gorakhpur! Smoky seekh kebabs grilled over open charcoal sigdi, paired with warm rumali roti and mint chutney.",
+    "categories": [
+      "street-food"
+    ],
+    "cuisines": [
+      "Rolls & Kebabs",
+      "Mughlai"
+    ],
+    "popularDishes": [
+      "Mutton Seekh Kebab",
+      "Chicken Boti Tikka",
+      "Rumali Roti Roll",
+      "Chicken Malai Tikka"
+    ],
+    "costForTwo": 220,
+    "averageRating": 4.8,
+    "reviewCount": 310,
+    "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 94153 66190",
+    "whatsappPhone": "+91 94153 66190",
+    "openTime": "17:00",
+    "closeTime": "23:30",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "both",
+    "status": "Active",
+    "ownerName": "Mohammad Imran Qureshi",
+    "ownerEmail": "buxipur.kebabs@gorakhpurfoodguide.in",
+    "facilities": [
+      "Charcoal Grill",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 5,
+      "taste": 5,
+      "hygiene": 4.5,
+      "service": 4.8,
+      "ambience": 4.1
+    },
+    "priceRange": {
+      "min": 70,
+      "max": 150
+    },
+    "distanceKm": 1.2,
+    "menu": [
+      {
+        "id": "bk-1",
+        "name": "Charcoal Mutton Seekh Kebab (4 Pcs)",
+        "price": 120,
+        "category": "Kebabs",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Minced spiced mutton skewers flame-broiled over hot coals, brushed with butter and served with onions.",
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "id": "bk-2",
+        "name": "Chicken Tikka Rumali Roll",
+        "price": 100,
+        "category": "Rolls",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Smoky boneless chicken chunks wrapped in thin rumali roti with lemon juice and chaat masala.",
+        "imageUrl": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_buxipur-seekh-kebab-corner%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_buxipur-seekh-kebab-corner%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_buxipur-seekh-kebab-corner)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_buxipur-seekh-kebab-corner)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3EBS%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "bajrangi-dal-samosa-ghantaghar",
+    "name": "Bajrangi Dal Samosa & Jalebi Bhandar",
+    "area": "Reti Chowk",
+    "city": "Gorakhpur",
+    "address": "Near Clock Tower, Ghantaghar Chowk, Gorakhpur",
+    "description": "Heritage street shop famous for eastern UP specialty Chana Dal Samosa (pithi samosa) and hot jalebis prepared in pure mustard and ghee.",
+    "categories": [
+      "street-food",
+      "sweets"
+    ],
+    "cuisines": [
+      "Kachori & Samosa",
+      "Mithai"
+    ],
+    "popularDishes": [
+      "Chana Dal Samosa",
+      "Desi Ghee Jalebi",
+      "Khasta Dal Kachori",
+      "Lassi"
+    ],
+    "costForTwo": 70,
+    "averageRating": 4.8,
+    "reviewCount": 275,
+    "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 94508 44310",
+    "whatsappPhone": "+91 94508 44310",
+    "openTime": "07:00",
+    "closeTime": "21:00",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Bajrangi Lal",
+    "ownerEmail": "bajrangi.samosa@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Stall",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.9,
+      "taste": 5,
+      "hygiene": 4.6,
+      "service": 4.7,
+      "ambience": 4.2
+    },
+    "priceRange": {
+      "min": 20,
+      "max": 60
+    },
+    "distanceKm": 1.5,
+    "menu": [
+      {
+        "id": "bs-1",
+        "name": "Spicy Chana Dal Samosa (2 Pcs)",
+        "price": 30,
+        "category": "Samosa",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Traditional flaky samosas stuffed with coarse spiced Bengal gram and carom seeds.",
+        "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "id": "bs-2",
+        "name": "Crispy Jalebi (100g)",
+        "price": 35,
+        "category": "Sweets",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Golden sugar-syrup rings fried fresh in front of customers.",
+        "imageUrl": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_bajrangi-dal-samosa-ghantaghar%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_bajrangi-dal-samosa-ghantaghar%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_bajrangi-dal-samosa-ghantaghar)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_bajrangi-dal-samosa-ghantaghar)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3EBD%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "dilli-chole-bhature-taramandal",
+    "name": "Dilli 6 Chole Bhature Stall",
+    "area": "Taramandal",
+    "city": "Gorakhpur",
+    "address": "Planetarium Commercial Lane, Taramandal Road, Gorakhpur",
+    "description": "Delhi Chandni Chowk style fluffy paneer-stuffed bhaturas served with spicy dark Pindi chole, carrot pickle, and fresh mint chutney.",
+    "categories": [
+      "street-food",
+      "north-indian"
+    ],
+    "cuisines": [
+      "North Indian",
+      "Street Food"
+    ],
+    "popularDishes": [
+      "Paneer Stuffed Chole Bhature",
+      "Amritsari Kulcha",
+      "Sweet Lassi Kulhad",
+      "Aloo Poori"
+    ],
+    "costForTwo": 140,
+    "averageRating": 4.7,
+    "reviewCount": 205,
+    "imageUrl": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 99365 22019",
+    "whatsappPhone": "+91 99365 22019",
+    "openTime": "08:30",
+    "closeTime": "21:30",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Jagdish Chandra",
+    "ownerEmail": "dilli.chole@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Stall",
+      "Quick Dining",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.8,
+      "taste": 4.9,
+      "hygiene": 4.6,
+      "service": 4.7,
+      "ambience": 4.4
+    },
+    "priceRange": {
+      "min": 60,
+      "max": 120
+    },
+    "distanceKm": 2.2,
+    "menu": [
+      {
+        "id": "dc-1",
+        "name": "Paneer Stuffed Chole Bhature (2 Pcs)",
+        "price": 80,
+        "category": "Bhature",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Golden puffed bhaturas with paneer and coriander filling served with spiced dark chole and pickle.",
+        "imageUrl": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "id": "dc-2",
+        "name": "Malai Kulhad Lassi",
+        "price": 40,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "description": "Chilled sweet churned yogurt topped with thick malai skin and rose drops.",
+        "imageUrl": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_dilli-chole-bhature-taramandal%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_dilli-chole-bhature-taramandal%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_dilli-chole-bhature-taramandal)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_dilli-chole-bhature-taramandal)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3EDC%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "maggi-point-naukayan",
+    "name": "Maggi Point & Coffee Hub",
+    "area": "Taramandal",
+    "city": "Gorakhpur",
+    "address": "Near Boating Ticket Counter, Naukayan, Ramgarh Taal, Gorakhpur",
+    "description": "Bustling lakefront street kiosk famous among evening tourists for Cheese Corn Maggi, Peri-peri sandwiches, and Frothy Cold Coffee.",
+    "categories": [
+      "street-food",
+      "fast-food"
+    ],
+    "cuisines": [
+      "Chai & Snacks",
+      "Fast Food"
+    ],
+    "popularDishes": [
+      "Cheese Tadka Maggi",
+      "Thick Cold Coffee",
+      "Veg Grilled Sandwich",
+      "Spring Rolls"
+    ],
+    "costForTwo": 130,
+    "averageRating": 4.7,
+    "reviewCount": 320,
+    "imageUrl": "https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 72758 99120",
+    "whatsappPhone": "+91 72758 99120",
+    "openTime": "11:00",
+    "closeTime": "23:30",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Rohit Nishad",
+    "ownerEmail": "maggipoint.lake@gorakhpurfoodguide.in",
+    "facilities": [
+      "Lake View Seating",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.7,
+      "taste": 4.8,
+      "hygiene": 4.6,
+      "service": 4.8,
+      "ambience": 5
+    },
+    "priceRange": {
+      "min": 40,
+      "max": 90
+    },
+    "distanceKm": 2.1,
+    "menu": [
+      {
+        "id": "mp-1",
+        "name": "Double Cheese Corn Maggi",
+        "price": 70,
+        "category": "Maggi",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Two cakes of Maggi cooked with butter, sweet corn, oregano and melted mozzarella cheese.",
+        "imageUrl": "https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "id": "mp-2",
+        "name": "Frothy Cold Coffee with Ice Cream",
+        "price": 60,
+        "category": "Beverages",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Blended espresso with rich vanilla ice cream and chocolate drizzle.",
+        "imageUrl": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_maggi-point-naukayan%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_maggi-point-naukayan%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_maggi-point-naukayan)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_maggi-point-naukayan)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3EMP%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "al-hasan-rolls-urdubazar",
+    "name": "Al-Hasan Street Rolls & Biryani Cart",
+    "area": "Reti Chowk",
+    "city": "Gorakhpur",
+    "address": "Urdu Bazar Crossroad, Near Jama Masjid, Gorakhpur",
+    "description": "Legendary night street food counter serving authentic Lucknowi Dum Biryani quarter plates, succulent seekh paratha rolls, and chicken fry.",
+    "categories": [
+      "street-food"
+    ],
+    "cuisines": [
+      "Rolls & Kebabs",
+      "Mughlai"
+    ],
+    "popularDishes": [
+      "Chicken Dum Biryani (Quarter)",
+      "Seekh Paratha Roll",
+      "Crispy Chicken Fry",
+      "Tandoori Roti"
+    ],
+    "costForTwo": 180,
+    "averageRating": 4.8,
+    "reviewCount": 295,
+    "imageUrl": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 98380 44912",
+    "whatsappPhone": "+91 98380 44912",
+    "openTime": "16:00",
+    "closeTime": "23:30",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "both",
+    "status": "Active",
+    "ownerName": "Hasan Ali",
+    "ownerEmail": "alhasan.rolls@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Stall",
+      "Quick Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.9,
+      "taste": 5,
+      "hygiene": 4.5,
+      "service": 4.7,
+      "ambience": 4.1
+    },
+    "priceRange": {
+      "min": 60,
+      "max": 130
+    },
+    "distanceKm": 1.6,
+    "menu": [
+      {
+        "id": "ah-1",
+        "name": "Chicken Dum Biryani (Quarter Plate)",
+        "price": 80,
+        "category": "Biryani",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Aromatic basmati rice cooked on slow dum with tender chicken, brown onions and saffron essence.",
+        "imageUrl": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "id": "ah-2",
+        "name": "Mutton Seekh Paratha Roll",
+        "price": 90,
+        "category": "Rolls",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Grilled spiced seekh kebab wrapped in hot tawa paratha with onion salad and green chutney.",
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_al-hasan-rolls-urdubazar%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_al-hasan-rolls-urdubazar%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_al-hasan-rolls-urdubazar)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_al-hasan-rolls-urdubazar)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3EAS%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "anna-dosa-mohaddipur",
+    "name": "South Indian Anna Dosa Cart",
+    "area": "Mohaddipur",
+    "city": "Gorakhpur",
+    "address": "Near Mohaddipur Overbridge Pillar 14, Gorakhpur",
+    "description": "Famous street dosa van serving authentic Southern flavors: Ghee Roast Dosa, Onion Rava Dosa, Medu Vada, and piping hot gun-powder idlis.",
+    "categories": [
+      "street-food",
+      "fast-food"
+    ],
+    "cuisines": [
+      "Pav Bhaji & South Indian",
+      "Street Food"
+    ],
+    "popularDishes": [
+      "Ghee Roast Masala Dosa",
+      "Onion Rava Dosa",
+      "Crispy Medu Vada (2 Pcs)",
+      "Cheese Dosa"
+    ],
+    "costForTwo": 130,
+    "averageRating": 4.7,
+    "reviewCount": 190,
+    "imageUrl": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 94156 88120",
+    "whatsappPhone": "+91 94156 88120",
+    "openTime": "15:30",
+    "closeTime": "22:30",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "M. Selvam",
+    "ownerEmail": "anna.dosa@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Stall",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.8,
+      "taste": 4.9,
+      "hygiene": 4.6,
+      "service": 4.8,
+      "ambience": 4.2
+    },
+    "priceRange": {
+      "min": 40,
+      "max": 90
+    },
+    "distanceKm": 2.4,
+    "menu": [
+      {
+        "id": "ad-1",
+        "name": "Ghee Roast Masala Dosa",
+        "price": 70,
+        "category": "Dosa",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Paper thin crispy dosa roasted with pure desi ghee filled with flavorful potato masala.",
+        "imageUrl": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "id": "ad-2",
+        "name": "Crispy Medu Vada with Sambhar (2 Pcs)",
+        "price": 50,
+        "category": "Snacks",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": false,
+        "description": "Golden lentil fritters dunked in hot spiced drumstick sambhar and fresh coconut chutney.",
+        "imageUrl": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_anna-dosa-mohaddipur%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_anna-dosa-mohaddipur%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_anna-dosa-mohaddipur)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_anna-dosa-mohaddipur)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3ESI%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "munna-lal-malai-toast-reti",
+    "name": "Munna Lal Malai Toast & Rabdi Stall",
+    "area": "Reti Chowk",
+    "city": "Gorakhpur",
+    "address": "Near Old Ghantaghar Market Gate, Reti Chowk, Gorakhpur",
+    "description": "Iconic Gorakhpur dessert stall famous for char-toasted white bread smothered with fresh clotted malai, saffron sugar dust, and thick rabdi.",
+    "categories": [
+      "street-food",
+      "sweets"
+    ],
+    "cuisines": [
+      "Mithai",
+      "Desserts"
+    ],
+    "popularDishes": [
+      "Malai Toast with Elaichi",
+      "Kesariya Rabdi Bowl",
+      "Hot Badam Milk",
+      "Makkhan Malai"
+    ],
+    "costForTwo": 100,
+    "averageRating": 4.9,
+    "reviewCount": 310,
+    "imageUrl": "https://images.unsplash.com/photo-1505394033641-40c6ad1178d7?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 94503 11820",
+    "whatsappPhone": "+91 94503 11820",
+    "openTime": "17:00",
+    "closeTime": "23:30",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Munna Lal Yadav",
+    "ownerEmail": "munnalal.malai@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Counter",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 5,
+      "taste": 5,
+      "hygiene": 4.7,
+      "service": 4.8,
+      "ambience": 4.3
+    },
+    "priceRange": {
+      "min": 35,
+      "max": 80
+    },
+    "distanceKm": 1.7,
+    "menu": [
+      {
+        "id": "ml-1",
+        "name": "Signature Malai Toast",
+        "price": 40,
+        "category": "Malai Toast",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Charcoal toasted bread topped with thick hand-churned fresh cream and sugar crystals.",
+        "imageUrl": "https://images.unsplash.com/photo-1505394033641-40c6ad1178d7?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "id": "ml-2",
+        "name": "Kesariya Rabdi Bowl (100g)",
+        "price": 60,
+        "category": "Rabdi",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Slow-reduced whole buffalo milk flavored with saffron threads and crushed green cardamom.",
+        "imageUrl": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_munna-lal-malai-toast-reti%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_munna-lal-malai-toast-reti%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_munna-lal-malai-toast-reti)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_munna-lal-malai-toast-reti)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3EML%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "shere-punjab-chole-kulche-asuran",
+    "name": "Shere Punjab Chole Kulche Cart",
+    "area": "Medical College Road",
+    "city": "Gorakhpur",
+    "address": "Near Asuran Chowk Petrol Pump, Gorakhpur",
+    "description": "Amritsari street specialty stall serving buttery grilled kulchas stuffed with potatoes and onions, served with tangy boiled chickpea chaat.",
+    "categories": [
+      "street-food"
+    ],
+    "cuisines": [
+      "North Indian",
+      "Street Food"
+    ],
+    "popularDishes": [
+      "Butter Chole Kulche",
+      "Amritsari Aloo Kulcha",
+      "Masala Chaas",
+      "Boondi Raita"
+    ],
+    "costForTwo": 110,
+    "averageRating": 4.7,
+    "reviewCount": 220,
+    "imageUrl": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 98383 66102",
+    "whatsappPhone": "+91 98383 66102",
+    "openTime": "10:00",
+    "closeTime": "21:00",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Harpreet Singh",
+    "ownerEmail": "sherepunjab.kulche@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Stall",
+      "Quick Service",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.8,
+      "taste": 4.8,
+      "hygiene": 4.6,
+      "service": 4.7,
+      "ambience": 4.2
+    },
+    "priceRange": {
+      "min": 40,
+      "max": 80
+    },
+    "distanceKm": 2.9,
+    "menu": [
+      {
+        "id": "sp-1",
+        "name": "Special Butter Chole Kulche (2 Kulche)",
+        "price": 60,
+        "category": "Chole Kulche",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Soft fluffy kulchas toasted in butter served with tangy spicy chole, green chillies and lemon.",
+        "imageUrl": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_shere-punjab-chole-kulche-asuran%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_shere-punjab-chole-kulche-asuran%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_shere-punjab-chole-kulche-asuran)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_shere-punjab-chole-kulche-asuran)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3ESP%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "lakefront-soya-chaap-taramandal",
+    "name": "Lakefront Soya Chaap & Paneer Tikka Hub",
+    "area": "Taramandal",
+    "city": "Gorakhpur",
+    "address": "Opposite Water Sports Complex, Ramgarh Taal Road, Taramandal, Gorakhpur",
+    "description": "Renowned evening tandoori hub overlooking Ramgarh Lake famous for Afghani Malai Soya Chaap, Masala Chaap, and Smoky Paneer Tikka.",
+    "categories": [
+      "street-food",
+      "north-indian"
+    ],
+    "cuisines": [
+      "Rolls & Kebabs",
+      "North Indian"
+    ],
+    "popularDishes": [
+      "Afghani Malai Chaap",
+      "Tandoori Masala Chaap",
+      "Achari Paneer Tikka",
+      "Rumali Roti"
+    ],
+    "costForTwo": 200,
+    "averageRating": 4.8,
+    "reviewCount": 340,
+    "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 94158 99230",
+    "whatsappPhone": "+91 94158 99230",
+    "openTime": "16:00",
+    "closeTime": "23:30",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Kunal Grover",
+    "ownerEmail": "lakefront.chaap@gorakhpurfoodguide.in",
+    "facilities": [
+      "Lake View Seating",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.9,
+      "taste": 4.9,
+      "hygiene": 4.7,
+      "service": 4.8,
+      "ambience": 4.8
+    },
+    "priceRange": {
+      "min": 80,
+      "max": 150
+    },
+    "distanceKm": 2.2,
+    "menu": [
+      {
+        "id": "sc-1",
+        "name": "Afghani Malai Soya Chaap",
+        "price": 110,
+        "category": "Chaap",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Charcoal roasted soya chaap pieces drenched in rich cashew cream, butter and mild spices.",
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "id": "sc-2",
+        "name": "Tandoori Masala Soya Chaap",
+        "price": 100,
+        "category": "Chaap",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Spicy marinated soya chaap grilled on skewers served with mint dip and onion rings.",
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_lakefront-soya-chaap-taramandal%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_lakefront-soya-chaap-taramandal%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_lakefront-soya-chaap-taramandal)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_lakefront-soya-chaap-taramandal)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3ELS%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "chacha-chai-maska-buxipur",
+    "name": "Chacha Ki Masala Chai & Maska Bun",
+    "area": "Buxipur",
+    "city": "Gorakhpur",
+    "address": "Near Buxipur Book Market Crossroad, Gorakhpur",
+    "description": "Iconic 50-year-old student and reader tea stop in Buxipur serving boiling ginger-cardamom chai, sweet maska bun, and crispy samosas.",
+    "categories": [
+      "street-food",
+      "cafe"
+    ],
+    "cuisines": [
+      "Chai & Snacks",
+      "Street Food"
+    ],
+    "popularDishes": [
+      "Kadak Masala Chai",
+      "Maska Bun with Makkhan",
+      "Khari Biscuit",
+      "Aloo Bonda"
+    ],
+    "costForTwo": 60,
+    "averageRating": 4.8,
+    "reviewCount": 385,
+    "imageUrl": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 94502 33410",
+    "whatsappPhone": "+91 94502 33410",
+    "openTime": "06:00",
+    "closeTime": "22:00",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Chacha Abdul Rahim",
+    "ownerEmail": "chacha.chai@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Benches",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.9,
+      "taste": 5,
+      "hygiene": 4.6,
+      "service": 4.9,
+      "ambience": 4.3
+    },
+    "priceRange": {
+      "min": 15,
+      "max": 40
+    },
+    "distanceKm": 1.1,
+    "menu": [
+      {
+        "id": "cc-1",
+        "name": "Kadak Adrak Elaichi Chai (Kulhad)",
+        "price": 20,
+        "category": "Chai",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Strong Assam CTC tea brewed with crushed ginger roots and green cardamom pods.",
+        "imageUrl": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "id": "cc-2",
+        "name": "Fresh Maska Bun",
+        "price": 25,
+        "category": "Snacks",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Warm pillowy bun spread with rich butter and sprinkled with sugar.",
+        "imageUrl": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_chacha-chai-maska-buxipur%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_chacha-chai-maska-buxipur%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_chacha-chai-maska-buxipur)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_chacha-chai-maska-buxipur)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3ECK%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "awadh-shami-kebab-asuran",
+    "name": "Awadh Street Biryani & Shami Kebab",
+    "area": "Medical College Road",
+    "city": "Gorakhpur",
+    "address": "Near Asuran Chowk Flyover End, Gorakhpur",
+    "description": "Famous evening Mughlai stall serving melt-in-mouth Shami kebabs, fragrant mutton biryani by weight, and chicken seekh parathas.",
+    "categories": [
+      "street-food"
+    ],
+    "cuisines": [
+      "Rolls & Kebabs",
+      "Mughlai"
+    ],
+    "popularDishes": [
+      "Mutton Shami Kebab (2 Pcs)",
+      "Chicken Handi Biryani",
+      "Seekh Kebab Roll",
+      "Rumali Roti"
+    ],
+    "costForTwo": 210,
+    "averageRating": 4.8,
+    "reviewCount": 270,
+    "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 98382 77190",
+    "whatsappPhone": "+91 98382 77190",
+    "openTime": "16:30",
+    "closeTime": "23:00",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "both",
+    "status": "Active",
+    "ownerName": "Irfan Ansari",
+    "ownerEmail": "awadh.biryani@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Stall",
+      "Quick Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.9,
+      "taste": 5,
+      "hygiene": 4.5,
+      "service": 4.7,
+      "ambience": 4.2
+    },
+    "priceRange": {
+      "min": 70,
+      "max": 140
+    },
+    "distanceKm": 3.1,
+    "menu": [
+      {
+        "id": "as-1",
+        "name": "Mutton Shami Kebab with Rumali (2 Pcs)",
+        "price": 90,
+        "category": "Kebabs",
+        "diet": "nonveg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Silky smooth spiced minced meat patties pan fried in ghee, served with roomali roti.",
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_awadh-shami-kebab-asuran%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_awadh-shami-kebab-asuran%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_awadh-shami-kebab-asuran)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_awadh-shami-kebab-asuran)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3EAS%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "station-aloo-paratha-railway",
+    "name": "Station Road Aloo Paratha & Kadhi Chawal",
+    "area": "Station Road",
+    "city": "Gorakhpur",
+    "address": "Opposite Gorakhpur Junction Main Exit, Station Road, Gorakhpur",
+    "description": "24-hour busy traveler food stop serving giant stuffed Tawa Aloo-Pyaz Parathas with white butter, hot Kadhi Chawal, and thick sweet lassi.",
+    "categories": [
+      "street-food",
+      "north-indian"
+    ],
+    "cuisines": [
+      "North Indian",
+      "Street Food"
+    ],
+    "popularDishes": [
+      "Stuffed Aloo Paratha with Curd",
+      "Punjabi Kadhi Chawal",
+      "Paneer Paratha",
+      "Sweet Lassi"
+    ],
+    "costForTwo": 120,
+    "averageRating": 4.6,
+    "reviewCount": 310,
+    "imageUrl": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 94154 55102",
+    "whatsappPhone": "+91 94154 55102",
+    "openTime": "05:00",
+    "closeTime": "23:59",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Suraj Pal",
+    "ownerEmail": "station.paratha@gorakhpurfoodguide.in",
+    "facilities": [
+      "24/7 Service",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.7,
+      "taste": 4.8,
+      "hygiene": 4.4,
+      "service": 4.8,
+      "ambience": 4
+    },
+    "priceRange": {
+      "min": 40,
+      "max": 90
+    },
+    "distanceKm": 1.4,
+    "menu": [
+      {
+        "id": "ap-1",
+        "name": "Jumbo Aloo Pyaz Paratha with Curd & Pickle",
+        "price": 60,
+        "category": "Paratha",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Thick whole wheat flatbread stuffed with spiced potatoes and onions, served with butter.",
+        "imageUrl": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_station-aloo-paratha-railway%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_station-aloo-paratha-railway%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_station-aloo-paratha-railway)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_station-aloo-paratha-railway)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3ESR%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "university-chowmein-van",
+    "name": "University Road Chowmein & Chilli Potato Van",
+    "area": "Civil Lines",
+    "city": "Gorakhpur",
+    "address": "Near DDU University Science Gate, University Road, Gorakhpur",
+    "description": "Favorite food truck among college students serving spicy Desi Veg Hakka Chowmein, Honey Chilli Potatoes, and fried momos.",
+    "categories": [
+      "street-food",
+      "fast-food"
+    ],
+    "cuisines": [
+      "Momos & Chinese",
+      "Fast Food"
+    ],
+    "popularDishes": [
+      "Desi Veg Chowmein",
+      "Crispy Honey Chilli Potato",
+      "Veg Manchurian Gravy",
+      "Veg Fried Rice"
+    ],
+    "costForTwo": 120,
+    "averageRating": 4.7,
+    "reviewCount": 240,
+    "imageUrl": "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 98388 33190",
+    "whatsappPhone": "+91 98388 33190",
+    "openTime": "13:00",
+    "closeTime": "22:00",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Vikas Pandey",
+    "ownerEmail": "university.chowmein@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Food Van",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.8,
+      "taste": 4.8,
+      "hygiene": 4.5,
+      "service": 4.7,
+      "ambience": 4.4
+    },
+    "priceRange": {
+      "min": 40,
+      "max": 90
+    },
+    "distanceKm": 0.9,
+    "menu": [
+      {
+        "id": "uc-1",
+        "name": "Desi Veg Hakka Chowmein",
+        "price": 50,
+        "category": "Noodles",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Wok-tossed noodles with shredded cabbage, capsicum, carrots, soy sauce and green chilli.",
+        "imageUrl": "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "id": "uc-2",
+        "name": "Crispy Honey Chilli Potato",
+        "price": 60,
+        "category": "Starters",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Crispy fried potato fingers coated in spicy-sweet garlic chilli glaze and sesame seeds.",
+        "imageUrl": "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_university-chowmein-van%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_university-chowmein-van%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_university-chowmein-van)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_university-chowmein-van)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3EUR%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "banarasi-lassi-station",
+    "name": "Banarasi Peda & Rabdi Lassi Bhandar",
+    "area": "Station Road",
+    "city": "Gorakhpur",
+    "address": "Near Railway Station Platform 1 Road, Gorakhpur",
+    "description": "Renowned lassi joint serving thick creamy churned curd in large clay kulhads, loaded with pure malai, dry fruits, and drops of kewra water.",
+    "categories": [
+      "street-food",
+      "sweets"
+    ],
+    "cuisines": [
+      "Mithai",
+      "Desserts"
+    ],
+    "popularDishes": [
+      "Special Rabdi Lassi",
+      "Dry Fruit Malai Lassi",
+      "Mathura Style Peda",
+      "Kesar Milk"
+    ],
+    "costForTwo": 90,
+    "averageRating": 4.9,
+    "reviewCount": 360,
+    "imageUrl": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 94152 77801",
+    "whatsappPhone": "+91 94152 77801",
+    "openTime": "06:00",
+    "closeTime": "23:30",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Shyam Sundar Yadav",
+    "ownerEmail": "banarasi.lassi@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Stall",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 5,
+      "taste": 5,
+      "hygiene": 4.7,
+      "service": 4.9,
+      "ambience": 4.3
+    },
+    "priceRange": {
+      "min": 35,
+      "max": 70
+    },
+    "distanceKm": 1.3,
+    "menu": [
+      {
+        "id": "bl-1",
+        "name": "Special Kulhad Rabdi Lassi",
+        "price": 50,
+        "category": "Lassi",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Thick chilled sweet yogurt topped with rich condensed milk rabdi, cashews and almonds.",
+        "imageUrl": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_banarasi-lassi-station%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_banarasi-lassi-station%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_banarasi-lassi-station)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_banarasi-lassi-station)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3EBP%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "aggarwal-chole-dharamshala",
+    "name": "Aggarwal Chole Bhature & Lassi Center",
+    "area": "Station Road",
+    "city": "Gorakhpur",
+    "address": "Dharamshala Bazar Chauraha, Near Railway Colony, Gorakhpur",
+    "description": "Authentic Punjabi street bhatura stall famous for oversized balloon bhaturas, spicy Amritsari chole, and sweet rose lassi.",
+    "categories": [
+      "street-food",
+      "north-indian"
+    ],
+    "cuisines": [
+      "North Indian",
+      "Street Food"
+    ],
+    "popularDishes": [
+      "Paneer Bhature Chole",
+      "Amritsari Aloo Kulcha",
+      "Sweet Lassi",
+      "Rajma Chawal"
+    ],
+    "costForTwo": 130,
+    "averageRating": 4.7,
+    "reviewCount": 215,
+    "imageUrl": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 98390 11492",
+    "whatsappPhone": "+91 98390 11492",
+    "openTime": "08:00",
+    "closeTime": "21:30",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Rakesh Aggarwal",
+    "ownerEmail": "aggarwal.bhature@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Stall",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.8,
+      "taste": 4.8,
+      "hygiene": 4.6,
+      "service": 4.7,
+      "ambience": 4.2
+    },
+    "priceRange": {
+      "min": 50,
+      "max": 100
+    },
+    "distanceKm": 1.5,
+    "menu": [
+      {
+        "id": "ac-1",
+        "name": "Special Paneer Chole Bhature (2 Pcs)",
+        "price": 70,
+        "category": "Bhature",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Two large golden bhaturas stuffed with grated paneer served with spiced chickpea curry.",
+        "imageUrl": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_aggarwal-chole-dharamshala%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_aggarwal-chole-dharamshala%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_aggarwal-chole-dharamshala)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_aggarwal-chole-dharamshala)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3EAC%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "hunger-strike-burgers-civillines",
+    "name": "Hunger Strike Street Burgers & Sandwiches",
+    "area": "Civil Lines",
+    "city": "Gorakhpur",
+    "address": "Near Jubilee Inter College Gate, Civil Lines, Gorakhpur",
+    "description": "Popular evening street snack counter serving toasted triple-layer grilled sandwiches, loaded veg burgers, and cold beverages.",
+    "categories": [
+      "street-food",
+      "fast-food"
+    ],
+    "cuisines": [
+      "Fast Food",
+      "Street Food"
+    ],
+    "popularDishes": [
+      "Jumbo Veg Club Sandwich",
+      "Double Cheese Burger",
+      "Veg Cheese Grilled Roll",
+      "Cold Coffee"
+    ],
+    "costForTwo": 150,
+    "averageRating": 4.7,
+    "reviewCount": 195,
+    "imageUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 94157 88419",
+    "whatsappPhone": "+91 94157 88419",
+    "openTime": "13:00",
+    "closeTime": "22:30",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Arjun Singhania",
+    "ownerEmail": "hungerstrike.gkp@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Counter",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.7,
+      "taste": 4.8,
+      "hygiene": 4.6,
+      "service": 4.7,
+      "ambience": 4.4
+    },
+    "priceRange": {
+      "min": 50,
+      "max": 110
+    },
+    "distanceKm": 0.8,
+    "menu": [
+      {
+        "id": "hs-1",
+        "name": "Triple Layer Veg Grilled Sandwich",
+        "price": 70,
+        "category": "Sandwiches",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Three bread slices layered with sliced cucumber, tomatoes, spiced potatoes, cheese and mint butter.",
+        "imageUrl": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_hunger-strike-burgers-civillines%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_hunger-strike-burgers-civillines%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_hunger-strike-burgers-civillines)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_hunger-strike-burgers-civillines)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3EHS%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "rehmatullah-halwa-paratha-reti",
+    "name": "Rehmatullah Halwa Paratha Stall",
+    "area": "Reti Chowk",
+    "city": "Gorakhpur",
+    "address": "Old Mandi Road, Near Reti Chauraha, Gorakhpur",
+    "description": "Centuries-old festive street delicacy of Gorakhpur! Giant 2-foot crisp golden paratha served by weight with aromatic saffron semolina halwa.",
+    "categories": [
+      "street-food",
+      "sweets"
+    ],
+    "cuisines": [
+      "Mithai",
+      "Street Food"
+    ],
+    "popularDishes": [
+      "Crispy Halwa Paratha",
+      "Zarda Pulao",
+      "Sheermal",
+      "Shahi Tukda"
+    ],
+    "costForTwo": 110,
+    "averageRating": 4.8,
+    "reviewCount": 280,
+    "imageUrl": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 94509 22180",
+    "whatsappPhone": "+91 94509 22180",
+    "openTime": "15:00",
+    "closeTime": "23:30",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Rehmatullah Khan",
+    "ownerEmail": "rehmatullah.halwa@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Counter",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.9,
+      "taste": 5,
+      "hygiene": 4.5,
+      "service": 4.8,
+      "ambience": 4.1
+    },
+    "priceRange": {
+      "min": 40,
+      "max": 90
+    },
+    "distanceKm": 1.8,
+    "menu": [
+      {
+        "id": "rh-1",
+        "name": "Signature Halwa Paratha (200g)",
+        "price": 60,
+        "category": "Halwa Paratha",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Super thin deep-fried pastry paratha accompanied by dry-fruit loaded saffron halwa.",
+        "imageUrl": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_rehmatullah-halwa-paratha-reti%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_rehmatullah-halwa-paratha-reti%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_rehmatullah-halwa-paratha-reti)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_rehmatullah-halwa-paratha-reti)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3ERH%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "tandoori-chai-mohaddipur",
+    "name": "Tandoori Chai & Kulhad Rabdi Point",
+    "area": "Mohaddipur",
+    "city": "Gorakhpur",
+    "address": "Near Mohaddipur Chauraha, Gorakhpur",
+    "description": "Bustling tea counter famous for red-hot tandoor-roasted kulhad chai, earthen cup rabdi, and crispy samosas.",
+    "categories": [
+      "street-food",
+      "cafe"
+    ],
+    "cuisines": [
+      "Chai & Snacks",
+      "Mithai"
+    ],
+    "popularDishes": [
+      "Tandoori Chai",
+      "Matka Rabdi",
+      "Poha Jalebi",
+      "Aloo Bread Roll"
+    ],
+    "costForTwo": 80,
+    "averageRating": 4.7,
+    "reviewCount": 250,
+    "imageUrl": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 98384 11920",
+    "whatsappPhone": "+91 98384 11920",
+    "openTime": "06:00",
+    "closeTime": "22:30",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Sunil Yadav",
+    "ownerEmail": "tandoorichai.gkp@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Stall",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.8,
+      "taste": 4.8,
+      "hygiene": 4.6,
+      "service": 4.7,
+      "ambience": 4.3
+    },
+    "priceRange": {
+      "min": 25,
+      "max": 60
+    },
+    "distanceKm": 2.3,
+    "menu": [
+      {
+        "id": "tc-1",
+        "name": "Smoked Tandoori Chai (Kulhad)",
+        "price": 25,
+        "category": "Chai",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Special ginger tea poured into oven-baked earthen kulhad creating smoky froth.",
+        "imageUrl": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_tandoori-chai-mohaddipur%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_tandoori-chai-mohaddipur%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_tandoori-chai-mohaddipur)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_tandoori-chai-mohaddipur)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3ETC%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "shri-radhe-chaat-betiahata",
+    "name": "Shri Radhe Chaat & Pav Bhaji Stall",
+    "area": "Betiahata",
+    "city": "Gorakhpur",
+    "address": "Near Betiahata Chauraha, Gorakhpur",
+    "description": "Evening street favorites in Betiahata! Desi ghee tikki chaat, spicy pav bhaji, and authentic Banarasi dahi puchka.",
+    "categories": [
+      "street-food"
+    ],
+    "cuisines": [
+      "Street Food & Chaat",
+      "Pav Bhaji & South Indian"
+    ],
+    "popularDishes": [
+      "Desi Ghee Aloo Tikki",
+      "Amul Pav Bhaji",
+      "Dahi Puri",
+      "Pani Puri"
+    ],
+    "costForTwo": 120,
+    "averageRating": 4.8,
+    "reviewCount": 190,
+    "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 94151 77290",
+    "whatsappPhone": "+91 94151 77290",
+    "openTime": "16:00",
+    "closeTime": "22:30",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Radhe Mohan",
+    "ownerEmail": "shriradhe.chaat@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Stall",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.8,
+      "taste": 4.9,
+      "hygiene": 4.6,
+      "service": 4.7,
+      "ambience": 4.4
+    },
+    "priceRange": {
+      "min": 40,
+      "max": 80
+    },
+    "distanceKm": 1.2,
+    "menu": [
+      {
+        "id": "sr-1",
+        "name": "Desi Ghee Aloo Tikki (2 Pcs)",
+        "price": 50,
+        "category": "Chaat",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Golden pan-fried potato tikkis with sweet sonth and curd.",
+        "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_shri-radhe-chaat-betiahata%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_shri-radhe-chaat-betiahata%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_shri-radhe-chaat-betiahata)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_shri-radhe-chaat-betiahata)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3ESR%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "delhi-paratha-corner-golghar",
+    "name": "Delhi Paratha Corner & Rolls",
+    "area": "Golghar",
+    "city": "Gorakhpur",
+    "address": "Near Indralok Commercial Gate, Golghar, Gorakhpur",
+    "description": "Crispy tawa parathas stuffed with paneer, gobhi, pyaaz, and served with green chutney and mango pickle.",
+    "categories": [
+      "street-food",
+      "fast-food"
+    ],
+    "cuisines": [
+      "North Indian",
+      "Rolls & Kebabs"
+    ],
+    "popularDishes": [
+      "Paneer Paratha",
+      "Mix Veg Paratha",
+      "Soya Chaap Roll",
+      "Chai"
+    ],
+    "costForTwo": 130,
+    "averageRating": 4.7,
+    "reviewCount": 180,
+    "imageUrl": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 98380 55198",
+    "whatsappPhone": "+91 98380 55198",
+    "openTime": "12:00",
+    "closeTime": "23:00",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Dharmendra Yadav",
+    "ownerEmail": "delhi.paratha@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Counter",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.8,
+      "taste": 4.8,
+      "hygiene": 4.6,
+      "service": 4.7,
+      "ambience": 4.2
+    },
+    "priceRange": {
+      "min": 50,
+      "max": 90
+    },
+    "distanceKm": 0.4,
+    "menu": [
+      {
+        "id": "dp-1",
+        "name": "Stuffed Paneer Paratha",
+        "price": 70,
+        "category": "Paratha",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Fresh cottage cheese stuffed whole wheat paratha roasted in butter.",
+        "imageUrl": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_delhi-paratha-corner-golghar%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_delhi-paratha-corner-golghar%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_delhi-paratha-corner-golghar)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_delhi-paratha-corner-golghar)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3EDP%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "kanpur-thaggu-ke-laddu-stall",
+    "name": "Kanpur Thaggu Ke Laddu & Badam Milk",
+    "area": "Golghar",
+    "city": "Gorakhpur",
+    "address": "Cinema Road, Opp City Mall, Golghar, Gorakhpur",
+    "description": "Renowned sweet stall famous for authentic suji-ghee laddus, pista kulfi, and slow-boiled hot saffron almond milk.",
+    "categories": [
+      "street-food",
+      "sweets"
+    ],
+    "cuisines": [
+      "Mithai",
+      "Desserts"
+    ],
+    "popularDishes": [
+      "Special Thaggu Laddu",
+      "Hot Kesar Badam Milk",
+      "Matka Kulfi",
+      "Peda"
+    ],
+    "costForTwo": 110,
+    "averageRating": 4.9,
+    "reviewCount": 290,
+    "imageUrl": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 94150 44810",
+    "whatsappPhone": "+91 94150 44810",
+    "openTime": "10:00",
+    "closeTime": "22:30",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Prakash Chandra",
+    "ownerEmail": "thaggu.laddu@gorakhpurfoodguide.in",
+    "facilities": [
+      "Sweet Stall",
+      "Gift Packs",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 5,
+      "taste": 5,
+      "hygiene": 4.8,
+      "service": 4.8,
+      "ambience": 4.4
+    },
+    "priceRange": {
+      "min": 40,
+      "max": 90
+    },
+    "distanceKm": 0.3,
+    "menu": [
+      {
+        "id": "tl-1",
+        "name": "Special Laddu Box (250g)",
+        "price": 90,
+        "category": "Laddoo",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Semolina and pure ghee laddus with gond, makhana and dry fruits.",
+        "imageUrl": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_kanpur-thaggu-ke-laddu-stall%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_kanpur-thaggu-ke-laddu-stall%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_kanpur-thaggu-ke-laddu-stall)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_kanpur-thaggu-ke-laddu-stall)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3EKT%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "punjabi-chole-samose-bankroad",
+    "name": "Punjabi Chole Samose & Chaat Stall",
+    "area": "Bank Road",
+    "city": "Gorakhpur",
+    "address": "Near Bank Road Crossing, Gorakhpur",
+    "description": "Crowd-favorite street counter in Bank Road market serving spicy Chole Samosa chaat and crispy kachoris.",
+    "categories": [
+      "street-food"
+    ],
+    "cuisines": [
+      "Kachori & Samosa",
+      "Street Food"
+    ],
+    "popularDishes": [
+      "Chole Samosa Chaat",
+      "Paneer Pakora",
+      "Dal Kachori",
+      "Chai"
+    ],
+    "costForTwo": 80,
+    "averageRating": 4.7,
+    "reviewCount": 175,
+    "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 98382 33119",
+    "whatsappPhone": "+91 98382 33119",
+    "openTime": "09:00",
+    "closeTime": "21:30",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Gurvinder Singh",
+    "ownerEmail": "punjabi.chole@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Stall",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.8,
+      "taste": 4.8,
+      "hygiene": 4.5,
+      "service": 4.7,
+      "ambience": 4.1
+    },
+    "priceRange": {
+      "min": 30,
+      "max": 70
+    },
+    "distanceKm": 0.7,
+    "menu": [
+      {
+        "id": "pc-1",
+        "name": "Chole Samosa Plate (2 Pcs)",
+        "price": 50,
+        "category": "Samosa Chaat",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Two hot samosas crushed under spiced chickpeas with tamarind and mint dips.",
+        "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_punjabi-chole-samose-bankroad%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_punjabi-chole-samose-bankroad%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_punjabi-chole-samose-bankroad)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_punjabi-chole-samose-bankroad)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3EPC%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "shree-ganesh-pavbhaji-naukayan",
+    "name": "Shree Ganesh Pav Bhaji & Chinese",
+    "area": "Taramandal",
+    "city": "Gorakhpur",
+    "address": "Naukayan Ghat Food Street, Taramandal, Gorakhpur",
+    "description": "Vibrant street stall by the lake offering buttery Pav Bhaji, Hakka Noodles, Veg Manchurian, and fresh lime soda.",
+    "categories": [
+      "street-food",
+      "fast-food"
+    ],
+    "cuisines": [
+      "Pav Bhaji & South Indian",
+      "Momos & Chinese"
+    ],
+    "popularDishes": [
+      "Butter Pav Bhaji",
+      "Veg Hakka Noodles",
+      "Crispy Manchurian",
+      "Masala Pav"
+    ],
+    "costForTwo": 150,
+    "averageRating": 4.7,
+    "reviewCount": 230,
+    "imageUrl": "https://images.unsplash.com/photo-1606491956689-2ea866880c84?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 72754 11980",
+    "whatsappPhone": "+91 72754 11980",
+    "openTime": "15:00",
+    "closeTime": "23:30",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Ganesh Jaiswal",
+    "ownerEmail": "ganesh.pavbhaji@gorakhpurfoodguide.in",
+    "facilities": [
+      "Lake View Seating",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.8,
+      "taste": 4.8,
+      "hygiene": 4.6,
+      "service": 4.8,
+      "ambience": 4.8
+    },
+    "priceRange": {
+      "min": 60,
+      "max": 120
+    },
+    "distanceKm": 2.1,
+    "menu": [
+      {
+        "id": "gp-1",
+        "name": "Special Amul Butter Pav Bhaji",
+        "price": 80,
+        "category": "Pav Bhaji",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Spiced vegetable curry mashed on tawa with generous butter and soft pav.",
+        "imageUrl": "https://images.unsplash.com/photo-1606491956689-2ea866880c84?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_shree-ganesh-pavbhaji-naukayan%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_shree-ganesh-pavbhaji-naukayan%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_shree-ganesh-pavbhaji-naukayan)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_shree-ganesh-pavbhaji-naukayan)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3ESG%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "sardarji-malai-chaap-golghar",
+    "name": "Sardarji Malai Chaap & Rolls",
+    "area": "Golghar",
+    "city": "Gorakhpur",
+    "address": "Near Baldev Plaza Lane, Golghar, Gorakhpur",
+    "description": "Tandoori street cart famous for creamy Malai Soya Chaap, Haryali Chaap, and crisp Rumali Rolls.",
+    "categories": [
+      "street-food"
+    ],
+    "cuisines": [
+      "Rolls & Kebabs",
+      "North Indian"
+    ],
+    "popularDishes": [
+      "Afghani Malai Chaap",
+      "Tandoori Chaap Roll",
+      "Paneer Tikka",
+      "Masala Chaap"
+    ],
+    "costForTwo": 180,
+    "averageRating": 4.8,
+    "reviewCount": 260,
+    "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 98389 44102",
+    "whatsappPhone": "+91 98389 44102",
+    "openTime": "16:00",
+    "closeTime": "23:00",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Jaswinder Singh",
+    "ownerEmail": "sardarji.chaap@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Stall",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.9,
+      "taste": 4.9,
+      "hygiene": 4.6,
+      "service": 4.7,
+      "ambience": 4.3
+    },
+    "priceRange": {
+      "min": 70,
+      "max": 140
+    },
+    "distanceKm": 0.5,
+    "menu": [
+      {
+        "id": "sm-1",
+        "name": "Afghani Cream Soya Chaap",
+        "price": 100,
+        "category": "Soya Chaap",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Tender soya chunks marinated in heavy cream, cashews and white pepper.",
+        "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_sardarji-malai-chaap-golghar%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_sardarji-malai-chaap-golghar%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_sardarji-malai-chaap-golghar)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_sardarji-malai-chaap-golghar)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3ESM%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "royal-falooda-shikanji-reti",
+    "name": "Royal Falooda & Masala Shikanji Point",
+    "area": "Reti Chowk",
+    "city": "Gorakhpur",
+    "address": "Ghantaghar Crossing, Reti Chowk, Gorakhpur",
+    "description": "Refreshing summer drinks and traditional faloodas! Ice-chilled Masala Shikanji, Roohafza milkshakes, and dry fruit faloodas.",
+    "categories": [
+      "street-food",
+      "sweets"
+    ],
+    "cuisines": [
+      "Kulfi & Falooda",
+      "Desserts"
+    ],
+    "popularDishes": [
+      "Chilled Masala Shikanji",
+      "Royal Rabdi Falooda",
+      "Kewra Lassi",
+      "Cold Badam Milk"
+    ],
+    "costForTwo": 90,
+    "averageRating": 4.8,
+    "reviewCount": 210,
+    "imageUrl": "https://images.unsplash.com/photo-1505394033641-40c6ad1178d7?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 94153 11809",
+    "whatsappPhone": "+91 94153 11809",
+    "openTime": "11:00",
+    "closeTime": "23:00",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Rashid Khan",
+    "ownerEmail": "royal.falooda@gorakhpurfoodguide.in",
+    "facilities": [
+      "Drink Stall",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.9,
+      "taste": 5,
+      "hygiene": 4.7,
+      "service": 4.8,
+      "ambience": 4.2
+    },
+    "priceRange": {
+      "min": 30,
+      "max": 70
+    },
+    "distanceKm": 1.6,
+    "menu": [
+      {
+        "id": "rf-1",
+        "name": "Fresh Masala Shikanji with Baraf",
+        "price": 30,
+        "category": "Shikanji",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Fresh squeezed lime juice with crushed ice, rock salt, roasted cumin and mint.",
+        "imageUrl": "https://images.unsplash.com/photo-1505394033641-40c6ad1178d7?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_royal-falooda-shikanji-reti%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_royal-falooda-shikanji-reti%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_royal-falooda-shikanji-reti)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_royal-falooda-shikanji-reti)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3ERF%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "kundan-chaat-buxipur",
+    "name": "Kundan Chaat & Golgappa Corner",
+    "area": "Buxipur",
+    "city": "Gorakhpur",
+    "address": "Near Buxipur Post Office, Gorakhpur",
+    "description": "Neighborhood chaat stall celebrated for crispy spicy aloo tikki, dahi gujiya, and sweet tamarind pani puris.",
+    "categories": [
+      "street-food"
+    ],
+    "cuisines": [
+      "Street Food & Chaat"
+    ],
+    "popularDishes": [
+      "Aloo Tikki Chaat",
+      "Pudina Pani Puri",
+      "Dahi Vada",
+      "Papdi Chaat"
+    ],
+    "costForTwo": 90,
+    "averageRating": 4.7,
+    "reviewCount": 195,
+    "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 98393 22410",
+    "whatsappPhone": "+91 98393 22410",
+    "openTime": "15:30",
+    "closeTime": "22:00",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Kundan Lal",
+    "ownerEmail": "kundan.chaat@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Stall",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.8,
+      "taste": 4.9,
+      "hygiene": 4.5,
+      "service": 4.7,
+      "ambience": 4.1
+    },
+    "priceRange": {
+      "min": 35,
+      "max": 70
+    },
+    "distanceKm": 1,
+    "menu": [
+      {
+        "id": "kc-1",
+        "name": "Crispy Aloo Tikki with Dahi & Sonth",
+        "price": 40,
+        "category": "Chaat",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Mashed spiced potato patties crisped on tawa with tangy tamarind and sweet curd.",
+        "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_kundan-chaat-buxipur%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_kundan-chaat-buxipur%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_kundan-chaat-buxipur)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_kundan-chaat-buxipur)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3EKC%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "shankar-laddoo-bhandar-mohaddipur",
+    "name": "Shankar Ji Peda & Samosa Stall",
+    "area": "Mohaddipur",
+    "city": "Gorakhpur",
+    "address": "Near Mohaddipur Petrol Pump, Gorakhpur",
+    "description": "Popular tea and snack stall famous for morning khasta kachoris, fresh samosas, and traditional milk pedas.",
+    "categories": [
+      "street-food",
+      "sweets"
+    ],
+    "cuisines": [
+      "Kachori & Samosa",
+      "Mithai"
+    ],
+    "popularDishes": [
+      "Khasta Kachori Aloo",
+      "Kaju Samosa",
+      "Mathura Peda",
+      "Chai"
+    ],
+    "costForTwo": 80,
+    "averageRating": 4.7,
+    "reviewCount": 220,
+    "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 94158 33190",
+    "whatsappPhone": "+91 94158 33190",
+    "openTime": "06:30",
+    "closeTime": "21:30",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "veg",
+    "status": "Active",
+    "ownerName": "Shankar Dayal",
+    "ownerEmail": "shankar.peda@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Counter",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.8,
+      "taste": 4.8,
+      "hygiene": 4.6,
+      "service": 4.7,
+      "ambience": 4.2
+    },
+    "priceRange": {
+      "min": 30,
+      "max": 70
+    },
+    "distanceKm": 2.5,
+    "menu": [
+      {
+        "id": "sp-1",
+        "name": "Khasta Kachori with Peppery Sabzi (4 Pcs)",
+        "price": 40,
+        "category": "Kachori",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Crispy flaky kachoris served with spiced potato and hing curry.",
+        "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_shankar-laddoo-bhandar-mohaddipur%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_shankar-laddoo-bhandar-mohaddipur%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_shankar-laddoo-bhandar-mohaddipur)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_shankar-laddoo-bhandar-mohaddipur)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3ESJ%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
+  },
+  {
+    "id": "chatori-gali-momos-civillines",
+    "name": "Chatori Gali Momos & Spring Rolls",
+    "area": "Civil Lines",
+    "city": "Gorakhpur",
+    "address": "Behind City Mall, Civil Lines, Gorakhpur",
+    "description": "Youth evening hangout famous for crispy fried vegetable spring rolls, Schezwan fried momos, and chilli paneer gravy.",
+    "categories": [
+      "street-food",
+      "fast-food"
+    ],
+    "cuisines": [
+      "Momos & Chinese",
+      "Fast Food"
+    ],
+    "popularDishes": [
+      "Crispy Spring Rolls",
+      "Schezwan Fried Momos",
+      "Chilli Paneer Dry",
+      "Veg Noodles"
+    ],
+    "costForTwo": 160,
+    "averageRating": 4.8,
+    "reviewCount": 250,
+    "imageUrl": "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=1000&q=80",
+    "isDemo": false,
+    "phone": "+91 98394 55102",
+    "whatsappPhone": "+91 98394 55102",
+    "openTime": "14:30",
+    "closeTime": "23:00",
+    "openDays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "diet": "both",
+    "status": "Active",
+    "ownerName": "Aman Srivastava",
+    "ownerEmail": "chatorigali.gkp@gorakhpurfoodguide.in",
+    "facilities": [
+      "Street Counter",
+      "Takeaway",
+      "UPI Accepted"
+    ],
+    "ratingsBreakdown": {
+      "food": 4.8,
+      "taste": 4.9,
+      "hygiene": 4.6,
+      "service": 4.8,
+      "ambience": 4.5
+    },
+    "priceRange": {
+      "min": 60,
+      "max": 130
+    },
+    "distanceKm": 0.7,
+    "menu": [
+      {
+        "id": "cg-1",
+        "name": "Golden Veggie Spring Rolls (2 Pcs)",
+        "price": 70,
+        "category": "Spring Rolls",
+        "diet": "veg",
+        "isAvailable": true,
+        "isFeatured": true,
+        "description": "Crisp sheet rolls stuffed with stir fried noodles and vegetables served with sweet chili sauce.",
+        "imageUrl": "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "logoUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22brandGrad_chatori-gali-momos-civillines%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2394381c%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23432818%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow_chatori-gali-momos-civillines%22%20x%3D%22-10%25%22%20y%3D%22-10%25%22%20width%3D%22120%25%22%20height%3D%22120%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%222%22%20stdDeviation%3D%222.5%22%20flood-opacity%3D%220.35%22%2F%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2292%22%20height%3D%2292%22%20rx%3D%2226%22%20fill%3D%22url(%23brandGrad_chatori-gali-momos-civillines)%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222.5%22%20filter%3D%22url(%23shadow_chatori-gali-momos-civillines)%22%2F%3E%0A%20%20%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%2282%22%20height%3D%2282%22%20rx%3D%2221%22%20fill%3D%22none%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%223%203%22%20opacity%3D%220.45%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2238%22%20r%3D%2214%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2030%20L44%2046%20M56%2030%20L56%2046%20M42%2030%20C42%2035%2046%2035%2046%2030%22%20stroke%3D%22%23fce588%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2276%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2215%22%20fill%3D%22%23ffffff%22%20letter-spacing%3D%221.5%22%3ECG%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2287%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%226.5%22%20fill%3D%22%23fce588%22%20letter-spacing%3D%222%22%3ESTREET%20FOOD%3C%2Ftext%3E%0A%3C%2Fsvg%3E"
   }
 ];

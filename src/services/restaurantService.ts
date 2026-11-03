@@ -46,7 +46,7 @@ export const restaurantService: RestaurantService = {
           new Promise<null>((resolve) => setTimeout(() => resolve(null), timeoutMs)),
         ]);
         if (cloudRest) {
-          storageService.upsertRestaurantFromCloud(cloudRest);
+          storageService.silentUpsertRestaurant(cloudRest);
           return cloudRest;
         }
       } catch {

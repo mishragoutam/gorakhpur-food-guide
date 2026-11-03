@@ -74,7 +74,11 @@ export default function RestaurantDetailsPage() {
   const tableNumber = searchParams.get('table');
 
   const restaurantQuery = useRestaurant(restaurantId);
-  const restaurant = restaurantQuery.status === 'ready' ? restaurantQuery.data : null;
+  const initialLocal = useMemo(
+    () => (restaurantId ? storageService.getRestaurantById(restaurantId) : null),
+    [restaurantId],
+  );
+  const restaurant = restaurantQuery.status === 'ready' ? restaurantQuery.data : (initialLocal || null);
 
   usePageTitle(restaurant ? restaurant.name : 'Restaurant details');
 
@@ -193,7 +197,7 @@ export default function RestaurantDetailsPage() {
     return () => window.removeEventListener('rateit-storage-change', handleStorageChange);
   }, [restaurantId]);
 
-  if (restaurantQuery.status === 'loading') {
+  if (restaurantQuery.status === 'loading' && !restaurant) {
     return (
       <section className="py-8 sm:py-12">
         <Container>

@@ -17,7 +17,8 @@ export function useAsyncData<T>(load: () => Promise<T>, deps: DependencyList) {
 
   useEffect(() => {
     let cancelled = false;
-    setState((previous) => (previous.status === 'loading' ? previous : { status: 'loading' }));
+    // Keep previously loaded data visible during background revalidation to eliminate flickering
+    setState((previous) => (previous.status === 'ready' ? previous : { status: 'loading' }));
 
     load().then(
       (data) => {
