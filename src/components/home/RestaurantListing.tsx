@@ -1,5 +1,5 @@
 import { FlaskConical, SearchX, TriangleAlert } from 'lucide-react';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { ActiveFilters } from '@/components/home/ActiveFilters';
 import { FilterBar } from '@/components/home/FilterBar';
 import { RestaurantCard } from '@/components/home/RestaurantCard';
@@ -46,6 +46,16 @@ export function RestaurantListing({ filters, onFilterChange, onResetFilters }: R
   const cuisineOptions = useMemo(() => getCuisineOptions(all), [all]);
   const visible = useMemo(() => filterRestaurants(all, filters), [all, filters]);
 
+  const [prevFilters, setPrevFilters] = useState(filters);
+  const [displayCount, setDisplayCount] = useState<number>(12);
+
+  if (prevFilters !== filters) {
+    setPrevFilters(filters);
+    setDisplayCount(12);
+  }
+
+  const pagedList = visible.slice(0, displayCount);
+
   const isFiltering = hasActiveFilters(filters);
   const isSampleData = all.length > 0 && all.every((restaurant) => restaurant.isDemo);
   const showDemoNotice = restaurants.status !== 'ready' || all.some((restaurant) => restaurant.isDemo);
@@ -79,13 +89,30 @@ export function RestaurantListing({ filters, onFilterChange, onResetFilters }: R
 
             <div className="mt-6">
               {visible.length > 0 ? (
-                <ul role="list" className={GRID}>
-                  {visible.map((restaurant) => (
-                    <li key={restaurant.id}>
-                      <RestaurantCard restaurant={restaurant} />
-                    </li>
-                  ))}
-                </ul>
+                <>
+                  <ul role="list" className={GRID}>
+                    {pagedList.map((restaurant) => (
+                      <li key={restaurant.id}>
+                        <RestaurantCard restaurant={restaurant} />
+                      </li>
+                    ))}
+                  </ul>
+
+                  {visible.length > displayCount ? (
+                    <div className="mt-8 flex flex-col items-center justify-center gap-2">
+                      <p className="text-xs font-semibold text-ink-500">
+                        Showing {pagedList.length} of {visible.length} restaurants
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => setDisplayCount((prev) => prev + 12)}
+                        className="inline-flex items-center gap-2 rounded-full border border-cream-300 bg-white px-6 py-3 text-xs font-bold text-ink-800 shadow-xs transition hover:bg-cream-100 hover:border-cream-400 active:scale-[0.99] cursor-pointer"
+                      >
+                        Load More Restaurants ({visible.length - displayCount} remaining)
+                      </button>
+                    </div>
+                  ) : null}
+                </>
               ) : (
                 <StatePanel
                   icon={SearchX}

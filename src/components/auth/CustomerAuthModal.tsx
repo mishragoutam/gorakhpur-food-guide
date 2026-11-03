@@ -1,4 +1,4 @@
-import { User, X, Mail, Lock, CheckCircle2, ArrowLeft } from 'lucide-react';
+import { X, Mail, Lock, CheckCircle2, UserPlus, LogIn } from 'lucide-react';
 import { useState } from 'react';
 import { storageService } from '@/services/storageService';
 import { showToast } from '@/lib/toast';
@@ -35,24 +35,6 @@ function GoogleIcon({ className = 'size-4 shrink-0' }: { className?: string }) {
   );
 }
 
-const QUICK_GOOGLE_ACCOUNTS = [
-  {
-    name: 'Aarav Sharma',
-    email: 'aarav.sharma@gmail.com',
-    avatarUrl: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150&q=80',
-  },
-  {
-    name: 'Priya Verma',
-    email: 'priya.verma@gmail.com',
-    avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150&q=80',
-  },
-  {
-    name: 'Rohan Gupta',
-    email: 'rohan.gupta.gkp@gmail.com',
-    avatarUrl: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=150&h=150&q=80',
-  },
-];
-
 export function CustomerAuthModal({
   isOpen,
   onClose,
@@ -61,73 +43,68 @@ export function CustomerAuthModal({
   initialGoogleMode = false,
 }: CustomerAuthModalProps) {
   const [mode, setMode] = useState<'login' | 'register'>(initialMode);
-  const [googleView, setGoogleView] = useState<boolean>(initialGoogleMode);
+  const [isGoogleMode] = useState<boolean>(initialGoogleMode);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [googleCustomEmail, setGoogleCustomEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
   if (!isOpen) return null;
 
-  const completeGoogleSignIn = (targetEmail: string, customName?: string, customAvatar?: string) => {
-    const cleanEmail = targetEmail.trim().toLowerCase();
-    const derivedName =
-      customName ||
-      name.trim() ||
-      cleanEmail
-        .split('@')[0]
-        ?.replace(/[._]/g, ' ')
-        .split(' ')
-        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-        .join(' ') ||
-      'Google Diner';
-
-    const googleUser = {
-      name: derivedName,
-      email: cleanEmail,
-      avatarUrl:
-        customAvatar ||
-        'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150&q=80',
-    };
-
-    // Save to local storage, active session, and syncs audit trail to Supabase
-    storageService.setCustomerUser(googleUser);
-
-    showToast(`Signed in with Google! Email ${cleanEmail} verified.`);
-    if (onSuccess) onSuccess(googleUser);
-    onClose();
-  };
-
-  const handleGoogleButtonClick = () => {
+  const handleGoogleAction = () => {
     setError('');
-    const typed = email.trim();
-    if (typed && typed.includes('@')) {
-      // User already typed an email into the input
-      completeGoogleSignIn(typed);
-    } else {
-      // Open the dedicated Google account selector sheet
-      setGoogleView(true);
-    }
-  };
+    const cleanEmail = email.trim().toLowerCase();
 
-  const handleCustomGoogleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-    const target = googleCustomEmail.trim();
-    if (!target || !target.includes('@')) {
-      setError('Please enter a valid Google email address (e.g. name@gmail.com).');
+    if (!cleanEmail || !cleanEmail.includes('@')) {
+      setError('Please enter your Google / Gmail address above to proceed.');
       return;
     }
-    completeGoogleSignIn(target);
+
+    const allUsers = storageService.getUsers();
+    const existing = allUsers.find((u) => u.email.toLowerCase() === cleanEmail);
+
+    if (mode === 'login') {
+      if (existing) {
+        // Found existing account
+        const user = {
+          name: existing.name,
+          email: cleanEmail,
+          avatarUrl: existing.avatarUrl,
+        };
+        storageService.setCustomerUser(user);
+        showToast(`Welcome back, ${user.name}! Signed in with Google.`);
+        if (onSuccess) onSuccess(user);
+        onClose();
+      } else {
+        // No existing account: prompt to create
+        setMode('register');
+        setError(`No account found for ${cleanEmail}. Enter your full name below to create your new account.`);
+      }
+    } else {
+      // Register mode
+      if (!name.trim()) {
+        setError('Please enter your full name to complete registration.');
+        return;
+      }
+      const user = {
+        name: name.trim(),
+        email: cleanEmail,
+        avatarUrl:
+          'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150&q=80',
+      };
+      storageService.setCustomerUser(user);
+      showToast(`Account created! Welcome, ${user.name}`);
+      if (onSuccess) onSuccess(user);
+      onClose();
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
-    const cleanEmail = email.trim();
+    const cleanEmail = email.trim().toLowerCase();
     const cleanName = name.trim();
 
     if (!cleanEmail || !cleanEmail.includes('@')) {
@@ -192,13 +169,23 @@ export function CustomerAuthModal({
       }
 
       // Fast email authentication
-      const userName = mode === 'register' ? cleanName : cleanEmail.split('@')[0] || 'Diner';
-      const user = { name: userName, email: cleanEmail };
+      const allUsers = storageService.getUsers();
+      const existing = allUsers.find((u) => u.email.toLowerCase() === cleanEmail);
 
-      storageService.setCustomerUser(user);
-      showToast(`Signed in as ${user.name}`);
-      if (onSuccess) onSuccess(user);
-      onClose();
+      if (mode === 'login') {
+        const userName = existing?.name || cleanEmail.split('@')[0] || 'Diner';
+        const user = { name: userName, email: cleanEmail, avatarUrl: existing?.avatarUrl };
+        storageService.setCustomerUser(user);
+        showToast(`Welcome back, ${user.name}!`);
+        if (onSuccess) onSuccess(user);
+        onClose();
+      } else {
+        const user = { name: cleanName, email: cleanEmail };
+        storageService.setCustomerUser(user);
+        showToast(`Account created! Welcome, ${user.name}`);
+        if (onSuccess) onSuccess(user);
+        onClose();
+      }
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Authentication failed. Please try again.';
       setError(msg);
@@ -227,233 +214,184 @@ export function CustomerAuthModal({
           <X size={20} />
         </button>
 
-        {/* GOOGLE ACCOUNT SELECTOR VIEW */}
-        {googleView ? (
+        <div className="mb-6 flex items-center gap-3">
+          <div className="flex size-11 items-center justify-center rounded-2xl bg-accent-100 text-accent-700">
+            {mode === 'login' ? <LogIn size={22} /> : <UserPlus size={22} />}
+          </div>
           <div>
-            <div className="mb-5 flex items-center gap-3">
-              <button
-                type="button"
-                onClick={() => setGoogleView(false)}
-                className="rounded-full p-1.5 text-ink-500 hover:bg-cream-100 hover:text-ink-900"
-                title="Back to email login"
-              >
-                <ArrowLeft size={18} />
-              </button>
-              <div className="flex size-10 items-center justify-center rounded-2xl bg-cream-100 shadow-2xs">
-                <GoogleIcon className="size-5" />
-              </div>
+            <h2 id="auth-modal-title" className="text-xl font-bold text-ink-900">
+              {mode === 'login' ? 'Sign In to RateIt' : 'Create New Account'}
+            </h2>
+            <p className="text-xs text-ink-500">Gorakhpur Food Guide & Verified Dining</p>
+          </div>
+        </div>
+
+        {/* Mode Switcher */}
+        <div className="mb-5 flex rounded-full bg-cream-100 p-1">
+          <button
+            type="button"
+            onClick={() => {
+              setMode('login');
+              setError('');
+            }}
+            className={`flex-1 rounded-full py-2 text-xs font-bold transition ${
+              mode === 'login' ? 'bg-white text-ink-900 shadow-xs' : 'text-ink-600 hover:text-ink-900'
+            }`}
+          >
+            Existing User Sign In
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setMode('register');
+              setError('');
+            }}
+            className={`flex-1 rounded-full py-2 text-xs font-bold transition ${
+              mode === 'register' ? 'bg-white text-ink-900 shadow-xs' : 'text-ink-600 hover:text-ink-900'
+            }`}
+          >
+            Create New Account
+          </button>
+        </div>
+
+        {/* Fast Google Authentication Form */}
+        <div className="mb-4 rounded-2xl border border-cream-200 bg-cream-50/70 p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <GoogleIcon className="size-4" />
+            <span className="text-xs font-bold text-ink-900">
+              {mode === 'login' ? 'Continue with Google Account' : 'Register with Google Email'}
+            </span>
+          </div>
+          <p className="text-[11px] text-ink-600 mb-3">
+            {mode === 'login'
+              ? 'Enter your Google email address to verify your dining identity.'
+              : 'Sign up with your personal Gmail for verified diner badges.'}
+          </p>
+
+          <div className="space-y-2.5">
+            {mode === 'register' ? (
               <div>
-                <h2 id="auth-modal-title" className="text-lg font-bold text-ink-900">
-                  Sign in with Google
-                </h2>
-                <p className="text-xs text-ink-500">to continue to RateIt Gorakhpur</p>
-              </div>
-            </div>
-
-            <p className="mb-3 text-xs font-semibold text-ink-700">Choose an account to continue:</p>
-
-            <div className="space-y-2 mb-4">
-              {QUICK_GOOGLE_ACCOUNTS.map((acc) => (
-                <button
-                  key={acc.email}
-                  type="button"
-                  onClick={() => completeGoogleSignIn(acc.email, acc.name, acc.avatarUrl)}
-                  className="flex w-full items-center gap-3 rounded-2xl border border-cream-200 bg-cream-50/60 p-3 text-left transition hover:border-accent-400 hover:bg-cream-100/80 active:scale-[0.99]"
-                >
-                  <img
-                    src={acc.avatarUrl}
-                    alt={acc.name}
-                    className="size-9 rounded-full object-cover ring-1 ring-ink-900/10"
-                  />
-                  <div className="min-w-0 flex-1">
-                    <p className="text-xs font-bold text-ink-900 truncate">{acc.name}</p>
-                    <p className="text-[11px] text-ink-500 truncate">{acc.email}</p>
-                  </div>
-                  <span className="text-xs font-semibold text-accent-700">Continue</span>
-                </button>
-              ))}
-            </div>
-
-            <div className="relative my-4 text-center">
-              <hr className="border-cream-200" />
-              <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-2.5 text-[11px] font-semibold text-ink-400 uppercase tracking-wider">
-                or enter another gmail
-              </span>
-            </div>
-
-            <form onSubmit={handleCustomGoogleSubmit} className="space-y-3">
-              <div>
-                <label className="mb-1 block text-xs font-bold text-ink-800" htmlFor="google-email-input">
-                  Your Google Email
+                <label className="mb-1 block text-[11px] font-bold text-ink-800" htmlFor="google-name">
+                  Your Full Name
                 </label>
-                <div className="relative">
-                  <Mail size={16} className="absolute left-3.5 top-3 text-ink-400" />
-                  <input
-                    id="google-email-input"
-                    type="email"
-                    required
-                    value={googleCustomEmail}
-                    onChange={(e) => setGoogleCustomEmail(e.target.value)}
-                    placeholder="e.g. yourname@gmail.com"
-                    className="w-full rounded-xl border border-cream-300 pl-10 pr-3.5 py-2.5 text-sm text-ink-900 outline-none focus:border-accent-600 focus:ring-2 focus:ring-accent-100"
-                  />
-                </div>
+                <input
+                  id="google-name"
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="e.g. Rahul Sharma"
+                  className="w-full rounded-xl border border-cream-300 bg-white px-3 py-2 text-xs text-ink-900 outline-none focus:border-accent-600 focus:ring-1 focus:ring-accent-200"
+                />
               </div>
+            ) : null}
 
-              {error ? <p className="text-xs font-semibold text-red-600">{error}</p> : null}
-
-              <button
-                type="submit"
-                className="flex w-full items-center justify-center gap-2 rounded-xl bg-ink-900 py-2.5 text-sm font-bold text-white shadow-md transition hover:bg-ink-800 active:scale-[0.99]"
-              >
-                <GoogleIcon className="size-4" />
-                <span>Continue with this Account</span>
-              </button>
-            </form>
+            <div>
+              <label className="mb-1 block text-[11px] font-bold text-ink-800" htmlFor="google-email">
+                Your Google / Gmail Address
+              </label>
+              <div className="relative">
+                <Mail size={14} className="absolute left-3 top-2.5 text-ink-400" />
+                <input
+                  id="google-email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@gmail.com"
+                  className="w-full rounded-xl border border-cream-300 bg-white pl-8 pr-3 py-2 text-xs text-ink-900 outline-none focus:border-accent-600 focus:ring-1 focus:ring-accent-200"
+                />
+              </div>
+            </div>
 
             <button
               type="button"
-              onClick={() => setGoogleView(false)}
-              className="mt-4 block w-full text-center text-xs font-semibold text-ink-500 hover:text-ink-900"
+              onClick={handleGoogleAction}
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-ink-900 py-2.5 text-xs font-bold text-white shadow-xs transition hover:bg-ink-800 active:scale-[0.99] cursor-pointer"
             >
-              ← Back to standard email & password login
+              <GoogleIcon className="size-3.5" />
+              <span>{mode === 'login' ? 'Sign In with this Google Account' : 'Create Account with Google'}</span>
             </button>
           </div>
-        ) : (
-          /* STANDARD LOGIN / REGISTER VIEW */
+        </div>
+
+        <div className="relative my-4 text-center">
+          <hr className="border-cream-200" />
+          <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-3 text-[11px] font-semibold text-ink-400 uppercase tracking-wider">
+            or standard email & password
+          </span>
+        </div>
+
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+          {mode === 'register' && !isGoogleMode ? (
+            <div>
+              <label className="mb-1 block text-xs font-bold text-ink-800" htmlFor="auth-name">
+                Your Full Name
+              </label>
+              <input
+                id="auth-name"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="e.g. Priya Mishra"
+                className="w-full rounded-xl border border-cream-300 px-3.5 py-2 text-xs text-ink-900 outline-none focus:border-accent-600 focus:ring-2 focus:ring-accent-100"
+              />
+            </div>
+          ) : null}
+
           <div>
-            <div className="mb-6 flex items-center gap-3">
-              <div className="flex size-11 items-center justify-center rounded-2xl bg-accent-100 text-accent-700">
-                <User size={22} />
-              </div>
-              <div>
-                <h2 id="auth-modal-title" className="text-xl font-bold text-ink-900">
-                  {mode === 'login' ? 'Sign In to RateIt' : 'Create Free Account'}
-                </h2>
-                <p className="text-xs text-ink-500">Gorakhpur Food Guide & Table Reviews</p>
-              </div>
+            <label className="mb-1 block text-xs font-bold text-ink-800" htmlFor="auth-email">
+              Email Address
+            </label>
+            <div className="relative">
+              <Mail size={15} className="absolute left-3.5 top-2.5 text-ink-400" />
+              <input
+                id="auth-email"
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="your.email@example.com"
+                className="w-full rounded-xl border border-cream-300 pl-9 pr-3.5 py-2 text-xs text-ink-900 outline-none focus:border-accent-600 focus:ring-2 focus:ring-accent-100"
+              />
             </div>
-
-            {/* 1-Click Google Sign In */}
-            <div className="mb-4">
-              <button
-                type="button"
-                disabled={isLoading}
-                onClick={handleGoogleButtonClick}
-                className="flex w-full items-center justify-center gap-3 rounded-2xl border border-cream-300 bg-white py-3 text-sm font-bold text-ink-800 shadow-xs transition hover:bg-cream-50 hover:border-cream-400 active:scale-[0.99] disabled:opacity-60"
-              >
-                <GoogleIcon />
-                <span>Continue with Google</span>
-              </button>
-            </div>
-
-            <div className="relative my-4 text-center">
-              <hr className="border-cream-200" />
-              <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-3 text-[11px] font-semibold text-ink-500 uppercase tracking-wider">
-                or continue with email
-              </span>
-            </div>
-
-            {/* Mode Switcher */}
-            <div className="mb-4 flex rounded-full bg-cream-100 p-1">
-              <button
-                type="button"
-                onClick={() => {
-                  setMode('login');
-                  setError('');
-                }}
-                className={`flex-1 rounded-full py-2 text-xs font-bold transition ${
-                  mode === 'login' ? 'bg-white text-ink-900 shadow-xs' : 'text-ink-600 hover:text-ink-900'
-                }`}
-              >
-                Email Login
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setMode('register');
-                  setError('');
-                }}
-                className={`flex-1 rounded-full py-2 text-xs font-bold transition ${
-                  mode === 'register' ? 'bg-white text-ink-900 shadow-xs' : 'text-ink-600 hover:text-ink-900'
-                }`}
-              >
-                Create Account
-              </button>
-            </div>
-
-            <form onSubmit={handleSubmit} className="flex flex-col gap-3.5">
-              {mode === 'register' ? (
-                <div>
-                  <label className="mb-1 block text-xs font-bold text-ink-800" htmlFor="auth-name">
-                    Your Full Name
-                  </label>
-                  <div className="relative">
-                    <input
-                      id="auth-name"
-                      type="text"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      placeholder="e.g. Aarav Mehta"
-                      className="w-full rounded-xl border border-cream-300 px-3.5 py-2.5 text-sm text-ink-900 outline-none focus:border-accent-600 focus:ring-2 focus:ring-accent-100"
-                    />
-                  </div>
-                </div>
-              ) : null}
-
-              <div>
-                <label className="mb-1 block text-xs font-bold text-ink-800" htmlFor="auth-email">
-                  Email Address
-                </label>
-                <div className="relative">
-                  <Mail size={16} className="absolute left-3.5 top-3 text-ink-400" />
-                  <input
-                    id="auth-email"
-                    type="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="you@gmail.com"
-                    className="w-full rounded-xl border border-cream-300 pl-10 pr-3.5 py-2.5 text-sm text-ink-900 outline-none focus:border-accent-600 focus:ring-2 focus:ring-accent-100"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <div className="flex items-center justify-between mb-1">
-                  <label className="block text-xs font-bold text-ink-800" htmlFor="auth-pw">
-                    Password {mode === 'login' ? '(Optional)' : ''}
-                  </label>
-                  {mode === 'login' ? (
-                    <span className="text-[11px] text-ink-500">Leave blank for fast sign-in</span>
-                  ) : null}
-                </div>
-                <div className="relative">
-                  <Lock size={16} className="absolute left-3.5 top-3 text-ink-400" />
-                  <input
-                    id="auth-pw"
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder={mode === 'register' ? 'At least 6 characters' : 'Enter password or leave blank'}
-                    className="w-full rounded-xl border border-cream-300 pl-10 pr-3.5 py-2.5 text-sm text-ink-900 outline-none focus:border-accent-600 focus:ring-2 focus:ring-accent-100"
-                  />
-                </div>
-              </div>
-
-              {error ? <p className="text-xs font-semibold text-red-600">{error}</p> : null}
-
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-accent-600 py-3 text-sm font-bold text-white shadow-md transition hover:bg-accent-700 active:scale-[0.99] disabled:opacity-60"
-              >
-                <CheckCircle2 size={16} />
-                {isLoading ? 'Signing In...' : mode === 'login' ? 'Sign In with Email' : 'Complete Registration'}
-              </button>
-            </form>
           </div>
-        )}
+
+          <div>
+            <div className="flex items-center justify-between mb-1">
+              <label className="block text-xs font-bold text-ink-800" htmlFor="auth-pw">
+                Password {mode === 'login' ? '(Optional)' : ''}
+              </label>
+              {mode === 'login' ? (
+                <span className="text-[10px] text-ink-500">Leave blank for fast sign-in</span>
+              ) : null}
+            </div>
+            <div className="relative">
+              <Lock size={15} className="absolute left-3.5 top-2.5 text-ink-400" />
+              <input
+                id="auth-pw"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder={mode === 'register' ? 'At least 6 characters' : 'Enter password or leave blank'}
+                className="w-full rounded-xl border border-cream-300 pl-9 pr-3.5 py-2 text-xs text-ink-900 outline-none focus:border-accent-600 focus:ring-2 focus:ring-accent-100"
+              />
+            </div>
+          </div>
+
+          {error ? <p className="text-xs font-semibold text-red-600">{error}</p> : null}
+
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="mt-1 flex w-full items-center justify-center gap-2 rounded-xl bg-accent-600 py-2.5 text-xs font-bold text-white shadow-md transition hover:bg-accent-700 active:scale-[0.99] disabled:opacity-60 cursor-pointer"
+          >
+            <CheckCircle2 size={15} />
+            {isLoading
+              ? 'Processing...'
+              : mode === 'login'
+              ? 'Sign In with Email'
+              : 'Complete Registration'}
+          </button>
+        </form>
       </div>
     </div>
   );

@@ -1,22 +1,33 @@
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Layout } from '@/components/layout/Layout';
 import { ToastContainer } from '@/components/ui/Toast';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 import { storageService } from '@/services/storageService';
-import AboutPage from '@/pages/AboutPage';
-import ContactPage from '@/pages/ContactPage';
 import HomePage from '@/pages/HomePage';
-import NotFoundPage from '@/pages/NotFoundPage';
-import OwnerLoginPage from '@/pages/OwnerLoginPage';
-import OwnerRegisterPage from '@/pages/OwnerRegisterPage';
-import OwnerDashboardPage from '@/pages/owner/OwnerDashboardPage';
-import AdminPage from '@/pages/admin/AdminPage';
-import MyReviewsPage from '@/pages/MyReviewsPage';
-import PrivacyPage from '@/pages/PrivacyPage';
 import RestaurantDetailsPage from '@/pages/RestaurantDetailsPage';
-import TermsPage from '@/pages/TermsPage';
-import GroupDiningPage from '@/pages/GroupDiningPage';
+import NotFoundPage from '@/pages/NotFoundPage';
+
+// Code-split heavy routes for rapid mobile loading
+const OwnerDashboardPage = lazy(() => import('@/pages/owner/OwnerDashboardPage'));
+const AdminPage = lazy(() => import('@/pages/admin/AdminPage'));
+const GroupDiningPage = lazy(() => import('@/pages/GroupDiningPage'));
+const OwnerLoginPage = lazy(() => import('@/pages/OwnerLoginPage'));
+const OwnerRegisterPage = lazy(() => import('@/pages/OwnerRegisterPage'));
+const MyReviewsPage = lazy(() => import('@/pages/MyReviewsPage'));
+const AboutPage = lazy(() => import('@/pages/AboutPage'));
+const ContactPage = lazy(() => import('@/pages/ContactPage'));
+const PrivacyPage = lazy(() => import('@/pages/PrivacyPage'));
+const TermsPage = lazy(() => import('@/pages/TermsPage'));
+
+function RouteLoadingFallback() {
+  return (
+    <div className="min-h-[50vh] flex flex-col items-center justify-center gap-3">
+      <div className="size-8 rounded-full border-2 border-forest-600 border-t-transparent animate-spin" />
+      <span className="text-xs font-semibold text-ink-500">Loading page...</span>
+    </div>
+  );
+}
 
 export default function App() {
   useEffect(() => {
@@ -55,25 +66,27 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route path="restaurants/:restaurantId" element={<RestaurantDetailsPage />} />
-          <Route path="decide-together" element={<GroupDiningPage />} />
-          <Route path="decide-together/:sessionId" element={<GroupDiningPage />} />
-          <Route path="my-reviews" element={<MyReviewsPage />} />
-          <Route path="owner/login" element={<OwnerLoginPage />} />
-          <Route path="owner/register" element={<OwnerRegisterPage />} />
-          <Route path="about" element={<AboutPage />} />
-          <Route path="contact" element={<ContactPage />} />
-          <Route path="privacy" element={<PrivacyPage />} />
-          <Route path="terms" element={<TermsPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Route>
-        {/* Full-width dedicated dashboards */}
-        <Route path="owner/dashboard" element={<OwnerDashboardPage />} />
-        <Route path="admin" element={<AdminPage />} />
-      </Routes>
+      <Suspense fallback={<RouteLoadingFallback />}>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route index element={<HomePage />} />
+            <Route path="restaurants/:restaurantId" element={<RestaurantDetailsPage />} />
+            <Route path="decide-together" element={<GroupDiningPage />} />
+            <Route path="decide-together/:sessionId" element={<GroupDiningPage />} />
+            <Route path="my-reviews" element={<MyReviewsPage />} />
+            <Route path="owner/login" element={<OwnerLoginPage />} />
+            <Route path="owner/register" element={<OwnerRegisterPage />} />
+            <Route path="about" element={<AboutPage />} />
+            <Route path="contact" element={<ContactPage />} />
+            <Route path="privacy" element={<PrivacyPage />} />
+            <Route path="terms" element={<TermsPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+          {/* Full-width dedicated dashboards */}
+          <Route path="owner/dashboard" element={<OwnerDashboardPage />} />
+          <Route path="admin" element={<AdminPage />} />
+        </Routes>
+      </Suspense>
       <ToastContainer />
     </BrowserRouter>
   );

@@ -12,6 +12,7 @@ import {
   Navigation,
   CheckCircle2,
   Search,
+  Calendar,
 } from 'lucide-react';
 import { useEffect, useState, useMemo } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
@@ -25,6 +26,7 @@ import { WriteReviewModal } from '@/components/reviews/WriteReviewModal';
 import { QrReviewModal } from '@/components/qr/QrReviewModal';
 import { RestaurantQrModal } from '@/components/qr/RestaurantQrModal';
 import { CustomerAuthModal } from '@/components/auth/CustomerAuthModal';
+import { TableBookingModal } from '@/components/booking/TableBookingModal';
 import { usePageTitle } from '@/hooks/usePageTitle';
 import { useRestaurant } from '@/hooks/useRestaurants';
 import { getBudgetBand } from '@/lib/budget';
@@ -76,6 +78,7 @@ export default function RestaurantDetailsPage() {
   const [writeModalOpen, setWriteModalOpen] = useState(false);
   const [qrModalOpen, setQrModalOpen] = useState(false);
   const [standeeModalOpen, setStandeeModalOpen] = useState(false);
+  const [bookingModalOpen, setBookingModalOpen] = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [authGoogleMode, setAuthGoogleMode] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -337,6 +340,15 @@ export default function RestaurantDetailsPage() {
 
             {/* Action Buttons */}
             <div className="mt-6 flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                onClick={() => setBookingModalOpen(true)}
+                className="inline-flex items-center gap-2 rounded-full bg-forest-700 px-6 py-3 text-sm font-bold text-white shadow-md transition hover:bg-forest-800 hover:shadow-lg cursor-pointer"
+                style={{ backgroundColor: '#2f7d5f', color: '#ffffff' }}
+              >
+                <Calendar size={16} />
+                Book a Table
+              </button>
               <button
                 type="button"
                 onClick={() => setWriteModalOpen(true)}
@@ -816,6 +828,12 @@ export default function RestaurantDetailsPage() {
         isOpen={standeeModalOpen}
         restaurant={restaurant}
         onClose={() => setStandeeModalOpen(false)}
+      />
+
+      <TableBookingModal
+        isOpen={bookingModalOpen}
+        restaurant={restaurant}
+        onClose={() => setBookingModalOpen(false)}
       />
 
       <CustomerAuthModal

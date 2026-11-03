@@ -10,6 +10,7 @@ import type {
   RatingBreakdown,
   Restaurant,
   Review,
+  TableBooking,
   UserProfile,
 } from '@/types/restaurant';
 
@@ -22,6 +23,7 @@ const STORAGE_KEYS = {
   ownerSession: 'rateit_owner_session',
   adminSession: 'rateit_admin_session',
   dataCleared: 'rateit_data_cleared',
+  bookings: 'rateit_table_bookings_v1',
 };
 
 export const COMMON_REVIEW_TAGS = [
@@ -693,6 +695,71 @@ export const storageService = {
 
   resetAllData(): void {
     this.loadDemoData();
+  },
+
+  /**
+   * Table Bookings
+   */
+  getBookings(restaurantId?: string): TableBooking[] {
+    const all = safeGet<TableBooking[]>(STORAGE_KEYS.bookings, []);
+    if (!restaurantId) return all;
+    return all.filter((b) => b.restaurantId === restaurantId);
+  },
+
+  createBooking(
+    data: Omit<TableBooking, 'id' | 'createdAt' | 'status' | 'confirmationCode' | 'notifications'>,
+  ): TableBooking {
+    const all = this.getBookings();
+    const id = `TB-${Date.now().toString().slice(-5)}`;
+    const confirmationCode = Math.floor(100000 + Math.random() * 900000).toString();
+
+    const smsText = `RateIt Gorakhpur: Your table for ${data.guests} at ${data.restaurantName} is CONFIRMED for ${data.date} at ${data.time}. Booking Code: ${confirmationCode}. Show this SMS upon arrival.`;
+    const emailSubject = `Table Confirmed: ${data.restaurantName} on ${data.date} (${data.time})`;
+
+    const booking: TableBooking = {
+      ...data,
+      id,
+      createdAt: new Date().toISOString(),
+      status: 'Confirmed',
+      confirmationCode,
+      notifications: {
+        smsSent: true,
+        smsDeliveredTo: data.mobile,
+        emailSent: true,
+        emailDeliveredTo: data.email,
+        smsText,
+        emailSubject,
+      },
+    };
+
+    all.unshift(booking);
+    safeSet(STORAGE_KEYS.bookings, all);
+    this.addAuditLog(`Table reservation created: ${data.guestName} at ${data.restaurantName} for ${data.guests} guests`);
+
+    // Sync to Supabase audit log
+    supabaseService
+      .logAudit({
+        id: `audit-bk-${Date.now()}`,
+        action: `Table booking confirmed: ${data.restaurantName} (${data.guests} guests)`,
+        target: data.mobile,
+        details: `${data.date} at ${data.time} for ${data.guestName} (${data.email})`,
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      })
+      .catch(() => {});
+
+    window.dispatchEvent(new CustomEvent('rateit-storage-change', { detail: { key: STORAGE_KEYS.bookings } }));
+    return booking;
+  },
+
+  updateBookingStatus(id: string, status: TableBooking['status']): TableBooking | null {
+    const all = this.getBookings();
+    const b = all.find((item) => item.id === id);
+    if (!b) return null;
+    b.status = status;
+    safeSet(STORAGE_KEYS.bookings, all);
+    this.addAuditLog(`Table reservation ${id} status changed to ${status}`);
+    window.dispatchEvent(new CustomEvent('rateit-storage-change', { detail: { key: STORAGE_KEYS.bookings } }));
+    return b;
   },
 
   /**

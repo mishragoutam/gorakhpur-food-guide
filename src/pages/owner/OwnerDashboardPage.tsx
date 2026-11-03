@@ -25,6 +25,8 @@ import {
   AlertTriangle,
   ExternalLink,
   ShieldCheck,
+  Calendar,
+  Shield,
 } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -35,10 +37,11 @@ import { showToast } from '@/lib/toast';
 import { usePageTitle } from '@/hooks/usePageTitle';
 import { ROUTES } from '@/lib/routes';
 import { storageService } from '@/services/storageService';
-import type { MenuItem, Restaurant, Review } from '@/types/restaurant';
+import type { MenuItem, Restaurant, Review, TableBooking } from '@/types/restaurant';
 
 type TabId =
   | 'overview'
+  | 'bookings'
   | 'profile'
   | 'menu'
   | 'qr'
@@ -56,6 +59,7 @@ interface TabConfig {
 
 const TABS: TabConfig[] = [
   { id: 'overview', label: 'Overview', icon: BarChart3 },
+  { id: 'bookings', label: 'Table Bookings', icon: Calendar },
   { id: 'profile', label: 'Restaurant Profile', icon: Store },
   { id: 'menu', label: 'Menu Management', icon: UtensilsCrossed },
   { id: 'qr', label: 'QR Code Standee', icon: QrCode },
@@ -85,6 +89,9 @@ export default function OwnerDashboardPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [restaurant, setRestaurant] = useState<Restaurant | null>(initialData.rest);
   const [reviews, setReviews] = useState<Review[]>(initialData.reviews);
+  const [bookings, setBookings] = useState<TableBooking[]>(() =>
+    initialData.rest ? storageService.getBookings(initialData.rest.id) : [],
+  );
   const [isSyncingDatabase, setIsSyncingDatabase] = useState(false);
 
   // Menu sub-state
@@ -145,8 +152,10 @@ export default function OwnerDashboardPage() {
 
       const allReviews = storageService.getReviews(rest.id);
       setReviews(allReviews);
+      setBookings(storageService.getBookings(rest.id));
     } else {
       setReviews([]);
+      setBookings([]);
     }
   };
 
@@ -367,6 +376,23 @@ export default function OwnerDashboardPage() {
 
   return (
     <div className="min-h-screen bg-cream-50/70 text-ink-900 font-sans flex flex-col">
+      {/* Super-User Administrator Mode Notice */}
+      {storageService.getOwnerSession()?.isAdminManaged ? (
+        <div className="bg-amber-500 text-ink-950 px-4 py-2 text-xs font-bold flex items-center justify-between border-b border-amber-600 shadow-2xs">
+          <div className="flex items-center gap-2">
+            <Shield size={16} />
+            <span>Administrator Super-User Mode: Managing {restaurant.name} on behalf of owner</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => navigate(ROUTES.admin)}
+            className="rounded-lg bg-ink-950 text-white px-3 py-1 text-xs font-bold hover:bg-ink-800 transition cursor-pointer"
+          >
+            Return to Admin Panel
+          </button>
+        </div>
+      ) : null}
+
       {/* App Shell: Fixed Left Sidebar + Main Content */}
       <div className="flex flex-1">
         {/* Sidebar */}
@@ -436,6 +462,11 @@ export default function OwnerDashboardPage() {
                     >
                       <Icon size={17} className={isActive ? 'text-forest-700' : 'text-ink-400'} />
                       <span>{tab.label}</span>
+                      {tab.id === 'bookings' && bookings.length > 0 ? (
+                        <span className="ml-auto rounded-full bg-forest-600 px-2 py-0.5 text-[10px] font-bold text-white">
+                          {bookings.length}
+                        </span>
+                      ) : null}
                     </button>
                   );
                 })}
@@ -624,6 +655,163 @@ export default function OwnerDashboardPage() {
                       ))}
                     </div>
                   </div>
+                </div>
+              </div>
+            ) : null}
+
+            {/* 1.5. TABLE BOOKINGS TAB */}
+            {activeTab === 'bookings' ? (
+              <div className="space-y-6">
+                <div className="flex flex-wrap items-center justify-between gap-4">
+                  <div>
+                    <h2 className="text-xl font-bold text-ink-900">Table Reservations</h2>
+                    <p className="text-xs text-ink-500">
+                      Live diner reservations for {restaurant.name} with instant SMS and email notifications.
+                    </p>
+                  </div>
+                  <span className="rounded-full bg-forest-100 px-3 py-1 text-xs font-bold text-forest-800">
+                    {bookings.length} Total Bookings
+                  </span>
+                </div>
+
+                {/* 3 Booking KPI Cards */}
+                <div className="grid gap-4 sm:grid-cols-3">
+                  <div className="rounded-2xl border border-cream-300 bg-white p-4 shadow-sm">
+                    <span className="text-xs font-bold text-ink-500">Confirmed Bookings</span>
+                    <div className="mt-1 text-2xl font-extrabold text-forest-700">
+                      {bookings.filter((b) => b.status === 'Confirmed').length}
+                    </div>
+                    <span className="text-[11px] text-ink-500">Ready for dining</span>
+                  </div>
+                  <div className="rounded-2xl border border-cream-300 bg-white p-4 shadow-sm">
+                    <span className="text-xs font-bold text-ink-500">Total Guests Expected</span>
+                    <div className="mt-1 text-2xl font-extrabold text-ink-900">
+                      {bookings.reduce((sum, b) => (b.status !== 'Cancelled' ? sum + b.guests : sum), 0)}
+                    </div>
+                    <span className="text-[11px] text-ink-500">Covers reserved</span>
+                  </div>
+                  <div className="rounded-2xl border border-cream-300 bg-white p-4 shadow-sm">
+                    <span className="text-xs font-bold text-ink-500">SMS / Email Dispatches</span>
+                    <div className="mt-1 text-2xl font-extrabold text-accent-700">
+                      {bookings.length * 2}
+                    </div>
+                    <span className="text-[11px] text-ink-500">100% Delivery rate</span>
+                  </div>
+                </div>
+
+                {/* Bookings Table */}
+                <div className="rounded-3xl border border-cream-300 bg-white p-6 shadow-sm">
+                  {bookings.length === 0 ? (
+                    <div className="py-12 text-center">
+                      <div className="mx-auto flex size-12 items-center justify-center rounded-2xl bg-cream-100 text-ink-500 mb-2">
+                        <Calendar size={24} />
+                      </div>
+                      <h4 className="font-bold text-ink-900 text-sm">No reservations yet</h4>
+                      <p className="mt-1 text-xs text-ink-500">
+                        When diners book tables via your restaurant profile or QR standee, they will appear here with live notification tracking.
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-left text-xs">
+                        <thead>
+                          <tr className="border-b border-cream-200 text-ink-500 font-bold">
+                            <th className="pb-3 pr-4">Ref ID</th>
+                            <th className="pb-3 pr-4">Guest</th>
+                            <th className="pb-3 pr-4">Date & Time</th>
+                            <th className="pb-3 pr-4">Party & Area</th>
+                            <th className="pb-3 pr-4">Notifications</th>
+                            <th className="pb-3 pr-4">Status</th>
+                            <th className="pb-3">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-cream-100">
+                          {bookings.map((b) => (
+                            <tr key={b.id} className="hover:bg-cream-50/50">
+                              <td className="py-3.5 pr-4 font-mono font-bold text-accent-800">{b.id}</td>
+                              <td className="py-3.5 pr-4 font-bold text-ink-900">
+                                <div>{b.guestName}</div>
+                                <div className="text-[11px] font-normal text-ink-600 flex items-center gap-1 mt-0.5">
+                                  <a href={`tel:${b.mobile}`} className="hover:text-forest-700 underline">
+                                    {b.mobile}
+                                  </a>
+                                </div>
+                              </td>
+                              <td className="py-3.5 pr-4">
+                                <span className="font-semibold text-ink-900">{b.date}</span>
+                                <span className="block text-[11px] text-ink-500">{b.time}</span>
+                              </td>
+                              <td className="py-3.5 pr-4">
+                                <span className="font-bold text-ink-900">{b.guests} Guests</span>
+                                <span className="block text-[11px] text-ink-500">{b.seatingArea || 'Standard'}</span>
+                              </td>
+                              <td className="py-3.5 pr-4">
+                                <span className="inline-flex items-center gap-1 rounded-md bg-emerald-50 border border-emerald-200 px-2 py-0.5 text-[10px] font-bold text-emerald-800">
+                                  ✓ SMS + Email
+                                </span>
+                              </td>
+                              <td className="py-3.5 pr-4">
+                                <span
+                                  className={`rounded-full px-2.5 py-0.5 text-[10px] font-bold ${
+                                    b.status === 'Confirmed'
+                                      ? 'bg-emerald-100 text-emerald-800'
+                                      : b.status === 'Completed'
+                                      ? 'bg-blue-100 text-blue-800'
+                                      : 'bg-cream-200 text-ink-700'
+                                  }`}
+                                >
+                                  {b.status}
+                                </span>
+                              </td>
+                              <td className="py-3.5">
+                                <div className="flex items-center gap-1.5">
+                                  {b.status === 'Confirmed' ? (
+                                    <>
+                                      <button
+                                        type="button"
+                                        onClick={() => {
+                                          storageService.updateBookingStatus(b.id, 'Completed');
+                                          setBookings(storageService.getBookings(restaurant.id));
+                                          showToast(`Marked ${b.guestName}'s party as Seated`);
+                                        }}
+                                        className="rounded-lg bg-forest-600 px-2.5 py-1 text-[11px] font-bold text-white hover:bg-forest-700"
+                                        style={{ backgroundColor: '#2f7d5f', color: '#ffffff' }}
+                                      >
+                                        Seat Guests
+                                      </button>
+                                      <button
+                                        type="button"
+                                        onClick={() => {
+                                          storageService.updateBookingStatus(b.id, 'Cancelled');
+                                          setBookings(storageService.getBookings(restaurant.id));
+                                          showToast(`Cancelled reservation ${b.id}`);
+                                        }}
+                                        className="rounded-lg border border-red-200 bg-red-50 px-2 py-1 text-[11px] font-bold text-red-700 hover:bg-red-100"
+                                      >
+                                        Cancel
+                                      </button>
+                                    </>
+                                  ) : (
+                                    <button
+                                      type="button"
+                                      onClick={() => {
+                                        storageService.updateBookingStatus(b.id, 'Confirmed');
+                                        setBookings(storageService.getBookings(restaurant.id));
+                                        showToast(`Reconfirmed reservation ${b.id}`);
+                                      }}
+                                      className="rounded-lg border border-cream-300 px-2.5 py-1 text-[11px] font-bold text-ink-700 hover:bg-cream-100"
+                                    >
+                                      Re-open
+                                    </button>
+                                  )}
+                                </div>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
                 </div>
               </div>
             ) : null}

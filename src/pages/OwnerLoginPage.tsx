@@ -53,12 +53,6 @@ export default function OwnerLoginPage() {
     navigate(ROUTES.ownerDashboard);
   };
 
-  const handleSelectPartnerEmail = (partnerEmail: string) => {
-    setEmail(partnerEmail);
-    setPassword('Owner@123');
-    setError('');
-  };
-
   return (
     <section className="py-10 sm:py-16">
       <Container>
@@ -155,37 +149,6 @@ export default function OwnerLoginPage() {
                 <LogIn size={16} />
                 Log In to Dashboard
               </button>
-
-              <div className="relative my-4 text-center">
-                <hr className="border-cream-300" />
-                <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-3 text-[11px] font-semibold text-ink-500 uppercase">
-                  Select Registered Partner Account
-                </span>
-              </div>
-
-              <div className="rounded-2xl border border-cream-300 bg-cream-50/70 p-3">
-                <label className="text-[11px] font-bold text-ink-700 block mb-1.5" htmlFor="partner-picker">
-                  Quick-fill email for registered partner:
-                </label>
-                <select
-                  id="partner-picker"
-                  onChange={(e) => {
-                    if (e.target.value) handleSelectPartnerEmail(e.target.value);
-                  }}
-                  defaultValue=""
-                  className="w-full rounded-xl border border-cream-300 bg-white px-3 py-2 text-xs font-semibold text-ink-800 outline-none focus:border-forest-600 cursor-pointer"
-                >
-                  <option value="" disabled>-- Choose a Gorakhpur Restaurant Account --</option>
-                  {storageService.getRestaurants().map((r) => (
-                    <option key={r.id} value={r.ownerEmail || ''}>
-                      {r.name} ({r.area}) — {r.ownerEmail}
-                    </option>
-                  ))}
-                </select>
-                <p className="mt-1 text-[10px] text-ink-500">
-                  Selecting an account populates its verified owner credentials for isolated access.
-                </p>
-              </div>
 
               <div className="mt-6 flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-cream-200 text-xs">
                 <span className="text-ink-600">Don't have a restaurant account yet?</span>

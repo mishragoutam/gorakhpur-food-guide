@@ -133,4 +133,30 @@ export interface OwnerSession {
   restaurantName: string;
   ownerEmail: string;
   ownerName: string;
+  isAdminManaged?: boolean;
+}
+
+export interface TableBooking {
+  id: string;
+  restaurantId: string;
+  restaurantName: string;
+  guestName: string;
+  mobile: string;
+  email: string;
+  date: string;
+  time: string;
+  guests: number;
+  seatingArea?: string;
+  specialRequests?: string;
+  status: 'Confirmed' | 'Pending' | 'Completed' | 'Cancelled';
+  createdAt: string;
+  confirmationCode: string;
+  notifications: {
+    smsSent: boolean;
+    smsDeliveredTo: string;
+    emailSent: boolean;
+    emailDeliveredTo: string;
+    smsText: string;
+    emailSubject: string;
+  };
 }

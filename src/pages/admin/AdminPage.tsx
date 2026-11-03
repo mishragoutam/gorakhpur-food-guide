@@ -18,7 +18,7 @@ import {
   ExternalLink,
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { showToast } from '@/lib/toast';
 import { usePageTitle } from '@/hooks/usePageTitle';
 import { ROUTES } from '@/lib/routes';
@@ -32,6 +32,7 @@ type AdminTab = 'dash' | 'users' | 'shops' | 'revs' | 'qr' | 'audit';
 
 export default function AdminPage() {
   usePageTitle('Admin Moderation Panel');
+  const navigate = useNavigate();
 
   const [isLoggedIn, setIsLoggedIn] = useState(() => storageService.isAdminLoggedIn());
   const [adminEmail, setAdminEmail] = useState('admin@rateit.com');
@@ -90,6 +91,19 @@ export default function AdminPage() {
     storageService.setAdminLoggedIn(false);
     setIsLoggedIn(false);
     showToast('Admin logged out');
+  };
+
+  const openShopAsAdmin = (s: Restaurant) => {
+    storageService.setOwnerSession({
+      restaurantId: s.id,
+      restaurantName: s.name,
+      ownerEmail: s.ownerEmail || 'admin@rateit.com',
+      ownerName: s.ownerName || 'Admin Super-User',
+      isAdminManaged: true,
+    });
+    storageService.addAuditLog('Admin accessed restaurant dashboard', s.name);
+    showToast(`Opening ${s.name} dashboard in Admin Mode`);
+    navigate(ROUTES.ownerDashboard);
   };
 
   // Moderation actions
@@ -668,6 +682,14 @@ export default function AdminPage() {
                         </td>
                         <td className="py-3.5">
                           <div className="flex flex-wrap items-center gap-1.5">
+                            <button
+                              type="button"
+                              onClick={() => openShopAsAdmin(s)}
+                              className="rounded-lg bg-forest-600 px-2.5 py-1 text-[11px] font-bold text-white hover:bg-forest-700"
+                              style={{ backgroundColor: '#2f7d5f', color: '#ffffff' }}
+                            >
+                              Manage Dashboard
+                            </button>
                             <button
                               type="button"
                               onClick={() => toggleShopStatus(s)}
