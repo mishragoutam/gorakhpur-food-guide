@@ -114,6 +114,19 @@ describe('restaurantUrl utility', () => {
     expect(byCaseInsensitive).not.toBeNull();
     expect(byCaseInsensitive?.id).toBe('demo-kesar-darbar-kitchen');
 
+    // Verify KIPM Cafe matches by ID, slug, and name
+    const byKipmId = storageService.getRestaurantById('rest-1793732616313');
+    expect(byKipmId).not.toBeNull();
+    expect(byKipmId?.name).toBe('KIPM Cafe');
+
+    const byKipmSlug = storageService.getRestaurantById('kipm-cafe');
+    expect(byKipmSlug).not.toBeNull();
+    expect(byKipmSlug?.name).toBe('KIPM Cafe');
+
+    const byKipmName = storageService.getRestaurantById('KIPM Cafe');
+    expect(byKipmName).not.toBeNull();
+    expect(byKipmName?.name).toBe('KIPM Cafe');
+
     const notFound = storageService.getRestaurantById('completely-non-existent-xyz');
     expect(notFound).toBeNull();
   });

@@ -60,6 +60,15 @@ describe('App routing', () => {
     expect(document.title).toBe('Lotus Wok House | VYORA');
   });
 
+  it('opens restaurant details via QR code route aliases (/r/:id, /restaurant/:id)', async () => {
+    window.history.pushState({}, '', '/r/rest-1793732616313?qr=standee&table=2');
+    render(<App />);
+
+    expect(await screen.findByRole('heading', { level: 1, name: 'KIPM Cafe' })).toBeInTheDocument();
+    expect(screen.getByText(/Welcome to KIPM Cafe!/)).toBeInTheDocument();
+    expect(screen.getByText(/Table 2/)).toBeInTheDocument();
+  });
+
   it('says so when a restaurant does not exist', async () => {
     window.history.pushState({}, '', '/restaurants/not-a-real-id');
     render(<App />);

@@ -471,7 +471,12 @@ const fmtDate = ts => new Date(ts).toLocaleDateString('en-IN',{day:'numeric',mon
 const inr = n => '₹' + Number(n).toLocaleString('en-IN');
 const starsHTML = v => `<span class="stars" style="--p:${(v/5*100).toFixed(0)}%" role="img" aria-label="${v.toFixed(1)} out of 5 stars">★★★★★</span>`;
 const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-const reviewUrl = () => 'https://rateit.example/r/' + slug(state.profile.name);
+const reviewUrl = () => {
+  const isBrowser = typeof window !== 'undefined' && window.location?.origin && !window.location.origin.includes('file:');
+  const base = isBrowser ? window.location.origin.replace(/\/+$/, '') : 'https://gorakhpurfoodguide.in';
+  const targetId = state?.profile?.id || slug(state?.profile?.name || 'restaurant');
+  return `${base}/restaurants/${targetId}`;
+};
 const to12h = t => { const [h,m] = t.split(':').map(Number); return `${((h+11)%12)+1}:${String(m).padStart(2,'0')} ${h<12?'AM':'PM'}`; };
 function setErr(scope, name, msg){ const el = $(`[data-err="${name}"]`, scope); if (el) el.textContent = msg; }
 function stats(){

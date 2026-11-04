@@ -40,7 +40,7 @@ export const restaurantService: RestaurantService = {
     // If Supabase is configured, fetch fresh data from cloud to guarantee mobile matches desktop
     if (supabaseService.isConfigured()) {
       try {
-        const timeoutMs = local ? 1800 : 5000;
+        const timeoutMs = local ? 1800 : 7000;
         const cloudRest = await Promise.race([
           supabaseService.getRestaurantById(id),
           new Promise<null>((resolve) => setTimeout(() => resolve(null), timeoutMs)),

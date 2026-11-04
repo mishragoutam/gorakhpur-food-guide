@@ -78,7 +78,10 @@ export default function RestaurantDetailsPage() {
     () => (restaurantId ? storageService.getRestaurantById(restaurantId) : null),
     [restaurantId],
   );
-  const restaurant = restaurantQuery.status === 'ready' ? restaurantQuery.data : (initialLocal || null);
+  const restaurant =
+    restaurantQuery.status === 'ready' && restaurantQuery.data
+      ? restaurantQuery.data
+      : initialLocal;
 
   usePageTitle(restaurant ? restaurant.name : 'Restaurant details');
 

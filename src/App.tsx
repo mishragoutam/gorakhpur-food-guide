@@ -101,6 +101,9 @@ export default function App() {
           <Route element={<Layout />}>
             <Route index element={<HomePage />} />
             <Route path="restaurants/:restaurantId" element={<RestaurantDetailsPage />} />
+            <Route path="restaurant/:restaurantId" element={<RestaurantDetailsPage />} />
+            <Route path="r/:restaurantId" element={<RestaurantDetailsPage />} />
+            <Route path="review/:restaurantId" element={<RestaurantDetailsPage />} />
             <Route path="decide-together" element={<GroupDiningPage />} />
             <Route path="decide-together/:sessionId" element={<GroupDiningPage />} />
             <Route path="my-reviews" element={<MyReviewsPage />} />

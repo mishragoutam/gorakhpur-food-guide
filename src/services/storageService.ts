@@ -174,21 +174,66 @@ const SEED_AUDIT: AuditLogEntry[] = [
   { id: 'a3', action: 'Verified new menu submission', target: 'Kesar Darbar Kitchen', timestamp: 'Yesterday' },
 ];
 
+const memoryCache = new Map<string, unknown>();
+
 function safeGet<T>(key: string, fallback: T): T {
   try {
     const raw = localStorage.getItem(key);
-    return raw !== null ? (JSON.parse(raw) as T) : fallback;
+    if (raw !== null) {
+      const parsed = JSON.parse(raw) as T;
+      memoryCache.set(key, parsed);
+      return parsed;
+    } else {
+      // LocalStorage was cleared or key is unset; synchronize memory cache
+      memoryCache.delete(key);
+    }
   } catch {
-    return fallback;
+    // LocalStorage blocked (e.g. security policy / Safari private mode), fallback to memoryCache
+    if (memoryCache.has(key)) {
+      return memoryCache.get(key) as T;
+    }
   }
+  return fallback;
 }
 
 function safeSet<T>(key: string, value: T): void {
+  // Always update in-memory cache so current session and components never lose data
+  memoryCache.set(key, value);
   try {
     localStorage.setItem(key, JSON.stringify(value));
-    window.dispatchEvent(new CustomEvent('rateit-storage-change', { detail: { key } }));
   } catch {
-    // Storage quota or private mode fallback
+    // If localStorage quota is exceeded (e.g. mobile quota with large images),
+    // sanitize heavy base64 strings in the localStorage copy so data still persists
+    try {
+      if (Array.isArray(value)) {
+        const sanitized = value.map((item: Record<string, unknown>) => {
+          if (!item || typeof item !== 'object') return item;
+          const copy = { ...item };
+          if (typeof copy.imageUrl === 'string' && copy.imageUrl.length > 15000) {
+            delete copy.imageUrl;
+          }
+          if (typeof copy.logoUrl === 'string' && copy.logoUrl.length > 15000) {
+            delete copy.logoUrl;
+          }
+          if (Array.isArray(copy.menu)) {
+            copy.menu = (copy.menu as Record<string, unknown>[]).map((m) => {
+              if (m && typeof m === 'object' && typeof m.imageUrl === 'string' && m.imageUrl.length > 15000) {
+                const { imageUrl: _, ...restMenu } = m;
+                return restMenu;
+              }
+              return m;
+            });
+          }
+          return copy;
+        });
+        localStorage.setItem(key, JSON.stringify(sanitized));
+      }
+    } catch {
+      // Memory cache is fully active as resilient fallback
+    }
+  } finally {
+    // Storage change event MUST always fire so UI re-renders and reloads
+    window.dispatchEvent(new CustomEvent('rateit-storage-change', { detail: { key } }));
   }
 }
 
@@ -328,20 +373,33 @@ export const storageService = {
         restId === decoded ||
         restCleanId === cleanId ||
         restSlug === cleanId ||
-        restSlug === decoded
+        restSlug === decoded ||
+        r.name.toLowerCase() === decoded
       );
     });
 
     if (found) return found;
 
     // Resilient fallback to authentic Gorakhpur dining directory
-    const gFallback = GORAKHPUR_RESTAURANTS.find(
-      (r) =>
+    const gFallback = GORAKHPUR_RESTAURANTS.find((r) => {
+      const restId = r.id.toLowerCase();
+      const restCleanId = restId.replace(/^demo-/, '');
+      const restSlug = r.name
+        .normalize('NFD')
+        .replace(/\p{M}/gu, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+
+      return (
+        restId === decoded ||
+        restCleanId === cleanId ||
+        restSlug === cleanId ||
+        restSlug === decoded ||
         r.id === id ||
-        r.id.toLowerCase() === decoded ||
-        r.id.replace(/^demo-/, '') === cleanId ||
-        r.name.toLowerCase() === decoded,
-    );
+        r.name.toLowerCase() === decoded
+      );
+    });
     if (gFallback) return { ...gFallback };
 
     // Resilient fallback to test demo list if not in active list
@@ -362,15 +420,17 @@ export const storageService = {
     // Start with all cloud restaurants (source of truth)
     const merged: Restaurant[] = [...cloudList];
 
-    // Keep any local demo fixtures if they aren't already represented in cloud
+    // Keep any local restaurants (including newly registered user restaurants) if not yet represented in cloud
     for (const localRest of current) {
-      if (!cloudMap.has(localRest.id) && localRest.isDemo) {
+      if (!cloudMap.has(localRest.id)) {
         merged.push(localRest);
+        if (!localRest.isDemo && supabaseService.isConfigured()) {
+          supabaseService.saveRestaurant(localRest).catch(() => {});
+        }
       }
     }
 
     safeSet(STORAGE_KEYS.restaurants, merged);
-    window.dispatchEvent(new CustomEvent('rateit-storage-change', { detail: { key: STORAGE_KEYS.restaurants } }));
   },
 
   /**

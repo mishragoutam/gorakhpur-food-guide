@@ -228,28 +228,58 @@ export async function getSupabaseRestaurants(): Promise<Restaurant[]> {
 }
 
 /**
- * Fetch a single restaurant by ID from Supabase.
+ * Fetch a single restaurant by ID or slug from Supabase.
  */
 export async function getSupabaseRestaurantById(id: string): Promise<Restaurant | null> {
   if (!supabase || !id) return null;
+  const decoded = decodeURIComponent(id).trim();
+  const cleanId = decoded.replace(/^demo-/, '').toLowerCase();
+
   try {
+    // 1. Direct exact match query
     const { data, error } = await supabase
       .from('restaurants')
       .select('*')
       .eq('id', id)
       .maybeSingle();
 
-    if (error) {
-      console.error(`[Supabase] Error fetching restaurant ${id}:`, error.message);
-      return null;
+    if (!error && data) {
+      return fromRestaurantRow(data as Record<string, unknown>);
     }
 
-    if (!data) return null;
-    return fromRestaurantRow(data as Record<string, unknown>);
+    // 2. Resilient slug / case-insensitive / name fallback in cloud database
+    const { data: list, error: listErr } = await supabase
+      .from('restaurants')
+      .select('*');
+
+    if (!listErr && list && list.length > 0) {
+      const match = list.find((row) => {
+        const rowId = String(row.id || '').toLowerCase();
+        const rowCleanId = rowId.replace(/^demo-/, '');
+        const rowName = String(row.name || '').toLowerCase();
+        const rowSlug = rowName
+          .normalize('NFD')
+          .replace(/\p{M}/gu, '')
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-+|-+$/g, '');
+
+        return (
+          rowId === decoded.toLowerCase() ||
+          rowCleanId === cleanId ||
+          rowSlug === cleanId ||
+          rowSlug === decoded.toLowerCase() ||
+          rowName === decoded.toLowerCase()
+        );
+      });
+
+      if (match) {
+        return fromRestaurantRow(match as Record<string, unknown>);
+      }
+    }
   } catch (err) {
     console.error(`[Supabase] Exception fetching restaurant ${id}:`, err);
-    return null;
   }
+  return null;
 }
 
 /**
