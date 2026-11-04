@@ -36,6 +36,7 @@ export default function App() {
     if (import.meta.env.MODE !== 'test' && isSupabaseConfigured() && supabase) {
       // 1. Initial Cloud Sync: Ensure mobile and desktop stay 100% identical
       restaurantService.fetchFromCloud().catch(() => {});
+      storageService.fetchBookingsFromCloud().catch(() => {});
 
       // 2. Auth State Change Listener
       const {
@@ -85,10 +86,23 @@ export default function App() {
         )
         .subscribe();
 
+      // 4. Realtime Subscription: Instant sync for table reservations across mobile and desktop
+      const bookingChannel = supabase
+        .channel('realtime:bookings-sync')
+        .on(
+          'postgres_changes',
+          { event: '*', schema: 'public', table: 'inquiries', filter: 'category=eq.table_booking' },
+          () => {
+            storageService.fetchBookingsFromCloud().catch(() => {});
+          },
+        )
+        .subscribe();
+
       return () => {
         subscription.unsubscribe();
         if (supabase) {
           supabase.removeChannel(restaurantChannel);
+          supabase.removeChannel(bookingChannel);
         }
       };
     }

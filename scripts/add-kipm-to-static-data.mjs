@@ -128,3 +128,4 @@ if (!content.includes('KIPM Cafe')) {
 } else {
   console.log('KIPM Cafe already in GORAKHPUR_RESTAURANTS');
 }
+

@@ -1,6 +1,6 @@
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 import { GORAKHPUR_USERS } from '@/data/gorakhpurUsers';
-import type { Restaurant, Review, AuditLogEntry } from '@/types/restaurant';
+import type { Restaurant, Review, AuditLogEntry, TableBooking } from '@/types/restaurant';
 
 // In-memory lookup map for simulated user avatars
 const USER_AVATAR_BY_EMAIL = new Map<string, string>();
@@ -556,6 +556,116 @@ export function subscribeToSupabaseReviews(
   }
 }
 
+/**
+ * Save table booking to Supabase inquiries table under category 'table_booking'.
+ */
+export async function saveSupabaseBooking(booking: TableBooking): Promise<boolean> {
+  if (!supabase) return false;
+  try {
+    const { error } = await supabase.from('inquiries').upsert(
+      {
+        id: booking.id,
+        name: booking.guestName,
+        email: booking.email,
+        phone: booking.mobile,
+        category: 'table_booking',
+        message: JSON.stringify(booking),
+        status: booking.status,
+      },
+      { onConflict: 'id' },
+    );
+    if (error) {
+      console.warn('[Supabase] Error saving table booking:', error.message);
+      return false;
+    }
+    return true;
+  } catch (err) {
+    console.warn('[Supabase] Exception saving table booking:', err);
+    return false;
+  }
+}
+
+/**
+ * Fetch all table bookings from Supabase inquiries table.
+ */
+export async function getSupabaseBookings(): Promise<TableBooking[]> {
+  if (!supabase) return [];
+  try {
+    const { data, error } = await supabase
+      .from('inquiries')
+      .select('*')
+      .eq('category', 'table_booking')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.warn('[Supabase] Error fetching table bookings:', error.message);
+      return [];
+    }
+
+    const bookings: TableBooking[] = [];
+    for (const row of data || []) {
+      try {
+        if (row.message) {
+          const parsed = JSON.parse(row.message) as TableBooking;
+          if (row.status && ['Confirmed', 'Pending', 'Completed', 'Cancelled'].includes(row.status)) {
+            parsed.status = row.status as TableBooking['status'];
+          }
+          bookings.push(parsed);
+        }
+      } catch {
+        // Skip malformed entry
+      }
+    }
+    return bookings;
+  } catch (err) {
+    console.warn('[Supabase] Exception fetching table bookings:', err);
+    return [];
+  }
+}
+
+/**
+ * Update table booking status in Supabase inquiries table.
+ */
+export async function updateSupabaseBookingStatus(
+  bookingId: string,
+  status: TableBooking['status'],
+): Promise<boolean> {
+  if (!supabase || !bookingId) return false;
+  try {
+    const { error } = await supabase
+      .from('inquiries')
+      .update({ status })
+      .eq('id', bookingId);
+
+    if (error) {
+      console.warn('[Supabase] Error updating table booking status:', error.message);
+      return false;
+    }
+    return true;
+  } catch (err) {
+    console.warn('[Supabase] Exception updating table booking status:', err);
+    return false;
+  }
+}
+
+/**
+ * Delete table booking from Supabase inquiries table.
+ */
+export async function deleteSupabaseBooking(bookingId: string): Promise<boolean> {
+  if (!supabase || !bookingId) return false;
+  try {
+    const { error } = await supabase.from('inquiries').delete().eq('id', bookingId);
+    if (error) {
+      console.warn('[Supabase] Error deleting table booking:', error.message);
+      return false;
+    }
+    return true;
+  } catch (err) {
+    console.warn('[Supabase] Exception deleting table booking:', err);
+    return false;
+  }
+}
+
 export const supabaseService = {
   isConfigured: isSupabaseConfigured,
   isActive: isSupabaseActive,
@@ -569,6 +679,10 @@ export const supabaseService = {
   deleteReview: deleteSupabaseReview,
   saveInquiry: saveSupabaseInquiry,
   logAudit: logSupabaseAudit,
+  saveBooking: saveSupabaseBooking,
+  getBookings: getSupabaseBookings,
+  updateBookingStatus: updateSupabaseBookingStatus,
+  deleteBooking: deleteSupabaseBooking,
   seed: seedSupabase,
   subscribeReviews: subscribeToSupabaseReviews,
 };

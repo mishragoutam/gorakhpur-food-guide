@@ -33,6 +33,8 @@ import {
   Lock,
   Eye,
   EyeOff,
+  Phone,
+  MessageCircle,
 } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -98,8 +100,10 @@ export default function OwnerDashboardPage() {
   const [restaurant, setRestaurant] = useState<Restaurant | null>(initialData.rest);
   const [reviews, setReviews] = useState<Review[]>(initialData.reviews);
   const [bookings, setBookings] = useState<TableBooking[]>(() =>
-    initialData.rest ? storageService.getBookings(initialData.rest.id) : [],
+    initialData.rest ? storageService.getBookings(initialData.rest.id, initialData.rest.name) : [],
   );
+  const [bookingStatusFilter, setBookingStatusFilter] = useState<'All' | 'Confirmed' | 'Completed' | 'Cancelled'>('All');
+  const [isSyncingBookings, setIsSyncingBookings] = useState(false);
   const [isSyncingDatabase, setIsSyncingDatabase] = useState(false);
 
   // Menu sub-state
@@ -177,10 +181,23 @@ export default function OwnerDashboardPage() {
 
       const allReviews = storageService.getReviews(rest.id);
       setReviews(allReviews);
-      setBookings(storageService.getBookings(rest.id));
+      setBookings(storageService.getBookings(rest.id, rest.name));
     } else {
       setReviews([]);
       setBookings([]);
+    }
+  };
+
+  const handleSyncBookings = async () => {
+    setIsSyncingBookings(true);
+    try {
+      await storageService.fetchBookingsFromCloud();
+      loadData();
+      showToast('Reservations synchronized with cloud', 'success');
+    } catch {
+      showToast('Could not sync reservations from cloud', 'error');
+    } finally {
+      setIsSyncingBookings(false);
     }
   };
 
@@ -193,7 +210,25 @@ export default function OwnerDashboardPage() {
     }
     const handleStorageChange = () => loadData();
     window.addEventListener('rateit-storage-change', handleStorageChange);
-    return () => window.removeEventListener('rateit-storage-change', handleStorageChange);
+    window.addEventListener('storage', handleStorageChange);
+
+    // Fetch cloud bookings immediately on dashboard load
+    storageService.fetchBookingsFromCloud().then(() => {
+      loadData();
+    }).catch(() => {});
+
+    // Live polling for cross-device reservations (e.g. diner booking on phone)
+    const pollInterval = setInterval(() => {
+      storageService.fetchBookingsFromCloud().then(() => {
+        loadData();
+      }).catch(() => {});
+    }, 5000);
+
+    return () => {
+      window.removeEventListener('rateit-storage-change', handleStorageChange);
+      window.removeEventListener('storage', handleStorageChange);
+      clearInterval(pollInterval);
+    };
   }, [navigate]);
 
   const competitorsList = useMemo(() => {
@@ -776,24 +811,48 @@ export default function OwnerDashboardPage() {
               <div className="space-y-6">
                 <div className="flex flex-wrap items-center justify-between gap-4">
                   <div>
-                    <h2 className="text-xl font-bold text-ink-900">Table Reservations</h2>
-                    <p className="text-xs text-ink-500">
+                    <div className="flex items-center gap-2">
+                      <h2 className="text-xl font-bold text-ink-900">Table Reservations</h2>
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 text-[11px] font-bold text-emerald-800">
+                        <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        Live Cloud Sync
+                      </span>
+                    </div>
+                    <p className="text-xs text-ink-500 mt-0.5">
                       Live diner reservations for {restaurant.name} with instant SMS and email notifications.
                     </p>
                   </div>
-                  <span className="rounded-full bg-accent-100 px-3 py-1 text-xs font-bold text-accent-800">
-                    {bookings.length} Total Bookings
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={handleSyncBookings}
+                      disabled={isSyncingBookings}
+                      className="inline-flex items-center gap-1.5 rounded-xl border border-cream-300 bg-white px-3 py-1.5 text-xs font-bold text-ink-700 hover:bg-cream-100 disabled:opacity-50 transition-colors shadow-2xs"
+                    >
+                      <RefreshCw size={14} className={isSyncingBookings ? 'animate-spin text-accent-600' : ''} />
+                      {isSyncingBookings ? 'Syncing...' : 'Sync Cloud'}
+                    </button>
+                    <span className="rounded-full bg-accent-100 px-3 py-1.5 text-xs font-bold text-accent-800">
+                      {bookings.length} Total Bookings
+                    </span>
+                  </div>
                 </div>
 
-                {/* 3 Booking KPI Cards */}
-                <div className="grid gap-4 sm:grid-cols-3">
+                {/* 4 Booking KPI Cards */}
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                   <div className="rounded-2xl border border-cream-300 bg-white p-4 shadow-sm">
-                    <span className="text-xs font-bold text-ink-500">Confirmed Bookings</span>
-                    <div className="mt-1 text-2xl font-extrabold text-accent-700">
+                    <span className="text-xs font-bold text-ink-500">Confirmed (Waiting)</span>
+                    <div className="mt-1 text-2xl font-extrabold text-emerald-700">
                       {bookings.filter((b) => b.status === 'Confirmed').length}
                     </div>
-                    <span className="text-[11px] text-ink-500">Ready for dining</span>
+                    <span className="text-[11px] text-emerald-600 font-medium">Ready for dining</span>
+                  </div>
+                  <div className="rounded-2xl border border-cream-300 bg-white p-4 shadow-sm">
+                    <span className="text-xs font-bold text-ink-500">Seated / Completed</span>
+                    <div className="mt-1 text-2xl font-extrabold text-blue-700">
+                      {bookings.filter((b) => b.status === 'Completed').length}
+                    </div>
+                    <span className="text-[11px] text-blue-600 font-medium">Successfully served</span>
                   </div>
                   <div className="rounded-2xl border border-cream-300 bg-white p-4 shadow-sm">
                     <span className="text-xs font-bold text-ink-500">Total Guests Expected</span>
@@ -811,8 +870,34 @@ export default function OwnerDashboardPage() {
                   </div>
                 </div>
 
-                {/* Bookings Table */}
-                <div className="rounded-3xl border border-cream-300 bg-white p-6 shadow-sm">
+                {/* Bookings Table Container */}
+                <div className="rounded-3xl border border-cream-300 bg-white p-6 shadow-sm space-y-4">
+                  {/* Status Filter Tabs */}
+                  <div className="flex flex-wrap items-center gap-2 border-b border-cream-200 pb-3">
+                    {(['All', 'Confirmed', 'Completed', 'Cancelled'] as const).map((status) => {
+                      const count =
+                        status === 'All'
+                          ? bookings.length
+                          : bookings.filter((b) => b.status === status).length;
+                      const isSelected = bookingStatusFilter === status;
+                      return (
+                        <button
+                          key={status}
+                          type="button"
+                          onClick={() => setBookingStatusFilter(status)}
+                          className={`rounded-xl px-3 py-1.5 text-xs font-bold transition-colors ${
+                            isSelected
+                              ? 'bg-accent-600 text-white shadow-2xs'
+                              : 'bg-cream-100 text-ink-700 hover:bg-cream-200'
+                          }`}
+                          style={isSelected ? { backgroundColor: '#b84221', color: '#ffffff' } : undefined}
+                        >
+                          {status === 'All' ? 'All Bookings' : status === 'Confirmed' ? 'Confirmed' : status === 'Completed' ? 'Seated / Done' : 'Cancelled'} ({count})
+                        </button>
+                      );
+                    })}
+                  </div>
+
                   {bookings.length === 0 ? (
                     <div className="py-12 text-center">
                       <div className="mx-auto flex size-12 items-center justify-center rounded-2xl bg-cream-100 text-ink-500 mb-2">
@@ -838,88 +923,123 @@ export default function OwnerDashboardPage() {
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-cream-100">
-                          {bookings.map((b) => (
-                            <tr key={b.id} className="hover:bg-cream-50/50">
-                              <td className="py-3.5 pr-4 font-mono font-bold text-accent-800">{b.id}</td>
-                              <td className="py-3.5 pr-4 font-bold text-ink-900">
-                                <div>{b.guestName}</div>
-                                <div className="text-[11px] font-normal text-ink-600 flex items-center gap-1 mt-0.5">
-                                  <a href={`tel:${b.mobile}`} className="hover:text-accent-700 underline">
-                                    {b.mobile}
-                                  </a>
-                                </div>
-                              </td>
-                              <td className="py-3.5 pr-4">
-                                <span className="font-semibold text-ink-900">{b.date}</span>
-                                <span className="block text-[11px] text-ink-500">{b.time}</span>
-                              </td>
-                              <td className="py-3.5 pr-4">
-                                <span className="font-bold text-ink-900">{b.guests} Guests</span>
-                                <span className="block text-[11px] text-ink-500">{b.seatingArea || 'Standard'}</span>
-                              </td>
-                              <td className="py-3.5 pr-4">
-                                <span className="inline-flex items-center gap-1 rounded-md bg-emerald-50 border border-emerald-200 px-2 py-0.5 text-[10px] font-bold text-emerald-800">
-                                  ✓ SMS + Email
-                                </span>
-                              </td>
-                              <td className="py-3.5 pr-4">
-                                <span
-                                  className={`rounded-full px-2.5 py-0.5 text-[10px] font-bold ${
-                                    b.status === 'Confirmed'
-                                      ? 'bg-emerald-100 text-emerald-800'
-                                      : b.status === 'Completed'
-                                      ? 'bg-blue-100 text-blue-800'
-                                      : 'bg-cream-200 text-ink-700'
-                                  }`}
-                                >
-                                  {b.status}
-                                </span>
-                              </td>
-                              <td className="py-3.5">
-                                <div className="flex items-center gap-1.5">
-                                  {b.status === 'Confirmed' ? (
-                                    <>
+                          {bookings
+                            .filter((b) => (bookingStatusFilter === 'All' ? true : b.status === bookingStatusFilter))
+                            .map((b) => (
+                              <tr key={b.id} className="hover:bg-cream-50/50">
+                                <td className="py-3.5 pr-4 font-mono font-bold text-accent-800">
+                                  <div>{b.id}</div>
+                                  <div className="text-[10px] font-mono text-ink-400">Code: {b.confirmationCode}</div>
+                                </td>
+                                <td className="py-3.5 pr-4 font-bold text-ink-900">
+                                  <div>{b.guestName}</div>
+                                  <div className="text-[11px] font-normal text-ink-600 flex flex-wrap items-center gap-2 mt-0.5">
+                                    <a href={`tel:${b.mobile}`} className="hover:text-accent-700 underline flex items-center gap-1">
+                                      <Phone size={11} className="text-ink-400" />
+                                      {b.mobile}
+                                    </a>
+                                    <a
+                                      href={`https://wa.me/${b.mobile.replace(/\D/g, '')}?text=${encodeURIComponent(`Hello ${b.guestName}, this is ${restaurant.name} in Gorakhpur regarding your table reservation ${b.id} for ${b.guests} guests on ${b.date} at ${b.time}.`)}`}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 hover:text-emerald-800 hover:underline"
+                                      title="Message guest on WhatsApp"
+                                    >
+                                      <MessageCircle size={11} />
+                                      WhatsApp
+                                    </a>
+                                  </div>
+                                </td>
+                                <td className="py-3.5 pr-4">
+                                  <span className="font-semibold text-ink-900">{b.date}</span>
+                                  <span className="block text-[11px] text-ink-500">{b.time}</span>
+                                </td>
+                                <td className="py-3.5 pr-4">
+                                  <span className="font-bold text-ink-900">{b.guests} Guests</span>
+                                  <span className="block text-[11px] text-ink-500">{b.seatingArea || 'Standard'}</span>
+                                  {b.specialRequests ? (
+                                    <div className="text-[10px] text-amber-800 italic mt-0.5 font-medium bg-amber-50 rounded px-1.5 py-0.5 border border-amber-200 inline-block">
+                                      Note: {b.specialRequests}
+                                    </div>
+                                  ) : null}
+                                </td>
+                                <td className="py-3.5 pr-4">
+                                  <span className="inline-flex items-center gap-1 rounded-md bg-emerald-50 border border-emerald-200 px-2 py-0.5 text-[10px] font-bold text-emerald-800">
+                                    ✓ SMS + Email
+                                  </span>
+                                </td>
+                                <td className="py-3.5 pr-4">
+                                  <span
+                                    className={`rounded-full px-2.5 py-0.5 text-[10px] font-bold ${
+                                      b.status === 'Confirmed'
+                                        ? 'bg-emerald-100 text-emerald-800'
+                                        : b.status === 'Completed'
+                                        ? 'bg-blue-100 text-blue-800'
+                                        : 'bg-cream-200 text-ink-700'
+                                    }`}
+                                  >
+                                    {b.status}
+                                  </span>
+                                </td>
+                                <td className="py-3.5">
+                                  <div className="flex items-center gap-1.5">
+                                    {b.status === 'Confirmed' ? (
+                                      <>
+                                        <button
+                                          type="button"
+                                          onClick={() => {
+                                            storageService.updateBookingStatus(b.id, 'Completed');
+                                            setBookings(storageService.getBookings(restaurant.id, restaurant.name));
+                                            showToast(`Marked ${b.guestName}'s party as Seated`);
+                                          }}
+                                          className="rounded-lg bg-accent-600 px-2.5 py-1 text-[11px] font-bold text-white hover:bg-accent-700"
+                                          style={{ backgroundColor: '#b84221', color: '#ffffff' }}
+                                        >
+                                          Seat Guests
+                                        </button>
+                                        <button
+                                          type="button"
+                                          onClick={() => {
+                                            storageService.updateBookingStatus(b.id, 'Cancelled');
+                                            setBookings(storageService.getBookings(restaurant.id, restaurant.name));
+                                            showToast(`Cancelled reservation ${b.id}`);
+                                          }}
+                                          className="rounded-lg border border-red-200 bg-red-50 px-2 py-1 text-[11px] font-bold text-red-700 hover:bg-red-100"
+                                        >
+                                          Cancel
+                                        </button>
+                                      </>
+                                    ) : (
                                       <button
                                         type="button"
                                         onClick={() => {
-                                          storageService.updateBookingStatus(b.id, 'Completed');
-                                          setBookings(storageService.getBookings(restaurant.id));
-                                          showToast(`Marked ${b.guestName}'s party as Seated`);
+                                          storageService.updateBookingStatus(b.id, 'Confirmed');
+                                          setBookings(storageService.getBookings(restaurant.id, restaurant.name));
+                                          showToast(`Reconfirmed reservation ${b.id}`);
                                         }}
-                                        className="rounded-lg bg-accent-600 px-2.5 py-1 text-[11px] font-bold text-white hover:bg-accent-700"
-                                        style={{ backgroundColor: '#b84221', color: '#ffffff' }}
+                                        className="rounded-lg border border-cream-300 px-2.5 py-1 text-[11px] font-bold text-ink-700 hover:bg-cream-100"
                                       >
-                                        Seat Guests
+                                        Re-open
                                       </button>
-                                      <button
-                                        type="button"
-                                        onClick={() => {
-                                          storageService.updateBookingStatus(b.id, 'Cancelled');
-                                          setBookings(storageService.getBookings(restaurant.id));
-                                          showToast(`Cancelled reservation ${b.id}`);
-                                        }}
-                                        className="rounded-lg border border-red-200 bg-red-50 px-2 py-1 text-[11px] font-bold text-red-700 hover:bg-red-100"
-                                      >
-                                        Cancel
-                                      </button>
-                                    </>
-                                  ) : (
+                                    )}
                                     <button
                                       type="button"
                                       onClick={() => {
-                                        storageService.updateBookingStatus(b.id, 'Confirmed');
-                                        setBookings(storageService.getBookings(restaurant.id));
-                                        showToast(`Reconfirmed reservation ${b.id}`);
+                                        if (window.confirm(`Delete reservation ${b.id} for ${b.guestName}?`)) {
+                                          storageService.deleteBooking(b.id);
+                                          setBookings(storageService.getBookings(restaurant.id, restaurant.name));
+                                          showToast(`Deleted reservation ${b.id}`);
+                                        }
                                       }}
-                                      className="rounded-lg border border-cream-300 px-2.5 py-1 text-[11px] font-bold text-ink-700 hover:bg-cream-100"
+                                      className="p-1 text-ink-400 hover:text-red-600 rounded transition-colors"
+                                      title="Delete reservation"
                                     >
-                                      Re-open
+                                      <Trash2 size={13} />
                                     </button>
-                                  )}
-                                </div>
-                              </td>
-                            </tr>
-                          ))}
+                                  </div>
+                                </td>
+                              </tr>
+                            ))}
                         </tbody>
                       </table>
                     </div>

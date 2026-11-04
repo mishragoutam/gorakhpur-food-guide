@@ -178,14 +178,22 @@ const memoryCache = new Map<string, unknown>();
 
 function safeGet<T>(key: string, fallback: T): T {
   try {
-    const raw = localStorage.getItem(key);
-    if (raw !== null) {
-      const parsed = JSON.parse(raw) as T;
-      memoryCache.set(key, parsed);
-      return parsed;
-    } else {
-      // LocalStorage was cleared or key is unset; synchronize memory cache
-      memoryCache.delete(key);
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const raw = localStorage.getItem(key);
+      if (raw !== null) {
+        const parsed = JSON.parse(raw) as T;
+        memoryCache.set(key, parsed);
+        return parsed;
+      }
+      // If localStorage is completely empty (e.g. after localStorage.clear() in tests), clear memoryCache
+      if (localStorage.length === 0) {
+        memoryCache.clear();
+        return fallback;
+      }
+      // If key is not in localStorage but exists in memoryCache (e.g. quota-exceeded fallback), use memoryCache
+      if (memoryCache.has(key)) {
+        return memoryCache.get(key) as T;
+      }
     }
   } catch {
     // LocalStorage blocked (e.g. security policy / Safari private mode), fallback to memoryCache
@@ -833,10 +841,27 @@ export const storageService = {
   /**
    * Table Bookings
    */
-  getBookings(restaurantId?: string): TableBooking[] {
+  getBookings(restaurantId?: string, restaurantName?: string): TableBooking[] {
     const all = safeGet<TableBooking[]>(STORAGE_KEYS.bookings, []);
-    if (!restaurantId) return all;
-    return all.filter((b) => b.restaurantId === restaurantId);
+    if (!restaurantId && !restaurantName) return all;
+
+    const targetId = restaurantId?.toLowerCase().trim();
+    const cleanTargetId = targetId?.replace(/^demo-/, '');
+    const targetName = restaurantName?.toLowerCase().trim();
+
+    return all.filter((b) => {
+      if (!b) return false;
+      const bId = b.restaurantId?.toLowerCase().trim();
+      const bCleanId = bId?.replace(/^demo-/, '');
+      const bName = b.restaurantName?.toLowerCase().trim();
+
+      if (targetId && bId === targetId) return true;
+      if (cleanTargetId && bCleanId === cleanTargetId) return true;
+      if (targetName && bName === targetName) return true;
+      if (targetId && bName && targetId.replace(/[^a-z0-9]/g, '') === bName.replace(/[^a-z0-9]/g, '')) return true;
+      if (bId && targetName && bId.replace(/[^a-z0-9]/g, '') === targetName.replace(/[^a-z0-9]/g, '')) return true;
+      return false;
+    });
   },
 
   createBooking(
@@ -869,6 +894,9 @@ export const storageService = {
     safeSet(STORAGE_KEYS.bookings, all);
     this.addAuditLog(`Table reservation created: ${data.guestName} at ${data.restaurantName} for ${data.guests} guests`);
 
+    // Sync to Supabase inquiries table for cross-device cloud persistence
+    supabaseService.saveBooking(booking).catch(() => {});
+
     // Sync to Supabase audit log
     supabaseService
       .logAudit({
@@ -891,8 +919,66 @@ export const storageService = {
     b.status = status;
     safeSet(STORAGE_KEYS.bookings, all);
     this.addAuditLog(`Table reservation ${id} status changed to ${status}`);
+
+    // Update in Supabase cloud
+    supabaseService.updateBookingStatus(id, status).catch(() => {});
+
     window.dispatchEvent(new CustomEvent('rateit-storage-change', { detail: { key: STORAGE_KEYS.bookings } }));
     return b;
+  },
+
+  deleteBooking(id: string): boolean {
+    const all = this.getBookings();
+    const filtered = all.filter((item) => item.id !== id);
+    if (filtered.length === all.length) return false;
+    safeSet(STORAGE_KEYS.bookings, filtered);
+    this.addAuditLog(`Table reservation ${id} deleted`);
+
+    // Delete in Supabase cloud
+    supabaseService.deleteBooking(id).catch(() => {});
+
+    window.dispatchEvent(new CustomEvent('rateit-storage-change', { detail: { key: STORAGE_KEYS.bookings } }));
+    return true;
+  },
+
+  /**
+   * Synchronize table reservations from Supabase cloud database into local storage.
+   */
+  async fetchBookingsFromCloud(): Promise<TableBooking[]> {
+    try {
+      const cloudBookings = await supabaseService.getBookings();
+      if (!cloudBookings || cloudBookings.length === 0) return this.getBookings();
+
+      const localBookings = this.getBookings();
+      const map = new Map<string, TableBooking>();
+
+      // 1. Add cloud bookings
+      for (const b of cloudBookings) {
+        map.set(b.id, b);
+      }
+      // 2. Add local bookings (push un-synced to cloud, preserve local changes)
+      for (const b of localBookings) {
+        if (!map.has(b.id)) {
+          map.set(b.id, b);
+          supabaseService.saveBooking(b).catch(() => {});
+        } else {
+          const cloudB = map.get(b.id)!;
+          if (b.status !== cloudB.status) {
+            map.set(b.id, { ...cloudB, status: b.status });
+            supabaseService.updateBookingStatus(b.id, b.status).catch(() => {});
+          }
+        }
+      }
+
+      const merged = Array.from(map.values()).sort(
+        (a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime(),
+      );
+
+      safeSet(STORAGE_KEYS.bookings, merged);
+      return merged;
+    } catch {
+      return this.getBookings();
+    }
   },
 
   /**
